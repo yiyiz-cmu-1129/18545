@@ -2,19 +2,20 @@
 `define ADD   4'b1101		//Add
 	`define ADDA  2'b11		//Add Address
 `define ADDQ  4'b0101		//Add Quick
-`define ADDI  4'b0110		//Add Immidiate
+`define ADDI  3'b011		//Add Immidiate
 //Not needed `define ADDX			//Add with extend
 `define AND   4'b1100		//Logical AND
 	`define ABCD  2'b11		//Add decimal with extend
-`define ANDI  4'b0010	//And immidiate
+`define ANDI  3'b001	//And immidiate
 `define AS	  4'b1110	//Arithmatic shift
 `define BCC	  4'b0110	//Branch Conditionally
-`define BCHG			//Bit Test and Change
-`define BCLR			//Bit Test and Clear
-`define BRA     		//Branch always
-`define BSET    		//Bit Test and Set
+`define BCHG  2'b01		//Bit Test and Change
+`define BITTEST 3'b100  //Test bits imm
+`define BCLR  2'b10		//Bit Test and Clear
+//`define BRA     		//Branch always  included in bcc
+`define BSET  2'b11		//Bit Test and Set
 `define BSR     		//Branch to Subroutine
-`define BTST    		//Bit Test
+`define BTST  2'b00		//Bit Test
 `define CHK     		//Check Register Against Bounds
 `define CLR     		//Clear Operand
 `define CMP     		//Compare
@@ -65,17 +66,21 @@
 
 
 //size definitions
-`define BYTE 4'b0001;
-`define WORD 4'b0011;
-`define LONG 4'b1111;
+`define BYTE 4'b0001
+`define WORD 4'b0011
+`define LONG 4'b1111
 
-`define IMM 4'b0000;
+`define IMM 4'b0000
 
 //ALU OPS
 `define ALU_ADD
 `define ALU_AND
 `define ALU_ASL
 `define ALU_ASR
+`define ALU_BCHG
+`define ALU_BCLR
+`define ALU_BSET
+`define ALU_BTST
 
 
 

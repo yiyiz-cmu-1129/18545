@@ -2,10 +2,10 @@
 //This is the decoder
 module decoder(reg1, reg2, reg_dest, alu_op, size, 
 	mem_read, reg_vs_imm, sign_extend, cond_code_update,
-	quick, br, inst);
+	quick, br, jump, inst);
 	output logic [3:0] reg1, reg2, reg_dest, alu_op, size;
 	output logic mem_read, reg_vs_imm, sign_extend; 
-	output logic cond_code_update, quick, br;
+	output logic cond_code_update, quick, br, jump;
 	input logic [15:0] inst;
 
 	logic [2:0] mode;
@@ -20,6 +20,7 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
 		alu_op = 0;
 		size = BYTE;
 		quick = 0;
+        jump = 0;
 		mode = inst[5:3];
 		br = 0;
 		cond_code_update = 1;
@@ -135,33 +136,88 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
 				if(inst[7:0] == 8'hFF) size = LONG;
 				reg_vs_imm = 1;
 				br = 1;
-				alu_op = {1, inst[11:8]};
+                if(inst[11:8] == 4'd0) jump = 1;
+                else alu_op = {1, inst[11:8]};
 			end
-
+                
 			IMM: begin
-				case(inst[11:8])
-					ADDI: begin
-						alu_op = ALU_ADD;
-						reg_vs_imm = 1;
-						case(inst[7:6])
-							2'b00: size = BYTE;
-							2'b01: size = WORD;
-							2'b10: size = LONG;
-						endcase
-						reg_dest = reg1;
-					end
-					ANDI: begin
-						alu_op = ALU_AND;
-						reg_vs_imm = 1;
-						case(inst[7:6])
-							2'b00: size = BYTE;
-							2'b01: size = WORD;
-							2'b10: size = LONG;
-						endcase
-						reg_dest = reg1;
-					end
-					
-				endcase
+                if(inst[8]) begin
+                    case(inst[7:6])
+                        BCHG: begin
+                            reg_dest = reg1;
+                            alu_op = ALU_BCHG;
+                            size = LONG;
+                        end
+                        BCLR: begin
+                            reg_dest = reg1;
+                            alu_op = ALU_BCLR;
+                            size = LONG;
+                        end
+                        BSET: begin
+                            reg_dest = reg1;
+                            alu_op = ALU_BSET;
+                            size = LONG;
+                        end
+                        BTST: begin
+                            reg_dest = reg1;
+                            alu_op = ALU_BTST;
+                            size = LONG;
+                        end    
+                    endcase
+                end
+                else begin
+				    case(inst[11:9])
+					    ADDI: begin
+						    alu_op = ALU_ADD;
+						    reg_vs_imm = 1;
+						    case(inst[7:6])
+							    2'b00: size = BYTE;
+							    2'b01: size = WORD;
+							    2'b10: size = LONG;
+						    endcase
+						    reg_dest = reg1;
+					    end
+					    ANDI: begin
+						    alu_op = ALU_AND;
+						    reg_vs_imm = 1;
+						    case(inst[7:6])
+							    2'b00: size = BYTE;
+							    2'b01: size = WORD;
+							    2'b10: size = LONG;
+						    endcase
+						    reg_dest = reg1;
+					    end
+                        BITTEST: begin
+                            case(inst[7:6])
+                                BCHG: begin
+                                    reg_dest = reg1;
+                                    alu_op = ALU_BCHG;
+                                    size = BYTE;
+                                    reg_vs_imm = 1;
+                                end
+                                BCLR: begin
+                                    reg_dest = reg1;
+                                    alu_op = ALU_BCLR;
+                                    size = BYTE;
+                                    reg_vs_imm = 1;
+                                end
+                                BSET: begin
+                                    reg_dest = reg1;
+                                    alu_op = ALU_BSET;
+                                    size = BYTE;
+                                    reg_vs_imm = 1;
+                                end
+                                BTST: begin
+                                    reg_dest = reg1;
+                                    alu_op = ALU_BTST;
+                                    size = BYTE;
+                                    reg_vs_imm = 1;
+                                end
+                                
+                            endcase
+					    end
+				    endcase
+                end
 			end
 
 		endcase
