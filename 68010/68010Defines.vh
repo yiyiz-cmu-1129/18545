@@ -74,7 +74,7 @@
 
 //ALU OPS
 `define ALU_ADD
-`define ALU_AND
+`define ALU_AND 
 `define ALU_ASL
 `define ALU_ASR
 `define ALU_BCHG

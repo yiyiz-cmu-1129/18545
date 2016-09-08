@@ -54,6 +54,17 @@ module m68010_top(
 	//interupt control
 	input logic ipl0_b, ipl1_b, ipl2_b;
 
+	//Decoder signals
+	logic [15:0] inst;
+	logic [3:0] reg1, reg2, reg_dest;
+	logic [31:0] reg1_data, reg2_data, reg_dest_data;
+	logic branch;
+	logic [3:0] size;
+
+	//ALU signals
+	logic [31:0] long_imm_data;
+	logic [15:0] word_imm_data;
+	logic [7:0] byte_imm_data;
 
 	//Temp reset
 	logic rst_b;
@@ -66,10 +77,10 @@ module m68010_top(
 	logic [31:0] pc, pc_next, branch_target;
 	register #(32, 0) programCounter(pc, pc_next, clk, 1'b1, rst_b);
 	//Incrementing with branch
-	assign branch_target = (size == WORD) ? pc + {16'd0, word_imm_data} + 32'd2 
+	assign branch_target = (size == `WORD) ? pc + {16'd0, word_imm_data} + 32'd2 
 										  : pc + {24'd0, byte_imm_data} + 32'd2;
 
-	assign pc_next = (branch & br_true) : branch_target : pc + 32'd2;
+	assign pc_next = (branch & br_true) ? branch_target : pc + 32'd2;
 
 
 	//Condition Code Register
@@ -85,9 +96,6 @@ module m68010_top(
 
 ///////How imm values are treated//////
 /////This is in ALU stage
-	logic [31:0] long_imm_data;
-	logic [15:0] word_imm_data;
-	logic [7:0] byte_imm_data;
 
 	assign long_imm_data = {data_F, data_D_F};
 	assign word_imm_data = data_D_F;
@@ -128,10 +136,7 @@ module m68010_top(
 
 
 	//This is the decoder area
-	logic [15:0] inst;
-	logic [3:0] reg1, reg2, reg_dest;
-	logic [31:0] reg1_data, reg2_data, reg_dest_data;
-	logic branch;
+	
 
 	//register decoder
 
@@ -204,7 +209,7 @@ module m68010_top(
 endmodule
 
 
-module alu(data_out, condition_code_out, condition_code_in, opcode, opmode, mode, data_in_1, data_in_2);
+module alu(data_out, condition_code_out, condition_code_in, opcode, data_in_1, data_in_2);
 	output logic [31:0] data_out;
 	output logic [4:0] condition_code_out;
 	input logic [4:0] condition_code_in;
@@ -221,11 +226,11 @@ module alu(data_out, condition_code_out, condition_code_in, opcode, opmode, mode
 	always_comb begin
 		add_v_sub = 0;
 		case(opcode)
-			ALU_ADD: begin
+			`ALU_ADD: begin
 				data_out = data_out_addSub;
 				condition_code_out = condition_code_addSub;
 			end
-			ALU_AND: begin
+			`ALU_AND: begin
 				data_out = data_out_and;
 				condition_code_out = {condition_code_in[4], condition_code_and};
 			end

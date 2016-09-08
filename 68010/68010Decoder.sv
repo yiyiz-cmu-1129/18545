@@ -1,4 +1,4 @@
-`include "68010Defines.sv"
+`include "68010Defines.vh"
 //This is the decoder
 module decoder(reg1, reg2, reg_dest, alu_op, size, 
 	mem_read, reg_vs_imm, sign_extend, cond_code_update,
@@ -18,7 +18,7 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
 		reg_dest = 0;
 		reg_vs_imm = 0;
 		alu_op = 0;
-		size = BYTE;
+		size = `BYTE;
 		quick = 0;
         jump = 0;
 		mode = inst[5:3];
@@ -44,173 +44,173 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
 		//This is the main decode area
 		case(inst[15:11])
 			//Byte only operation
-			ADD: begin
-				alu_op = ALU_ADD;
+			`ADD: begin
+				alu_op = `ALU_ADD;
 				case(inst[7:6])
 					2'b00: begin
-						size = BYTE;
+						size = `BYTE;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					2'b01: begin
-						size = WORD;
+						size = `WORD;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					2'b10: begin
-						size = LONG;
+						size = `LONG;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					//Why the put the an ADDA instruction like this no idea
-					ADDA: begin
-						size = (inst[8]) ? LONG : WORD;
+					`ADDA: begin
+						size = (inst[8]) ? `LONG : `WORD;
 						reg_dest = reg1;
 						sign_extend = 1;
 						cond_code_update = 0;
 					end
 				endcase
 			end
-			ADDQ: begin
-				alu_op = ALU_ADD;
+			`ADDQ: begin
+				alu_op = `ALU_ADD;
 				quick = 1;
 				reg_dest = reg1;
 				case(inst[7:6])
-					2'b00: size = BYTE;
-					2'b01: size = WORD;
-					2'b10: size = LONG;
+					2'b00: size = `BYTE;
+					2'b01: size = `WORD;
+					2'b10: size = `LONG;
 				endcase
 			end
-			AND: begin
+			`AND: begin
 				case(inst[7:6])
 					2'b00: begin
-						size = BYTE;
-						alu_op = ALU_AND;
+						size = `BYTE;
+						alu_op = `ALU_AND;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					2'b01: begin
-						size = WORD;
-						alu_op = ALU_AND;
+						size = `WORD;
+						alu_op = `ALU_AND;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					2'b10: begin
-						size = LONG;
-						alu_op = ALU_AND;
+						size = `LONG;
+						alu_op = `ALU_AND;
 						reg_dest = (inst[8]) ? reg1 : reg2;
 					end
 					//Why did they decided to put this with the 
 					//and I will never know...
-					ABCD: begin
-						alu_op = ALU_ADD;
+					`ABCD: begin
+						alu_op = `ALU_ADD;
 						mem_read_inst = inst[3];
 						reg_dest = reg2;
 						sign_extend = 1;
-						size = BYTE;
+						size = `BYTE;
 					end
 				endcase
 			end
-			AS: begin
-				alu_op = (inst[8]) ? ALU_ASL : ALU_ASR;
+			`AS: begin
+				alu_op = (inst[8]) ? `ALU_ASL : `ALU_ASR;
 				case(inst[7:6])
 					2'b00: begin
-						size = BYTE;
+						size = `BYTE;
 						mode = 3'b000;
 						quick = ~inst[5];
 					end
 					2'b01: begin
-						size = WORD;
+						size = `WORD;
 						mode = 3'b000;
 						quick = ~inst[5];
 					end
-				ding to the last bit s	2'b10: begin 
-						size = LONG;
+					2'b10: begin 
+						size = `LONG;
 						mode = 3'b000;
 						quick = ~inst[5];
 					end
 					2'b11: begin
-						size = LONG;
+						size = `LONG;
 						mem_read_inst = 1;
 					end
 				endcase
 				reg_dest = reg1;
 			end
-			BCC: begin
-				if(inst[7:0] == 8'd0) size = WORD;
-				if(inst[7:0] == 8'hFF) size = LONG;
+			`BCC: begin
+				if(inst[7:0] == 8'd0) size = `WORD;
+				if(inst[7:0] == 8'hFF) size = `LONG;
 				reg_vs_imm = 1;
 				br = 1;
                 if(inst[11:8] == 4'd0) jump = 1;
                 else alu_op = {1, inst[11:8]};
 			end
                 
-			IMM: begin
+			`IMM: begin
                 if(inst[8]) begin
                     case(inst[7:6])
-                        BCHG: begin
+                        `BCHG: begin
                             reg_dest = reg1;
-                            alu_op = ALU_BCHG;
-                            size = LONG;
+                            alu_op = `ALU_BCHG;
+                            size = `LONG;
                         end
-                        BCLR: begin
+                        `BCLR: begin
                             reg_dest = reg1;
-                            alu_op = ALU_BCLR;
-                            size = LONG;
+                            alu_op = `ALU_BCLR;
+                            size = `LONG;
                         end
-                        BSET: begin
+                        `BSET: begin
                             reg_dest = reg1;
-                            alu_op = ALU_BSET;
-                            size = LONG;
+                            alu_op = `ALU_BSET;
+                            size = `LONG;
                         end
-                        BTST: begin
+                        `BTST: begin
                             reg_dest = reg1;
-                            alu_op = ALU_BTST;
-                            size = LONG;
+                            alu_op = `ALU_BTST;
+                            size = `LONG;
                         end    
                     endcase
                 end
                 else begin
 				    case(inst[11:9])
-					    ADDI: begin
-						    alu_op = ALU_ADD;
+					    `ADDI: begin
+						    alu_op = `ALU_ADD;
 						    reg_vs_imm = 1;
 						    case(inst[7:6])
-							    2'b00: size = BYTE;
-							    2'b01: size = WORD;
-							    2'b10: size = LONG;
+							    2'b00: size = `BYTE;
+							    2'b01: size = `WORD;
+							    2'b10: size = `LONG;
 						    endcase
 						    reg_dest = reg1;
 					    end
-					    ANDI: begin
-						    alu_op = ALU_AND;
+					    `ANDI: begin
+						    alu_op = `ALU_AND;
 						    reg_vs_imm = 1;
 						    case(inst[7:6])
-							    2'b00: size = BYTE;
-							    2'b01: size = WORD;
-							    2'b10: size = LONG;
+							    2'b00: size = `BYTE;
+							    2'b01: size = `WORD;
+							    2'b10: size = `LONG;
 						    endcase
 						    reg_dest = reg1;
 					    end
-                        BITTEST: begin
+                        `BITTEST: begin
                             case(inst[7:6])
-                                BCHG: begin
+                                `BCHG: begin
                                     reg_dest = reg1;
-                                    alu_op = ALU_BCHG;
-                                    size = BYTE;
+                                    alu_op = `ALU_BCHG;
+                                    size = `BYTE;
                                     reg_vs_imm = 1;
                                 end
-                                BCLR: begin
+                                `BCLR: begin
                                     reg_dest = reg1;
-                                    alu_op = ALU_BCLR;
-                                    size = BYTE;
+                                    alu_op = `ALU_BCLR;
+                                    size = `BYTE;
                                     reg_vs_imm = 1;
                                 end
-                                BSET: begin
+                                `BSET: begin
                                     reg_dest = reg1;
-                                    alu_op = ALU_BSET;
-                                    size = BYTE;
+                                    alu_op = `ALU_BSET;
+                                    size = `BYTE;
                                     reg_vs_imm = 1;
                                 end
-                                BTST: begin
+                                `BTST: begin
                                     reg_dest = reg1;
-                                    alu_op = ALU_BTST;
-                                    size = BYTE;
+                                    alu_op = `ALU_BTST;
+                                    size = `BYTE;
                                     reg_vs_imm = 1;
                                 end
                                 
