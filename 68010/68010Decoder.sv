@@ -2,10 +2,10 @@
 //This is the decoder
 module decoder(reg1, reg2, reg_dest, alu_op, size, 
 	mem_read, reg_vs_imm, sign_extend, cond_code_update,
-	quick, br, jump, inst);
+	quick, br, jump, br_sub, inst);
 	output logic [3:0] reg1, reg2, reg_dest, alu_op, size;
 	output logic mem_read, reg_vs_imm, sign_extend; 
-	output logic cond_code_update, quick, br, jump;
+	output logic cond_code_update, quick, br, jump, br_sub;
 	input logic [15:0] inst;
 
 	logic [2:0] mode;
@@ -23,6 +23,7 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
         jump = 0;
 		mode = inst[5:3];
 		br = 0;
+		br_sub = 0;
 		cond_code_update = 1;
 		case(mode)
 			3'b000: begin
@@ -136,10 +137,62 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
 				if(inst[7:0] == 8'hFF) size = `LONG;
 				reg_vs_imm = 1;
 				br = 1;
+				cond_code_update = 0;
                 if(inst[11:8] == 4'd0) jump = 1;
+                else if(inst[11:8] == `BSR) begin 
+                	br_sub = 1;
+                	jump = 1;
+                end
                 else alu_op = {1, inst[11:8]};
 			end
-                
+            `CHK: begin
+            	case(inst[8:6])
+            		3'b110: begin //check
+            			size = `WORD;
+            			alu_op = `ALU_CHK;
+            		end
+            		3'b000: begin //CLR byte
+            			size = `BYTE;
+            			alu_op = `ALU_CLR;
+            			reg_dest = reg1;
+            		end
+            		3'b001: begin //CLR word
+            			size = `WORD;
+            			alu_op = `ALU_CLR;
+            			reg_dest = reg1;
+            		end
+            		3'b010: begin //CLR LONG
+            			size = `LONG;
+            			alu_op = `ALU_CLR;
+            			reg_dest = reg1;
+            		end
+            	endcase
+            end
+            `CMP: begin
+            	reg_dest = reg1;
+            	case(inst[8:6])
+            		3'b000: begin
+            			size = `BYTE;
+            			alu_op = `ALU_CMP;
+            		end
+            		3'b001: begin
+            			size = `WORD;
+            			alu_op = `ALU_CMP;
+            		end
+            		3'b010: begin
+            			size = `LONG;
+            			alu_op = `ALU_CMP;
+            		end
+            		3'b011: begin
+            			size = `WORD;
+            			alu_op = `ALU_CMPA;
+            		end
+            		3'b111: begin
+            			size = `LONG;
+            			alu_op = `ALU_CMPA;
+            		end
+            	endcase
+            end
 			`IMM: begin
                 if(inst[8]) begin
                     case(inst[7:6])
@@ -213,7 +266,6 @@ module decoder(reg1, reg2, reg_dest, alu_op, size,
                                     size = `BYTE;
                                     reg_vs_imm = 1;
                                 end
-                                
                             endcase
 					    end
 				    endcase
