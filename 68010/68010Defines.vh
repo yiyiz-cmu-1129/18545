@@ -14,16 +14,16 @@
 `define BCLR  2'b10		//Bit Test and Clear
 //`define BRA     		//Branch always  included in bcc
 `define BSET  2'b11		//Bit Test and Set
-`define BSR     		//Branch to Subroutine
+`define BSR   4'b0001   //Branch to Subroutine
 `define BTST  2'b00		//Bit Test
-`define CHK     		//Check Register Against Bounds
-`define CLR     		//Clear Operand
-`define CMP     		//Compare
+`define CHK   4'b0100	//Check Register Against Bounds
+//`define CLR     		//Clear Operand
+`define CMP  4'b1011	//Compare
 `define CMPA 			//Compare Address
 `define CMPM 			//Compare Memory
 `define CMPI			//Compare Immidiate
 `define DBCC			//Test Condition, Decrement, and branch
-`define DIVS			//Signed Divide
+`define DIVS  	//Signed Divide
 `define DIVU 			//Unsigned Divide
 `define EOR				//Exclusive Or eg. xor
 `define EXG				//Exchange Registers
@@ -81,6 +81,7 @@
 `define ALU_BCLR
 `define ALU_BSET
 `define ALU_BTST
+`define ALU_CHK
 
 
 
