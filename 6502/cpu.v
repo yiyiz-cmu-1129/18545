@@ -18,6 +18,12 @@
  * on the output pads if external memory is required.
  */
 
+
+//COMMENT THIS LINE OUT FOR SYNTHESIS
+`define SIM 1
+
+
+
 module cpu( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
 
 input clk;              // CPU clock 
@@ -282,8 +288,8 @@ always @*
             JMPI1:  statename = "JMPI1";
     endcase
 
-//always @( PC )
-//      $display( "%t, PC:%04x IR:%02x A:%02x X:%02x Y:%02x S:%02x C:%d Z:%d V:%d N:%d P:%02x", $time, PC, IR, A, X, Y, S, C, Z, V, N, P );
+always @( PC, state )
+      $display( "%t, PC:%04x IR:%02x State: %s A:%02x X:%02x Y:%02x S:%02x C:%d Z:%d V:%d N:%d P:%02x", $time, PC, IR, statename, A, X, Y, S, C, Z, V, N, P );
 
 `endif
 

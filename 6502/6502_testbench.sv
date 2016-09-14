@@ -1,3 +1,5 @@
+
+
 module testbench();
   logic clk, rst;
   logic [15:0] address_bus;
@@ -15,18 +17,25 @@ module testbench();
 	if(write_en) mem[address_bus] <= data_out;
   
   initial begin
-	forever #2 clk = ~clk;
-	forever #2 $display(address_bus);
+	forever #5 clk = ~clk;
   end
+
+   //initial begin
+   //   forever @(posedge clk) $display("Time: %d, AB: %h, PC: %h, OP: %h", $time, address_bus, my6502.PC, mem[my6502.PC]);
+   //end
 
   initial begin;
 	$readmemh("functional_test_bytecode.hex", mem);
-	clk = 0;
-	rst = 0;
+	clk = 1;
+	rst = 1;
 	ready = 1;
 	irq = 0;
 	nmi = 0;
-	#5 rst = 1;
-	#1000000 $stop;
+        //force my6502.PC = 0;
+	#15
+	rst = 0;
+        //#10
+        //release my6502.PC;
+	#200 $stop;
   end
 endmodule
