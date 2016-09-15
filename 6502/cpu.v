@@ -288,8 +288,8 @@ always @*
             JMPI1:  statename = "JMPI1";
     endcase
 
-always @( PC, state )
-      $display( "%t, PC:%04x IR:%02x State: %s A:%02x X:%02x Y:%02x S:%02x C:%d Z:%d V:%d N:%d P:%02x", $time, PC, IR, statename, A, X, Y, S, C, Z, V, N, P );
+always @( PC, state, PC_temp, DI )
+      $display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, PC, AB, DI, IR, statename);
 
 `endif
 
@@ -794,6 +794,7 @@ always @(posedge clk)
 
 /*
  * Update I flag
+#                  100, PC:ff83 IR:xx State: ABSX1 DataIn:00xx P:00110100 DIMUX:xx ADD:xx PC_temp:ff83 res:0 RDY1:1
  */
 
 always @(posedge clk)
@@ -842,7 +843,7 @@ always @(posedge clk )
  * time to read the IR again before the next decode.
  */
 
-reg RDY1 = 1;
+reg RDY1;// = 1;
 
 always @(posedge clk )
     RDY1 <= RDY;
