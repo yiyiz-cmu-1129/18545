@@ -288,8 +288,12 @@ always @*
             JMPI1:  statename = "JMPI1";
     endcase
 
-always @( PC, state, PC_temp, DI )
-      $display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, PC, AB, DI, IR, statename);
+reg [15:0] PC_delayed;
+always @(posedge clk)
+	PC_delayed <= PC;
+
+always @( PC, state )
+      $display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, PC_delayed, AB, DI, IR, statename);
 
 `endif
 

@@ -27,7 +27,7 @@ module testbench();
 	//Take the address from 0xfffc, 0xfffd
 	//Jump to that address
 	//Start executing
-	$readmemh("test_bytecode.hex", mem);
+	$readmemh("mm6502memory.hex", mem);
 	clk = 1;
 	rst = 1;
 	ready = 1;
@@ -36,7 +36,7 @@ module testbench();
 	#15
 	rst = 0;
 	#30
-	//force data_in == 8'h00;
-	#200 $stop;
+	//forever @(posedge clk) $stop;
+	#10000 $stop;
   end
 endmodule
