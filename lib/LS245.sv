@@ -1,4 +1,5 @@
-//I found this in the other teams git
+//Input to output direction based on Dir
+//OE is a disable
 
 module ls245(A, B, Dir, OE_b);
 inout logic [7:0] A, B;

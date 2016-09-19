@@ -7,6 +7,10 @@ inout logic [7:0] D;
 input logic [10:0] A;
 input logic CS_b, WE_b, OE_b;
 
+`ifdef SIM
+
+`endif
+
 //memory interface
 output logic [7:0] data_in;
 output logic [10:0] addr;
