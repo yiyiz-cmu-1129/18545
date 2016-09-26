@@ -24,6 +24,7 @@
 
 
 
+
 module cpu( clk, reset, AB, DI, DO, WE, IRQ, NMI, RDY );
 
 input clk;              // CPU clock 
@@ -292,8 +293,8 @@ reg [15:0] PC_delayed;
 always @(posedge clk)
 	PC_delayed <= PC;
 
-always @( PC, state )
-      $display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, PC_delayed, AB, DI, IR, statename);
+//always @( PC, state )
+      //$display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, PC_delayed, AB, DI, IR, statename);
 
 `endif
 
@@ -1180,7 +1181,7 @@ always @(posedge clk )
         endcase
 
 always @(posedge clk )
-     if( state == DECODE && RDY )
+     if( state == DECODE && RDY)
         casex( IR )
                 8'b0010_x100:   // BIT zp/abs   
                                 bit_ins <= 1;

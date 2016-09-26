@@ -12,6 +12,9 @@ module testbench();
 
   reg [7:0] mem[65535:0];
 
+    always @( my6502.PC, my6502.state, my6502.AB )
+        $display( "%t, PC:%04x AB:%04x DI:%02x IR:%02x State:%s", $time, my6502.PC_delayed, my6502.AB, my6502.DI, my6502.IR, my6502.statename);
+
   always_ff @(posedge clk) //SYNCHRONOUS READS FROM MEMORY FFS
 	data_in <= mem[address_bus];
 
