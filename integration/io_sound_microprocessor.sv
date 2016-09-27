@@ -29,6 +29,7 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     logic SNDBW;
     logic SNDBW_b;
     logic [7:0] POKEYout;
+    logic MUSRES_b;
 
 
     assign SNDBW_b = ~SNDBW;
@@ -47,6 +48,14 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     assign PR101 = 1;
     assign my6502IRQ_b = 1;
 
+
+
+
+
+
+    ///////////////////////////////////////////////
+    /////////I/O and Sound Microprocessor//////////
+    ///////////////////////////////////////////////
     assign RDphi2 = ~(phi0 & SNDBW_b);
     assign WRphi2 = ~(phi0 & ~SNDBW_b);
 
@@ -63,6 +72,14 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                .NMI(~SNDNMI_b),
                .RDY(PR101));
 
+
+
+
+
+
+    /////////////////////////////////
+    //////////Sound Effects//////////
+    /////////////////////////////////
     logic clk; //oh god why
     logic [7:0] POKEY_P; //unused
     POKEY myPOKEY(.Din(SDout),
@@ -81,7 +98,14 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                   .P(POKEY_P));
     //assign SDin = (~SNDBW_b) ? POKEYout : 8'bzzzz_zzzz; 
 
+    
 
+
+
+
+    ///////////////////////
+    //////////RAM//////////
+    ///////////////////////
     logic [7:0] RAM0datatoMem, RAM1datatoMem; //Memory Interface Signals
     logic [10:0] RAM0addrtoMem, RAM1addrtoMem;
     logic RAM0c_out, RAM1c_out, RAM0_we, RAM1_we, RAM0_en, RAM1_en;
@@ -108,7 +132,14 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                       .data_out(8'b0),
                       .c_out(RAM1c_out), .we(RAM1_we), .en(RAM1_en));
 
+    
 
+
+
+
+    /////////////////////////////////////
+    //////////Sound Program ROM//////////
+    /////////////////////////////////////
     logic [13:0] ROM0addr, ROM1addr,ROM2addr;
     logic ROM0c_out, ROM1c_out, ROM2c_out;
     control_23128 rom0(.Dout(SDin),
@@ -141,6 +172,12 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
 
 
 
+
+
+
+    ///////////////////////////////////
+    //////////Address Decoder//////////
+    ///////////////////////////////////
     ls139 ls139one(.y({SROM_b, AddrDecToAddrDec}),
                    .g(1'b0),
                    .a(my6502toAddrDec[0]),
@@ -167,6 +204,42 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     assign WR68k_b = ~(~WRphi2 & ~ls138to68k);
     assign RD68k_b = ~(~RDphi2 & ~ls138to68k);
     
+
+
+
+
+    ///////////////////////
+    //////////LED//////////
+    ///////////////////////
+    logic [7:0] LEDctrl;
+    ls259 coin259(.S(SBA[2:0]),
+                  .D(SDout),
+                  .En(SNDRST_b),
+                  .Q(LEDctrl),
+                  .clk(phi0));
+    assign MUSRES_b = LEDctrl[0];
+
+    
+
+
+
+    /////////////////////////
+    //////////MUSIC//////////
+    /////////////////////////
+    y2151 musicy2151(.Din(SDout),
+                     .Dout(SDin),
+                     .A0(SBA[0]),
+                     .WR_b(WRphi2),
+                     .RD_b(RDphi2),
+                     .CS_b(YMHCS_b),
+                     .IC_b(MUSRES_b),
+                     .iRQ_b(my6502IRQ_b),
+                     .SO(),
+                     .SH1(),
+                     .SH2(),
+                     .phiM(phi0)); //Hopefully this works - the sheet lists it as "1H" whereas phi0 is "2H"
+    
+
     //Self test logic
     //Comes from the COIN diagram to some extent
     //Very temporary till we figure out what self test is
