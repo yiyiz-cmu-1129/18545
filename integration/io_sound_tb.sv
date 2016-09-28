@@ -16,8 +16,8 @@ module testbench();
 	    forever #5 clk = ~clk;
     end
 
-always @( dut.my6502.PC, dut.my6502.state, dut.RAM0.Din, dut.RAM0.CS_b, dut.RAM0.Din )
-    $display( "%t, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04x SDin:%02x SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b",
+always @( dut.my6502.PC, dut.my6502.state )
+    $display( "%t, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04x SDin:%02x SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b MUSRES:%01b",
     $time,
     dut.my6502.PC,
     dut.my6502.statename,
@@ -31,7 +31,8 @@ always @( dut.my6502.PC, dut.my6502.state, dut.RAM0.Din, dut.RAM0.CS_b, dut.RAM0
     dut.my6502.X,
     dut.my6502.S,
     {dut.RAM_CS1_b, dut.RAM_CS0_b},
-    dut.SROM_b);
+    dut.SROM_b,
+    dut.MUSRES_b);
 
     initial begin;
 	    clk = 1;
@@ -39,10 +40,7 @@ always @( dut.my6502.PC, dut.my6502.state, dut.RAM0.Din, dut.RAM0.CS_b, dut.RAM0
 	    nmi_b = 1;
 	    #15
 	    rst_b = 1;
-	    #30
-	    //forever @(posedge clk) $stop;
-	    #800000
-        $display("RAM0 0x15: %02h", dut.RAM0.ram[11'h4][7:0]);
+	    #400
         $stop;
     end
 endmodule

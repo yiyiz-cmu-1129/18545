@@ -7,6 +7,8 @@
 `include "../lib/23128.sv"
 `include "../lib/LS139.sv"
 `include "../lib/LS138.sv"
+`include "../lib/LS259.sv"
+`include "../lib/Y2151.sv"
 `default_nettype none
 
 module io_sound (phi0, SNDRST_b, SNDNMI_b);
@@ -30,13 +32,14 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     logic SNDBW_b;
     logic [7:0] POKEYout;
     logic MUSRES_b;
+    logic my6502IRQ_b;
+
 
 
     assign SNDBW_b = ~SNDBW;
 
     //Signals needed to be found
     logic PR101;
-    logic my6502IRQ_b;
     logic PKS;
     logic YMHCS_b;
     logic SIOWR_b, SIORD_b;
@@ -46,9 +49,6 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
 
     //Temp till I find these
     assign PR101 = 1;
-    assign my6502IRQ_b = 1;
-
-
 
 
 
@@ -114,23 +114,13 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS0_b),
                       .WE_b(SNDBW_b),
-                      .OE_b(1'b0),
-                      //Unimportant:
-                      .data_in(RAM0datatoMem),
-                      .addr(RAM0addrtoMem),
-                      .data_out(8'b0),
-                      .c_out(RAM0c_out), .we(RAM0_we), .en(RAM0_en));
+                      .OE_b(1'b0));
     control_6116 RAM1(.Dout(SDin),
                       .Din(SDout),
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS1_b),
                       .WE_b(SNDBW_b),
-                      .OE_b(1'b0),
-                      //Unimportant:
-                      .data_in(RAM1datatoMem),
-                      .addr(RAM1addrtoMem),
-                      .data_out(8'b0),
-                      .c_out(RAM1c_out), .we(RAM1_we), .en(RAM1_en));
+                      .OE_b(1'b0));
 
     
 
@@ -140,35 +130,21 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     /////////////////////////////////////
     //////////Sound Program ROM//////////
     /////////////////////////////////////
-    logic [13:0] ROM0addr, ROM1addr,ROM2addr;
-    logic ROM0c_out, ROM1c_out, ROM2c_out;
     control_23128 rom0(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[0]),
-                       .OE_b(~SNDBW_b), //This is READ active low
-                       //Unimportant:
-                       .addr(ROM0addr),
-                       .data_out(8'b0),
-                       .c_out(ROM0c_out));
+                       .OE_b(~SNDBW_b)); //This is READ active low
 
     control_23128 rom1(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[1]),
-                       .OE_b(~SNDBW_b),
-                       //Unimportant:
-                       .addr(ROM1addr),
-                       .data_out(8'b0),
-                       .c_out(ROM1c_out));
+                       .OE_b(~SNDBW_b));
 
 
     control_23128 rom2(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[2]),
-                       .OE_b(~SNDBW_b),
-                       //Unimportant:
-                       .addr(ROM2addr),
-                       .data_out(8'b0),
-                       .c_out(ROM2c_out));
+                       .OE_b(~SNDBW_b));
 
 
 
@@ -213,13 +189,26 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     ///////////////////////
     logic [7:0] LEDctrl;
     ls259 coin259(.S(SBA[2:0]),
-                  .D(SDout),
-                  .En(SNDRST_b),
+                  .D(SDout[0]),
+                  .En_b(SIOWR_b),
                   .Q(LEDctrl),
+                  .clr_b(SNDRST_b),
                   .clk(phi0));
     assign MUSRES_b = LEDctrl[0];
 
-    
+
+
+
+    /////////////////////////
+    //////////COIN///////////
+    /////////////////////////
+    //Self test logic
+    //Temporary till we figure out what self test is
+    //Somewhat replaces the 367A
+    logic [7:0] SDinCoin;
+    always_ff @(posedge phi0) SDinCoin <= (~SIORD_b) ? 8'h87 : 8'bzzzz_zzzz;
+    assign SDin = SDinCoin;
+
 
 
 
@@ -238,14 +227,5 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                      .SH1(),
                      .SH2(),
                      .phiM(phi0)); //Hopefully this works - the sheet lists it as "1H" whereas phi0 is "2H"
-    
-
-    //Self test logic
-    //Comes from the COIN diagram to some extent
-    //Very temporary till we figure out what self test is
-    logic [7:0] SDinCoin;
-    always_ff @(posedge phi0) SDinCoin <= (~SIORD_b) ? 8'h87 : 8'bzzzz_zzzz;
-    assign SDin = SDinCoin;
-
 
 endmodule
