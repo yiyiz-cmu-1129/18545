@@ -8,14 +8,15 @@
 //I'll try to figure out a good simulation way to do this
 //But someone else will have to figure out the synth one
 
-module control_23128(Dout, A, CS_b, OE_b);
+module control_23128(Dout, A, CS_b, OE_b, clk);
     output logic [7:0] Dout;
     input logic [13:0] A;
     input logic CS_b, OE_b;
+    input clk;
 
     logic [7:0] ram [16383:0];
 
-    always_ff @(posedge testbench.dut.phi0) begin //hmmmm
+    always_ff @(posedge clk) begin //hmmmm
         Dout <= (~CS_b && ~OE_b) ? ram[A][7:0] : 8'bzzzz_zzzz;
     end
 endmodule

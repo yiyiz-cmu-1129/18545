@@ -114,13 +114,15 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS0_b),
                       .WE_b(SNDBW_b),
-                      .OE_b(1'b0));
+                      .OE_b(1'b0),
+                      .clk(phi0));
     control_6116 RAM1(.Dout(SDin),
                       .Din(SDout),
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS1_b),
                       .WE_b(SNDBW_b),
-                      .OE_b(1'b0));
+                      .OE_b(1'b0),
+                      .clk(phi0));
 
     
 
@@ -133,18 +135,21 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     control_23128 rom0(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[0]),
-                       .OE_b(~SNDBW_b)); //This is READ active low
+                       .OE_b(~SNDBW_b), //This is READ active low
+                       .clk(phi0));
 
     control_23128 rom1(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[1]),
-                       .OE_b(~SNDBW_b));
+                       .OE_b(~SNDBW_b),
+                       .clk(phi0));
 
 
     control_23128 rom2(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[2]),
-                       .OE_b(~SNDBW_b));
+                       .OE_b(~SNDBW_b),
+                       .clk(phi0));
 
 
 
