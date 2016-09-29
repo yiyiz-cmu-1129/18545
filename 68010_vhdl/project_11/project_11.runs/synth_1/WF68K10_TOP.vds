@@ -1,0 +1,985 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Thu Sep 29 10:56:55 2016
+# Process ID: 635
+# Log file: /afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/project_11/project_11.runs/synth_1/WF68K10_TOP.vds
+# Journal file: /afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/project_11/project_11.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source WF68K10_TOP.tcl -notrace
+Command: synth_design -top WF68K10_TOP -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -60 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1064.828 ; gain = 155.520 ; free physical = 4247 ; free virtual = 18495
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'WF68K10_TOP' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:120]
+	Parameter VERSION bound to: 16'b0001010100000001 
+INFO: [Synth 8-3491] module 'WF68K10_ADDRESS_REGISTERS' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_address_registers.vhd:42' bound to instance 'I_ADRESSREGISTERS' of component 'WF68K10_ADDRESS_REGISTERS' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:627]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_ADDRESS_REGISTERS' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_address_registers.vhd:116]
+INFO: [Synth 8-4471] merging register 'DFC_reg[2:0]' into 'DFC_REG_reg[2:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_address_registers.vhd:563]
+INFO: [Synth 8-4471] merging register 'SFC_reg[2:0]' into 'SFC_REG_reg[2:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_address_registers.vhd:564]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_ADDRESS_REGISTERS' (1#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_address_registers.vhd:116]
+INFO: [Synth 8-3491] module 'WF68K10_ALU' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:50' bound to instance 'I_ALU' of component 'WF68K10_ALU' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:687]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_ALU' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:91]
+INFO: [Synth 8-4471] merging register 'SHFT_EN_reg' into 'SHIFT_STATE_reg' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:548]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_ALU' (2#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:91]
+INFO: [Synth 8-3491] module 'WF68K10_BUS_INTERFACE' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_bus_interface.vhd:61' bound to instance 'I_BUS_IF' of component 'WF68K10_BUS_INTERFACE' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:717]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_BUS_INTERFACE' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_bus_interface.vhd:137]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_BUS_INTERFACE' (3#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_bus_interface.vhd:137]
+INFO: [Synth 8-3491] module 'WF68K10_CONTROL' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:96' bound to instance 'I_CONTROL' of component 'WF68K10_CONTROL' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:782]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_CONTROL' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:218]
+INFO: [Synth 8-4471] merging register 'ADR_OFFSET_reg[5:0]' into 'ADR_OFFS_VAR_reg[5:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:902]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_CONTROL' (4#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:218]
+INFO: [Synth 8-3491] module 'WF68K10_DATA_REGISTERS' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_data_registers.vhd:41' bound to instance 'I_DATA_REGISTERS' of component 'WF68K10_DATA_REGISTERS' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:883]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_DATA_REGISTERS' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_data_registers.vhd:68]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_DATA_REGISTERS' (5#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_data_registers.vhd:68]
+	Parameter VERSION bound to: 16'b0001010100000001 
+INFO: [Synth 8-3491] module 'WF68K10_EXCEPTION_HANDLER' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:55' bound to instance 'I_EXC_HANDLER' of component 'WF68K10_EXCEPTION_HANDLER' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:904]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_EXCEPTION_HANDLER' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:135]
+	Parameter VERSION bound to: 16'b0001010100000001 
+INFO: [Synth 8-4471] merging register 'VBR_reg[31:0]' into 'VB_REG_reg[31:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:398]
+INFO: [Synth 8-4471] merging register 'STACK_CNT_reg[5:0]' into 'STACK_POS_VAR_reg[5:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:624]
+INFO: [Synth 8-4471] merging register 'STACK_POS_reg[5:0]' into 'STACK_POS_VAR_reg[5:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:625]
+INFO: [Synth 8-4471] merging register 'PIPE_CNT_reg[1:0]' into 'CNT_reg[1:0]' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:677]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_EXCEPTION_HANDLER' (6#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_exception_handler.vhd:135]
+INFO: [Synth 8-3491] module 'WF68K10_OPCODE_DECODER' declared at '/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:67' bound to instance 'I_OPCODE_DECODER' of component 'WF68K10_OPCODE_DECODER' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:979]
+INFO: [Synth 8-638] synthesizing module 'WF68K10_OPCODE_DECODER' [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:122]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:705]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:1111]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:1155]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:1216]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_OPCODE_DECODER' (7#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:122]
+INFO: [Synth 8-256] done synthesizing module 'WF68K10_TOP' (8#1) [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_top.vhd:120]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:09 ; elapsed = 00:00:12 . Memory (MB): peak = 1181.117 ; gain = 271.809 ; free physical = 4102 ; free virtual = 18357
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1181.117 ; gain = 271.809 ; free physical = 4102 ; free virtual = 18357
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:10 ; elapsed = 00:00:14 . Memory (MB): peak = 1189.117 ; gain = 279.809 ; free physical = 4102 ; free virtual = 18357
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <multiplier> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:479]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:426]
+WARNING: [Synth 8-3936] Found unconnected internal register 'BIW_1_reg' and it is trimmed from '16' to '11' bits. [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_alu.vhd:140]
+INFO: [Synth 8-5545] ROM "DIV_RDY" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "DIV_STATE" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "QUOTIENT" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "REMAINDER" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5546] ROM "VFLAG_SHFT" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "XNZVC" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "XNZVC" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5545] ROM "Z" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "DIV_RDY" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "DIV_STATE" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "QUOTIENT" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "REMAINDER" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5546] ROM "VFLAG_SHFT" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "XNZVC" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "XNZVC" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5545] ROM "Z" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5544] ROM "DIV_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BITCNT" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "Z_1" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "Z_0" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BUS_EN" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BGn" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BUS_CYC_RDY" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "CHK_RD" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "OFFSET_VAR" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "OFFSET_VAR" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BUS_EN" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BGn" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "BUS_CYC_RDY" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "CHK_RD" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "OFFSET_VAR" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "DATA_INMUX" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_ARB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_BUS_CTRL_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_BUS_CTRL_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_BUS_CTRL_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_BUS_CTRL_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:935]
+WARNING: [Synth 8-3936] Found unconnected internal register 'BIW_0_WB_reg' and it is trimmed from '12' to '11' bits. [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_control.vhd:607]
+INFO: [Synth 8-802] inferred FSM for state register 'EXEC_WB_STATE_reg' in module 'WF68K10_CONTROL'
+INFO: [Synth 8-5546] ROM "RMC" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "ADR_OFFS_VAR" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "DR_WR_1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "RMC" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "ADR_OFFS_VAR" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "DR_WR_1" won't be mapped to Block RAM because address size (3) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_EXEC_WB_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "NEXT_FETCH_STATE" won't be mapped to Block RAM because address size (1) smaller than threshold (5)
+INFO: [Common 17-14] Message 'Synth 8-5544' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
+INFO: [Synth 8-802] inferred FSM for state register 'EX_STATE_reg' in module 'WF68K10_EXCEPTION_HANDLER'
+INFO: [Synth 8-5546] ROM "CPU_SPACE" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "EXCEPTION" won't be mapped to RAM because it is too sparse
+ROM size is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5546] ROM "p_4_in" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "DATA_RERUN" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "HALT_OUTn" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IBOUND" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "CPU_SPACE" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "EXCEPTION" won't be mapped to RAM because it is too sparse
+ROM size is below threshold of ROM address width. It will be mapped to LUTs
+INFO: [Synth 8-5546] ROM "p_4_in" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "DATA_RERUN" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "HALT_OUTn" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "IBOUND" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/wf68k10_opcode_decoder.vhd:588]
+INFO: [Synth 8-5546] ROM "OP_STOP" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "OP_STOP" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "DATA_EXH" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "DATA_EXH" won't be mapped to RAM because it is too sparse
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                     Old Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                              000 |                              000
+                 execute |                              010 |                              001
+               writeback |                              011 |                              011
+              write_dest |                              001 |                              100
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'EXEC_WB_STATE_reg' using encoding 'sequential' in module 'WF68K10_CONTROL'
+---------------------------------------------------------------------------------------------------
+                   State |                     New Encoding |                     Old Encoding 
+---------------------------------------------------------------------------------------------------
+                    idle |                            00000 |                            00000
+                    init |                            00001 |                            00110
+              get_vector |                            00011 |                            00100
+            calc_vect_no |                            00100 |                            00010
+             restore_isp |                            00110 |                            01111
+             build_stack |                            00101 |                            00001
+          validate_frame |                            00010 |                            10010
+         examine_version |                            01010 |                            00011
+                read_top |                            01011 |                            01011
+             read_bottom |                            01100 |                            00111
+                read_ssw |                            01101 |                            01010
+                wait_rmc |                            01111 |                            10011
+          read_fault_adr |                            10000 |                            01000
+          read_outbuffer |                            10001 |                            01001
+              rerun_data |                            10010 |                            01101
+              restore_pc |                            01001 |                            10000
+          restore_status |                            10011 |                            10001
+             refill_pipe |                            01000 |                            01100
+                  halted |                            00111 |                            00101
+---------------------------------------------------------------------------------------------------
+INFO: [Synth 8-3354] encoded FSM with state register 'EX_STATE_reg' using encoding 'sequential' in module 'WF68K10_EXCEPTION_HANDLER'
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:22 ; elapsed = 00:00:24 . Memory (MB): peak = 1296.379 ; gain = 387.070 ; free physical = 3950 ; free virtual = 18255
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++------+-----------------+------------+----------+
+|      |RTL Partition    |Replication |Instances |
++------+-----------------+------------+----------+
+|1     |WF68K10_TOP__GB0 |           1|     42816|
+|2     |WF68K10_TOP__GB1 |           1|     14294|
+|3     |WF68K10_ALU      |           1|     14937|
++------+-----------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     64 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 31    
+	   3 Input     32 Bit       Adders := 6     
+	   2 Input     30 Bit       Adders := 2     
+	   2 Input     16 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
+	   2 Input      7 Bit       Adders := 2     
+	   3 Input      7 Bit       Adders := 2     
+	   2 Input      6 Bit       Adders := 5     
+	   4 Input      5 Bit       Adders := 2     
+	   3 Input      5 Bit       Adders := 4     
+	  17 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 6     
+	   3 Input      4 Bit       Adders := 2     
+	   2 Input      3 Bit       Adders := 4     
+	   2 Input      2 Bit       Adders := 3     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 8     
++---Registers : 
+	               64 Bit    Registers := 2     
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 48    
+	               16 Bit    Registers := 15    
+	               12 Bit    Registers := 1     
+	               11 Bit    Registers := 2     
+	               10 Bit    Registers := 1     
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                7 Bit    Registers := 7     
+	                6 Bit    Registers := 5     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 10    
+	                3 Bit    Registers := 19    
+	                2 Bit    Registers := 11    
+	                1 Bit    Registers := 81    
++---Muxes : 
+	   2 Input     64 Bit        Muxes := 3     
+	   8 Input     64 Bit        Muxes := 1     
+	   2 Input     33 Bit        Muxes := 4     
+	   2 Input     32 Bit        Muxes := 353   
+	   4 Input     32 Bit        Muxes := 58    
+	   7 Input     32 Bit        Muxes := 1     
+	   3 Input     32 Bit        Muxes := 23    
+	   9 Input     32 Bit        Muxes := 1     
+	   5 Input     32 Bit        Muxes := 2     
+	   2 Input     31 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 66    
+	   4 Input     16 Bit        Muxes := 2     
+	   2 Input     13 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 59    
+	  15 Input      8 Bit        Muxes := 3     
+	   5 Input      7 Bit        Muxes := 4     
+	  10 Input      7 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 103   
+	   3 Input      7 Bit        Muxes := 6     
+	   9 Input      7 Bit        Muxes := 3     
+	   6 Input      7 Bit        Muxes := 1     
+	  13 Input      7 Bit        Muxes := 1     
+	   4 Input      7 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 30    
+	   5 Input      6 Bit        Muxes := 4     
+	   6 Input      6 Bit        Muxes := 1     
+	   3 Input      6 Bit        Muxes := 6     
+	   4 Input      6 Bit        Muxes := 1     
+	  10 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 41    
+	   4 Input      5 Bit        Muxes := 25    
+	  16 Input      5 Bit        Muxes := 1     
+	   7 Input      5 Bit        Muxes := 8     
+	   3 Input      5 Bit        Muxes := 18    
+	   5 Input      5 Bit        Muxes := 8     
+	  19 Input      5 Bit        Muxes := 8     
+	  62 Input      5 Bit        Muxes := 1     
+	  20 Input      5 Bit        Muxes := 7     
+	  18 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 85    
+	  16 Input      4 Bit        Muxes := 1     
+	   3 Input      4 Bit        Muxes := 47    
+	   4 Input      4 Bit        Muxes := 11    
+	   6 Input      4 Bit        Muxes := 2     
+	   9 Input      4 Bit        Muxes := 1     
+	   5 Input      4 Bit        Muxes := 6     
+	  13 Input      4 Bit        Muxes := 1     
+	  11 Input      4 Bit        Muxes := 1     
+	   7 Input      4 Bit        Muxes := 1     
+	  19 Input      4 Bit        Muxes := 7     
+	  12 Input      4 Bit        Muxes := 3     
+	  29 Input      4 Bit        Muxes := 1     
+	  15 Input      4 Bit        Muxes := 1     
+	   7 Input      3 Bit        Muxes := 2     
+	   9 Input      3 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 99    
+	   6 Input      3 Bit        Muxes := 6     
+	   8 Input      3 Bit        Muxes := 1     
+	   5 Input      3 Bit        Muxes := 4     
+	   3 Input      3 Bit        Muxes := 7     
+	   4 Input      3 Bit        Muxes := 3     
+	  12 Input      3 Bit        Muxes := 2     
+	  33 Input      3 Bit        Muxes := 1     
+	   9 Input      2 Bit        Muxes := 3     
+	   3 Input      2 Bit        Muxes := 6     
+	   4 Input      2 Bit        Muxes := 5     
+	   2 Input      2 Bit        Muxes := 53    
+	   6 Input      2 Bit        Muxes := 1     
+	   7 Input      2 Bit        Muxes := 1     
+	  20 Input      2 Bit        Muxes := 1     
+	   5 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 514   
+	   4 Input      1 Bit        Muxes := 28    
+	   3 Input      1 Bit        Muxes := 14    
+	   8 Input      1 Bit        Muxes := 3     
+	   7 Input      1 Bit        Muxes := 3     
+	   5 Input      1 Bit        Muxes := 8     
+	   6 Input      1 Bit        Muxes := 4     
+	  13 Input      1 Bit        Muxes := 1     
+	  10 Input      1 Bit        Muxes := 1     
+	  29 Input      1 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 1     
+	  11 Input      1 Bit        Muxes := 1     
+	  22 Input      1 Bit        Muxes := 1     
+	  12 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module WF68K10_TOP 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 2     
+	   2 Input      8 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                1 Bit    Registers := 3     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 101   
+	   5 Input     32 Bit        Muxes := 2     
+	   3 Input     32 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     13 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 7     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 6     
+	   5 Input      3 Bit        Muxes := 2     
+	   6 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 5     
+Module WF68K10_ALU 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     64 Bit       Adders := 1     
+	   2 Input     32 Bit       Adders := 2     
+	   3 Input     32 Bit       Adders := 4     
+	   2 Input     16 Bit       Adders := 1     
+	   2 Input      7 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
+	   4 Input      5 Bit       Adders := 2     
+	   3 Input      5 Bit       Adders := 4     
+	   2 Input      4 Bit       Adders := 2     
+	   3 Input      4 Bit       Adders := 2     
++---XORs : 
+	   2 Input     32 Bit         XORs := 1     
+	   2 Input      1 Bit         XORs := 8     
++---Registers : 
+	               64 Bit    Registers := 2     
+	               32 Bit    Registers := 14    
+	               16 Bit    Registers := 2     
+	               12 Bit    Registers := 1     
+	               11 Bit    Registers := 1     
+	                7 Bit    Registers := 2     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 9     
++---Muxes : 
+	   2 Input     64 Bit        Muxes := 3     
+	   8 Input     64 Bit        Muxes := 1     
+	   2 Input     32 Bit        Muxes := 47    
+	   4 Input     32 Bit        Muxes := 7     
+	   7 Input     32 Bit        Muxes := 1     
+	   3 Input     32 Bit        Muxes := 1     
+	   9 Input     32 Bit        Muxes := 1     
+	   2 Input     31 Bit        Muxes := 2     
+	   2 Input     16 Bit        Muxes := 1     
+	   5 Input      7 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 6     
+	   2 Input      5 Bit        Muxes := 9     
+	   4 Input      5 Bit        Muxes := 1     
+	  16 Input      5 Bit        Muxes := 1     
+	  18 Input      4 Bit        Muxes := 1     
+	   7 Input      3 Bit        Muxes := 1     
+	   9 Input      3 Bit        Muxes := 1     
+	  10 Input      3 Bit        Muxes := 1     
+	   9 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 2     
+	   4 Input      2 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 4     
+	   2 Input      1 Bit        Muxes := 39    
+	   4 Input      1 Bit        Muxes := 7     
+	   3 Input      1 Bit        Muxes := 3     
+	   8 Input      1 Bit        Muxes := 1     
+Module WF68K10_ADDRESS_REGISTERS 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 24    
+	   3 Input     32 Bit       Adders := 1     
+	   2 Input     30 Bit       Adders := 2     
++---Registers : 
+	               33 Bit    Registers := 1     
+	               32 Bit    Registers := 16    
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 3     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     33 Bit        Muxes := 4     
+	   3 Input     32 Bit        Muxes := 18    
+	   4 Input     32 Bit        Muxes := 17    
+	   2 Input     32 Bit        Muxes := 153   
+	   2 Input     16 Bit        Muxes := 14    
+	   2 Input      8 Bit        Muxes := 14    
+	   2 Input      4 Bit        Muxes := 5     
+	   7 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 201   
+	   8 Input      1 Bit        Muxes := 1     
+Module WF68K10_BUS_INTERFACE 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 3     
+	   2 Input      3 Bit       Adders := 3     
++---Registers : 
+	               32 Bit    Registers := 4     
+	               16 Bit    Registers := 1     
+	                9 Bit    Registers := 2     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 4     
+	                2 Bit    Registers := 4     
+	                1 Bit    Registers := 17    
++---Muxes : 
+	   4 Input     32 Bit        Muxes := 2     
+	   3 Input     32 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 3     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 4     
+	   2 Input      3 Bit        Muxes := 13    
+	   6 Input      3 Bit        Muxes := 1     
+	   7 Input      3 Bit        Muxes := 1     
+	   9 Input      2 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 5     
+	   4 Input      2 Bit        Muxes := 1     
+	   6 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 33    
+	   5 Input      1 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 2     
+Module WF68K10_DATA_REGISTERS 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 8     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 48    
+	   4 Input     32 Bit        Muxes := 32    
+	   2 Input     16 Bit        Muxes := 32    
+	   2 Input      8 Bit        Muxes := 32    
+	   2 Input      4 Bit        Muxes := 3     
+	   2 Input      1 Bit        Muxes := 11    
+Module WF68K10_EXCEPTION_HANDLER 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 3     
+	               16 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 5     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 20    
++---Muxes : 
+	   2 Input     32 Bit        Muxes := 4     
+	   2 Input      8 Bit        Muxes := 9     
+	  15 Input      8 Bit        Muxes := 3     
+	  10 Input      7 Bit        Muxes := 1     
+	   5 Input      7 Bit        Muxes := 1     
+	   5 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 1     
+	   7 Input      5 Bit        Muxes := 8     
+	   3 Input      5 Bit        Muxes := 17    
+	   2 Input      5 Bit        Muxes := 24    
+	   5 Input      5 Bit        Muxes := 8     
+	   4 Input      5 Bit        Muxes := 24    
+	  19 Input      5 Bit        Muxes := 8     
+	  62 Input      5 Bit        Muxes := 1     
+	  16 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   3 Input      4 Bit        Muxes := 40    
+	   4 Input      4 Bit        Muxes := 8     
+	   6 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 9     
+	   8 Input      3 Bit        Muxes := 1     
+	   7 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 72    
+	   3 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 4     
+	   6 Input      1 Bit        Muxes := 3     
+	   5 Input      1 Bit        Muxes := 3     
+	  13 Input      1 Bit        Muxes := 1     
+	   8 Input      1 Bit        Muxes := 1     
+Module WF68K10_OPCODE_DECODER 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      7 Bit       Adders := 1     
+	   3 Input      7 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 2     
++---Registers : 
+	               16 Bit    Registers := 10    
+	                7 Bit    Registers := 4     
+	                3 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 19    
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 17    
+	   4 Input     16 Bit        Muxes := 2     
+	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      7 Bit        Muxes := 103   
+	   3 Input      7 Bit        Muxes := 6     
+	   9 Input      7 Bit        Muxes := 3     
+	   5 Input      7 Bit        Muxes := 2     
+	   6 Input      7 Bit        Muxes := 1     
+	  13 Input      7 Bit        Muxes := 1     
+	   4 Input      7 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 21    
+	   5 Input      6 Bit        Muxes := 3     
+	   6 Input      6 Bit        Muxes := 1     
+	   3 Input      6 Bit        Muxes := 5     
+	   4 Input      6 Bit        Muxes := 1     
+	  10 Input      6 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   3 Input      5 Bit        Muxes := 1     
+	   9 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 7     
+	   5 Input      3 Bit        Muxes := 1     
+	   3 Input      3 Bit        Muxes := 2     
+	   4 Input      2 Bit        Muxes := 1     
+	  20 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 3     
+	   5 Input      2 Bit        Muxes := 2     
+	   2 Input      1 Bit        Muxes := 59    
+	   4 Input      1 Bit        Muxes := 15    
+	   5 Input      1 Bit        Muxes := 2     
+	   3 Input      1 Bit        Muxes := 6     
+	  10 Input      1 Bit        Muxes := 1     
+	  29 Input      1 Bit        Muxes := 1     
+	   7 Input      1 Bit        Muxes := 1     
+Module WF68K10_CONTROL 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     32 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 2     
+	  17 Input      5 Bit       Adders := 1     
+	   2 Input      4 Bit       Adders := 1     
+	   2 Input      3 Bit       Adders := 1     
++---Registers : 
+	               32 Bit    Registers := 1     
+	               16 Bit    Registers := 1     
+	               11 Bit    Registers := 1     
+	                7 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 11    
++---Muxes : 
+	   3 Input     32 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 2     
+	   3 Input      6 Bit        Muxes := 1     
+	  20 Input      5 Bit        Muxes := 7     
+	   2 Input      4 Bit        Muxes := 71    
+	   5 Input      4 Bit        Muxes := 6     
+	   4 Input      4 Bit        Muxes := 3     
+	   3 Input      4 Bit        Muxes := 7     
+	  13 Input      4 Bit        Muxes := 1     
+	  11 Input      4 Bit        Muxes := 1     
+	   7 Input      4 Bit        Muxes := 1     
+	   6 Input      4 Bit        Muxes := 1     
+	  19 Input      4 Bit        Muxes := 7     
+	  12 Input      4 Bit        Muxes := 3     
+	  29 Input      4 Bit        Muxes := 1     
+	  15 Input      4 Bit        Muxes := 1     
+	   6 Input      3 Bit        Muxes := 4     
+	   5 Input      3 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 64    
+	   4 Input      3 Bit        Muxes := 3     
+	   3 Input      3 Bit        Muxes := 5     
+	  12 Input      3 Bit        Muxes := 2     
+	  33 Input      3 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 37    
+	   4 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 94    
+	   6 Input      1 Bit        Muxes := 1     
+	   9 Input      1 Bit        Muxes := 1     
+	  11 Input      1 Bit        Muxes := 1     
+	   3 Input      1 Bit        Muxes := 2     
+	   5 Input      1 Bit        Muxes := 2     
+	   7 Input      1 Bit        Muxes := 1     
+	  22 Input      1 Bit        Muxes := 1     
+	  12 Input      1 Bit        Muxes := 2     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:23 ; elapsed = 00:00:24 . Memory (MB): peak = 1296.379 ; gain = 387.070 ; free physical = 3950 ; free virtual = 18255
+---------------------------------------------------------------------------------
+Start Cross Boundary Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-5545] ROM "DIV_STATE" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "QUOTIENT" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "Z" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5546] ROM "VFLAG_SHFT" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5545] ROM "REMAINDER" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+INFO: [Synth 8-5545] ROM "DIV_RDY" won't be mapped to RAM because address size (32) is larger than maximum supported(18)
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+DSP Report: Generating DSP p_1_out, operation Mode is: (PCIN>>17)+A*B.
+DSP Report: operator p_1_out is absorbed into DSP p_1_out.
+DSP Report: operator p_0_out is absorbed into DSP p_1_out.
+INFO: [Synth 8-5546] ROM "DATA_EXH" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "DATA_EXH" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "OP_STOP" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "RMC" won't be mapped to RAM because it is too sparse
+---------------------------------------------------------------------------------
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1304.387 ; gain = 395.078 ; free physical = 3900 ; free virtual = 18206
+---------------------------------------------------------------------------------
+Finished Parallel Reinference  : Time (s): cpu = 00:00:32 ; elapsed = 00:00:33 . Memory (MB): peak = 1304.387 ; gain = 395.078 ; free physical = 3900 ; free virtual = 18206
+
+Report RTL Partitions: 
++------+-----------------+------------+----------+
+|      |RTL Partition    |Replication |Instances |
++------+-----------------+------------+----------+
+|1     |WF68K10_TOP__GB0 |           1|     50732|
+|2     |WF68K10_TOP__GB1 |           1|     14402|
+|3     |WF68K10_ALU      |           1|     16057|
++------+-----------------+------------+----------+
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+DSP:
++------------+----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|Module Name | DSP Mapping    | Neg Edge Clk | A Size | B Size | C Size | D Size | P Size | AREG | BREG | CREG | DREG | ADREG | MREG | PREG | 
++------------+----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+|WF68K10_ALU | A*B            | No           | 18     | 16     | 48     | 25     | 48     | 0    | 0    | 1    | 1    | 1     | 0    | 0    | 
+|WF68K10_ALU | (PCIN>>17)+A*B | No           | 16     | 16     | 30     | 25     | 30     | 0    | 0    | 1    | 1    | 1     | 0    | 0    | 
+|WF68K10_ALU | A*B            | No           | 18     | 18     | 48     | 25     | 48     | 0    | 0    | 1    | 1    | 1     | 0    | 0    | 
+|WF68K10_ALU | (PCIN>>17)+A*B | No           | 18     | 16     | 31     | 25     | 47     | 0    | 0    | 1    | 1    | 1     | 0    | 0    | 
++------------+----------------+--------------+--------+--------+--------+--------+--------+------+------+------+------+-------+------+------+
+
+Note: The table shows the DSPs inferred at the current stage of the synthesis flow. Some DSP may be reimplemented as non DSP primitives later in the synthesis flow. Multiple instantiated DSPs are reported only once.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Start Area Optimization
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (\SREG_MEM_reg[11] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\SREG_MEM_reg[7] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\SREG_MEM_reg[6] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\SREG_MEM_reg[5] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[5] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[4] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[3] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[2] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[1] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_reg[0] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[9] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[8] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[7] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[6] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[5] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[4] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[3] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[2] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[1] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_reg[0] ) is unused and will be removed from module WF68K10_ALU.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_ALU/\STATUS_REG_reg[11] )
+WARNING: [Synth 8-3332] Sequential element (\STATUS_REG_reg[11] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\STATUS_REG_reg[7] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\STATUS_REG_reg[6] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\STATUS_REG_reg[5] ) is unused and will be removed from module WF68K10_ALU.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_WB_reg[9] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_WB_reg[2] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_0_WB_reg[1] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[9] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[8] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[7] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[6] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[5] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[4] ) is unused and will be removed from module WF68K10_CONTROL.
+WARNING: [Synth 8-3332] Sequential element (\BIW_1_WB_reg[3] ) is unused and will be removed from module WF68K10_CONTROL.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_CONTROL/\ADR_OFFS_VAR_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_OPCODE_DECODER/\PC_EW_OFFSET_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_OPCODE_DECODER/OPCODE_RD_I_reg)
+WARNING: [Synth 8-3332] Sequential element (LOOP_BSY_I_reg) is unused and will be removed from module WF68K10_OPCODE_DECODER.
+WARNING: [Synth 8-3332] Sequential element (OPCODE_RD_I_reg) is unused and will be removed from module WF68K10_OPCODE_DECODER.
+WARNING: [Synth 8-3332] Sequential element (\PC_EW_OFFSET_reg[0] ) is unused and will be removed from module WF68K10_OPCODE_DECODER.
+WARNING: [Synth 8-3332] Sequential element (\ADR_OFFS_VAR_reg[0] ) is unused and will be removed from module WF68K10_CONTROL.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_EXC_HANDLER/\PC_OFFSET_reg[0] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_EXC_HANDLER/\IVECT_OFFS_reg[1] )
+WARNING: [Synth 8-3332] Sequential element (\PC_OFFSET_reg[0] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+WARNING: [Synth 8-3332] Sequential element (\IVECT_OFFS_reg[1] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+WARNING: [Synth 8-3332] Sequential element (\IVECT_OFFS_reg[0] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (I_EXC_HANDLER/\SR_CPY_reg[11] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (OPCODE_REQ_I_reg)
+WARNING: [Synth 8-3332] Sequential element (\SR_CPY_reg[11] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+WARNING: [Synth 8-3332] Sequential element (\SR_CPY_reg[7] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+WARNING: [Synth 8-3332] Sequential element (\SR_CPY_reg[6] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+WARNING: [Synth 8-3332] Sequential element (\SR_CPY_reg[5] ) is unused and will be removed from module WF68K10_EXCEPTION_HANDLER.
+---------------------------------------------------------------------------------
+Finished Area Optimization : Time (s): cpu = 00:01:28 ; elapsed = 00:01:29 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3638 ; free virtual = 17948
+---------------------------------------------------------------------------------
+Finished Parallel Area Optimization  : Time (s): cpu = 00:01:28 ; elapsed = 00:01:29 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3638 ; free virtual = 17948
+
+Report RTL Partitions: 
++------+-----------------+------------+----------+
+|      |RTL Partition    |Replication |Instances |
++------+-----------------+------------+----------+
+|1     |WF68K10_TOP__GB0 |           1|     16060|
+|2     |WF68K10_TOP__GB1 |           1|      5379|
+|3     |WF68K10_ALU      |           1|      8144|
++------+-----------------+------------+----------+
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:01:28 ; elapsed = 00:01:29 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3638 ; free virtual = 17948
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:01:28 ; elapsed = 00:01:29 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3638 ; free virtual = 17948
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++------+-----------------+------------+----------+
+|      |RTL Partition    |Replication |Instances |
++------+-----------------+------------+----------+
+|1     |WF68K10_TOP__GB0 |           1|     16060|
+|2     |WF68K10_TOP__GB1 |           1|      5379|
+|3     |WF68K10_ALU      |           1|      8144|
++------+-----------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (\I_BUS_IF/OFFSET_VAR_reg[2] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_BUS_IF/SSW_80_reg[3] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_EXC_HANDLER/STACK_POS_VAR_reg[0] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/BIW_1_reg[10] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/BIW_0_reg[7] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/BIW_0_reg[6] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_CONTROL/BIW_0_WB_reg[8] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/BIW_0_reg[10] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[2] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[1] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[0] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[6] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[5] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[4] ) is unused and will be removed from module WF68K10_TOP.
+WARNING: [Synth 8-3332] Sequential element (\I_ALU/OP_reg[3] ) is unused and will be removed from module WF68K10_TOP.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:01:32 ; elapsed = 00:01:34 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3633 ; free virtual = 17943
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3632 ; free virtual = 17943
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3632 ; free virtual = 17943
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3636 ; free virtual = 17946
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3636 ; free virtual = 17946
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:01:33 ; elapsed = 00:01:35 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3636 ; free virtual = 17946
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+--------+------+
+|      |Cell    |Count |
++------+--------+------+
+|1     |BUFG    |     1|
+|2     |CARRY4  |   423|
+|3     |DSP48E1 |     4|
+|4     |LUT1    |   772|
+|5     |LUT2    |   729|
+|6     |LUT3    |   992|
+|7     |LUT4    |   758|
+|8     |LUT5    |  1761|
+|9     |LUT6    |  4199|
+|10    |MUXF7   |   175|
+|11    |MUXF8   |     3|
+|12    |FDCE    |     3|
+|13    |FDRE    |  2244|
+|14    |FDSE    |    72|
+|15    |IBUF    |    29|
+|16    |OBUF    |    65|
++------+--------+------+
+
+Report Instance Areas: 
++------+--------------------+--------------------------+------+
+|      |Instance            |Module                    |Cells |
++------+--------------------+--------------------------+------+
+|1     |top                 |                          | 12230|
+|2     |  I_ADRESSREGISTERS |WF68K10_ADDRESS_REGISTERS |  2300|
+|3     |  I_ALU             |WF68K10_ALU               |  2419|
+|4     |  I_BUS_IF          |WF68K10_BUS_INTERFACE     |   539|
+|5     |  I_CONTROL         |WF68K10_CONTROL           |  1354|
+|6     |  I_DATA_REGISTERS  |WF68K10_DATA_REGISTERS    |   669|
+|7     |  I_EXC_HANDLER     |WF68K10_EXCEPTION_HANDLER |  1127|
+|8     |  I_OPCODE_DECODER  |WF68K10_OPCODE_DECODER    |  3654|
++------+--------------------+--------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:01:34 ; elapsed = 00:01:36 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3636 ; free virtual = 17946
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 62 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:01:31 ; elapsed = 00:01:33 . Memory (MB): peak = 1600.691 ; gain = 574.863 ; free physical = 3636 ; free virtual = 17946
+Synthesis Optimization Complete : Time (s): cpu = 00:01:34 ; elapsed = 00:01:36 . Memory (MB): peak = 1600.691 ; gain = 691.383 ; free physical = 3636 ; free virtual = 17946
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 456 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 2 inverter(s) to 48 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+No Unisim elements were transformed.
+
+INFO: [Common 17-83] Releasing license: Synthesis
+202 Infos, 62 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:01:35 ; elapsed = 00:01:37 . Memory (MB): peak = 1656.719 ; gain = 638.891 ; free physical = 3594 ; free virtual = 17943
+report_utilization: Time (s): cpu = 00:00:00.13 ; elapsed = 00:00:00.24 . Memory (MB): peak = 1688.738 ; gain = 0.000 ; free physical = 3588 ; free virtual = 17941
+INFO: [Common 17-206] Exiting Vivado at Thu Sep 29 10:58:40 2016...

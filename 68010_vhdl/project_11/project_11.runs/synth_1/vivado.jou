@@ -1,0 +1,10 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Thu Sep 29 10:56:55 2016
+# Process ID: 635
+# Log file: /afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/project_11/project_11.runs/synth_1/WF68K10_TOP.vds
+# Journal file: /afs/ece.cmu.edu/usr/cmeredit/Private/class/18545/18545/68010_vhdl/project_11/project_11.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source WF68K10_TOP.tcl -notrace

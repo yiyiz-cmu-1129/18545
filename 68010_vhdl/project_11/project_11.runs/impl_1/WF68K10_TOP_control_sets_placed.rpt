@@ -1,0 +1,144 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+-----------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
+| Date         : Thu Sep 29 10:59:32 2016
+| Host         : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+| Command      : report_control_sets -verbose -file WF68K10_TOP_control_sets_placed.rpt
+| Design       : WF68K10_TOP
+| Device       : xc7z020
+-----------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++-------------------------------------------------------------------+-------+
+|                               Status                              | Count |
++-------------------------------------------------------------------+-------+
+| Number of unique control sets                                     |    91 |
+| Minimum Number of register sites lost to control set restrictions |    82 |
++-------------------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             467 |          236 |
+| No           | No                    | Yes                    |               3 |            3 |
+| No           | Yes                   | No                     |              52 |           38 |
+| Yes          | No                    | No                     |            1474 |          763 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             322 |          137 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++----------------+-------------------------------------------+----------------------------------+------------------+----------------+
+|  Clock Signal  |               Enable Signal               |         Set/Reset Signal         | Slice Load Count | Bel Load Count |
++----------------+-------------------------------------------+----------------------------------+------------------+----------------+
+|  CLK_IBUF_BUFG |                                           | I_OPCODE_DECODER/LOOP_EXIT77_out |                1 |              1 |
+|  CLK_IBUF_BUFG |                                           | I_BUS_IF/DATA_RDY                |                2 |              2 |
+|  CLK_IBUF_BUFG | I_CONTROL/SBIT_WB_reg                     |                                  |                3 |              4 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/EXCEPTION[3]_i_1_n_0        |                                  |                2 |              4 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/STACK_FORMAT_I[3]_i_1_n_0   |                                  |                3 |              4 |
+|  CLK_IBUF_BUFG | I_CONTROL/BITS[4]_i_2_n_0                 | I_BUS_IF/SR[0]                   |                2 |              5 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/ADR_OFFS_VAR_reg[5]_0[0] | I_CONTROL/PHASE2_reg_0           |                2 |              5 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/VECT_No[9]_i_1_n_0          |                                  |                5 |              5 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/STACK_POS_VAR[5]_i_1_n_0    |                                  |                2 |              5 |
+|  CLK_IBUF_BUFG | I_CONTROL/DR_MARK_USED                    |                                  |                5 |              6 |
+|  CLK_IBUF_BUFG | I_CONTROL/AR_MARK_USED                    |                                  |                4 |              6 |
+|  CLK_IBUF_BUFG | I_BUS_IF/ADR_OFFSET[5]_i_2_n_0            | I_BUS_IF/ADR_OFFSET[5]_i_1_n_0   |                2 |              6 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/E[0]                        |                                  |                2 |              6 |
+|  CLK_IBUF_BUFG |                                           | I_OPCODE_DECODER/SR[0]           |                5 |              6 |
+|  CLK_IBUF_BUFG |                                           | I_CONTROL/PHASE2_reg_0           |                4 |              6 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/PC_VAR[6]_i_2_n_0        | I_EXC_HANDLER/BUSY_EXH           |                2 |              7 |
+|  CLK_IBUF_BUFG | I_BUS_IF/SSW_80[7]_i_1_n_0                |                                  |                4 |              7 |
+|  CLK_IBUF_BUFG | I_BUS_IF/E[0]                             | I_EXC_HANDLER/IPIPE_FLUSH1_out   |                3 |              7 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[6][7]_i_1_n_0         |                                  |                3 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[6][15]_i_1_n_0        |                                  |                3 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[5][7]_i_1_n_0         |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[7][15]_i_1_n_0        |                                  |                4 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[5][15]_i_1_n_0        |                                  |                3 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[4][7]_i_1_n_0         |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[4][15]_i_1_n_0        |                                  |                6 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[7][7]_i_1_n_0         |                                  |                4 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[3][7]_i_1_n_0         |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[3][15]_i_1_n_0        |                                  |                4 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[2][7]_i_1_n_0         |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[2][15]_i_1_n_0        |                                  |                7 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[1][7]_i_1_n_0         |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[1][15]_i_1_n_0        |                                  |                4 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[0][7]_i_1_n_0         |                                  |                6 |              8 |
+| ~CLK_IBUF_BUFG | I_BUS_IF/DATA_INMUX[7]_i_1_n_0            |                                  |                3 |              8 |
+| ~CLK_IBUF_BUFG | I_BUS_IF/DATA_INMUX[15]_i_1_n_0           |                                  |                5 |              8 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[0][15]_i_1_n_0        |                                  |                6 |              8 |
+|  CLK_IBUF_BUFG |                                           | I_BUS_IF/RESET_CPU               |                7 |              8 |
+|  CLK_IBUF_BUFG | I_BUS_IF/DBUFFER[7]_i_1_n_0               |                                  |                3 |              8 |
+|  CLK_IBUF_BUFG | I_BUS_IF/DBUFFER[7]_i_1_n_0               | I_BUS_IF/DBUFFER[15]_i_1_n_0     |                4 |              8 |
+|  CLK_IBUF_BUFG | I_BUS_IF/TMP[8]_i_2_n_0                   | I_OPCODE_DECODER/SS[0]           |                2 |              9 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/SR_CPY_reg[15]_0[0]         |                                  |                7 |             12 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[0][31]_i_1_n_0        |                                  |                7 |             16 |
+|  CLK_IBUF_BUFG | I_CONTROL/STORE_ABS_LO                    |                                  |                8 |             16 |
+| ~CLK_IBUF_BUFG | I_BUS_IF/DATA_INMUX[31]_i_1_n_0           |                                  |                7 |             16 |
+| ~CLK_IBUF_BUFG |                                           |                                  |               10 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/IPIPE[C][15]_i_1_n_0     | I_EXC_HANDLER/IPIPE_FLUSH1_out   |                8 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/IPIPE[D][15]_i_1_n_0     | I_EXC_HANDLER/IPIPE_FLUSH1_out   |                7 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/IPIPE[B][15]_i_1_n_0     | I_EXC_HANDLER/IPIPE_FLUSH1_out   |                8 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/EXT_WORD[15]_i_1_n_0     |                                  |                5 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/BIW_0[15]_i_1_n_0        |                                  |                8 |             16 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/BKPT_REQ                 |                                  |                5 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[7][31]_i_1_n_0        |                                  |                8 |             16 |
+|  CLK_IBUF_BUFG | I_BUS_IF/DBUFFER[7]_i_1_n_0               | I_BUS_IF/DBUFFER[31]_i_1_n_0     |                7 |             16 |
+|  CLK_IBUF_BUFG | I_CONTROL/E[0]                            |                                  |               11 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[1][31]_i_1_n_0        |                                  |                9 |             16 |
+|  CLK_IBUF_BUFG | I_CONTROL/ABS_ADDRESS_reg[31]             |                                  |                9 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[6][31]_i_1_n_0        |                                  |                8 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[5][31]_i_1_n_0        |                                  |               10 |             16 |
+|  CLK_IBUF_BUFG | I_CONTROL/IBUFFER_reg[0]                  |                                  |                9 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[4][31]_i_1_n_0        |                                  |               11 |             16 |
+|  CLK_IBUF_BUFG | I_BUS_IF/OPCODE_RDY_I1                    |                                  |                5 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[3][31]_i_1_n_0        |                                  |               10 |             16 |
+|  CLK_IBUF_BUFG | I_BUS_IF/CAHR_reg[15]_0[0]                | I_EXC_HANDLER/IPIPE_FLUSH1_out   |                7 |             16 |
+|  CLK_IBUF_BUFG | I_DATA_REGISTERS/DR[2][31]_i_1_n_0        |                                  |                9 |             16 |
+|  CLK_IBUF_BUFG | I_CONTROL/RESULT_SHIFTOP_reg[30]_0        |                                  |               10 |             29 |
+|  CLK_IBUF_BUFG | I_BUS_IF/BUS_CTRL_STATE[0]_i_1_n_0        |                                  |               18 |             32 |
+|  CLK_IBUF_BUFG | I_CONTROL/BASE_DISPL_reg[31][0]           | I_BUS_IF/RESET_CPU               |                9 |             32 |
+|  CLK_IBUF_BUFG |                                           | I_CONTROL/RESULT_reg[63]_0       |               22 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/PC_I_reg[31][0]          | I_BUS_IF/RESET_CPU               |               14 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/E[0]                     |                                  |               18 |             32 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/ADR_CPY[31]_i_1_n_0         |                                  |               13 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/LOAD_OP1                 |                                  |               10 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/LOAD_OP3                 |                                  |                9 |             32 |
+|  CLK_IBUF_BUFG | I_CONTROL/ADR_WB_reg[31]                  |                                  |               12 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[6][31]            |                                  |               26 |             32 |
+|  CLK_IBUF_BUFG | I_CONTROL/LOAD_OP2                        |                                  |               14 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[2][31]_0          |                                  |               27 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[3][31]_0          |                                  |               25 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[4][31]            |                                  |               27 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[5][31]_0          |                                  |               29 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[0][31]_0          |                                  |               29 |             32 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/AR_reg[1][31]_1          |                                  |               27 |             32 |
+|  CLK_IBUF_BUFG | I_BUS_IF/ISP_REG_reg[31][0]               |                                  |               23 |             32 |
+|  CLK_IBUF_BUFG | I_BUS_IF/ADR_LATCH_reg[0]                 |                                  |               14 |             35 |
+|  CLK_IBUF_BUFG | I_ALU/QUOTIENT[31]_i_2_n_0                | I_ALU/QUOTIENT[31]_i_1_n_0       |               26 |             62 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/OP_REG[15]_i_1_n_0       |                                  |               20 |             64 |
+|  CLK_IBUF_BUFG | I_ALU/QUOTIENT_VAR[0]_i_2_n_0             | I_ALU/QUOTIENT_VAR[0]_i_1_n_0    |               34 |             69 |
+|  CLK_IBUF_BUFG | I_EXC_HANDLER/PC_VAR_MEM_reg[6][0]        |                                  |               31 |             71 |
+|  CLK_IBUF_BUFG | I_OPCODE_DECODER/ALU_INIT                 |                                  |               62 |            152 |
+|  CLK_IBUF_BUFG | I_ALU/DIV_STATE_reg_n_0_[0]               |                                  |               57 |            160 |
+|  CLK_IBUF_BUFG |                                           |                                  |              226 |            451 |
++----------------+-------------------------------------------+----------------------------------+------------------+----------------+
+
+

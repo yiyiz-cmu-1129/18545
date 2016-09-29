@@ -1,0 +1,7 @@
+{
+   guistr: "# # String gsaved with Nlview 6.4.12  2014-12-16 bk=1.3272 VDI=35 GEI=35 GUI=JA:1.8
+#  -string -flagsOSRD
+preplace inst m68010_0 -pg 1 -lvl 1 -y 210 -defaultsOSRD
+levelinfo -pg 1 0 140 300
+",
+}
