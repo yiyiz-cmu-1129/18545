@@ -184,6 +184,12 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     assign SIORD_b = ~(~RDphi2 & ~ls138toSIO);
     assign WR68k_b = ~(~WRphi2 & ~ls138to68k);
     assign RD68k_b = ~(~RDphi2 & ~ls138to68k);
+
+    //This emulates what the code wants the first RD68k to look like
+    //Needs to be hooked up to somewhere at some point
+    logic [7:0] SDin68k;
+    always_ff @(posedge phi0) SDin68k <= (~RD68k_b) ? 8'b0 : 8'bzzzz_zzzz;
+    assign SDin = SDin68k;
     
 
 

@@ -24,10 +24,15 @@ module y2151(Din, Dout, A0, WR_b, RD_b, CS_b, IC_b, iRQ_b, SO, SH1, SH2, phiM);
             regs = 2048'b0;
         end
         else begin
-            if (~A0 && ~WR_b && ~CS_b) addr <= Din;
-            if (A0 && ~WR_b && ~CS_b) regs[addr] <= Din;
-        
-            if (~RD_b && ~CS_b) Dout <= regs[addr];
+            //Writes can either write a new address or to registers
+            if (~WR_b && ~CS_b) begin
+                if (~A0) addr <= Din;
+                if (A0)  regs[addr] <= Din;
+            end
+
+            //Read gives {busy, 5'b0, timerB, timerA}
+            //Here we just say NOT busy and don't know what the timers are
+            if (~RD_b && ~CS_b) Dout <= 8'b0000_0000; 
             else Dout <= 8'bzzzz_zzzz;
         end
     end

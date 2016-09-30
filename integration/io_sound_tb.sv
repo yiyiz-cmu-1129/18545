@@ -17,7 +17,7 @@ module testbench();
     end
 
 always @( dut.my6502.PC, dut.my6502.state )
-    $display( "%t, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04x SDin:%02x SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b MUSRES:%01b",
+    $display( "%t, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04x SDin:%02x SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b RD68k:%01b",
     $time,
     dut.my6502.PC,
     dut.my6502.statename,
@@ -32,7 +32,7 @@ always @( dut.my6502.PC, dut.my6502.state )
     dut.my6502.S,
     {dut.RAM_CS1_b, dut.RAM_CS0_b},
     dut.SROM_b,
-    dut.MUSRES_b);
+    dut.RD68k_b);
 
     initial begin;
 	    clk = 1;
@@ -40,7 +40,7 @@ always @( dut.my6502.PC, dut.my6502.state )
 	    nmi_b = 1;
 	    #15
 	    rst_b = 1;
-	    #400
+	    #400000
         $stop;
     end
 endmodule
