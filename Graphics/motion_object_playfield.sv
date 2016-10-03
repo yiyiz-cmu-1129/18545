@@ -15,7 +15,18 @@ input logic [15:0] VRD,
 input logic [9:0] PP,
 input logic [1:0] PPI, //This is PPI9 and PPI8
 input logic [6:0] MOSR,
-input logic VRESET_b
+input logic VRESET_b,
+//Additional signals for the Motion Object Horizontal Line Buffer
+input logic LMPD_b,
+output logic ACS_b, BCS_b, CLRA_b, CLRB_b,
+//Graphic Priority Control
+output logic [1:0] CRAS,
+output logic [1:0] GTC,
+input logic [4:0] PFX, //This is PFX7-3
+input logic [3:0] MPX,
+input logic MPX7, PFSC,
+//This is for alphanumerics
+input logic ALBLK 
 );
 
     logic [11:0] MM; //This include MMI9 and MMI8
@@ -96,14 +107,68 @@ input logic VRESET_b
 
 
 /////////////////////Motion Object Horizontal Line Buffer Control//////////////////
+    
+    logic MOH_1m_out, MOH_1d_out;
+    logic PADB, PADB_b;
 
+    //I am very unsure if this is how the 574 works
+    assign PADB_b = ~PADB;
+    always_ff @(posedge MCKR) begin
+        if(~PR1) PADB <= 1'b0;
+        else if(~PR1) PADB <= PADB_b ^ BUFCLR_b;
+        else PADB <= PADB;
+    end
 
+    assign MOH_1m_out = PR27 & MOSR[3] & MOSR[2] & MOSR[1] & MOSR[0];
+    assign MOH_1d_out = LMPD_b & MOH_1m_out;
+    assign ACS_b = PADB & ~MOH_1d_out;
+    assign BCS_b = PADB_b & ~MOH_1d_out;
+    assign CLRA_b = PADB_b | BUFCLR_b;
+    assign CLRB_b = PADB | BUFCLR_b;
 
+    
 
 ////////////////////ALPHANUMERICS/////////////////////////////////
+    logic [5:0] A_3F_Q, A_3H_Q;
+    logic [7:0] A_5F_D, A_5H_Q;
+    logic MOP_4H_b;
+    assign MOP_4H_b = ~MOP_4H;
+    
+    control_23128 A_5F(
+        A_5F_D,
+        {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},
+        1'b0,
+        1'b0);
+    
+    
+
+
+
+
+
 
 ////////////////////Graphic Priority Control//////////////////////
 
+    logic GPC_8c_out, GPC_1c_out;
+    assign GPC_8c_out = ~PFX[4] & ~PFX[3] & ~PFX[2] & ~PFX[1] & ~PFX[0];
+    assign GPC_1c_out = ~(MPX[3] & MPX[2] & MPX[1]);
+   
+    logic [3:0] GPC_3E_Y;
+
+    //The 825129 needs to be written //////////////////////////////////////////////
+    control_825129 gpc_3E(
+        GPC_3E_Y, //Y out
+        {A_3F_Q[5], APIX[1:0], GPC_8c_out, PFSC, GPC_1c_out, MPX7, MPX[0]}, //Address in
+        1'b0, //CE_b
+        1'b0, //OE_b
+    };
+
+    //LS74 1B and 5b
+    always_ff @(posedge MCKF) begin
+		CRAS[1:0] <= GPC_3E_Y[1:0];
+	end
+    assign GCT[1:0] = GPC_3E_Y[3:2];
+ 
 
 
 
