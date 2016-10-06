@@ -6,7 +6,9 @@ module playfield_horizontal(
 	input logic MCKR,
 	input logic PFHST_b, 
 	input logic [7:0] PFSR,
-	input logic PR1, PR97, clk_4H
+	input logic PR1, PR97, clk_4H,
+    input logic PFSPC_b,
+    output logic PFSC_V_MO
 	);
 
 	logic [7:0] VBD_from_10f;
@@ -57,8 +59,47 @@ module playfield_horizontal(
 		clk_4H
 		);
 
-    //Still need 5189 and 5273 from devon
-    //
+    //Then we have the LS189 which was mislabled as 5189
+    logic [7:0] PHS_4D_in;
+    logic clk;
+    ls189 PHS_4m(
+        PFSR[7:4],
+        {PR97, PHS_6D_out[2:0]},
+        PHS_4D_in[7:4],
+        MCKR,
+        1'b0,
+        clk);
 
+    ls189 PHS_5m(
+        PFRS[3:0],
+        {PR97, PHS_6D_out[2:0]},
+        PHS_4D_in[3:0],
+        MCKR,
+        1'b0,
+        clk); //The clock here is not in the original diagram
+
+    ls273 PHS_4d(
+        PHS_4D_in,
+        MCKF,
+        PR1,
+        PFX[7:0]);
+
+
+//////////////PLAYFIELD PRIORITY//////////////////
+    logic [7:0] PP_12E_in;
+    logic zeroCare;
+    
+    ls273 PP_11e(
+        VBD[7:0],
+        PFSPC_b,
+        1'b1,
+        PP_12E_in);
+
+    ls151 PP_12e(
+        PFX[2:0],
+        PP_12E_in,
+        1'b0,
+        PFSC_V_MO,
+        zeroCare);
 
 endmodule

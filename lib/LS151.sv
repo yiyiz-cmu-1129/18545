@@ -6,9 +6,13 @@ module ls151(I, S, Z, Z_b, E_b);
     output logic Z, Z_b;
 
     always_comb begin
-        if (E_b)
-            Z = 0; Z_b = 1;
-        else
-            Z = I[S]; Z_b = ~I[S];
+        if (E_b) begin
+            Z = 0; 
+            Z_b = 1;
+        end
+        else begin
+            Z = I[S]; 
+            Z_b = ~I[S];
+        end
     end
 endmodule
