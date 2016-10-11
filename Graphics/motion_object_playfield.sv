@@ -26,7 +26,8 @@ input logic [4:0] PFX, //This is PFX7-3
 input logic [3:0] MPX,
 input logic MPX7, PFSC,
 //This is for alphanumerics
-input logic ALBLK 
+input logic ALBLK,
+output logic MGHF
 );
 
     logic [11:0] MM; //This include MMI9 and MMI8
@@ -131,18 +132,44 @@ input logic ALBLK
 ////////////////////ALPHANUMERICS/////////////////////////////////
     logic [5:0] A_3F_Q, A_3H_Q;
     logic [7:0] A_5F_D, A_5H_Q;
-    logic MOP_4H_b;
+    logic MOP_4H_b, A_S1;
+    logic dnca1, dnca2, dnca3, dnca4, dnca5, dnca6, dnca7;
     assign MOP_4H_b = ~MOP_4H;
-    
+    assign A_S1 = MOP_1H & MOP_2H;
     control_23128 A_5F(
         A_5F_D,
         {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},
         1'b0,
         1'b0);
     
+    ls273 A_5H(
+        VRD[7:0],
+        MOP_4H,
+        1'b1, 
+        A_5H_Q);
     
+    ls194 A_2B(
+        1'b1,
+        MCKF,
+        1'b1, A_S1,
+        1'b0, 1'b0,
+        A_5F_D[4], A_5F_D[5], A_5F_D[6], A_5F_D[7],
+        dnca1, dnca2, dnca3, APIX[1]);
+ 
+    ls194 A_4B(
+        1'b1,
+        MCKF,
+        1'b1, A_S1,
+        1'b0, 1'b0,
+        A_5F_D[0], A_5F_D[1], A_5F_D[2], A_5F_D[3],
+        dnca4, dnca5, dnca6, APIX[0]);
 
 
+    ls174 A_3H(
+        A_3H_Q,
+        {VRD[13], 1'b1, VRD[8], VRD[12:10]},
+        MOP_4H,
+        1'b1);
 
 
 
