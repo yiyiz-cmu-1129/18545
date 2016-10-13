@@ -74,11 +74,7 @@ module color_ram(
     //It is the address for them
     assign A_2149 = (CRAM) ? MA : {CRAS, CR_9d_Q};
     logic [15:0] Din, Dout;
-//This will need to interface with vivado's memory, vivado will need to generate the clock which this is clocked at
-    logic [9:0] Addr_to_vivado_memory;
-    logic [3:0] data_in_vivado1, data_in_vivado2, data_in_vivado3, data_in_vivado4;
-    logic [3:0] data_out_vivado1, data_out_vivado2, data_out_vivado3, data_out_vivado4;
-    logic WE_to_vivado_memory;
+    logic clk;
 
     control_2149 cr13D(
     Din[3:0],
@@ -86,11 +82,7 @@ module color_ram(
     A_2149,
     1'b0,
     CRAMWR_b,
-    
-    data_in_vivado1,
-    data_out_vivado1,
-    Addr_to_vivado_memory,
-    WE_to_vivado_memory);
+    clk);
     
     control_2149 cr12D(
     Din[7:4],
@@ -98,10 +90,7 @@ module color_ram(
     A_2149,
     1'b0,
     CRAMWR_b,
-    
-    data_in_vivado2,
-    data_out_vivado2,
-    ,
+    clk
     );
     
     control_2149 cr10D(
@@ -110,10 +99,7 @@ module color_ram(
     A_2149,
     1'b0,
     CRAMWR_b,
-    
-    data_in_vivado3,
-    data_out_vivado3,
-    ,
+    clk
     );
 
     control_2149 cr11D(
@@ -122,10 +108,7 @@ module color_ram(
     A_2149,
     1'b0,
     CRAMWR_b,
-    
-    data_in_vivado4,
-    data_out_vivado4,
-    ,
+    clk
     );
 
     //This is the LS245 except we cant have inout ports so sad
