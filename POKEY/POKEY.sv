@@ -62,9 +62,9 @@ module POKEY
    assign clr = (skCtl[1:0] == 2'b00);
 
 
-//   tristateDriver #(8) triDrv(.i(dataOut), .o(D), .en(readHighWriteLow));
+   tristateDriver #(8) triDrv(.i(dataOut), .o(Dout), .en(readHighWriteLow & ~cs0Bar)); //DWW: Uncommented, made Dout, added cs0Bar
    assign dataIn = Din;
-   assign Dout = dataOut;
+   //assign Dout = dataOut; //DWW: Commented
 
 
    wave15kGen w15k(.clk(clk), .clr(clr), .wave(wave15k), .pulse(pulse15k));

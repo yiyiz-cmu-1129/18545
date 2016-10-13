@@ -11,8 +11,10 @@
 `include "../lib/Y2151.sv"
 `default_nettype none
 
-module io_sound (phi0, SNDRST_b, SNDNMI_b);
-    input  logic phi0; //phi0 == phi2 == Bphi2
+module io_sound (SC_1H, SC_2H, clk100, SNDRST_b, SNDNMI_b);
+    input  logic SC_1H; //Clocks the YM2151
+    input  logic SC_2H; //SC_2H == phi0 == phi2 == Bphi2
+    input  logic clk100; //Not in the original design, specifically for POKEY
     input  logic SNDRST_b;
     input  logic SNDNMI_b;
 
@@ -33,6 +35,10 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     logic [7:0] POKEYout;
     logic MUSRES_b;
     logic my6502IRQ_b;
+    logic YMHCS_b;
+    logic SIOWR_b, SIORD_b;
+
+
 
 
 
@@ -41,8 +47,6 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     //Signals needed to be found
     logic PR101;
     logic PKS;
-    logic YMHCS_b;
-    logic SIOWR_b, SIORD_b;
     logic WR68k_b, RD68k_b;
     logic SNDEXT_b;
 
@@ -52,17 +56,19 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
 
 
 
-
     ///////////////////////////////////////////////
     /////////I/O and Sound Microprocessor//////////
     ///////////////////////////////////////////////
-    assign RDphi2 = ~(phi0 & SNDBW_b);
-    assign WRphi2 = ~(phi0 & ~SNDBW_b);
+    
+    //These are like this so that they only assert for 1 cycle
+    //of the SC_1H clk, which is 2x as fast as the SC_2H
+    assign RDphi2 = ~(SC_2H & SNDBW_b);
+    assign WRphi2 = ~(SC_2H & ~SNDBW_b);
 
     //Working in the abstraction that the 6502 controls everything
     //IE things output to the IN line of the 6502 and input from it's OUT line
     //This might not be the case
-    cpu my6502(.clk(phi0),
+    cpu my6502(.clk(SC_2H),
                .reset(~SNDRST_b),
                .AB({my6502toAddrDec, SBA}),
                .DI(SDin),
@@ -80,21 +86,18 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     /////////////////////////////////
     //////////Sound Effects//////////
     /////////////////////////////////
-    logic clk; //oh god why
     logic [7:0] POKEY_P; //unused
     POKEY myPOKEY(.Din(SDout),
-                  .Dout(/*POKEYout*/),
+                  .Dout(SDin), //This should drive the 6502 input line
                   .A(SBA[3:0]),
-                  .phi2(phi0),
+                  .phi2(SC_2H),
                   //Yes, this is the same WE as the 6502
                   //That's what the diagram shows
                   .readHighWriteLow(SNDBW_b),
-                  .cs0Bar(CSND_b),
-                //.cs1(PR101), //This is missing
+                  .cs0Bar(CSND_b | ~PR101), //There are 2 CS signals, we just OR them because Demorgans
                   .aud(PKS),
                   //This clk is the 100 MHz clock, and is not a pin on the POKEY DIP
-                  //WHAT'S THE RELATIVE TIMING to PHI2
-                  .clk(clk),
+                  .clk(clk100),
                   .P(POKEY_P));
     //assign SDin = (~SNDBW_b) ? POKEYout : 8'bzzzz_zzzz; 
 
@@ -106,23 +109,20 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     ///////////////////////
     //////////RAM//////////
     ///////////////////////
-    logic [7:0] RAM0datatoMem, RAM1datatoMem; //Memory Interface Signals
-    logic [10:0] RAM0addrtoMem, RAM1addrtoMem;
-    logic RAM0c_out, RAM1c_out, RAM0_we, RAM1_we, RAM0_en, RAM1_en;
     control_6116 RAM0(.Dout(SDin),
                       .Din(SDout),
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS0_b),
                       .WE_b(SNDBW_b),
                       .OE_b(1'b0),
-                      .clk(phi0));
+                      .clk(SC_2H));
     control_6116 RAM1(.Dout(SDin),
                       .Din(SDout),
                       .A(SBA[10:0]),
                       .CS_b(RAM_CS1_b),
                       .WE_b(SNDBW_b),
                       .OE_b(1'b0),
-                      .clk(phi0));
+                      .clk(SC_2H));
 
     
 
@@ -136,20 +136,20 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                        .A(SBA),
                        .CS_b(SROM_b[0]),
                        .OE_b(~SNDBW_b), //This is READ active low
-                       .clk(phi0));
+                       .clk(SC_2H));
 
     control_23128 rom1(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[1]),
                        .OE_b(~SNDBW_b),
-                       .clk(phi0));
+                       .clk(SC_2H));
 
 
     control_23128 rom2(.Dout(SDin),
                        .A(SBA),
                        .CS_b(SROM_b[2]),
                        .OE_b(~SNDBW_b),
-                       .clk(phi0));
+                       .clk(SC_2H));
 
 
 
@@ -188,7 +188,7 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     //This emulates what the code wants the first RD68k to look like
     //Needs to be hooked up to somewhere at some point
     logic [7:0] SDin68k;
-    always_ff @(posedge phi0) SDin68k <= (~RD68k_b) ? 8'b0 : 8'bzzzz_zzzz;
+    always_ff @(posedge SC_2H) SDin68k <= (~RD68k_b) ? 8'b0 : 8'bzzzz_zzzz;
     assign SDin = SDin68k;
     
 
@@ -204,7 +204,7 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                   .En_b(SIOWR_b),
                   .Q(LEDctrl),
                   .clr_b(SNDRST_b),
-                  .clk(phi0));
+                  .clk(SC_2H));
     assign MUSRES_b = LEDctrl[0];
 
 
@@ -217,7 +217,7 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
     //Temporary till we figure out what self test is
     //Somewhat replaces the 367A
     logic [7:0] SDinCoin;
-    always_ff @(posedge phi0) SDinCoin <= (~SIORD_b) ? 8'h87 : 8'bzzzz_zzzz;
+    always_ff @(posedge SC_2H) SDinCoin <= (~SIORD_b) ? 8'h87 : 8'bzzzz_zzzz;
     assign SDin = SDinCoin;
 
 
@@ -237,6 +237,5 @@ module io_sound (phi0, SNDRST_b, SNDNMI_b);
                      .SO(),
                      .SH1(),
                      .SH2(),
-                     .phiM(phi0)); //Hopefully this works - the sheet lists it as "1H" whereas phi0 is "2H"
-
+                     .phiM(SC_1H)); //Twice the speed of the 6502 and everything else
 endmodule
