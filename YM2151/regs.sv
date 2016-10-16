@@ -1,6 +1,7 @@
 
 // The regfile consists of 256 byte registers
 // and a READ-ONLY status register
+// Need to set the Write busy flag
 
 module reg_file 
 (input logic [7:0] Din,
@@ -20,19 +21,23 @@ module reg_file
  logic [7:0] status_reg;
  logic [255:0][7:0] regs;
 
+ //Guess write complete needs 68 clk cycles??? Need to confirm
+ logic [6:0] write_complete_cnt;
+ logic write_cnt_inc;
 
  //not sure about the timing now, so make everything to be synchronous now
  always_ff @(posedge phiM) begin
         if (~IC_b) begin
             regs <= 2048'b0;
-            CT_1 <= 1'b0;
-            CT_2 <= 1'b0; //Upon initial clear CT_1 and CT_2 shall be 0
         end
         else begin
             //Writes can either write a new address or to registers
             if (~WR_b && ~CS_b) begin
                 if (~A0) addr <= Din;
-                if (A0)  regs[addr] <= Din;
+                //write busy flag is not set
+                if (A0 && (status_reg[7]==1'b0))  begin 
+                  regs[addr] <= Din;
+                end 
             end
 
             //Read gives {busy, 5'b0, timerB, timerA}
@@ -40,13 +45,18 @@ module reg_file
             else Dout <= 8'bzzzz_zzzz;
 
 
-            //CT_1 and CT_2 are from reg #1B
-            CT_1 <= regs[27][7];
-            CT_2 <= regs[27][6];
+            //timer sets the status reg
+            status_reg[1] <= TM_2;
+            status_reg[0] <= TM_1;
        end
     end
 
-    //IRQ set when either timer has a carry bit 
+    // IRQ set when either timer has a carry bit 
     assign IRQ_b = ((TM_1==1) || (TM_2==1)) ? 1'b0 : 1'b1;
+    
+    // CT_1 and CT_2 are from reg #1B
+    // Upon initial clear CT_1 and CT_2 shall be 0
+    assign CT_1 = (~IC_b) ? 1'b0 : regs[27][7];
+    assign CT_2 = (~IC_b) ? 1'b0 : regs[27][6];
 
 endmodule
