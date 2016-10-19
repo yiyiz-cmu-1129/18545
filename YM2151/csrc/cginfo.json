@@ -1,0 +1,68 @@
+{
+    "MlibObjs": {},
+    "SIMBData": {
+        "out": "amcQwB.o",
+        "bytes": 58025
+    },
+    "PrevCompiledModules": {
+        "std": {
+            "reYIK_d": {
+                "mode": 4,
+                "bytes": 29004,
+                "mod": "std",
+                "out": "objs/reYIK_d.o"
+            }
+        },
+        "...MASTER...": {
+            "amcQw_d": {
+                "mode": 4,
+                "bytes": 7923,
+                "mod": "...MASTER...",
+                "out": "objs/amcQw_d.o"
+            }
+        }
+    },
+    "stat": {
+        "nMops": 840
+    },
+    "NameTable": {
+        "std": [
+            "std",
+            "reYIK",
+            "module"
+        ],
+        "envelope_generator": [
+            "envelope_generator",
+            "ieBUd",
+            "module"
+        ],
+        "...MASTER...": [
+            "SIM",
+            "amcQw",
+            "module"
+        ]
+    },
+    "CompileStrategy": "fullobj",
+    "CurCompileModules": [
+        "...MASTER...",
+        "envelope_generator"
+    ],
+    "CurCompileUdps": {},
+    "LVLData": [
+        "SIM"
+    ],
+    "Misc": {
+        "csrc_abs": "/afs/ece.cmu.edu/usr/yiyiz/Private/18545/18545/YM2151/csrc",
+        "cwd": "/afs/ece.cmu.edu/usr/yiyiz/Private/18545/18545/YM2151",
+        "csrc": "csrc",
+        "daidir_abs": "/afs/ece.cmu.edu/usr/yiyiz/Private/18545/18545/YM2151/simv.daidir",
+        "daidir": "simv.daidir",
+        "default_output_dir": "csrc",
+        "archive_dir": "archive.6"
+    },
+    "PEModules": [],
+    "CompileStatus": "Successful",
+    "CompileProcesses": [
+        "cgproc.6993.json"
+    ]
+}

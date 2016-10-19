@@ -1,0 +1,25 @@
+{
+    "CompUnits": {
+        "amcQw_d": {
+            "mod": "...MASTER...",
+            "out": "objs/amcQw_d.o",
+            "mode": 4,
+            "bytes": 8400
+        },
+        "ieBUd_d": {
+            "mod": "envelope_generator",
+            "out": "objs/ieBUd_d.o",
+            "mode": 4,
+            "bytes": 14308
+        }
+    },
+    "Modules": {
+        "...MASTER...": {},
+        "std": {},
+        "envelope_generator": {
+            "Compiled": "Yes",
+            "Compiled Times": 1
+        }
+    },
+    "ObjArchives": []
+}
