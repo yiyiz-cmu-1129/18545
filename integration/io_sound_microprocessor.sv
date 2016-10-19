@@ -9,14 +9,14 @@
 `include "../lib/LS138.sv"
 `include "../lib/LS259.sv"
 `include "../lib/Y2151.sv"
+`include "../lib/LS374.sv"
 `default_nettype none
 
-module io_sound (SC_1H, SC_2H, clk100, SNDRST_b, SNDNMI_b);
+module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
     input  logic SC_1H; //Clocks the YM2151
     input  logic SC_2H; //SC_2H == phi0 == phi2 == Bphi2
     input  logic clk100; //Not in the original design, specifically for POKEY
     input  logic SNDRST_b;
-    input  logic SNDNMI_b;
 
     tri [7:0]  SDin, SDout; //Sound Data into processor and out of
     logic [13:0] SBA; //Sound Address Bus
@@ -37,6 +37,9 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b, SNDNMI_b);
     logic my6502IRQ_b;
     logic YMHCS_b;
     logic SIOWR_b, SIORD_b;
+    logic WR68k_b, RD68k_b;
+    logic SNDNMI_b;
+
 
 
 
@@ -47,7 +50,6 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b, SNDNMI_b);
     //Signals needed to be found
     logic PR101;
     logic PKS;
-    logic WR68k_b, RD68k_b;
     logic SNDEXT_b;
 
 
@@ -238,4 +240,66 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b, SNDNMI_b);
                      .SH1(),
                      .SH2(),
                      .phiM(SC_1H)); //Twice the speed of the 6502 and everything else
+
+
+
+    //////////////////////////////////////////
+    //////////MP COMMUNICATION PORTS//////////
+    //////////////////////////////////////////
+
+
+    logic [7:0] IBDout, IBDin; //IO bus, controlled by 68k
+    logic SNDWR_b, SNDRD_b; //68k handshake control signals
+    logic ctrl_68kBUF, ctrl_SNDBUF; //Tells us when there's data in the buffer ready to be read by SND or 68k, respectively
+    logic SNDINT_b; //Interrupt for the 68k
+
+    //This is the control for the handshaking between the 6502 and the 68k
+    
+    //This set controls the 68k writing to the sound processor
+    //The 68k loads the values of the 374 with the data it wants to send to the 6502
+    //It at the same time asserts SNDWR_b to trigger a SNDNMI_b
+    //The 6502 then responds to this in its interrupt handler and reads the data
+    //To signal that it is reading the data it asserts RD68k_b, which outputs the data and resets the NMI signal
+
+    //LS74one
+    always_ff @(posedge SNDWR_b, negedge RD68k_b) begin
+        if (~RD68k_b) begin
+            ctrl_68kBUF <= 1'b0;
+            SNDNMI_b <= 1'b1;
+        end
+        else if (~SNDWR_b & RD68k_b) begin
+            ctrl_68kBUF <= 1'b1;
+            SNDNMI_b <= 1'b0;
+        end
+    end
+
+    ls374 ls374one(.Q(IBDout),
+                   .D(SDin),
+                   .clk(SNDWR_b),
+                   .OC_b(RD68k_b));
+
+    //This set controls the 6502 writing to the video processor
+    //The 6502 asserts WR68k_b to write to the 374 the data it wants to sent
+    //This also sets the SNDINT_b interrupt signal for the 68k
+    //The 68k responds by asserting SNDRD_b to read the data out from the 374 and reset the interrupt
+
+    //LS74two
+    always_ff @(posedge WR68k_b, negedge (SNDRD_b & SNDRST_b)) begin //AND of two active low signals is an OR for active highs
+        if (~(SNDRD_b & SNDRST_b)) begin
+            ctrl_SNDBUF <= 1'b0;
+            SNDINT_b <= 1'b1;
+        end
+        else if (~WR68k_b & (SNDRD_b & SNDRST_b)) begin
+            ctrl_SNDBUF <= 1'b1;
+            SNDINT_b <= 1'b0;
+        end
+    end
+
+    ls374 ls374two(.Q(IBDin),
+                   .D(SDout),
+                   .clk(WR68k_b),
+                   .OC_b(SNDRD_b));
+
+            
+
 endmodule
