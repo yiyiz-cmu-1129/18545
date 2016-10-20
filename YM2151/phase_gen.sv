@@ -1,9 +1,11 @@
 //  KEY CODE [6:4]->Octave [3:0]->Note
+//  reg #1B [7:6]control_output [1:0] waveform select
 //  sample rate of the audio codec is 48K
 module phase_gen 
-  (input logic [7:0] key_code, 
+  (input logic [7:0] key_code,
+   input logic [1:0] wave_form, 
    input logic phiM, //clk
-   input logic IC_b, //rst_b
+   input logic IC_b, //irst_b
    output logic [15:0] out_val);
 
 // sample rate in the table is 2.5K 
@@ -25,14 +27,11 @@ module phase_gen
 // 11.A# -> 932 HZ   48.54 => 49                             940.8 Hz   7.2 
 // 12 B -> 988 HZ    51.46 => 51                             979.2 Hz   8.8
 
-   
+    logic [15:0] val;
+    logic [5:0] step_size;
+    logic [11:0] counter; //largest val is 4096
 
-
-
-endmodule phase_gen
-
-
-module sin_bram();
+    //tables 
     reg [15:0] square_tbl[0:2499]; //2.5K sample
     reg [15:0] sawtooth_tbl[0:2499]; //2.5K sample
     reg [15:0] triangle_tbl[0:2499]; //2.5K sample
@@ -43,4 +42,41 @@ module sin_bram();
         $readmemh("triangle.txt",triangle_tbl);
     end 
 
-endmodule 
+    always_ff @(posedge phiM, negedge IC_b) begin
+        if(~IC_b) begin
+            out_val <= 16'd0;
+            counter <= 12'd0;
+        end 
+        else begin 
+            if ((counter + step_size) > 12'd2499)
+                counter <= 12'd0;
+            else begin
+                counter <= counter + step_size;
+            end 
+            if (wave_form==2'd0) out_val <= sawtooth_tbl[counter];
+            else if (wave_form==2'd1) out_val <= square_tbl[counter];
+            else if (wave_form==2'd2) out_val <= triangle_tbl[counter];
+            else out_val <= 16'dx;
+        end 
+    end 
+
+    always_comb 
+    case(key_code[3:0])
+      4'd1: step_size = 6'd27;
+      4'd2: step_size = 6'd29;
+      4'd3: step_size = 6'd31;
+      4'd4: step_size = 6'd32;
+      4'd5: step_size = 6'd34;
+      4'd6: step_size = 6'd36;
+      4'd7: step_size = 6'd39;
+      4'd8: step_size = 6'd41;
+      4'd9: step_size = 6'd43;
+      4'd10: step_size = 6'd46;
+      4'd11: step_size = 6'd49;
+      4'd12: step_size = 6'd51;
+    endcase 
+  
+
+endmodule
+
+
