@@ -22,13 +22,13 @@ module reg_file
  logic [255:0][7:0] regs;
 
  //Guess write complete needs 68 clk cycles??? Need to confirm
- logic [6:0] write_complete_cnt;
- logic write_cnt_inc;
+ //logic [6:0] write_complete_cnt;
 
  //not sure about the timing now, so make everything to be synchronous now
- always_ff @(posedge phiM) begin
+ always_ff @(posedge phiM, negedge IC_b) begin
         if (~IC_b) begin
             regs <= 2048'b0;
+            status_reg <= 8'b0;
         end
         else begin
             //Writes can either write a new address or to registers
@@ -37,8 +37,12 @@ module reg_file
                 //write busy flag is not set
                 if (A0 && (status_reg[7]==1'b0))  begin 
                   regs[addr] <= Din;
+                  status_reg[7] <= 1'b1;
                 end 
             end
+
+            //assuming only takes 1 cycle to write 
+            if (status_reg[7] == 1'b1) status_reg[7] <= 1'b0;
 
             //Read gives {busy, 5'b0, timerB, timerA}
             if (~RD_b && ~CS_b) Dout <= status_reg; 
