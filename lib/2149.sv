@@ -7,7 +7,7 @@ module control_2149(
 
     logic [3:0] ram [1024:0];
     logic [3:0] data_in, data_out;
-    always_ff (@posedge clk) begin
+    always_ff @(posedge clk) begin
         if(~WE_b & ~CS_b) begin
             ram <= ram;
             ram[A][3:0] <= data_in;

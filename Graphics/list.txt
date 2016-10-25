@@ -1,0 +1,9 @@
+../68010_vhdl/wf68k10_pkg.vhd
+../68010_vhdl/wf68k10_top.vhd
+../68010_vhdl/wf68k10_address_registers.vhd
+../68010_vhdl/wf68k10_alu.vhd
+../68010_vhdl/wf68k10_bus_interface.vhd
+../68010_vhdl/wf68k10_control.vhd
+../68010_vhdl/wf68k10_data_registers.vhd
+../68010_vhdl/wf68k10_exception_handler.vhd
+../68010_vhdl/wf68k10_opcode_decoder.vhd

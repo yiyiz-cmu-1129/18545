@@ -1,4 +1,4 @@
-/ Left-right shift register
+// Left-right shift register
 //Also found this module
 module ls194(
   input logic clr, clk,
@@ -11,7 +11,7 @@ module ls194(
   
   always_comb
     case({s1, s0})
-      2'b00 : data[3:0] = q[3:0];
+      2'b00 : data[3:0] = data[3:0];
       2'b11 : data[3:0] = {a, b, c, d};
       2'b01 : data[3:0] = {SR, a, b, c};
       2'b10 : data[3:0] = {b, c, d, SL};

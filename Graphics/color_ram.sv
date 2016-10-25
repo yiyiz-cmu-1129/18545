@@ -14,7 +14,7 @@ module color_ram(
     input logic CRAM_b,     //Found in Address Decoder
     input logic CRAMWR_b,   //Found in Address Decoder
     input logic MCKF,       //Found in the System clock and Sync Generator
-    input logic BR_W_b);    //Found in the hookups from the 68010 diagram
+    input logic BR_W_b, clk);    //Found in the hookups from the 68010 diagram
 
     logic [6:0] MPX_b;
     logic CR_3c_pin7, CR_3c_pin9;
@@ -74,7 +74,6 @@ module color_ram(
     //It is the address for them
     assign A_2149 = (CRAM) ? MA : {CRAS, CR_9d_Q};
     logic [15:0] Din, Dout;
-    logic clk;
 
     control_2149 cr13D(
     Din[3:0],
@@ -112,14 +111,9 @@ module color_ram(
     );
 
     //This is the LS245 except we cant have inout ports so sad
-    always_comb begin
-        if(CRAM & BR_W_b) begin
-            D = VBD_in;
-            Din = VBD_in;
-        end
-        else D = Dout;
-        VBD_out = Dout;
-    end
+    assign D = (CRAM & BR_W_b) ? VBD_in : Dout;
+    assign Din = (CRAM & BR_W_b) ? VBD_in : 16'bzzzz_zzzz_zzzz_zzzz;
+    assign VBD_out = (CRAM & BR_W_b) ? 16'bzzzz_zzzz_zzzz_zzzz : Dout;
 
 endmodule
 

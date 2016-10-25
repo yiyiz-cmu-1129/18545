@@ -1,15 +1,15 @@
 //This is a combined motion playfield and alphanumerics
 module motion_playfield(
-output logic [9:0] MGRA,
+output logic [17:0] MGRA,
 output logic [1:0] MGRI, //This is the MGRI9 and MGRI8 pins
 output logic MATCH_b,
 output logic GLD_b,
 output logic [1:0] APIX,
 output logic [2:0] ALC,
-output logic P2, H01_b;
-input logic MCKF, PR27,
+output logic P2, H01_b,
+input logic MCKF, PR27, MCKR, PR1, PR80, PR97,
 input logic MOP_4H, MOP_4HDD, MOP_2HDL, MOP_4HDL, PHFLIP, MOP_4HD3_b,
-input logic MOP_1H, MOP_2H, BUFCLR_b, LPMD_b,
+input logic MOP_1H, MOP_2H, BUFCLR_b,
 input logic [15:0] VRD,
 input logic [9:0] PP,
 input logic [1:0] PPI, //This is PPI9 and PPI8
@@ -20,17 +20,17 @@ input logic LMPD_b,
 output logic ACS_b, BCS_b, CLRA_b, CLRB_b,
 //Graphic Priority Control
 output logic [1:0] CRAS,
-output logic [1:0] GTC,
+output logic [1:0] GCT,
 input logic [4:0] PFX, //This is PFX7-3
 output logic [7:0] MPX,
 input logic PFSC,
 //This is for alphanumerics
-input logic ALBLK,
+input logic ALBNK,
 output logic MGHF
 );
 //////////////////Motion Object Playfield Variables/////////////////////////
-
-
+    
+    logic clk; ///////////////We need to find a way to drive this
 
     logic [11:0] MM; //This include MMI9 and MMI8
     logic MOP_2HDL_b, MOHFLIP, MOP_4HDD_b;
@@ -44,7 +44,6 @@ output logic MGHF
     logic dnc1, dnc2, dnc3, MOP_4j_pin6;
     logic MOP_1a_3, MOP_1a_8, MOP_4f_in2, MOP_13h_out;
     logic MOP_8m_pin9_out; //This feeds into the alphanumerics
-    logic BCS_b, ACS_b;
     logic LDA_b, LDB_b;
 
 /////////////////////Motion Object Horizontal Line Buffer Control Variables//////////////////
@@ -167,7 +166,8 @@ output logic MGHF
         A_5F_D,
         {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},
         1'b0,
-        1'b0);
+        1'b0,
+        clk);
     
     ls273 A_5H(
         VRD[7:0],
@@ -175,8 +175,7 @@ output logic MGHF
         1'b1, 
         A_5H_Q);
     
-    ls194 A_2B(
-        1'b1,
+    ls194 A_2B(        1'b1,
         MCKF,
         1'b1, A_S1,
         1'b0, 1'b0,
@@ -211,8 +210,8 @@ output logic MGHF
     assign GPC_1c_out = ~(MPX[3] & MPX[2] & MPX[1]);
    
 
-    //The 825129 needs to be written //////////////////////////////////////////////
-    control_825129 gpc_3E(
+    //The 82S129 needs to be written //////////////////////////////////////////////
+    control_82S129 gpc_3E(
         GPC_3E_Y, //Y out
         {A_3F_Q[5], APIX[1:0], GPC_8c_out, PFSC, GPC_1c_out, MPX[7], MPX[0]}, //Address in
         1'b0, //CE_b
@@ -303,13 +302,12 @@ output logic MGHF
         RIP_1H,
         MCKR);
     
-    logic clk;
     logic [3:0] MOH_3L_out, MOH_4L_out, MOH_1L_out, MOH_2L_out;
     logic [7:0] MOSRinA, MOSRinB;
     control_2149 MOH_3L(
         MOSRinA[3:0],
         MOH_3L_out,
-        {1'b0, MOH_2F[0], MOH_2H, MOH_2J},
+        {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
         MCKR,
         clk);   
@@ -317,7 +315,7 @@ output logic MGHF
     control_2149 MOH_4L(
         MOSRinA[7:4],
         MOH_4L_out,
-        {1'b0, MOH_2F[0], MOH_2H, MOH_2J},
+        {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
         MCKR,
         clk);
@@ -325,7 +323,7 @@ output logic MGHF
     control_2149 MOH_1L(
         MOSRinB[3:0],
         MOH_1L_out,
-        {1'b0, MOH_1F[0], MOH_1H, MOH_1J},
+        {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
         MCKR,
         clk);    
@@ -333,20 +331,21 @@ output logic MGHF
     control_2149 MOH_2L(
         MOSRinB[7:4],
         MOH_2L_out,
-        {1'b0, MOH_1F[0], MOH_1H, MOH_1J},
+        {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
         MCKR,
         clk);        
     
-
+    logic [7:0] MPXA, MPXB;
+    assign MPX = (PADB) ? MPXB : MPXA;
     ls374 MOH_3K(
-        MPX,
+        MPXA,
         MOSRinA,
         MCKF,
         PADB);
 
     ls374 MOH_2K(
-        MPX,
+        MPXB,
         MOSRinB,
         MCKF,
         PADB_b);
@@ -363,6 +362,7 @@ output logic MGHF
         MOSRinA[7:4] = MOH_4L_out;
         MOSRinB[3:0] = MOH_1L_out;
         MOSRinA[3:0] = MOH_3L_out;
+
     end
 endmodule
 

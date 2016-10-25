@@ -8,7 +8,7 @@ module ims1420(
 
 	logic [3:0] ram [4096:0];
 	
-    always_ff (@posedge clk) begin
+    always_ff @(posedge clk) begin
         if(~WE_b & ~E_b) begin
             ram <= ram;
             ram[ADDR][3:0] <= DATA_IN;

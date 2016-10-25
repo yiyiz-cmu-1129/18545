@@ -23,9 +23,10 @@ input logic PRIO1, PR1,
 output logic BR_W_b,
 input logic BW_R_b,
 output logic CRAMWR_b,
+output logic CRAM_b,
 output logic RAM1_b, RAM0_b,
 output logic VRAMWR, VRAMRD_b, MA18_b,
-output logic UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, PFSPC_b,
+output logic UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, VBUS_b, PFSPC_b,
 output logic VSCRLD_b, HSCRLD_b, SLAP_b, SNDRD_b,
 output logic SNDWR_b, INPUT_b, RAJs_b, RAJs, RLETA_b,
 output logic E2PROM_b,
@@ -70,7 +71,6 @@ logic VRDTACK_b;
 
 
 
-    logic CRAM_b;
     logic dontcare, noonecares;
     logic [2:0] dnc;
     logic qd_12m, rip_12m, c_12m, out_13e;
@@ -164,7 +164,6 @@ logic VRDTACK_b;
 
 /////////////////////Address Decoder//////////////////
     
-logic VBUS_b;
 logic [1:0] AD_4J_Y;
 logic dnc2, AD_3D_Y, dnc4;
 logic [7:0] AD_14C_Y;
