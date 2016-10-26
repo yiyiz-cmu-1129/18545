@@ -3,12 +3,13 @@ module playfield_horizontal(
 	output logic [7:0] PFX, 
 	input logic [8:0] VBD,
 	input logic HSCRLD_b,
-	input logic MCKR,
+	input logic MCKR, MCKF,
 	input logic PFHST_b, 
 	input logic [7:0] PFSR,
 	input logic PR1, PR97, clk_4H,
     input logic PFSPC_b,
-    output logic PFSC_V_MO
+    output logic PFSC_V_MO,
+    input logic clk
 	);
 
 	logic [7:0] VBD_from_10f;
@@ -61,7 +62,6 @@ module playfield_horizontal(
 
     //Then we have the LS189 which was mislabled as 5189
     logic [7:0] PHS_4D_in;
-    logic clk;
     ls189 PHS_4m(
         PFSR[7:4],
         {PR97, PHS_6D_out[2:0]},
@@ -71,7 +71,7 @@ module playfield_horizontal(
         clk);
 
     ls189 PHS_5m(
-        PFRS[3:0],
+        PFSR[3:0],
         {PR97, PHS_6D_out[2:0]},
         PHS_4D_in[3:0],
         MCKR,
@@ -96,10 +96,10 @@ module playfield_horizontal(
         PP_12E_in);
 
     ls151 PP_12e(
-        PFX[2:0],
         PP_12E_in,
-        1'b0,
+        PFX[2:0],
         PFSC_V_MO,
-        zeroCare);
+        zeroCare,
+        1'b0);
 
 endmodule

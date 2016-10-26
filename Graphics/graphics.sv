@@ -29,6 +29,8 @@
 `include "video_mem.sv"
 `include "../68010_vhdl/video_microprocessor.sv"
 `default_nettype none
+
+
 module graphics(
 //The following are a bunch of clocks all from the system clock and sync generator
 input logic MCKF, MCKR,
@@ -39,7 +41,7 @@ input logic CLK_4HDL_b, CLK_4HDD,
 input logic [2:0] VRAC,
 input logic [7:0] CLKV, CLKH,
 input logic BUFCLR_b, CLK_4HD3_b, PFHST_b,
-input logic LMPD_b,
+input logic LMPD_b, VBKINT_b,
 
 
 //Interface with cartarage
@@ -96,7 +98,6 @@ logic PFSC_V_MO, H01_b;
 
 logic [1:0] PPI;
 logic INT3_b, INT1_b, PRIO1, PR1, VBKACK_b, WDOG_b;
-logic VBKINT_b;
 logic VBUS_b;
 
 assign ROMOUT_b = ROM_b;
@@ -105,7 +106,6 @@ assign INT3_b = 1'b1;
 assign INT1_b = 1'b1;
 assign PRIO1 = 1'b1;
 assign PR1 = 1'b1;
-assign VBKINT_b = 1'b1;
 
 
 //The following is a bunch of tristate stuff which wont work :(
@@ -196,7 +196,7 @@ video_ram Grap_VR(
 	.NXL_b(NXL_b), 
 	.VRAM_4HDL_b(CLK_4HDL_b), //Comes from the clock gen
 	.VRAC(VRAC), //Comes from the clock gen
-	.PFH(PFX_from_PH), //This is {PF256H, PF128H, PF64H, PF32H, PF16H, PF8H}
+	.PFH(PFH_from_PH), //This is {PF256H, PF128H, PF64H, PF32H, PF16H, PF8H}
 	.VRAM_4HDL(CLK_4HDL), //Comes from the clock gen
 	.SYSCLK_V(CLKV), //This comes from clock gen and is {128V, 64V, 32V, 16V, 8V, 4V, 2V, 1V}
 	.SYSCLK_H(CLKH), //This comes from clock gen and is {128H, 64H, 32H, 16H, 8H, 4H, 2H, 1H}
@@ -248,13 +248,15 @@ playfield_horizontal Grap_PH(
 	.VBD(VBD[8:0]), //9 bits
 	.HSCRLD_b(HSCRLD_b),
     .MCKR(MCKR),
+    .MCKF(MCKF),
 	.PFHST_b(PFHST_b), 
 	.PFSR(PFSR), //8 bits comes from cartarage
 	.PR1(1'b1), 
     .PR97(1'b1), 
     .clk_4H(CLK_4H),
     .PFSPC_b(PFSPC_b),
-    .PFSC_V_MO(PFSC_V_MO) 
+    .PFSC_V_MO(PFSC_V_MO),
+    .clk(clk) 
 	);
 
 motion_playfield Grap_MP(
@@ -303,7 +305,8 @@ motion_playfield Grap_MP(
 
 //This is for alphanumerics
     .ALBNK(ALBNK), //From Control Register
-    .MGHF(MGHF)
+    .MGHF(MGHF),
+    .clk(clk)
 );
 
 
@@ -312,7 +315,7 @@ color_ram Grap_sad(
     .VBD_out(VBD_from_CRAM), //Also part of cartarge 16 bit
     .VBD_in(VBD_to_CRAM), //Part of cartargage 16 bit
     .MPX(MPX_from_MOP[6:0]),  //Found in Motion Horizontal Line Buffer
-    .MA(MA_from_VMEM[9:0]),   //Comes from video microprocessor Main Memory
+    .MA(MA_from_VMEM[10:1]),   //Comes from video microprocessor Main Memory
     .GCT(GCT_from_MOP),  //Found in Graphics Proirity Control
     .PFX(PFX_from_PH),  //Found in Playfield Horizontal Scroll
     .ALC(ALC),  //Found in Alphanumerics

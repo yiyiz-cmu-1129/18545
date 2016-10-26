@@ -26,11 +26,11 @@ output logic [7:0] MPX,
 input logic PFSC,
 //This is for alphanumerics
 input logic ALBNK,
-output logic MGHF
+output logic MGHF,
+input logic clk
 );
 //////////////////Motion Object Playfield Variables/////////////////////////
     
-    logic clk; ///////////////We need to find a way to drive this
 
     logic [11:0] MM; //This include MMI9 and MMI8
     logic MOP_2HDL_b, MOHFLIP, MOP_4HDD_b;
@@ -175,7 +175,8 @@ output logic MGHF
         1'b1, 
         A_5H_Q);
     
-    ls194 A_2B(        1'b1,
+    ls194 A_2B(        
+        1'b1,
         MCKF,
         1'b1, A_S1,
         1'b0, 1'b0,

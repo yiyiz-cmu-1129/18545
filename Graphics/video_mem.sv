@@ -44,7 +44,7 @@ module video_mem(
         endcase
 
         //These are the LS244s
-		MA_out = address_in[15:0];
+		MA_out = {address_in[14:0], 1'b0};
         
         //These are the tristate connections
         MD = MD_from_CPU;
