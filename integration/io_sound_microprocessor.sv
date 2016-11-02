@@ -9,51 +9,66 @@
 `include "../lib/LS138.sv"
 `include "../lib/LS259.sv"
 `include "../lib/Y2151.sv"
-`include "../lib/LS374.sv"
 `default_nettype none
 
-module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
+module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
+                 SDin68k, SDout68k, SNDNMI_b, ctrl_SNDBUF, ctrl_68kBUF, WR68k_b, RD68k_b,
+                 SELFTEST_b, coin_aux, coin_l, coin_r);
     input  logic SC_1H; //Clocks the YM2151
     input  logic SC_2H; //SC_2H == phi0 == phi2 == Bphi2
     input  logic clk100; //Not in the original design, specifically for POKEY
     input  logic SNDRST_b;
 
-    tri [7:0]  SDin, SDout; //Sound Data into processor and out of
+    //MP Communication Port Signals
+    input logic [7:0] SDin68k;
+    output logic [7:0] SDout68k;
+    input logic SNDNMI_b;
+    input logic ctrl_SNDBUF, ctrl_68kBUF;
+    output logic WR68k_b, RD68k_b;
+
+    //Coin IO and self test
+    input logic SELFTEST_b;
+    input logic coin_aux, coin_l, coin_r;
+
+
+
+
+    //Address used mostly in address decoder, nowhere externally
     logic [13:0] SBA; //Sound Address Bus
-    
+
+    //6502
+    logic SNDBW;
+    logic SNDBW_b;
+    logic my6502IRQ_b; //from Music
+    tri [7:0] SDin, SDout;
+    //Address Decoder
     logic [1:0] my6502toAddrDec;
     logic RAM_CS0_b, RAM_CS1_b;
     logic [2:0] SROM_b;
     logic AddrDecToAddrDec;
     logic [7:0] ls138oneOut;
     logic ls138toSIO, ls138to68k;
-    logic MXT;
-    logic WRphi2, RDphi2;
-    logic CSND_b;
-    logic SNDBW;
-    logic SNDBW_b;
-    logic [7:0] POKEYout;
-    logic MUSRES_b;
-    logic my6502IRQ_b;
-    logic YMHCS_b;
     logic SIOWR_b, SIORD_b;
-    logic WR68k_b, RD68k_b;
-    logic SNDNMI_b;
+    logic SNDEXT_b; //To cartridge, unused
+    logic MXT; //Internal signal, supposed to control comm port and rom/ram tristates, now unused
 
 
+    //Music
+    logic WRphi2, RDphi2;
+    logic MUSRES_b;
+    logic YMHCS_b;
 
+    //Coin
+    logic [7:0] SDinCoin;
 
-
-
-    assign SNDBW_b = ~SNDBW;
+    //Sound
+    logic CSND_b;
+    logic PKS;
+    
 
     //Signals needed to be found
-    logic PR101;
-    logic PKS;
-    logic SNDEXT_b;
-
-
-    //Temp till I find these
+    logic PR101; //God knows
+    //Temp till I find it
     assign PR101 = 1;
 
 
@@ -75,12 +90,18 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
                .AB({my6502toAddrDec, SBA}),
                .DI(SDin),
                .DO(SDout),
-               .WE(SNDBW),
+               .WE(SNDBW), //It passes WE as active high
                .IRQ(~my6502IRQ_b),
                .NMI(~SNDNMI_b),
                .RDY(PR101));
 
+    assign SNDBW_b = ~SNDBW;
 
+
+    //Enable the connection when doing a WR68k or RD68k
+    //This isn't how they do it but should work more clearly
+    assign SDin = (~RD68k_b) ? SDin68k : 8'bzzzz_zzzz;
+    assign SDout68k = (~WR68k_b) ? SDout68k : 8'bzzzz_zzzz;
 
 
 
@@ -101,8 +122,6 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
                   //This clk is the 100 MHz clock, and is not a pin on the POKEY DIP
                   .clk(clk100),
                   .P(POKEY_P));
-    //assign SDin = (~SNDBW_b) ? POKEYout : 8'bzzzz_zzzz; 
-
     
 
 
@@ -186,12 +205,6 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
     assign SIORD_b = ~(~RDphi2 & ~ls138toSIO);
     assign WR68k_b = ~(~WRphi2 & ~ls138to68k);
     assign RD68k_b = ~(~RDphi2 & ~ls138to68k);
-
-    //This emulates what the code wants the first RD68k to look like
-    //Needs to be hooked up to somewhere at some point
-    logic [7:0] SDin68k;
-    always_ff @(posedge SC_2H) SDin68k <= (~RD68k_b) ? 8'b0 : 8'bzzzz_zzzz;
-    assign SDin = SDin68k;
     
 
 
@@ -215,13 +228,12 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
     /////////////////////////
     //////////COIN///////////
     /////////////////////////
-    //Self test logic
-    //Temporary till we figure out what self test is
-    //Somewhat replaces the 367A
-    logic [7:0] SDinCoin;
-    always_ff @(posedge SC_2H) SDinCoin <= (~SIORD_b) ? 8'h87 : 8'bzzzz_zzzz;
-    assign SDin = SDinCoin;
 
+    //The first call to this wants it to return 8'h87
+    //This means that ctrl_SNDBUF, an active high signal, should be asserted
+    //TODO: Look into why
+    always_ff @(posedge SC_2H) SDinCoin <= (~SIORD_b) ? {SELFTEST_b, 1'b1, 1'b1, ctrl_SNDBUF, ctrl_68kBUF, coin_aux, coin_l, coin_r} : 8'bzzzz_zzzz;
+    assign SDin = SDinCoin;
 
 
 
@@ -241,64 +253,6 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b);
                      .SH2(),
                      .phiM(SC_1H)); //Twice the speed of the 6502 and everything else
 
-
-
-    //////////////////////////////////////////
-    //////////MP COMMUNICATION PORTS//////////
-    //////////////////////////////////////////
-
-
-    logic [7:0] IBDout, IBDin; //IO bus, controlled by 68k
-    logic SNDWR_b, SNDRD_b; //68k handshake control signals
-    logic ctrl_68kBUF, ctrl_SNDBUF; //Tells us when there's data in the buffer ready to be read by SND or 68k, respectively
-    logic SNDINT_b; //Interrupt for the 68k
-
-    //This is the control for the handshaking between the 6502 and the 68k
-    
-    //This set controls the 68k writing to the sound processor
-    //The 68k loads the values of the 374 with the data it wants to send to the 6502
-    //It at the same time asserts SNDWR_b to trigger a SNDNMI_b
-    //The 6502 then responds to this in its interrupt handler and reads the data
-    //To signal that it is reading the data it asserts RD68k_b, which outputs the data and resets the NMI signal
-
-    //LS74one
-    always_ff @(posedge SNDWR_b, negedge RD68k_b) begin
-        if (~RD68k_b) begin
-            ctrl_68kBUF <= 1'b0;
-            SNDNMI_b <= 1'b1;
-        end
-        else if (~SNDWR_b & RD68k_b) begin
-            ctrl_68kBUF <= 1'b1;
-            SNDNMI_b <= 1'b0;
-        end
-    end
-
-    ls374 ls374one(.Q(IBDout),
-                   .D(SDin),
-                   .clk(SNDWR_b),
-                   .OC_b(RD68k_b));
-
-    //This set controls the 6502 writing to the video processor
-    //The 6502 asserts WR68k_b to write to the 374 the data it wants to sent
-    //This also sets the SNDINT_b interrupt signal for the 68k
-    //The 68k responds by asserting SNDRD_b to read the data out from the 374 and reset the interrupt
-
-    //LS74two
-    always_ff @(posedge WR68k_b, negedge (SNDRD_b & SNDRST_b)) begin //AND of two active low signals is an OR for active highs
-        if (~(SNDRD_b & SNDRST_b)) begin
-            ctrl_SNDBUF <= 1'b0;
-            SNDINT_b <= 1'b1;
-        end
-        else if (~WR68k_b & (SNDRD_b & SNDRST_b)) begin
-            ctrl_SNDBUF <= 1'b1;
-            SNDINT_b <= 1'b0;
-        end
-    end
-
-    ls374 ls374two(.Q(IBDin),
-                   .D(SDout),
-                   .clk(WR68k_b),
-                   .OC_b(SNDRD_b));
 
             
 
