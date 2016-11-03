@@ -27,7 +27,7 @@ input logic PFSC,
 //This is for alphanumerics
 input logic ALBNK,
 output logic MGHF,
-input logic clk
+input logic clk, rst
 );
 //////////////////Motion Object Playfield Variables/////////////////////////
     
@@ -217,6 +217,7 @@ input logic clk
         {A_3F_Q[5], APIX[1:0], GPC_8c_out, PFSC, GPC_1c_out, MPX[7], MPX[0]}, //Address in
         1'b0, //CE_b
         1'b0, //OE_b
+        clk
     );
 
     //LS74 1B and 5b
@@ -337,8 +338,9 @@ input logic clk
         MCKR,
         clk);        
     
-    logic [7:0] MPXA, MPXB;
-    assign MPX = (PADB) ? MPXB : MPXA;
+    logic [7:0] MPXA, MPXB, MPXC;
+    assign MPX = (rst) ? MPXC : 8'd0;
+    assign MPXC = (PADB) ? MPXB : MPXA;
     ls374 MOH_3K(
         MPXA,
         MOSRinA,
@@ -357,12 +359,8 @@ input logic clk
         MOSR7 <= ~TI;
     end
     always_comb begin
-        MOSRinA = (PADB_b) ? 8'bzzzz_zzzz : {MOSR7, MOSR}; //ls244
-        MOSRinB = (PADB) ? 8'bzzzz_zzzz : {MOSR7, MOSR}; //ls244
-        MOSRinB[7:4] = MOH_2L_out;
-        MOSRinA[7:4] = MOH_4L_out;
-        MOSRinB[3:0] = MOH_1L_out;
-        MOSRinA[3:0] = MOH_3L_out;
+        MOSRinB = (PADB) ? {MOH_2L_out, MOH_1L_out} : {MOSR7, MOSR}; //ls244
+        MOSRinA = (PADB_b) ? {MOH_4L_out, MOH_3L_out} : {MOSR7, MOSR}; //ls244
 
     end
 endmodule

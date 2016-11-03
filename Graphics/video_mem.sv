@@ -24,6 +24,7 @@ module video_mem(
         RAM1 = ~RAM1_b;
 		G = address_in[22] | AS_b; //This is the ls32
         //These are the LS245 chips
+        /*
         case({G, BR_W_b})
             2'b00: begin
                 data_out = MD;
@@ -42,11 +43,11 @@ module video_mem(
                 data_out = 16'bzzzz_zzzz_zzzz_zzzz;
             end
         endcase
-
+*/
         //These are the LS244s
 		MA_out = {address_in[14:0], 1'b0};
         
-        //These are the tristate connections
+        //These are the tristate connections which I got rid of because they be crap
         MD = MD_from_CPU;
         MD[15:8] = MD14L_out;
         MD[15:8] = MD15L_out;
@@ -56,15 +57,15 @@ module video_mem(
         MD[7:0] = MD12L_out;
         MD = MD_in;
         MD_out = MD;
-
 	end
-
+    assign data_out = (~G & BW_R_b) ? MD : 16'bzzzz_zzzz_zzzz_zzzz;
+    assign MD_from_CPU = (~G & BR_W_b) ? data_in : 16'bzzzz_zzzz_zzzz_zzzz;
 
     control_6116 VRAM_14L(
         MD[15:8],
         MD14L_out,
         address_in[10:0],
-        RAM0, //cs_b
+        RAM0_b, //cs_b ////////////////FIXME, I think that the rop line got cutoff, IE I made this RAM0_b instead of RAM0 This seems to have fixed MD breaking
         WH_b, //WE_b
         BW_R_b, //OE_b
         clk);
@@ -73,7 +74,7 @@ module video_mem(
         MD[15:8],
         MD15L_out,
         address_in[10:0],
-        RAM1, //cs_b
+        RAM1_b, //cs_b
         WH_b, //WE_b
         BW_R_b, //OE_b
         clk);

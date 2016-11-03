@@ -16,7 +16,7 @@ module video_ram(
 	input logic [7:0] SYSCLK_H, //This comes from clock gen and is {128H, 64H, 32H, 16H, 8H, 4H, 2H, 1H}
 	input logic H01_b,
 	output logic [5:0] MN_out,
-
+    input logic rst,
 	//For playfield verticle scroll
 	output logic [8:0] PP, //This is PP9-PP1
 	output logic PP18, PFHFLIP,
@@ -44,6 +44,16 @@ module video_ram(
 	assign VRAM_4F_out = (MCKR | VRAM_14E_out);
 	assign VRAM_14E_out = ~(VRAMWR & VRAC[2]);
 
+	always_comb begin
+		case(VRAC[1:0]) //This is not supposed to be negated but I am doing it anyway
+			2'b00: ADDR = {PFV[5:0], PFH[5:0]};
+			2'b01: ADDR = {1'b0, MPBS[2:0], VRAM_4HDL, H01_b, MN[5:0]};
+			2'b10: ADDR = {1'b1, SYSCLK_V[7:3], SYSCLK_H[7:2]};
+			2'b11: ADDR = MA[12:1];
+		endcase
+	end
+
+/*
 	ls153 VR_8F(
 		ADDR[11], ADDR[10],
 		{MA[12], 1'b1, 1'b0, PFV[5]},
@@ -85,7 +95,7 @@ module video_ram(
 		{MA[1], SYSCLK_H[2], MN[0], PFH[0]},
 		1'b0, 1'b0,
         VRAC[1:0]);
-
+*/
 	ls151 VR_4K(
 		{4'b1111, MA[13], 2'b11, 1'b0},
 		{1'b0, VRAC[1:0]},
@@ -98,7 +108,7 @@ module video_ram(
 	//This is the tristate logic
 	logic [15:0] VRD_mem_out, VRD_mem_outA, VRD_mem_outB, VRDM;
 	assign VRD_mem_out = (VRAM_4K_Y_b) ? VRD_mem_outA : VRD_mem_outB;
-	assign VRDM = (VRAM_4F_out) ? VRD_mem_out : 16'bzzzz_zzzz_zzzz_zzzz;
+	assign VRDM = (~VRAM_4F_out) ? VRD_mem_out : 16'd0;
 	assign VRD_mem_outA[3:0] = VRD_9H;
 	assign VRD_mem_outB[3:0] = VRD_8H;
 	assign VRD_mem_outA[7:4] = VRD_7H;
@@ -173,11 +183,16 @@ module video_ram(
 		clk);
 
     logic [7:0] VRAM_11K_Q, VRAM_11H_Q;
-    logic [15:0] VBDA;
-    assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : {VRAM_11K_Q, VRAM_11H_Q};
-
+    logic [15:0] VBDA, VBDB, VRDC, VBDC;
+    assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
+    assign VRD = (rst) ? VRDC : 16'd0;
+    //assign VBDB = (~VRAC[2]) ? {VRAM_11K_Q, VRAM_11H_Q} : 16'bzzzz_zzzz_zzzz_zzzz;
     //This is very odd, as they use E_b instead of the clk
     //This could be using logic as the clk ////////////////////LOOK INTO//////////////////
+    always_latch begin
+    	if(~VRAC[2]) VBDB <= VRD;
+    end
+/*
     ls373 VRAM_11K(
         VRAM_11K_Q,
         VRD[15:8],
@@ -189,13 +204,13 @@ module video_ram(
         VRD[7:0],
         VRAC[2], //This is labled as E_b but should be clk
         VRAMRD_b);
-
+*/
     //These are the LS244 chips
-    assign VRD = (~VRAM_14E_out) ? VBD : VRDM;
+    assign VRDC = (~VRAM_14E_out) ? VBD : VRDM;
     
     //These are the LS245 chips
     assign VBD = (~VBUS_b & ~BR_W_b) ? D_in : VBDA;
-    assign D_out = (~VBUS_b & BR_W_b) ? VBD : 16'bzzzz_zzzz_zzzz_zzzz;
+    assign D_out = VBD;
 
     ls174 VRAM_5K(
         MN,
