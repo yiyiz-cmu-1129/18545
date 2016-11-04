@@ -100,7 +100,11 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
 
     //Enable the connection when doing a WR68k or RD68k
     //This isn't how they do it but should work more clearly
-    assign SDin = (~RD68k_b) ? SDin68k : 8'bzzzz_zzzz;
+    logic [7:0] SDin68kbuffer; //Buffer for read synchronization
+    always_ff @(posedge SC_2H) SDin68kbuffer = (~RD68k_b) ? SDin68k : 8'bzzzz_zzzz;
+    assign SDin = SDin68kbuffer;
+    
+
     assign SDout68k = (~WR68k_b) ? SDout68k : 8'bzzzz_zzzz;
 
 
@@ -229,10 +233,12 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
     //////////COIN///////////
     /////////////////////////
 
-    //The first call to this wants it to return 8'h87
+    //The first call to this wants it to return 8'h87 ACCORDING TO MAME
     //This means that ctrl_SNDBUF, an active high signal, should be asserted
+    //The code doesnt care, as long as SELFTEST_b is 1, so maybe MAME is wrong
     //TODO: Look into why
-    always_ff @(posedge SC_2H) SDinCoin <= (~SIORD_b) ? {SELFTEST_b, 1'b1, 1'b1, ctrl_SNDBUF, ctrl_68kBUF, coin_aux, coin_l, coin_r} : 8'bzzzz_zzzz;
+    //Actually it's probably active high
+    always_ff @(posedge SC_2H) SDinCoin <= (~SIORD_b) ? {SELFTEST_b, 1'b0, 1'b1, ctrl_SNDBUF, ctrl_68kBUF, coin_aux, coin_l, coin_r} : 8'bzzzz_zzzz;
     assign SDin = SDinCoin;
 
 
@@ -240,8 +246,9 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
     /////////////////////////
     //////////MUSIC//////////
     /////////////////////////
+    logic [7:0] y2151Din, y2151Dinbuffer;
     y2151 musicy2151(.Din(SDout),
-                     .Dout(SDin),
+                     .Dout(y2151Din),
                      .A0(SBA[0]),
                      .WR_b(WRphi2),
                      .RD_b(RDphi2),
@@ -253,7 +260,7 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
                      .SH2(),
                      .phiM(SC_1H)); //Twice the speed of the 6502 and everything else
 
-
-            
+    always_ff @(posedge SC_2H) y2151Dinbuffer <= y2151Din;
+    assign SDin = y2151Dinbuffer;
 
 endmodule

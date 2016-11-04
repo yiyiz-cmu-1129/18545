@@ -68,8 +68,8 @@ module io_interface(Din68k, Dout68k, A,
                         .rst_b(SYSRES_b));
 
     //LS245
-    assign Din68k = (IBUS_b & BW_b) ? IBDin : 8'bzzzz_zzzz;
-    assign IBDout = (IBUS_b & ~BW_b) ? Dout68k : 8'bzzzz_zzzz;
+    assign Din68k = (~IBUS_b & BW_b) ? IBDin : 8'bzzzz_zzzz;
+    assign IBDout = (~IBUS_b & ~BW_b) ? Dout68k : 8'bzzzz_zzzz;
 
 
     ///////////////////////////////////////////
@@ -100,21 +100,24 @@ module io_interface(Din68k, Dout68k, A,
     //To signal that it is reading the data it asserts RD68k_b, which outputs the data and resets the NMI signal
 
     //LS74one
-    always_ff @(posedge SNDWR_b, negedge RD68k_b) begin
+    always_ff @(negedge SNDWR_b, negedge RD68k_b) begin
         if (~RD68k_b) begin
-            ctrl_68kBUF <= 1'b0;
+            ctrl_68kBUF <= 1'b1;
             SNDNMI_b <= 1'b1;
         end
         else if (~SNDWR_b & RD68k_b) begin
-            ctrl_68kBUF <= 1'b1;
+            ctrl_68kBUF <= 1'b0;
             SNDNMI_b <= 1'b0;
         end
     end
 
-    ls374 ls374one(.Q(IBDout),
-                   .D(Din6502),
-                   .clk(SNDWR_b),
-                   .OC_b(RD68k_b));
+    //LS374
+    logic [7:0] Din6502_stored;
+    always_ff @(posedge SC_1H) begin
+        if (~SNDWR_b)
+            Din6502_stored <= IBDout;
+    end
+    assign Din6502 = (~RD68k_b) ? Din6502_stored : 8'bzzzz_zzzz;
 
     //This set controls the 6502 writing to the video processor
     //The 6502 asserts WR68k_b to write to the 374 the data it wants to sent
@@ -122,19 +125,22 @@ module io_interface(Din68k, Dout68k, A,
     //The 68k responds by asserting SNDRD_b to read the data out from the 374 and reset the interrupt
 
     //LS74two
-    always_ff @(posedge WR68k_b, negedge (SNDRD_b & SNDRST_b)) begin //AND of two active low signals is an OR for active highs
+    always_ff @(negedge WR68k_b, negedge (SNDRD_b & SNDRST_b)) begin //AND of two active low signals is an OR for active highs
         if (~(SNDRD_b & SNDRST_b)) begin
-            ctrl_SNDBUF <= 1'b0;
+            ctrl_SNDBUF <= 1'b1;
             SNDINT_b <= 1'b1;
         end
         else if (~WR68k_b & (SNDRD_b & SNDRST_b)) begin
-            ctrl_SNDBUF <= 1'b1;
+            ctrl_SNDBUF <= 1'b0;
             SNDINT_b <= 1'b0;
         end
     end
 
-    ls374 ls374two(.Q(IBDin),
-                   .D(Dout6502),
-                   .clk(WR68k_b),
-                   .OC_b(SNDRD_b));
+    //LS374
+    logic IBDin_stored;
+    always_ff @(posedge SC_1H) begin
+        if (~WR68k_b)
+            IBDin_stored <= Dout6502;
+    end
+    assign IBDin = (~SNDRD_b) ? IBDin_stored : 8'bzzzz_zzzz;
 endmodule
