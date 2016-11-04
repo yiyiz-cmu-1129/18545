@@ -21,7 +21,7 @@ input logic WAIT_b,
 output logic WH_b, WL_b, RL_b,
 input logic PRIO1, PR1,
 output logic BR_W_b,
-input logic BW_R_b,
+output logic BW_R_b,
 output logic CRAMWR_b,
 output logic CRAM_b,
 output logic RAM1_b, RAM0_b,
@@ -121,10 +121,12 @@ logic VRDTACK_b;
     //This is the LS20 13h chip
     assign VPAn = ~(AS & FC_OUT[2] & FC_OUT[1] & FC_OUT[0]);
     
-    
+    assign LDS_b = LDSn;
+    assign UDS_b = UDSn;
     //This is the ls368 chip
     assign BR_W_b = ~RWn;
     assign AS = ~ASn;
+    assign BW_R_b = ~BR_W_b;
     //These are the 3 LS32 chips    
     assign WH_b = UDSn | ~BW_R_b;
     assign WL_b = ~BW_R_b | LDSn;
@@ -148,8 +150,8 @@ logic VRDTACK_b;
     assign VRDTACK_b = Q_574;
     //END OF 574
     assign out_13e = ~(Q_574_b | rip_12m);
-    assign DTACKn = out_13e;
-
+    //assign DTACKn = out_13e; //I found that this would need to be 0 for anything to work
+    assign DTACKn = ~out_13e;
 
     assign c_12m = WAIT_b & AS & VRAM_b;
     ls163a VM_12m(

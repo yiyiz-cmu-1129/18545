@@ -71,8 +71,8 @@ module color_ram(
     
     //This takes care of the ls244 which is not really needed
     //This needs to feed into the 2149 ram
-    //It is the address for them
-    assign A_2149 = (CRAM) ? MA : {CRAS, CR_9d_Q};
+    //It is the address for them this should be CRAM NOT CRAM_b but I am having issues so it is CRAM_b now
+    assign A_2149 = (CRAM_b) ? MA : {CRAS, CR_9d_Q};
     logic [15:0] Din, Dout;
 
     control_2149 cr13D(
@@ -111,8 +111,8 @@ module color_ram(
     );
 
     //This is the LS245 except we cant have inout ports so sad
-    assign D = (CRAM & BR_W_b) ? VBD_in : Dout;
-    assign Din = (CRAM & BR_W_b) ? VBD_in : 16'bzzzz_zzzz_zzzz_zzzz;
+    assign D = (CRAM_b & BR_W_b) ? VBD_in : Dout;
+    assign Din = (CRAM_b & BR_W_b) ? VBD_in : 16'bzzzz_zzzz_zzzz_zzzz;
     assign VBD_out = (CRAM & BR_W_b) ? 16'bzzzz_zzzz_zzzz_zzzz : Dout;
 
 endmodule
