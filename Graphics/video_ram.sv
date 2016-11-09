@@ -1,7 +1,7 @@
 //This will include the playfield verticle scroll and the control register
 
 module video_ram(
-	input logic [15:0] MA, //from video memory
+	input logic [17:0] MA, //from video memory
 	output logic [15:0] VRD_out,
 	input logic [15:0] VBD_in,
 	output logic [15:0] VBD_out,
@@ -41,7 +41,7 @@ module video_ram(
 	
 
 	//This is the 14E and the 4F
-	assign VRAM_4F_out = (MCKR | VRAM_14E_out);
+	assign VRAM_4F_out = ~VRAMWR;
 	assign VRAM_14E_out = ~(VRAMWR & VRAC[2]);
 
 	always_comb begin
@@ -53,49 +53,6 @@ module video_ram(
 		endcase
 	end
 
-/*
-	ls153 VR_8F(
-		ADDR[11], ADDR[10],
-		{MA[12], 1'b1, 1'b0, PFV[5]},
-		{MA[11], SYSCLK_V[7], MPBS[2], PFV[4]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-
-	ls153 VR_5J(
-		ADDR[9], ADDR[8],
-		{MA[10], SYSCLK_V[6], MPBS[1], PFV[3]},
-		{MA[9], SYSCLK_V[5], MPBS[0], PFV[2]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-
-	ls153 VR_1E(
-		ADDR[7], ADDR[6],
-		{MA[8], SYSCLK_V[4], VRAM_4HDL, PFV[1]},
-		{MA[7], SYSCLK_V[3], H01_b, PFV[0]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-
-	ls153 VR_2E(
-		ADDR[5], ADDR[4],
-		{MA[6], SYSCLK_H[7], MN[5], PFH[5]},
-		{MA[5], SYSCLK_H[6], MN[4], PFH[4]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-
-	ls153 VR_4H(
-		ADDR[3], ADDR[2],
-		{MA[4], SYSCLK_H[5], MN[3], PFH[3]},
-		{MA[3], SYSCLK_H[4], MN[2], PFH[2]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-
-	ls153 VR_10H(
-		ADDR[1], ADDR[0],
-		{MA[2], SYSCLK_H[3], MN[1], PFH[1]},
-		{MA[1], SYSCLK_H[2], MN[0], PFH[0]},
-		1'b0, 1'b0,
-        VRAC[1:0]);
-*/
 	ls151 VR_4K(
 		{4'b1111, MA[13], 2'b11, 1'b0},
 		{1'b0, VRAC[1:0]},
@@ -124,7 +81,7 @@ module video_ram(
 		VRD_9H,   //out
 		VRAM_4F_out,
 		VRAM_4K_Y,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_8H(
 		ADDR,
@@ -132,7 +89,7 @@ module video_ram(
 		VRD_8H,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_7H(
 		ADDR,
@@ -140,7 +97,7 @@ module video_ram(
 		VRD_7H,
 		VRAM_4F_out,
 		VRAM_4K_Y,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_6H(
 		ADDR,
@@ -148,7 +105,7 @@ module video_ram(
 		VRD_6H,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_9J(
 		ADDR,
@@ -156,7 +113,7 @@ module video_ram(
 		VRD_9J,
 		VRAM_4F_out,
 		VRAM_4K_Y,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_8J(
 		ADDR,
@@ -164,7 +121,7 @@ module video_ram(
 		VRD_8J,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_7J(
 		ADDR,
@@ -172,7 +129,7 @@ module video_ram(
 		VRD_7J,
 		VRAM_4F_out,
 		VRAM_4K_Y,
-		clk);
+		MCKR);
 
 	ims1420 VRAM_6J(
 		ADDR,
@@ -180,31 +137,17 @@ module video_ram(
 		VRD_6J,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
-		clk);
+		MCKR);
 
     logic [7:0] VRAM_11K_Q, VRAM_11H_Q;
     logic [15:0] VBDA, VBDB, VRDC, VBDC;
     assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
     assign VRD = (rst) ? VRDC : 16'd0;
-    //assign VBDB = (~VRAC[2]) ? {VRAM_11K_Q, VRAM_11H_Q} : 16'bzzzz_zzzz_zzzz_zzzz;
-    //This is very odd, as they use E_b instead of the clk
-    //This could be using logic as the clk ////////////////////LOOK INTO//////////////////
+
     always_latch begin
     	if(~VRAC[2]) VBDB <= VRD;
     end
-/*
-    ls373 VRAM_11K(
-        VRAM_11K_Q,
-        VRD[15:8],
-        VRAC[2], //This is labled as E_b but should be clk
-        VRAMRD_b);
 
-    ls373 VRAM_11H(
-        VRAM_11H_Q,
-        VRD[7:0],
-        VRAC[2], //This is labled as E_b but should be clk
-        VRAMRD_b);
-*/
     //These are the LS244 chips
     assign VRDC = (~VRAM_14E_out) ? VBD : VRDM;
     

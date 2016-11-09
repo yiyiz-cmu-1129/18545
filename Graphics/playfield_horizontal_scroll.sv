@@ -62,21 +62,23 @@ module playfield_horizontal(
 
     //Then we have the LS189 which was mislabled as 5189
     logic [7:0] PHS_4D_in;
+
+    //FIX ME
     ls189 PHS_4m(
         PFSR[7:4],
         {PR97, PHS_6D_out[2:0]},
         PHS_4D_in[7:4],
-        MCKR,
         1'b0,
-        clk);
+        1'b0,
+        MCKR);
 
     ls189 PHS_5m(
         PFSR[3:0],
         {PR97, PHS_6D_out[2:0]},
         PHS_4D_in[3:0],
-        MCKR,
         1'b0,
-        clk); //The clock here is not in the original diagram
+        1'b0,
+        MCKR); //The clock here is not in the original diagram
 
     ls273 PHS_4d(
         PHS_4D_in,

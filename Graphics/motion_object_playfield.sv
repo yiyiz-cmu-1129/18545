@@ -143,7 +143,7 @@ input logic clk, rst
     assign PADB_b = ~PADB;
     always_ff @(posedge MCKR) begin
         if(~PR1) PADB <= 1'b0;
-        else if(~PR1) PADB <= PADB_b ^ BUFCLR_b;
+        else if(PR1) PADB <= PADB_b ^ BUFCLR_b;
         else PADB <= PADB;
     end
 
@@ -167,7 +167,7 @@ input logic clk, rst
         {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},
         1'b0,
         1'b0,
-        clk);
+        MCKF);
     
     ls273 A_5H(
         VRD[7:0],
@@ -191,7 +191,8 @@ input logic clk, rst
         A_5F_D[0], A_5F_D[1], A_5F_D[2], A_5F_D[3],
         dnca4, dnca5, dnca6, APIX[0]);
 
-
+////////FIXME these look to be backward
+//A_3F_D[0:5] is what we are inputing
     ls174 A_3H(
         A_3H_Q,
         {VRD[13], 1'b1, VRD[8], VRD[12:10]},
@@ -202,7 +203,7 @@ input logic clk, rst
         A_3F_Q,
         {A_3H_Q[5], MOP_8m_pin9_out, 1'b0, A_3H_Q[2:0]},
         H03_b,
-        MCKF);
+        MCKR); //I changed this to MCKR from MCKF
 
 
 
@@ -211,13 +212,13 @@ input logic clk, rst
     assign GPC_1c_out = ~(MPX[3] & MPX[2] & MPX[1]);
    
 
-    //The 82S129 needs to be written //////////////////////////////////////////////
+    //The 82S129 needs to be written //////////////////////////////////////////////AND LOADED INTO
     control_82S129 gpc_3E(
         GPC_3E_Y, //Y out
         {A_3F_Q[5], APIX[1:0], GPC_8c_out, PFSC, GPC_1c_out, MPX[7], MPX[0]}, //Address in
         1'b0, //CE_b
         1'b0, //OE_b
-        clk
+        MCKR
     );
 
     //LS74 1B and 5b
@@ -311,36 +312,37 @@ input logic clk, rst
         MOH_3L_out,
         {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
-        MCKR,
-        clk);   
+        1'b0,
+        MCKR);   
      
     control_2149 MOH_4L(
         MOSRinA[7:4],
         MOH_4L_out,
         {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
-        MCKR,
-        clk);
+        1'b0,
+        MCKR);
 
     control_2149 MOH_1L(
         MOSRinB[3:0],
         MOH_1L_out,
         {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
-        MCKR,
-        clk);    
+        1'b0,
+        MCKR);    
 
     control_2149 MOH_2L(
         MOSRinB[7:4],
         MOH_2L_out,
         {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
-        MCKR,
-        clk);        
+        1'b0,
+        MCKR);        
     
     logic [7:0] MPXA, MPXB, MPXC;
     assign MPX = (rst) ? MPXC : 8'd0;
     assign MPXC = (PADB) ? MPXB : MPXA;
+
     ls374 MOH_3K(
         MPXA,
         MOSRinA,

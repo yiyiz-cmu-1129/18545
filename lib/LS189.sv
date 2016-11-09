@@ -9,8 +9,8 @@ module ls189(Q, A, D, W_b, S_b, CK);
     always_ff @(posedge CK) begin
         if (~S_b & ~W_b)
             mem[A] <= ~Q;
-        else if (~S_b & W_b)
-            D <= mem[A];
+        if (~S_b)
+            D <= ~Q;
         else
             D <= 4'bzzzz;
     end

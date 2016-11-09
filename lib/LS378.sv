@@ -1,13 +1,12 @@
 module ls378(
 	output logic [5:0] Q,
 	input logic [5:0] D,
-	input logic E_b, CP);
+	input logic E_b, ck);
 
-	logic [5:0] QL;
-	assign Q = QL;
-	always_ff @(posedge CP) begin
-		if(~E_b) QL <= D;
-		else QL <= QL;
+
+	always_ff @(posedge ck) begin
+		if(~E_b) Q <= D;
+		else Q <= Q;
 	end
 
 

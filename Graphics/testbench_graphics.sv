@@ -17,14 +17,14 @@ logic clk, reset, reset3;
 
 logic [15:0] VIDOUT;
 logic [15:0] MD;
-logic [15:0] MA;
+logic [17:0] MA;
 logic BR_W_b;
 logic [22:0] addr;
 logic PR1;
 //This loads rom
 reg [15:0] mem[8388608:0];
 logic first;
-always_ff @(posedge clk, posedge first) begin
+always_ff @(posedge MCKR, posedge first) begin
     if(first) $readmemh("../roms/68kmem.hex", mem);
     else if(~BR_W_b & PR1) mem[addr] <= MD;
 end
@@ -64,7 +64,10 @@ graphics GR(
 .MATCH_b(), 
 .MA18_b(), 
 .P2(),
-.MOSR(7'h3F),
+.MGHF(),
+.PFSC_v_MO(), 
+.GLD_b()
+.MOSR(7'h3f),
 .MGRA(),
 .MGRI(),
 .PFSR(8'h55),
@@ -114,36 +117,40 @@ system_clock that_feel(
 
 initial forever #5 clk = ~clk; //this is going to be the base clk
 
-always @(posedge CLK_1H) begin
+always @(posedge CLKH[1]) begin
     //$display("%t, ADR: %x Data:%x, Dout %x, Din %x, DTACK %b, reset %b, VID: %x, WH_b %b, WL_b %b, UDSn %b", 
    // 	$time, addr, GR.DATA, MD, mem[addr], GR.VM_68.DTACKn, GR.reset, VIDOUT, GR.WH_b, GR.WL_b, GR.VM_68.UDSn);
     //$display("Data_from_VRAM: %x, Data_from_VMEM: %x, Data_from_68k: %x", GR.Data_from_VRAM, GR.Data_from_VMEM, GR.Data_from_68k);
 
     //for debugging vram
-    //$display("VBD: %x, VBUS_b: %b, VBDA: %x, BR_W_b: %b, VBD_in: %x, VRAM11k: %x, VRAMRD_b: %b", GR.Grap_VR.VBD, GR.Grap_VR.VBUS_b, GR.Grap_VR.VBDA, GR.Grap_VR.BR_W_b, GR.Grap_VR.VBD_in, GR.Grap_VR.VRAM_11K_Q, GR.Grap_VR.VRAMRD_b);
+    //$display("VBD: %x, VBUS_b: %b, VBDA: %x, BR_W_b: %b, VBD_in: %x, VRAMRD_b: %b", GR.Grap_VR.VBD, GR.Grap_VR.VBUS_b, GR.Grap_VR.VBDA, GR.Grap_VR.BR_W_b, GR.Grap_VR.VBD_in, GR.Grap_VR.VRAMRD_b);
     //$display("VBD: %x, VBUS:%b, VRAMRD %b, VRAMWR %b, VRAM %b", GR.VBD, GR.VBUS_b, GR.VRAMRD_b, GR.VRAMWR, GR.VM_68.VRAM_b);
-    $display("ADR_OUT: %x, DATA: %x, VID: %x", GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT);
-    $display("VBD %x, VBD: %x, AD:%b, CRAS %b", 
-        GR.VBD, GR.VBD_From_VRAM, GR.Grap_sad.A_2149, GR.CRAS);
-    //$display("MA:%x, CRAM %b, CRAS %b, CR_9d_Q: %x",
-    //    GR.Grap_sad.MA, GR.Grap_sad.CRAM, GR.Grap_sad.CRAS, GR.Grap_sad.CR_9d_Q);
-    //$display("GPC_3E_Y: %b, Ti: %b, ls74reg:%b, VRD:%x", 
-    //    GR.Grap_MP.GPC_3E_Y, GR.Grap_MP.TI, GR.Grap_MP.ls74reg, GR.Grap_MP.VRD);
+    $display("ADR_OUT: %x, DATA: %x, VID: %x, GCT: %b", GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.Grap_sad.GCT);
+    //$display("VBD %x, VRD: %x, AD:%b, CRAS %b", 
+    //    GR.VBD, GR.Grap_MP.VRD, GR.Grap_sad.A_2149, GR.CRAS);
+    //$display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x",
+    //    GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout);
+    
 
 
 
-////////////////VRD VRD VRD VRD VRD VRD VRD VRD THIS IS THE ROOT OF ALL EVIL!!!!/////////////
+    //$display("PHS_4D_in: %b, PFSR: %b, ADR:%b, VRD:%x", 
+    //    GR.Grap_PH.PHS_4D_in, GR.Grap_PH.PFSR, GR.Grap_PH.PHS_6D_out, GR.Grap_MP.VRD);
 
-///////////////////ALL OF THE ISSUES ARE A RESULT OF IT
 
-    $display("MPX %b, CRAM_b: %b, BR_W_b: %b", 
-        GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b);
-    $display("VRD: %x, PVS_6B_out: %b, VSCRLD_b: %b, PFV: %x", 
-        GR.VRD, GR.Grap_VR.PVS_6B_out, GR.Grap_VR.VSCRLD_b, GR.Grap_VR.PFV);
 
+
+    //$display("MPX %b, CRAM_b: %b, BR_W_b: %b", 
+    //    GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b);
+/*
+    $display("MOP_8m_pin9_out: %b, GPC_3E_Y: %b, PFX: %b, MPX: %b", 
+        GR.Grap_MP.MOP_8m_pin9_out, GR.Grap_MP.GPC_3E_Y, GR.Grap_MP.PFX, GR.Grap_MP.MPX);
+    $display("A_5F_D: %b, H03_b: %b, MOP_2H: %b, MOP_1H: %b, A_3F_Q: %b", 
+        GR.Grap_MP.A_5F_D, GR.Grap_MP.H03_b, GR.Grap_MP.MOP_2H, GR.Grap_MP.MOP_1H, GR.Grap_MP.A_3F_Q);
 //For debuging vmem
     //$display("MD: %x, MD_in: %x, MD12L_out: %x, MD_from_CPU: %x, data_out: %x, G: %b",
      //GR.Grap_VM.MD, GR.Grap_VM.MD_in, GR.Grap_VM.MD15L_out, GR.Grap_VM.MD_from_CPU, GR.Grap_VM.data_out, GR.Grap_VM.G);
+*/
 end 
 
 
@@ -170,7 +177,10 @@ initial begin
     #1000 PR1 = 1'b1;
     #6000;
     reset3 = 1'b1;
-    #1000000 $stop;
+    #2000000000; 
+    $display("Buffer %x", GR.Grap_hope.buffer);
+    #1000;
+    $stop;
     
 end
 
@@ -185,12 +195,12 @@ always_comb begin
 	
 
 	//These are the signals we have no idea   FIX ME
-	VSYNC = CLKH[3];
-	HSYNC = CLKH[4];
-	VBKINT_b = CLKH[3];
-	VBLANK_b = CLKH[2];
-	HBLANK_b = CLKH[0];
-	BUFCLR_b = CLKH[5];
+	VSYNC = CLKH[5];
+	HSYNC = CLKH[3];
+	VBKINT_b = CLKH[8];
+	VBLANK_b = CLKH[8];
+	HBLANK_b = CLKH[4];
+	BUFCLR_b = CLKH[1];
 	PFHST_b = 1'b1;
 	LMPD_b = CLKH[2];
     NXL_b = CLKH[1];
