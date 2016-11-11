@@ -58,6 +58,7 @@ module io_interface(Din68k, Dout68k, A,
 
     assign OE_2804_b = LS74_Q_b & SYSRES_b; //AND for active low is an OR
 
+    //FIXME: How do writes work?
     control_2804 eeprom(.A(A[10:0]),
                         .Din(IBDout),
                         .Dout(IBDin),
