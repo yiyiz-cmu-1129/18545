@@ -1,41 +1,80 @@
-module system_clock(clk100, rst_b, SC_1H, SC_2H, SC_4H, SC_8H,
+module system_clock(clk100, rst_b, MCKR, SC_1H, SC_2H, SC_4H, SC_8H,
                     SC_16H, SC_32H, SC_64H, SC_128H, SC_256H);
     input logic clk100, rst_b;
-    output logic SC_1H, SC_2H, SC_4H, SC_8H, SC_16H, SC_32H, SC_64H, SC_128H, SC_256H;
+    output logic MCKR, SC_1H, SC_2H, SC_4H, SC_8H, SC_16H, SC_32H, SC_64H, SC_128H, SC_256H;
     
-    logic clk7;
-    logic [7:0] count100;
-    logic [7:0] count7;
+    logic MCKR;
+    logic [3:0] count100;
+    logic [8:0] count8;
 
     
     //This part makes the 7ish MHz clk from a 100MHz clk
     always_ff @(posedge clk100, negedge rst_b) begin
         if (~rst_b)
-            count100 <= 0;
+            count100 <= 4'd0;
         else
-            count100 <= (count100 >= 114) ? 0 : count100 + 1;
+            count100 <= (count100 >= 4'd13) ? 0 : count100 + 1;
     end
 
-    assign clk7 = count100 > 57;
-
+    assign MCKR = count100 > 4'd6;
+    
 
 
     //This part gives us our divisors of the 7MHz clk
-    always_ff @(posedge clk7, negedge rst_b) begin
+    always_ff @(posedge MCKR, negedge rst_b) begin
         if (~rst_b)
-            count7 <= 0;
+            count8 <= 0;
         else
-            count7 += 1;
+            count8 += 1;
 end
 
-    assign SC_1H = clk7;
-    assign SC_2H = count7[0];
-    assign SC_4H = count7[1];
-    assign SC_8H = count7[2];
-    assign SC_16H = count7[3];
-    assign SC_32H = count7[4];
-    assign SC_64H = count7[5];
-    assign SC_128H = count7[6];
-    assign SC_256H = count7[7];
+    assign SC_1H = count8[0];
+    assign SC_2H = count8[1];
+    assign SC_4H = count8[2];
+    assign SC_8H = count8[3];
+    assign SC_16H = count8[4];
+    assign SC_32H = count8[5];
+    assign SC_64H = count8[6];
+    assign SC_128H = count8[7];
+    assign SC_256H = count8[8];
 
 endmodule
+
+
+
+module system_clk_test;
+
+  logic clk100; 
+  logic rst_b;
+  logic MCKR; //main clk 7Mhz
+  logic sc_1h, sc_2h, sc_4h, sc_8h; 
+  logic sc_16h, sc_32h, sc_64h, sc_128h, sc_256h; 
+
+
+  system_clock sys_cl(.clk100(clk100), 
+                      .rst_b(rst_b),
+                      .MCKR(MCKR),
+                      .SC_1H(sc_1h), 
+                      .SC_2H(sc_2h), 
+                      .SC_4H(sc_4h), 
+                      .SC_8H(sc_8h),
+                      .SC_16H(sc_16h), 
+                      .SC_32H(sc_32h), 
+                      .SC_64H(sc_64h), 
+                      .SC_128H(sc_128h), 
+                      .SC_256H(sc_256h));
+
+  initial begin 
+  clk100 = 0;
+  forever #5 clk100 = ~clk100;
+  end
+
+  initial begin 
+  rst_b <= 1'b0; 
+  @(posedge clk100);
+  rst_b <= 1'b1;
+  #50000
+  $finish;
+  end 
+
+endmodule 
