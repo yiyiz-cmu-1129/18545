@@ -1,5 +1,6 @@
 `include "../integration/system_clock.sv"
 `include "graphics.sv"
+`include "cart.sv"
 
 module testbench();
 
@@ -21,6 +22,15 @@ logic [17:0] MA;
 logic BR_W_b;
 logic [22:0] addr;
 logic PR1;
+
+logic SLAP_b, MATCH_b, MA18_b, MGHF, P2, GLD_b, PFSC_v_MO;
+logic [3:0] ROMOUT_b;
+logic [6:0] MOSR;
+logic [7:0] PFSR;
+logic [1:0] MGRI;
+logic [17:0] MGRA;
+
+
 //This loads rom
 reg [15:0] mem[8388608:0];
 logic first;
@@ -58,19 +68,19 @@ graphics GR(
 
 
 //Interface with cartarage
-.SLAP_b(), 
+.SLAP_b(SLAP_b), 
 .BR_W_b(BR_W_b),
-.ROMOUT_b(),
-.MATCH_b(), 
-.MA18_b(), 
-.P2(),
-.MGHF(),
-.PFSC_v_MO(), 
-.GLD_b()
-.MOSR(7'h3f),
-.MGRA(),
-.MGRI(),
-.PFSR(8'h55),
+.ROMOUT_b(ROMOUT_b),
+.MATCH_b(MATCH_b), 
+.MA18_b(MA18_b), 
+.P2(P2),
+.MGHF(MGHF),
+.PFSC_v_MO(PFSC_v_MO), 
+.GLD_b(GLD_b),
+.MOSR(MOSR),
+.MGRA(MGRA),
+.MGRI(MGRI),
+.PFSR(PFSR),
 .MA_from_VMEM(MA), 
 .MD_from_VMEM(MD),
 .MD_to_VMEM(mem[addr]),
@@ -99,12 +109,13 @@ graphics GR(
 .addr(addr),
 .first(first),
 .reset3(reset3)
-
 );
+
 logic rst;
 system_clock that_feel(
 	.clk100(clk), 
 	.rst_b(rst),
+    .MCKR(),
 	.SC_1H(CLKH[0]),
 	.SC_2H(CLKH[1]),
 	.SC_4H(CLKH[2]),
@@ -114,6 +125,25 @@ system_clock that_feel(
     .SC_64H(CLKH[6]),
     .SC_128H(CLKH[7]), 
     .SC_256H(CLKH[8]));
+
+cart last_hope(
+    .SLAP_b(SLAP_b), 
+    .BR_W_b(BR_W_b),
+    .ROMOUT_b(ROMOUT_b),
+    .MATCH_b(MATCH_b), 
+    .MA18_b(MA18_b), 
+    .P2(P2), 
+    .MGHF(MGHF),
+    .MO_v_PF_b(PFSC_v_MO),
+    .GLD_b(GLD_b),
+    .MOSR(MOSR),
+    .MGRA(MGRA), // GA19-1 I think a typo was found
+    .MGRI(MGRI), //this is not really needed
+    .PFSR(PFSR),
+    .MA_from_VMEM(MA[15:0]), /////These are not used 
+    .MD_from_VMEM(), /////These are not used 
+    .reset(~reset3), 
+    .sysclk(MCKR));
 
 initial forever #5 clk = ~clk; //this is going to be the base clk
 
@@ -125,7 +155,7 @@ always @(posedge CLKH[1]) begin
     //for debugging vram
     //$display("VBD: %x, VBUS_b: %b, VBDA: %x, BR_W_b: %b, VBD_in: %x, VRAMRD_b: %b", GR.Grap_VR.VBD, GR.Grap_VR.VBUS_b, GR.Grap_VR.VBDA, GR.Grap_VR.BR_W_b, GR.Grap_VR.VBD_in, GR.Grap_VR.VRAMRD_b);
     //$display("VBD: %x, VBUS:%b, VRAMRD %b, VRAMWR %b, VRAM %b", GR.VBD, GR.VBUS_b, GR.VRAMRD_b, GR.VRAMWR, GR.VM_68.VRAM_b);
-    $display("ADR_OUT: %x, DATA: %x, VID: %x, GCT: %b", GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.Grap_sad.GCT);
+    $display("ADR_OUT: %x, DATA: %x, VID: %x, GCT: %b, MPX: %b, MOSR: %b", GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.Grap_sad.GCT, GR.Grap_MP.MPX, MOSR);
     //$display("VBD %x, VRD: %x, AD:%b, CRAS %b", 
     //    GR.VBD, GR.Grap_MP.VRD, GR.Grap_sad.A_2149, GR.CRAS);
     //$display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x",

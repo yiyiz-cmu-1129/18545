@@ -5,7 +5,7 @@ module control_2149(
     input logic CS_b, WE_b, clk);
 
 
-    logic [3:0] ram [16383:0];
+    logic [3:0] ram [1023:0];
     logic [3:0] data_in, data_out;
     always_ff @(posedge clk) begin
         if(~WE_b & ~CS_b) begin

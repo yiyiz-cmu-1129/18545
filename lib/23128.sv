@@ -11,27 +11,23 @@
 
 //WE NEED TO FIND WHAT GOES IN HERE
 
-module control_23128(Dout, A, CS_b, OE_b, clk);
+module control_23128(Dout, A, CS_b, OE_b, clk, reset);
 	parameter rom = "../Graphics/roms/alpha.hex";
     output logic [7:0] Dout;
     input logic [13:0] A;
     input logic CS_b, OE_b;
-    input clk;
+    input clk, reset;
 
-    logic [7:0] ram [1048575:0];
+    logic [7:0] mem [16383:0];
     logic first;
 
-    always_ff @(posedge clk) begin //hmmmm
-    	/*
-        if(first == 1'b0) begin
+    always_ff @(posedge clk) begin //hmmmm    	
+        if(reset) begin
     		Dout <= 8'b0000_0000;
-    		$readmemh(rom, ram);
-    		first <= 1'b1;
+    		$readmemh(rom, mem);
     	end
-        else Dout <= (~CS_b && ~OE_b) ? ram[A][7:0] : 8'bzzzz_zzzz;
-        */
-        /////////FIXME
-        Dout <= (~CS_b && ~OE_b) ? 8'b0000_0000 : 8'bzzzz_zzzz;
+        else Dout <= (~CS_b && ~OE_b) ? mem[A][7:0] : 8'bzzzz_zzzz;
+
     end
 endmodule
 

@@ -1,6 +1,6 @@
 //This is a combined motion playfield and alphanumerics
 module motion_playfield(
-output logic [17:0] MGRA,
+output logic [17:0] MGRA, //This is output as MGRA17-0 but 0 is not defined so...
 output logic [1:0] MGRI, //This is the MGRI9 and MGRI8 pins
 output logic MATCH_b,
 output logic GLD_b,
@@ -27,7 +27,7 @@ input logic PFSC,
 //This is for alphanumerics
 input logic ALBNK,
 output logic MGHF,
-input logic clk, rst
+input logic clk, reset
 );
 //////////////////Motion Object Playfield Variables/////////////////////////
     
@@ -162,12 +162,13 @@ input logic clk, rst
     assign H03_b = ~A_S1;
     assign ALC = A_3F_Q[2:0];
 
-    control_23128 A_5F(
+    control_23128 #("../roms/roms/alpha.hex") A_5F(
         A_5F_D,
         {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},
         1'b0,
         1'b0,
-        MCKF);
+        MCKF,
+        reset);
     
     ls273 A_5H(
         VRD[7:0],
@@ -193,6 +194,7 @@ input logic clk, rst
 
 ////////FIXME these look to be backward
 //A_3F_D[0:5] is what we are inputing
+
     ls174 A_3H(
         A_3H_Q,
         {VRD[13], 1'b1, VRD[8], VRD[12:10]},
@@ -212,13 +214,14 @@ input logic clk, rst
     assign GPC_1c_out = ~(MPX[3] & MPX[2] & MPX[1]);
    
 
-    //The 82S129 needs to be written //////////////////////////////////////////////AND LOADED INTO
-    control_82S129 gpc_3E(
+    ///////////This could be the wrong rom
+    control_82S129 #("../roms/roms/prom0.hex") gpc_3E(
         GPC_3E_Y, //Y out
         {A_3F_Q[5], APIX[1:0], GPC_8c_out, PFSC, GPC_1c_out, MPX[7], MPX[0]}, //Address in
         1'b0, //CE_b
         1'b0, //OE_b
-        MCKR
+        MCKR,
+        reset
     );
 
     //LS74 1B and 5b
@@ -340,7 +343,7 @@ input logic clk, rst
         MCKR);        
     
     logic [7:0] MPXA, MPXB, MPXC;
-    assign MPX = (rst) ? MPXC : 8'd0;
+    assign MPX = (reset) ? MPXC : 8'd0;
     assign MPXC = (PADB) ? MPXB : MPXA;
 
     ls374 MOH_3K(
@@ -363,7 +366,6 @@ input logic clk, rst
     always_comb begin
         MOSRinB = (PADB) ? {MOH_2L_out, MOH_1L_out} : {MOSR7, MOSR}; //ls244
         MOSRinA = (PADB_b) ? {MOH_4L_out, MOH_3L_out} : {MOSR7, MOSR}; //ls244
-
     end
 endmodule
 

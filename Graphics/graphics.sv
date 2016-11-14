@@ -52,7 +52,7 @@ output logic MATCH_b, MA18_b, P2, MGHF, PFSC_v_MO, GLD_b,
 input logic [6:0] MOSR,
 
 
-output logic [17:0] MGRA,
+output logic [17:0] MGRA, //This is output as MGRA17-0 but 0 is not defined so...
 output logic [1:0] MGRI,
 input logic [7:0] PFSR,
 
@@ -322,7 +322,7 @@ motion_playfield Grap_MP(
     .ALBNK(ALBNK), //From Control Register
     .MGHF(MGHF),
     .clk(clk),
-    .rst(reset3)
+    .reset(reset3)
 );
 
 
@@ -332,7 +332,7 @@ color_ram Grap_sad(
     .VBD_in(VBD_to_CRAM), //Part of cartargage 16 bit
     .MPX(MPX_from_MOP[6:0]),  //Found in Motion Horizontal Line Buffer
     .MA(MA_from_VMEM[10:1]),   //Comes from video microprocessor Main Memory
-    .GCT(GCT_from_MOP),  //Found in Graphics Proirity Control
+    .GCT(GCT_from_MOP),  //Found in Graphics Proirity Control still failing
     .PFX(PFX_from_PH),  //Found in Playfield Horizontal Scroll
     .ALC(ALC),  //Found in Alphanumerics
     .APIX(APIX), //Found in Alphanumerics
