@@ -1,0 +1,14 @@
+Notes:
+-68k Bios goes into the 23128's on in the video microprocessor main memory
+-Alpha goes into the 23128 in Alphanumerics
+--Note this might be wrong, I put two 2**13 bit roms together to make this one
+--I think that only the bottom 2**13 bits are valid
+--Depends what the system expects when asserting ALBNK, maybe fill top bits with 0xFFs
+-Banks go into the Graphics ROMs, 23256's, the plane is listed on the page, the bank chosen by GCSx
+-Clock FPLA is the 82S153 in the clock and sync gen that generates VRAC, etc.
+-Color AMD goes into the 27529 in Graphic Palette Select
+-EEPROM goes into the 2804 in Non-Volatile Memory
+-Prom0 and Prom1 go into the 82S129 in System Clock and Sync and Graphic Priority Control
+--Which goes where?
+-Remap AMD goes into the 27529 in Graphic Bank and Picture Select
+-Sound goes into the 23128s in Sound Program ROM
