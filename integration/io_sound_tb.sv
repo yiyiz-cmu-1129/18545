@@ -28,6 +28,7 @@ module testbench();
 
     system_clock sc(.clk100(clk100),
                     .rst_b(sc_rst_b),
+                    .MCKR(),
                     .SC_1H(SC_1H),
                     .SC_2H(SC_2H),
                     .SC_4H(),
@@ -36,7 +37,15 @@ module testbench();
                     .SC_32H(),
                     .SC_64H(),
                     .SC_128H(),
-                    .SC_256H());
+                    .SC_256H(),
+                    .PFHST_b(),
+                    .BUFCLR_b(),
+                    .NXL_b(),
+                    .LMPD_b(),
+                    .HBLANK_b(),
+                    .HSYNC(),
+                    .NXL_b_star(),
+                    .VRAC());
 
     io_sound dut(.clk100(clk100),
                  .SC_1H(SC_1H),
@@ -95,13 +104,6 @@ module testbench();
     assign coin_aux = 1; assign coin_l = 1; assign coin_r = 1;
 
 
-    
-
-    initial begin
-        $readmemh("rom0.hex", dut.rom0.ram);
-        $readmemh("rom1.hex", dut.rom1.ram);
-        $readmemh("rom2.hex", dut.rom2.ram);
-    end
   
     initial begin
 	    forever #5 clk100 = ~clk100;
@@ -135,7 +137,7 @@ module testbench();
 
 
 always @( dut.my6502.state )
-    $display( "%06d, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04h SDin:%02h SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b IC:%05d DIMUX:%02h",
+    $display( "%06d, PC:%04x State:%s IR:%02x AddrCtrl:%02b SBA:%04h SDin:%02h SDout:%02x SNDBW_b:%01b 6502A:%02x 6502X:%02x 6502S:%02x RAMctrl:%02b SROMctrl:%03b IC:%05d",
     cycles3p5,
     dut.my6502.PC,
     dut.my6502.statename,
@@ -150,8 +152,7 @@ always @( dut.my6502.state )
     dut.my6502.S,
     {dut.RAM_CS1_b, dut.RAM_CS0_b},
     dut.SROM_b,
-    instCount,
-    dut.my6502.DIMUX);
+    instCount);
 
     initial begin;
         SNDWR_b = 1;
@@ -165,6 +166,7 @@ always @( dut.my6502.state )
         #15 sc_rst_b = 1;
 	    @(posedge SC_2H);
 	    rst_b <= 1;
+        /* send an NMI after 1000 cycles
         while (instCount <= 1000) @(posedge SC_2H) //Do 1000 instructions
         SNDWR_b <= 1; //Then simulate the 68k sending some data
         IBUS_b <= 1;
@@ -178,6 +180,7 @@ always @( dut.my6502.state )
         SNDWR_b <= 1;
         IBUS_b <= 1;
         BW_b <= 1;
+        */
         #200000
 	    //#9000000
         $finish;

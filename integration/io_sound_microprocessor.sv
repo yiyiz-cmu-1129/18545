@@ -9,6 +9,7 @@
 `include "../lib/LS138.sv"
 `include "../lib/LS259.sv"
 `include "../lib/Y2151.sv"
+`include "../lib/clockFPLA.sv"
 `default_nettype none
 
 module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
@@ -157,24 +158,28 @@ module io_sound (SC_1H, SC_2H, clk100, SNDRST_b,
     /////////////////////////////////////
     //////////Sound Program ROM//////////
     /////////////////////////////////////
-    control_23128 rom0(.Dout(SDin),
-                       .A(SBA),
-                       .CS_b(SROM_b[0]),
-                       .OE_b(~SNDBW_b), //This is READ active low
-                       .clk(SC_2H));
 
-    control_23128 rom1(.Dout(SDin),
-                       .A(SBA),
-                       .CS_b(SROM_b[1]),
-                       .OE_b(~SNDBW_b),
-                       .clk(SC_2H));
+    control_23128 #("rom0.hex") rom0(.Dout(SDin),
+                                .A(SBA),
+                                .CS_b(SROM_b[0]),
+                                .OE_b(~SNDBW_b), //This is READ active low
+                                .clk(SC_2H),
+                                .reset(~SNDRST_b));
+
+    control_23128 #("rom1.hex") rom1(.Dout(SDin),
+                                .A(SBA),
+                                .CS_b(SROM_b[1]),
+                                .OE_b(~SNDBW_b),
+                                .clk(SC_2H),
+                                .reset(~SNDRST_b));
 
 
-    control_23128 rom2(.Dout(SDin),
-                       .A(SBA),
-                       .CS_b(SROM_b[2]),
-                       .OE_b(~SNDBW_b),
-                       .clk(SC_2H));
+    control_23128 #("rom2.hex") rom2(.Dout(SDin),
+                                .A(SBA),
+                                .CS_b(SROM_b[2]),
+                                .OE_b(~SNDBW_b),
+                                .clk(SC_2H),
+                                .reset(~SNDRST_b));
 
 
 

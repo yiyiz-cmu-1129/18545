@@ -1,11 +1,14 @@
 module system_clock(clk100, rst_b, MCKR, SC_1H, SC_2H, SC_4H, SC_8H,
-                    SC_16H, SC_32H, SC_64H, SC_128H, SC_256H);
+                    SC_16H, SC_32H, SC_64H, SC_128H, SC_256H,
+                    PFHST_b, BUFCLR_b, NXL_b, LMPD_b, HBLANK_b, HSYNC, NXL_b_star, VRAC);
     input logic clk100, rst_b;
     output logic MCKR, SC_1H, SC_2H, SC_4H, SC_8H, SC_16H, SC_32H, SC_64H, SC_128H, SC_256H;
-    
-    logic MCKR;
+    output logic PFHST_b, BUFCLR_b, NXL_b, LMPD_b, HBLANK_b, HSYNC, NXL_b_star;
+    output logic [2:0] VRAC;
+
     logic [3:0] count100;
     logic [8:0] count8;
+
 
     
     //This part makes the 7ish MHz clk from a 100MHz clk
@@ -36,7 +39,21 @@ end
     assign SC_32H = count8[5];
     assign SC_64H = count8[6];
     assign SC_128H = count8[7];
-    assign SC_256H = count8[8];
+    //assign SC_256H = count8[8];
+
+    logic [6:0] FPLAtoFF;
+        clockFPLA FPLA(.in({SC_128H, SC_64H, SC_32H, SC_16H, SC_8H, SC_4H, SC_2H, SC_1H}),
+                   .out({FPLAtoFF, PFHST_b, BUFCLR_b, SC_256H}),
+                   .rst_b(rst_b));
+
+    always_ff @(posedge MCKR) begin
+        NXL_b <= FPLAtoFF[6];
+        VRAC <= FPLAtoFF[5:3];
+        LMPD_b <= FPLAtoFF[2];
+        HBLANK_b <= FPLAtoFF[1];
+        HSYNC <= FPLAtoFF[0];
+        NXL_b_star <= NXL_b;
+    end
 
 endmodule
 
