@@ -8,7 +8,7 @@ Notes:
 -Clock FPLA is the 82S153 in the clock and sync gen that generates VRAC, etc.
 -Color AMD goes into the 27529 in Graphic Palette Select
 -EEPROM goes into the 2804 in Non-Volatile Memory
--Prom0 and Prom1 go into the 82S129 in System Clock and Sync and Graphic Priority Control
---Which goes where?
+-Prom1 and Prom0 go into the 82S129 in System Clock and Sync and Graphic Priority Control, respectively
+--90% sure that prom1 goes into the clock, because it doesn't run with prom0
 -Remap AMD goes into the 27529 in Graphic Bank and Picture Select
 -Sound goes into the 23128s in Sound Program ROM
