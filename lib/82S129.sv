@@ -3,10 +3,6 @@
 //Memory in ourselves
 
 
-
-////FIXME
-
-
 module control_82S129(
 	output logic [3:0] O,
 	input logic [7:0] A,
@@ -18,7 +14,7 @@ module control_82S129(
 
     assign CE = ~(CE1_b | CE2_b);
     
-    always_ff @(posedge clk) begin //hmmmm
+    always_ff @(posedge clk, negedge reset) begin
         if(~reset) $readmemh(rom, mem);
         O <= (CE) ? mem[A] : 4'bzzzz; 
     end

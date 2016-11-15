@@ -45,7 +45,18 @@ module testbench();
                     .HBLANK_b(),
                     .HSYNC(),
                     .NXL_b_star(),
-                    .VRAC());
+                    .VRAC(),
+                    .SC_1V(),
+                    .SC_2V(),
+                    .SC_4V(),
+                    .SC_8V(),
+                    .SC_16V(),
+                    .SC_32V(),
+                    .SC_64V(),
+                    .SC_128V(),
+                    .VBLANK_b(),
+                    .VBKINT_b(),
+                    .VSYNC());
 
     io_sound dut(.clk100(clk100),
                  .SC_1H(SC_1H),
