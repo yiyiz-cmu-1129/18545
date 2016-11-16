@@ -1,45 +1,40 @@
 //PLAYFIELD VERTICAL SCROLL
 //4-bit flip-flop counter
-//CTEN = count_enable, DU = down/up, RCO = ripple_clock_output
 module ls191(
-  input logic CTEN, DU, clk, load,
+  input logic CE_b, DU, clk, load_b,
   input logic a, b, c, d,
-  output logic MaxMin, RCO,
+  output logic TC, RC_b,
   output logic qa, qb, qc, qd);
   
-  logic [3:0] q;
-  logic [3:0] data;
+  bit [3:0] q;
   
-  // Increment or decrement data accordingly
-  always_comb
-    case({CTEN, DU})
-      2'b01 : data[3:0] = q[3:0] - 1;
-      2'b00 : data[3:0] = q[3:0] + 1;
-      2'b1x : data[3:0] = q[3:0];
-    endcase
-  
-  // If nededge load, set output to input. On clock, set normally.
+  // If nededge load, set output to input. On clock, set normally
   always_ff @(negedge load, posedge clk) begin
-    if(~load) q[3:0] <= {d,c,b,a};
-    else q[3:0] <= data[3:0];
+    if(~load_b) q <= {d,c,b,a};
+    else if (~CE_b) begin
+        if (~DU)
+            q <= q + 1;
+        else
+            q <= q - 1;
+    end
   end
   
-  assign {qd,qc,qb,qa} = q[3:0];
+  assign {qd,qc,qb,qa} = q;
   
-  // Set MaxMin
+  // Set Terminal Count
   always_comb begin
-    if((q[3:0] == 4'b1111 & ~DU) | (q[3:0] == 4'b0000 & DU))
-      MaxMin = 1;
+    if (~DU)
+        TC = q == 4'b1111;
     else
-      MaxMin = 0;
+        TC = q == 4'b0000;    
   end
   
-  // Set RCO
+  // Set RC
   always_comb begin
-    if(MaxMin & CTEN & ~clk)
-      RCO = 0;
+    if (~clk & ~CE_b & TC)
+        RC_b = 0;
     else
-      RCO = 1;
-  end      
+        RC_b = 1;
+  end
 endmodule
 
