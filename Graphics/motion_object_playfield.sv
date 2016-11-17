@@ -71,7 +71,7 @@ input logic clk, reset
 
 
 //////////////////Motion Object Playfield/////////////////////////
-
+    
     assign MOP_2HDL_b = ~MOP_2HDL;
     assign MOP_4HDD_b = ~MOP_4HDD;
     assign MOP_4HDL_b = ~MOP_4HDL;
@@ -161,7 +161,8 @@ input logic clk, reset
     assign A_S1 = MOP_1H & MOP_2H;
     assign H03_b = ~A_S1;
     assign ALC = A_3F_Q[2:0];
-
+    assign MGHF = A_3F_Q[4];
+    
     control_23128 #("../roms/roms/alpha.hex") A_5F(
         A_5F_D,
         {ALBNK, A_3H_Q[4], A_5H_Q, 3'b111, MOP_4H_b},

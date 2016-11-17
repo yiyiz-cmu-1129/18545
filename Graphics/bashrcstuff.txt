@@ -1,0 +1,5 @@
+alias s240="source /afs/ece/class/ece240/bin/setup_240"
+alias vhdlannew="/usr/local/synopsys/L-Foundation/2016.06/vcs_mx_vL-2016.06/bin/vhdlan"
+alias snew='export VCS_HOME="/usr/local/synopsys/L-Foundation/2016.06/vcs_mx_vL-2016.06/"'
+alias vlogannew="/usr/local/synopsys/L-Foundation/2016.06/vcs_mx_vL-2016.06/bin/vlogan"
+alias vcsnew="/usr/local/synopsys/L-Foundation/2016.06/vcs_mx_vL-2016.06/bin/vcs"

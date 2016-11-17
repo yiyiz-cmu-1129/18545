@@ -18,10 +18,10 @@ module video_ram(
 	output logic [5:0] MN_out,
     input logic rst,
 	//For playfield verticle scroll
-	output logic [8:0] PP, //This is PP9-PP1
+	output bit [8:0] PP, //This is PP9-PP1
 	output logic PP18, PFHFLIP,
 	input logic VSCRLD_b, VBLANK_b, HSYNC, VBUS_b,
-	output logic [5:0] PFV, //This is {PF256V, PF128V, PF64V, PF32V, PF16V, PF8V}
+	output bit [5:0] PFV, //This is {PF256V, PF128V, PF64V, PF32V, PF16V, PF8V}
 
     //For control register
     output logic SNDRST_b, TBTEST, PP19, TBRES_b, ALBNK,

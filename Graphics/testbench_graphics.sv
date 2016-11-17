@@ -1,6 +1,7 @@
 `include "../integration/system_clock.sv"
 `include "graphics.sv"
 `include "cart.sv"
+`include "../lib/clockFPLA.sv"
 
 module testbench();
 
@@ -11,7 +12,8 @@ logic HBLANK_b, CLK_1H, CLK_2H;
 logic CLK_2HDL, CLK_4H, CLK_4H_b;
 logic CLK_4HDL, CLK_4HDL_b, CLK_4HDD;
 logic [2:0] VRAC;
-logic [8:0] CLKV, CLKH;
+logic [8:0] CLKH;
+logic [7:0] CLKV;
 logic BUFCLR_b, CLK_4HD3_b, PFHST_b;
 logic LMPD_b, VBKINT_b;
 logic clk, reset, reset3;
@@ -23,7 +25,7 @@ logic BR_W_b;
 logic [22:0] addr;
 logic PR1;
 
-logic SLAP_b, MATCH_b, MA18_b, MGHF, P2, GLD_b, PFSC_v_MO;
+logic SLAP_b, MATCH_b, MA18_b, MGHF, P2, GLD_b, PFSC_v_MO, VBKACK_b;
 logic [3:0] ROMOUT_b;
 logic [6:0] MOSR;
 logic [7:0] PFSR;
@@ -65,7 +67,7 @@ graphics GR(
 .PFHST_b(PFHST_b),
 .LMPD_b(LMPD_b),
 .VBKINT_b(VBKINT_b),
-
+.VBKACK_b(VBKACK_b),
 
 //Interface with cartarage
 .SLAP_b(SLAP_b), 
@@ -75,7 +77,7 @@ graphics GR(
 .MA18_b(MA18_b), 
 .P2(P2),
 .MGHF(MGHF),
-.PFSC_v_MO(PFSC_v_MO), 
+.PFSC_V_MO(PFSC_v_MO), 
 .GLD_b(GLD_b),
 .MOSR(MOSR),
 .MGRA(MGRA),
@@ -113,18 +115,39 @@ graphics GR(
 
 logic rst;
 system_clock that_feel(
-	.clk100(clk), 
-	.rst_b(rst),
-    .MCKR(),
-	.SC_1H(CLKH[0]),
-	.SC_2H(CLKH[1]),
-	.SC_4H(CLKH[2]),
-	.SC_8H(CLKH[3]),
-    .SC_16H(CLKH[4]),
-    .SC_32H(CLKH[5]),
-    .SC_64H(CLKH[6]),
-    .SC_128H(CLKH[7]), 
-    .SC_256H(CLKH[8]));
+        .clk100(clk), 
+        .rst_b(rst),
+        .VBKACK_b(VBKACK_b),
+        .MCKR(MCKR),
+        .SC_1H(CLKH[0]),
+        .SC_2H(CLKH[1]),
+        .SC_4H(CLKH[2]), 
+        .SC_8H(CLKH[3]),
+        .SC_16H(CLKH[4]),
+        .SC_32H(CLKH[5]),
+        .SC_64H(CLKH[6]),
+        .SC_128H(CLKH[7]), 
+        .SC_256H(CLKH[8]),
+        .PFHST_b(PFHST_b),
+        .BUFCLR_b(BUFCLR_b),
+        .NXL_b(),
+        .LMPD_b(LMPD_b),
+        .HBLANK_b(HBLANK_b),
+        .HSYNC(HSYNC),
+        .NXL_b_star(NXL_b),
+        .VRAC(VRAC),
+        .SC_1V(CLKV[0]),
+        .SC_2V(CLKV[1]),
+        .SC_4V(CLKV[2]),
+        .SC_8V(CLKV[3]), 
+        .SC_16V(CLKV[4]),
+        .SC_32V(CLKV[5]),
+        .SC_64V(CLKV[6]), 
+        .SC_128V(CLKV[7]),
+        .VBLANK_b(VBLANK_b),
+        .VBKINT_b(VBKINT_b),
+        .VSYNC(VSYNC)
+        );
 
 cart last_hope(
     .SLAP_b(SLAP_b), 
@@ -142,12 +165,12 @@ cart last_hope(
     .PFSR(PFSR),
     .MA_from_VMEM(MA[15:0]), /////These are not used 
     .MD_from_VMEM(), /////These are not used 
-    .reset(~reset3), 
+    .reset(~reset), 
     .sysclk(MCKR));
 
 initial forever #5 clk = ~clk; //this is going to be the base clk
 
-always @(posedge CLKH[1]) begin
+always @(posedge MCKR) begin
     //$display("%t, ADR: %x Data:%x, Dout %x, Din %x, DTACK %b, reset %b, VID: %x, WH_b %b, WL_b %b, UDSn %b", 
    // 	$time, addr, GR.DATA, MD, mem[addr], GR.VM_68.DTACKn, GR.reset, VIDOUT, GR.WH_b, GR.WL_b, GR.VM_68.UDSn);
     //$display("Data_from_VRAM: %x, Data_from_VMEM: %x, Data_from_68k: %x", GR.Data_from_VRAM, GR.Data_from_VMEM, GR.Data_from_68k);
@@ -155,8 +178,9 @@ always @(posedge CLKH[1]) begin
     //for debugging vram
     //$display("VBD: %x, VBUS_b: %b, VBDA: %x, BR_W_b: %b, VBD_in: %x, VRAMRD_b: %b", GR.Grap_VR.VBD, GR.Grap_VR.VBUS_b, GR.Grap_VR.VBDA, GR.Grap_VR.BR_W_b, GR.Grap_VR.VBD_in, GR.Grap_VR.VRAMRD_b);
     //$display("VBD: %x, VBUS:%b, VRAMRD %b, VRAMWR %b, VRAM %b", GR.VBD, GR.VBUS_b, GR.VRAMRD_b, GR.VRAMWR, GR.VM_68.VRAM_b);
-    $display("ADR_OUT: %x, DATA: %x, VID: %x, GCT: %b, MPX: %b, MOSR: %b", GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.Grap_sad.GCT, GR.Grap_MP.MPX, MOSR);
-    //$display("VBD %x, VRD: %x, AD:%b, CRAS %b", 
+    $display("ADR_OUT: %x, DATA: %x, VID: %x, VBD: %b, A_2149: %b, CRAMWR_b: %b, GBA: %x", 
+        GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.VBD, GR.Grap_sad.A_2149, GR.CRAMWR_b, last_hope.GBA);
+    //$display("VBD %x, VRD: %x, AD:%b, CRAS %b",
     //    GR.VBD, GR.Grap_MP.VRD, GR.Grap_sad.A_2149, GR.CRAS);
     //$display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x",
     //    GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout);
@@ -186,7 +210,7 @@ end
 
 //clock generation
 logic temp;
-always_ff @(posedge MCKR) begin
+always_ff @(posedge CLK_1H) begin
     CLK_2HDL <= CLK_2H;
     CLK_4HDL_b <= ~CLK_4H;
     CLK_4HDL <= CLK_4H;
@@ -203,7 +227,7 @@ initial begin
     PR1 = 1'b0;
     #10 rst = 1'b1;
     first = 0;
-    #15000 reset = 1'b1;
+    #30000 reset = 1'b1;
     #1000 PR1 = 1'b1;
     #6000;
     reset3 = 1'b1;
@@ -218,23 +242,9 @@ always_comb begin
 	CLK_1H = CLKH[0];
 	CLK_2H = CLKH[1];
 	CLK_4H = CLKH[2];
-	CLKV = CLKH;
 	CLK_4H_b = ~CLK_4H;
-	MCKR = CLK_1H;
-	MCKF = ~CLK_1H;
-	
-
-	//These are the signals we have no idea   FIX ME
-	VSYNC = CLKH[5];
-	HSYNC = CLKH[3];
-	VBKINT_b = CLKH[8];
-	VBLANK_b = CLKH[8];
-	HBLANK_b = CLKH[4];
-	BUFCLR_b = CLKH[1];
-	PFHST_b = 1'b1;
-	LMPD_b = CLKH[2];
-    NXL_b = CLKH[1];
-	VRAC = {CLKH[3], CLKH[2], CLKH[1]};	
+	MCKF = ~MCKR;
+		
 end
 
 endmodule

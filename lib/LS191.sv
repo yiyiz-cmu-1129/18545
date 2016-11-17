@@ -9,7 +9,7 @@ module ls191(
   bit [3:0] q;
   
   // If nededge load, set output to input. On clock, set normally
-  always_ff @(negedge load, posedge clk) begin
+  always_ff @(negedge load_b, posedge clk) begin
     if(~load_b) q <= {d,c,b,a};
     else if (~CE_b) begin
         if (~DU)

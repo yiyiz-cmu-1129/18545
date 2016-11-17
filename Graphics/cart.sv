@@ -13,7 +13,7 @@ module cart(
     output logic [6:0] MOSR,
     input logic [17:0] MGRA, // GA17-0 which 0 does not exist
     input logic [1:0] MGRI,
-    output logic [7:0] PFSR,
+    output bit [7:0] PFSR,
     input logic [15:0] MA_from_VMEM, MD_from_VMEM,
     input logic reset, sysclk);
 
@@ -24,7 +24,7 @@ module cart(
 	logic [5:0] cart_2b_q, cart_1b_y; 
 	logic [5:0] MOFD, MOSD, PFFD, PFSD;
 	logic PFFLP, MOFLP, LDMO_b, LDPF_b;
-	logic [7:0] PFP_b, MOP_b, CPAL_b, NOROM_b, MHOLD_b, PFHOLD_b;
+	bit [7:0] PFP_b, MOP_b, CPAL_b, NOROM_b, MHOLD_b, PFHOLD_b;
 
 	assign GRA = {MGRI, MGRA[17:1]};
 	//These are the ls374 3b and 3a
@@ -35,13 +35,13 @@ module cart(
 		cart_2a_q <= {MOP_b[6], cart_2b_q};
 		if(~LDMO_b) 
 			{MOP_b[7:6], MHOLD_b[5:4], MOFLP} <= {CPAL_b[7:6], NOROM_b[5:4], MGHF};
-		else 
-			{MOP_b[7:6], MHOLD_b[5:4], MOFLP} <= {MOP_b[7:6], MHOLD_b[5:4], MOFLP};
+		//else 
+		//	{MOP_b[7:6], MHOLD_b[5:4], MOFLP} <= {MOP_b[7:6], MHOLD_b[5:4], MOFLP};
 
 		if(~LDPF_b) 
 			{PFP_b[7:6], PFHOLD_b[5:4], PFFLP} <= {CPAL_b[7:6], NOROM_b[5:4], MGHF};
-		else 
-			{PFP_b[7:6], PFHOLD_b[5:4], PFFLP} <= {PFP_b[7:6], PFHOLD_b[5:4], PFFLP};
+		//else 
+		//	{PFP_b[7:6], PFHOLD_b[5:4], PFFLP} <= {PFP_b[7:6], PFHOLD_b[5:4], PFFLP};
 
 	end
 	//these are the LS157s 1b and 4b THE ORDER OF THE TWO INPUTS COULD BE BACKWARD
@@ -176,7 +176,7 @@ module cart(
 		.D(romData[7:0]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({MOS1, MOS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -188,7 +188,7 @@ module cart(
 		.D(romData[7:0]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({PFS1, PFS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
@@ -202,7 +202,7 @@ module cart(
 		.D(romData[15:8]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({MOS1, MOS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -214,7 +214,7 @@ module cart(
 		.D(romData[15:8]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({PFS1, PFS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
@@ -228,7 +228,7 @@ module cart(
 		.D(romData[23:16]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({MOS1, MOS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -240,7 +240,7 @@ module cart(
 		.D(romData[23:16]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({PFS1, PFS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
@@ -254,7 +254,7 @@ module cart(
 		.D(romData[31:24]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({MOS1, MOS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -266,7 +266,7 @@ module cart(
 		.D(romData[31:24]), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S({PFS1, PFS0}),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
@@ -304,7 +304,7 @@ module cart(
 		.D(cart_4c_d), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S(cart_4c_s),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -316,7 +316,7 @@ module cart(
 		.D(cart_4c_d), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S(cart_3c_s),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
@@ -328,7 +328,7 @@ module cart(
 		.D(cart_2c_d), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S(cart_1c_s),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));	
@@ -340,7 +340,7 @@ module cart(
 		.D(cart_2c_d), //This needs to be filled in
 		.G_b(2'b11), //Set this to 00 to have it able to shift
 		.S(cart_2c_s),
-    	.CLR_b(1'b1), 
+    	.CLR_b(~reset), 
     	.SL(1'b0), //It looks like they dont use any of these 
     	.SR(1'b0), 
     	.CK(sysclk));
