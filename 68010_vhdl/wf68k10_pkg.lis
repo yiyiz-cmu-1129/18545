@@ -1,0 +1,437 @@
+--                      Synopsys 1076 VHDL Analyzer
+--                 Version F-2011.12-SP1 -- May 27, 2012
+--               Copyright (c) 1991-2012 by Synopsys Inc.
+--                          ALL RIGHTS RESERVED
+-- 
+-- This program is proprietary and confidential information of Synopsys Inc.
+-- and may be used and disclosed only as authorized in a license agreement
+-- controlling such use and disclosure.
+-- 
+-- Source File:  wf68k10_pkg.vhd
+-- Sat Oct  1 12:51:02 2016
+
+    1	------------------------------------------------------------------------
+    2	----                                                                ----
+    3	---- WF68K10 IP Core: this is the package file containing the data  ----
+    4	---- types and the component declarations.                          ----
+    5	----                                                                ----
+    6	---- Author(s):                                                     ----
+    7	---- - Wolfgang Foerster, wf@experiment-s.de; wf@inventronik.de     ----
+    8	----                                                                ----
+    9	------------------------------------------------------------------------
+   10	----                                                                ----
+   11	---- Copyright © 2014 Wolfgang Foerster Inventronik GmbH.           ----
+   12	----                                                                ----
+   13	---- This documentation describes Open Hardware and is licensed     ----
+   14	---- under the CERN OHL v. 1.2. You may redistribute and modify     ----
+   15	---- this documentation under the terms of the CERN OHL v.1.2.      ----
+   16	---- (http://ohwr.org/cernohl). This documentation is distributed   ----
+   17	---- WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF          ----
+   18	---- MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A        ----
+   19	---- PARTICULAR PURPOSE. Please see the CERN OHL v.1.2 for          ----
+   20	---- applicable conditions                                          ----
+   21	----                                                                ----
+   22	------------------------------------------------------------------------
+   23	-- 
+   24	-- Revision History
+   25	-- 
+   26	-- Revision 2K14B 20141201 WF
+   27	--   Initial Release.
+   28	-- 
+   29	
+   30	library ieee;
+   31	use ieee.std_logic_1164.all;
+   32	
+   33	package WF68K10_PKG is
+   34	type OP_SIZETYPE is (LONG, WORD, BYTE);
+   35	-- The OPCODES AND, NOT, OR, ROR and ROL are defined keywords in VHDL. Therefore the assignment is
+   36	-- AND_B, NOT_B, OR_B, ROTR and ROTL.
+   37	type OP_68K is (ABCD, ADD, ADDA, ADDI, ADDQ, ADDX, AND_B, ANDI, ANDI_TO_CCR, ANDI_TO_SR, ASL, ASR, Bcc, BCHG, BCLR, 
+   38	                BKPT, BRA, BSET, BSR, BTST, 
+   39	                CHK, CLR, CMP, CMPA, CMPI, CMPM, CPUSH, DBcc, DIVS, DIVU, EOR, EORI, EORI_TO_CCR, 
+   40	                EORI_TO_SR, EXG, EXT, ILLEGAL, JMP, JSR, LEA, LINK, LSL, LSR, MOVE, MOVE_FROM_CCR, MOVE_TO_CCR, 
+   41	                MOVE_FROM_SR, MOVE_TO_SR, MOVE_USP, MOVEA, MOVEC, MOVEM, MOVEP, MOVEQ, MOVES, MULS, MULU, NBCD, NEG, 
+   42	                NEGX, NOP, NOT_B, OR_B, ORI, ORI_TO_CCR, ORI_TO_SR, PEA, RESET, ROTL, ROTR, ROXL, ROXR, RTD, 
+   43	                RTE, RTR, RTS, SBCD, Scc, STOP, SUB, SUBA, SUBI, SUBQ, SUBX, SWAP, TAS, TRAP, TRAPV, TST, 
+   44	                UNLK, UNIMPLEMENTED);
+   45	
+   46	type TRAPTYPE_OPC is(NONE, T_1010, T_1111, T_ILLEGAL, T_TRAP, T_PRIV); -- None is the first entry and default.
+   47	
+   48	component WF68K10_ADDRESS_REGISTERS
+   49	    port (
+   50	        CLK                 : in std_logic;
+   51	        RESET               : in bit;
+   52	        AR_IN_1             : in std_logic_vector(31 downto 0);
+   53	        AR_IN_2             : in std_logic_vector(31 downto 0);
+   54	        AR_OUT_1            : out std_logic_vector(31 downto 0);
+   55	        AR_OUT_2            : out std_logic_vector(31 downto 0);
+   56	        INDEX_IN            : in std_logic_vector(31 downto 0);
+   57	        PC                  : out std_logic_vector(31 downto 0);
+   58	        PC_EW_OFFSET        : in std_logic_vector(2 downto 0);
+   59	        PC_REG_OUT          : out std_logic_vector(31 downto 0);
+   60	        STORE_ADR_FORMAT    : in bit;
+   61	        STORE_ABS_HI        : in bit;
+   62	        STORE_ABS_LO        : in bit;
+   63	        STORE_D16           : in bit;
+   64	        STORE_DISPL         : in bit;
+   65	        OP_SIZE             : in OP_SIZETYPE;
+   66	        OP_SIZE_WB          : in OP_SIZETYPE;
+   67	        DATA_RDY            : in bit;
+   68	        ADR_ATN             : out bit;
+   69	        ADR_OFFSET          : in std_logic_vector(7 downto 0);
+   70	        ADR_MARK_UNUSED     : in bit;
+   71	        ADR_MARK_USED       : in bit;
+   72	        ADR_IN_USE          : out bit;
+   73	        ADR_MODE            : in std_logic_vector(2 downto 0);
+   74	        AMODE_SEL           : in std_logic_vector(2 downto 0);
+   75	        ADR_EFF             : out std_logic_vector(31 downto 0);
+   76	        ADR_EFF_WB          : out std_logic_vector(31 downto 0);
+   77	        DFC                 : out std_logic_vector(2 downto 0);
+   78	        DFC_WR              : in bit;
+   79	        SFC                 : out std_logic_vector(2 downto 0);
+   80	        SFC_WR              : in bit;
+   81	        ISP_WR              : in bit;
+   82	        USP_RD              : in bit;
+   83	        USP_WR              : in bit;
+   84	        AR_MARK_USED        : in bit;
+   85	        USE_APAIR           : in boolean;
+   86	        AR_IN_USE           : out bit;
+   87	        AR_SEL_RD_1         : in std_logic_vector(3 downto 0);
+   88	        AR_SEL_RD_2         : in std_logic_vector(3 downto 0);
+   89	        AR_SEL_WR_1         : in std_logic_vector(2 downto 0);
+   90	        AR_SEL_WR_2         : in std_logic_vector(2 downto 0);
+   91	        AR_DEC              : in bit;
+   92	        AR_INC              : in bit;
+   93	        AR_WR_1             : in bit;
+   94	        AR_WR_2             : in bit;
+   95	        UNMARK              : in bit;
+   96	        EXT_WORD            : in std_logic_vector(15 downto 0);
+   97	        SBIT                : in std_logic;
+   98	        SP_ADD_DISPL        : in bit;
+   99	        RESTORE_ISP_PC      : in bit;
+  100	        DISPLACEMENT        : in std_logic_vector(31 downto 0);
+  101	        PC_ADD_DISPL        : in bit;
+  102	        PC_INC              : in bit;
+  103	        PC_LOAD             : in bit;
+  104	        PC_RESTORE          : in bit;
+  105	        PC_OFFSET           : in std_logic_vector(7 downto 0)
+  106	    );
+  107	end component;
+  108	
+  109	component WF68K10_ALU
+  110	    port (
+  111	        CLK                 : in std_logic;
+  112	        LOAD_OP1            : in bit;
+  113	        LOAD_OP2            : in bit;
+  114	        LOAD_OP3            : in bit;
+  115	        OP1_IN              : in std_logic_vector(31 downto 0);
+  116	        OP2_IN              : in std_logic_vector(31 downto 0);
+  117	        OP3_IN              : in std_logic_vector(31 downto 0);
+  118	        BITPOS_IN           : in Std_Logic_Vector(4 downto 0);
+  119	        RESULT              : out std_logic_vector(63 downto 0);
+  120	        ADR_MODE_IN         : in std_logic_vector(2 downto 0);
+  121	        OP_SIZE_IN          : in OP_SIZETYPE;
+  122	        OP_IN               : in OP_68K;
+  123	        BIW_0_IN            : in std_logic_vector(11 downto 0);
+  124	        BIW_1_IN            : in std_logic_vector(15 downto 0);
+  125	        SR_WR               : in bit;
+  126	        SR_INIT             : in bit;
+  127	        CC_UPDT             : in bit;
+  128	        STATUS_REG_OUT	    : out std_logic_vector(15 downto 0);
+  129	        ALU_COND            : out boolean;
+  130	        ALU_INIT            : in bit;
+  131	        ALU_BSY             : out bit;
+  132	        ALU_REQ             : out bit;
+  133	        ALU_ACK             : in bit;
+  134	        IRQ_PEND            : in std_logic_vector(2 downto 0);
+  135	        TRAP_CHK            : out bit;
+  136	        TRAP_DIVZERO        : out bit
+  137	    );
+  138	end component;
+  139	
+  140	component WF68K10_BUS_INTERFACE
+  141	    port (
+  142	        CLK                 : in std_logic;
+  143	        ADR_IN_P            : in std_logic_vector(31 downto 0);
+  144	        ADR_OUT_P           : out std_logic_vector(31 downto 0);
+  145	        FC_IN               : in std_logic_vector(2 downto 0);
+  146	        FC_OUT              : out std_logic_vector(2 downto 0);
+  147	        DATA_PORT_IN        : in std_logic_vector(15 downto 0); 
+  148	        DATA_PORT_OUT       : out std_logic_vector(15 downto 0);
+  149	        DATA_FROM_CORE      : in std_logic_vector(31 downto 0);
+  150	        DATA_TO_CORE        : out std_logic_vector(31 downto 0);
+  151	        OPCODE_TO_CORE      : out std_logic_vector(15 downto 0);
+  152	        DATA_PORT_EN        : out std_logic;
+  153	        BUS_EN              : out std_logic;
+  154	        OP_SIZE             : in OP_SIZETYPE;
+  155	        RD_REQ              : in bit;
+  156	        WR_REQ              : in bit;
+  157	        DATA_RDY            : out bit;
+  158	        DATA_VALID          : out std_logic;
+  159	        OPCODE_REQ          : in bit;
+  160	        OPCODE_RDY          : out bit;
+  161	        OPCODE_VALID        : out std_logic;
+  162	        RMC                 : in bit;
+  163	        BUSY_EXH            : in bit;
+  164	        INBUFFER            : out std_logic_vector(31 downto 0);
+  165	        OUTBUFFER           : out std_logic_vector(31 downto 0);
+  166	        SSW_80              : out std_logic_vector(8 downto 0);
+  167	        DTACKn              : in std_logic;
+  168	        ASn                 : out std_logic;
+  169	        UDSn                : out std_logic;
+  170	        LDSn                : out std_logic;
+  171	        RWn                 : out std_logic;
+  172	        RMCn                : out std_logic;
+  173	        DBENn               : out std_logic;
+  174	        E                   : out std_logic;
+  175	        VMAn                : out std_logic;
+  176	        VMA_EN              : out std_logic;
+  177	        VPAn                : in std_logic;
+  178	        BRn                 : in std_logic;
+  179	        BGACKn              : in std_logic;
+  180	        BGn                 : out std_logic;
+  181	        RESET_STRB          : in bit;
+  182	        RESET_IN            : in std_logic;
+  183	        RESET_OUT           : out std_logic;
+  184	        RESET_CPU           : out bit;
+  185	        AVECn               : in std_logic;
+  186	        HALTn               : in std_logic;
+  187	        BERRn               : in std_logic;
+  188	        AERR                : out bit;
+  189	        BERR_WR             : out bit;
+  190	        BUS_BSY             : out bit
+  191	    );
+  192	end component;
+  193	
+  194	component WF68K10_CONTROL
+  195	    port(
+  196	        CLK                 : in std_logic;
+  197	        RESET_CPU           : in bit;
+  198	        BUSY                : out bit;
+  199	        BUSY_EXH            : in bit;
+  200	        BUSY_OPD            : in bit;
+  201	        EW_REQ              : out bit;
+  202	        OW_REQ              : out bit;
+  203	        OW_VALID            : in std_logic;
+  204	        OPD_ACK             : in bit;
+  205	        RERUN_RMC           : in bit;
+  206	        EW_ACK              : in bit;
+  207	        ADR_MARK_UNUSED     : out bit;
+  208	        ADR_MARK_USED       : out bit;
+  209	        ADR_IN_USE          : in bit;
+  210	        ADR_OFFSET          : out std_logic_vector(5 downto 0);
+  211	        DATA_RD             : out bit;
+  212	        DATA_WR             : out bit;
+  213	        DATA_RDY            : in bit;
+  214	        DATA_VALID          : in std_logic;
+  215	        RMC                 : out bit;
+  216	        LOAD_OP2            : out bit;
+  217	        LOAD_OP3            : out bit;
+  218	        LOAD_OP1            : out bit;
+  219	        STORE_ADR_FORMAT    : out bit;
+  220	        STORE_D16           : out bit;
+  221	        STORE_DISPL         : out bit;
+  222	        STORE_ABS_HI        : out bit;
+  223	        STORE_ABS_LO        : out bit;
+  224	        STORE_IDATA_B2      : out bit;
+  225	        STORE_IDATA_B1      : out bit;
+  226	        OP                  : in OP_68K;
+  227	        OP_SIZE             : out OP_SIZETYPE;
+  228	        BIW_0               : in std_logic_vector(13 downto 0);
+  229	        BIW_1               : in std_logic_vector(15 downto 0);
+  230	        BIW_2               : in std_logic_vector(15 downto 0);
+  231	        EXT_WORD            : in std_logic_vector(15 downto 0);
+  232	        ADR_MODE            : out std_logic_vector(2 downto 0);
+  233	        AMODE_SEL           : out std_logic_vector(2 downto 0);
+  234	        OP_SIZE_WB          : out OP_SIZETYPE;
+  235	        AR_MARK_USED        : out bit;
+  236	        USE_APAIR           : out boolean;
+  237	        AR_IN_USE           : in bit;
+  238	        AR_SEL_RD_1         : out std_logic_vector(3 downto 0);
+  239	        AR_SEL_RD_2         : out std_logic_vector(3 downto 0);
+  240	        AR_SEL_WR_1         : out std_logic_vector(2 downto 0);
+  241	        AR_SEL_WR_2         : out std_logic_vector(2 downto 0);
+  242	        AR_INC              : out bit;
+  243	        AR_DEC              : out bit;
+  244	        AR_WR_1             : out bit;
+  245	        AR_WR_2             : out bit;
+  246	        DR_MARK_USED        : out bit;
+  247	        USE_DPAIR           : out boolean;
+  248	        DR_IN_USE           : in bit;
+  249	        DR_SEL_RD_1         : out std_logic_vector(3 downto 0);
+  250	        DR_SEL_RD_2         : out std_logic_vector(3 downto 0);
+  251	        DR_SEL_WR_1         : out std_logic_vector(2 downto 0);
+  252	        DR_SEL_WR_2         : out std_logic_vector(2 downto 0);
+  253	        DR_WR_1             : out bit;
+  254	        DR_WR_2             : out bit;
+  255	        UNMARK              : out bit;
+  256	        DISPLACEMENT        : out std_logic_vector(31 downto 0);
+  257	        PC_ADD_DISPL        : out bit;
+  258	        PC_LOAD             : out bit;
+  259	        SP_ADD_DISPL        : out bit;
+  260	        DFC_WR              : out bit;
+  261	        DFC_RD              : out bit;
+  262	        SFC_WR              : out bit;
+  263	        SFC_RD              : out bit;
+  264	        VBR_WR              : out bit;
+  265	        VBR_RD              : out bit;
+  266	        USP_RD              : out bit;
+  267	        USP_WR              : out bit;
+  268	        IPIPE_FLUSH         : out bit;
+  269	        ALU_INIT            : out bit;
+  270	        ALU_BSY             : in bit;
+  271	        ALU_REQ             : in bit;
+  272	        ALU_ACK             : out bit;
+  273	        BKPT_CYCLE          : out bit;
+  274	        BKPT_INSERT         : out bit;
+  275	        LOOP_BSY            : in bit;
+  276	        LOOP_EXIT           : out bit;
+  277	        SR_WR               : out bit;
+  278	        MOVEM_ADn           : out bit;
+  279	        MOVEP_PNTR          : out integer range 0 to 4;
+  280	        CC_UPDT             : out bit;
+  281	        TRACE_EN            : in std_logic;
+  282	        VBIT                : in std_logic;
+  283	        ALU_COND            : in boolean;
+  284	        DBcc_COND           : in boolean;
+  285	        RESET_STRB          : out bit;
+  286	        IPENDn              : in bit;
+  287	        BERR                : out bit;
+  288	        EX_TRACE            : out bit;
+  289	        TRAP_ILLEGAL        : out bit;
+  290	        TRAP_V              : out bit;
+  291	        RTE_INIT            : out bit;
+  292	        RTE_RESUME          : in bit
+  293	    );
+  294	end component;
+  295	
+  296	component WF68K10_DATA_REGISTERS
+  297	    port (
+  298	        CLK                 : in std_logic;
+  299	        RESET               : in bit;
+  300	        DR_IN_1             : in std_logic_vector(31 downto 0);
+  301	        DR_IN_2             : in std_logic_vector(31 downto 0);
+  302	        DR_OUT_1            : out std_logic_vector(31 downto 0);
+  303	        DR_OUT_2            : out std_logic_vector(31 downto 0);
+  304	        DR_SEL_WR_1         : in std_logic_vector(2 downto 0);
+  305	        DR_SEL_WR_2         : in std_logic_vector(2 downto 0);
+  306	        DR_SEL_RD_1         : in std_logic_vector(3 downto 0);
+  307	        DR_SEL_RD_2         : in std_logic_vector(3 downto 0);
+  308	        DR_WR_1             : in bit;
+  309	        DR_WR_2             : in bit;
+  310	        DR_MARK_USED        : in bit;
+  311	        USE_DPAIR           : in boolean;
+  312	        DR_IN_USE           : out bit;
+  313	        UNMARK              : in bit;
+  314	        OP_SIZE             : in OP_SIZETYPE
+  315	    );
+  316	end component;
+  317	
+  318	component WF68K10_EXCEPTION_HANDLER
+  319	    generic(VERSION         : std_logic_vector(15 downto 0) := x"1301");
+  320	    port (
+  321	        CLK                 : in std_logic;
+  322	        RESET_CPU           : in bit;
+  323	        BUSY_EXH            : out bit;
+  324	        BUSY_MAIN           : in bit;
+  325	        ADR_IN              : in std_logic_vector(31 downto 0);
+  326	        ADR_CPY             : out std_logic_vector(31 downto 0);
+  327	        ADR_OFFSET          : out std_logic_vector(7 downto 0);
+  328	        FC_OUT              : out std_logic_vector(2 downto 0);
+  329	        CPU_SPACE           : out bit;
+  330	        DATA_0              : in std_logic;
+  331	        DATA_RD             : out bit;
+  332	        DATA_WR             : out bit;
+  333	        DATA_RERUN          : out bit;
+  334	        DATA_IN             : in std_logic_vector(31 downto 0);
+  335	        OP_SIZE             : out OP_SIZETYPE;
+  336	        DATA_RDY            : in bit;
+  337	        DATA_VALID          : in std_logic;
+  338	        RERUN_RMC           : out bit;
+  339	        OPCODE_RDY          : in bit;
+  340	        OPD_ACK             : in bit; -- Opword is available.
+  341	        OW_VALID            : in std_logic;
+  342	        STATUS_REG_IN       : in std_logic_vector(15 downto 0);
+  343	        SR_CPY              : out std_logic_vector(15 downto 0);
+  344	        SR_INIT             : out bit;
+  345	        SR_WR               : out bit;
+  346	        ISP_LOAD            : out bit;
+  347	        PC_INC              : out bit;
+  348	        PC_LOAD             : out bit;
+  349	        PC_RESTORE          : out bit;
+  350	        PC_OFFSET           : out std_logic_vector(2 downto 0);
+  351	        REST_BIW_0          : out bit;
+  352	        STACK_FORMAT        : out std_logic_vector(3 downto 0);
+  353	        STACK_POS           : out integer range 0 to 46;
+  354	        AR_DEC              : out bit;
+  355	        ADD_DISPL           : out bit;
+  356	        DISPLACEMENT        : out std_logic_vector(7 downto 0);
+  357	        IPIPE_FLUSH         : out bit;
+  358	        RESTORE_ISP_PC      : out bit;
+  359	        RTE_INIT            : in bit;
+  360	        RTE_RESUME          : out bit;
+  361	        HALT_OUTn           : out std_logic;
+  362	        LOOP_EXIT           : out bit;
+  363	        IRQ_IN              : in std_logic_vector(2 downto 0);
+  364	        IRQ_PEND            : out std_logic_vector(2 downto 0);
+  365	        AVECn               : in std_logic;
+  366	        IPENDn              : out bit;
+  367	        INT_VECT            : out std_logic_vector(31 downto 0);
+  368	        IVECT_OFFS          : out std_logic_vector(9 downto 0);
+  369	        TRAP_AERR           : in bit;
+  370	        TRAP_BERR           : in bit;
+  371	        TRAP_CHK            : in bit;
+  372	        TRAP_DIVZERO        : in bit;
+  373	        TRAP_ILLEGAL        : in bit;
+  374	        TRAP_CODE_OPC       : in TRAPTYPE_OPC;
+  375	        TRAP_VECTOR         : in std_logic_vector(3 downto 0);
+  376	        TRAP_V              : in bit;
+  377	        EX_TRACE_IN         : in bit;
+  378	        VBR_WR              : in bit;
+  379	        VBR                 : out std_logic_vector(31 downto 0)     
+  380	    );
+  381	end component;
+  382	
+  383	component WF68K10_OPCODE_DECODER
+  384	    port (
+  385	        CLK                 : in std_logic;
+  386	        K6800n              : in std_logic;
+  387	        OW_REQ_MAIN         : in bit;
+  388	        EW_REQ_MAIN         : in bit;
+  389	        BUSY_EXH            : in bit;
+  390	        BUSY_MAIN           : in bit;
+  391	        BUSY_OPD            : out bit;
+  392	        BKPT_INSERT         : in bit;
+  393	        BKPT_DATA           : in std_logic_vector(15 downto 0);
+  394	        LOOP_EXIT           : in bit;
+  395	        LOOP_BSY            : out bit;
+  396	        OPD_ACK_MAIN        : out bit;
+  397	        EW_ACK              : out bit;
+  398	        ADR_IN_PC_1         : in std_logic;
+  399	        PC_EW_OFFSET        : out std_logic_vector(2 downto 0);
+  400	        PC_INC              : out bit;
+  401	        PC_INC_EXH          : in bit;
+  402	        PC_ADR_OFFSET       : out std_logic_vector(7 downto 0);
+  403	        PC_OFFSET           : out std_logic_vector(7 downto 0);
+  404	        OPCODE_RD           : out bit;
+  405	        OPCODE_RDY          : in bit;
+  406	        OPCODE_VALID        : in std_logic;
+  407	        OPCODE_DATA         : in std_logic_vector(15 downto 0);
+  408	        IPIPE_FLUSH         : in bit;
+  409	        OW_VALID            : out std_logic;
+  410	        RC                  : out std_logic;
+  411	        RB                  : out std_logic;
+  412	        FC                  : out std_logic;
+  413	        FB                  : out std_logic;
+  414	        SBIT                : in std_logic;
+  415	        TRAP_CODE           : out TRAPTYPE_OPC;
+  416	        OP                  : buffer OP_68K;
+  417	        BIW_0               : buffer std_logic_vector(15 downto 0);
+  418	        BIW_1               : out std_logic_vector(15 downto 0);
+  419	        BIW_2               : out std_logic_vector(15 downto 0);
+  420	        EXT_WORD            : out std_logic_vector(15 downto 0);
+  421	        REST_BIW_0          : in bit
+  422	    );
+  423	end component;
+  424	end WF68K10_PKG;
+-- "wf68k10_pkg.vhd": errors: 0; warnings: 0.

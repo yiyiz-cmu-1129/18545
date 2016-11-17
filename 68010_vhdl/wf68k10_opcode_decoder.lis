@@ -1,0 +1,1323 @@
+--                      Synopsys 1076 VHDL Analyzer
+--                 Version F-2011.12-SP1 -- May 27, 2012
+--               Copyright (c) 1991-2012 by Synopsys Inc.
+--                          ALL RIGHTS RESERVED
+-- 
+-- This program is proprietary and confidential information of Synopsys Inc.
+-- and may be used and disclosed only as authorized in a license agreement
+-- controlling such use and disclosure.
+-- 
+-- Source File:  wf68k10_opcode_decoder.vhd
+-- Sat Oct  1 12:43:48 2016
+
+    1	------------------------------------------------------------------------
+    2	----                                                                ----
+    3	---- WF68K10 IP Core: this is the bus controller module.            ----
+    4	----                                                                ----
+    5	---- Description:                                                   ----
+    6	---- This module is a 68030 compatible instruction word decoder.    ----
+    7	---- all of the 68030 bus interface functionality.                  ----
+    8	---- Besides the 68030 instructions this deoder features the follo- ----
+    9	---- wing ones:                                                     ----
+   10	----                                                                ----
+   11	---- This module is primarily controlled by the following signals:  ----
+   12	---- OW_REQ, OPD_ACK_xxx, EW_REQ, EW_ACK. The handshaking is as     ----
+   13	---- follows: if a new instruction is required, assert the signal   ----
+   14	---- OW_REQ and wait until ACK is asserted by the logic of          ----
+   15	---- the decoder logic. Deassert OW_REQ right after ACK             ----
+   16	---- (in the same clock cycle). One clock cycle after ACK, the      ----
+   17	---- required instruction has been copied from the pipe to the      ----
+   18	---- register BIW_0. The respective additional instruction words    ----
+   19	---- are located in BIW_1, BIW_2. For more information              ----
+   20	---- see the 68030 "Programmers Reference Manual" and the signal    ----
+   21	---- INSTR_LVL in this module.                                      ----
+   22	---- The extension request works in the same manner by asserting    ----
+   23	---- EW_REQ. One clock cycle after EXT_ACK one extension word has   ----
+   24	---- been copied to EXT_WORD.                                       ----
+   25	---- Be aware that it is in the scope of the logic driving          ----
+   26	---- OW_REQ and EW_REQ to hold the instruction pipe aligned.        ----
+   27	---- This means in detail, that the correct number or instruction   ----
+   28	---- and extension words must be requested. Otherwise unpredictable ----
+   29	---- processor behaviour will occur. Furthermore OW_REQ and         ----
+   30	---- EW_REQ may not be asserted the same time.                      ----
+   31	---- This operation code decoder with the handhsake logic as des-   ----
+   32	---- cribed above is the first pipeline stage of the CPU architec-  ----
+   33	---- ture.                                                          ----
+   34	----                                                                ----
+   35	----                                                                ----
+   36	---- Author(s):                                                     ----
+   37	---- - Wolfgang Foerster, wf@experiment-s.de; wf@inventronik.de     ----
+   38	----                                                                ----
+   39	------------------------------------------------------------------------
+   40	----                                                                ----
+   41	---- Copyright © 2014 Wolfgang Foerster Inventronik GmbH.           ----
+   42	----                                                                ----
+   43	---- This documentation describes Open Hardware and is licensed     ----
+   44	---- under the CERN OHL v. 1.2. You may redistribute and modify     ----
+   45	---- this documentation under the terms of the CERN OHL v.1.2.      ----
+   46	---- (http://ohwr.org/cernohl). This documentation is distributed   ----
+   47	---- WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF          ----
+   48	---- MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A        ----
+   49	---- PARTICULAR PURPOSE. Please see the CERN OHL v.1.2 for          ----
+   50	---- applicable conditions                                          ----
+   51	----                                                                ----
+   52	------------------------------------------------------------------------
+   53	-- 
+   54	-- Revision History
+   55	-- 
+   56	-- Revision 2K14B 20141201 WF
+   57	--   Initial Release.
+   58	-- 
+   59	
+   60	library work;
+   61	use work.WF68K10_PKG.all;
+   62	
+   63	library ieee;
+   64	use ieee.std_logic_1164.all;
+   65	use ieee.std_logic_unsigned.all;
+   66	
+   67	entity WF68K10_OPCODE_DECODER is
+   68	    port (
+   69	        CLK                 : in std_logic;
+   70	        K6800n              : in std_logic;
+   71	
+   72	        OW_REQ_MAIN         : in bit; -- Request from the execution unit.
+   73	        EW_REQ_MAIN         : in bit; -- Extension words request.
+   74	        BUSY_EXH            : in bit; -- Exception handler is busy.
+   75	        BUSY_MAIN           : in bit; -- Main controller busy.
+   76	        BUSY_OPD            : out bit; -- This unit is busy.
+   77	        
+   78	        BKPT_INSERT         : in bit;
+   79	        BKPT_DATA           : in std_logic_vector(15 downto 0);
+   80	        LOOP_EXIT           : in bit;
+   81	        LOOP_BSY            : out bit;
+   82	
+   83	        OPD_ACK_MAIN        : out bit; -- Operation controller acknowledge.
+   84	        EW_ACK              : out bit; -- Extension word available.
+   85	
+   86	        ADR_IN_PC_1         : in std_logic;
+   87	        PC_INC              : out bit;
+   88	        PC_INC_EXH          : in bit;
+   89	        PC_ADR_OFFSET       : out std_logic_vector(7 downto 0);
+   90	        PC_EW_OFFSET        : out std_logic_vector(2 downto 0);
+   91	        PC_OFFSET           : out std_logic_vector(7 downto 0);
+   92	
+   93	        OPCODE_RD           : out bit;
+   94	        OPCODE_RDY          : in bit;
+   95	        OPCODE_VALID        : in std_logic;
+   96	        OPCODE_DATA         : in std_logic_vector(15 downto 0);
+   97	
+   98	        IPIPE_FLUSH         : in bit; -- Abandon the instruction pipe.
+   99	
+  100	        -- Fault logic:
+  101	        OW_VALID            : out std_logic; -- Operation words valid.
+  102	        RC                  : out std_logic; -- Rerun flag on instruction pipe stage C.
+  103	        RB                  : out std_logic; -- Rerun flag on instruction pipe stage B.
+  104	        FC                  : out std_logic; -- Fault on use of instruction pipe stage C.
+  105	        FB                  : out std_logic; -- Fault on use of instruction pipe stage B.
+  106	
+  107	        -- Trap logic:
+  108	        SBIT                : in std_logic;
+  109	        TRAP_CODE           : out TRAPTYPE_OPC;
+  110	
+  111	        -- System control signals:
+  112	        OP                  : buffer OP_68K;
+  113	        BIW_0               : buffer std_logic_vector(15 downto 0);
+  114	        BIW_1               : out std_logic_vector(15 downto 0);
+  115	        BIW_2               : out std_logic_vector(15 downto 0);
+  116	        EXT_WORD            : out std_logic_vector(15 downto 0);
+  117	
+  118	        REST_BIW_0          : in bit
+  119	    );
+  120	end entity WF68K10_OPCODE_DECODER;
+  121	
+  122	architecture BEHAVIOR of WF68K10_OPCODE_DECODER is
+  123	type CAHR_STATUSTYPE is(FULL, EMPTY);
+  124	type INSTR_LVL_TYPE is(D, B, C);
+  125	type IPIPE_TYPE is
+  126	    record
+  127	        D       : std_logic_vector(15 downto 0);
+  128	        C       : std_logic_vector(15 downto 0);
+  129	        B       : std_logic_vector(15 downto 0);
+  130	    end record;
+  131	
+  132	signal REQ                  : bit;
+  133	
+  134	signal CAHR                 : std_logic_vector(15 downto 0);
+  135	signal CAHR_REQ             : bit;
+  136	signal CAHR_FAULT           : std_logic;
+  137	signal CAHR_STATUS          : CAHR_STATUSTYPE;
+  138	
+  139	signal EW_REQ               : bit;
+  140	
+  141	signal IPIPE                : IPIPE_TYPE;
+  142	signal FIFO_RD              : bit;
+  143	signal IPIPE_B_FAULT        : std_logic;
+  144	signal IPIPE_C_FAULT        : std_logic;
+  145	signal IPIPE_D_FAULT        : std_logic;
+  146	signal IPIPE_PNTR           : natural range 0 to 3;
+  147	
+  148	signal INSTR_LVL            : INSTR_LVL_TYPE;
+  149	signal LEVEL_D              : bit;
+  150	signal LOOP_BSY_I           : boolean;
+  151	signal LOOP_OP              : boolean;
+  152	
+  153	signal BKPT_REQ             : bit;
+  154	
+  155	signal OP_I                 : OP_68K;
+  156	signal OP_REG               : std_logic_vector(15 downto 0);
+  157	
+  158	signal OPCODE_RD_I          : bit;
+  159	signal OW_REQ               : bit;
+  160	
+  161	signal TRAP_CODE_I          : TRAPTYPE_OPC;
+  162	signal FLUSHED              : boolean;
+  163	signal PC_INC_I             : bit;
+  164	signal PIPE_RDY             : bit;
+  165	begin
+  166	    P_BSY: process(BUSY_EXH, CLK, IPIPE_FLUSH, OPCODE_RDY)
+  167	    -- This logic requires asynchronous reset. This flip flop is intended 
+  168	    -- to break combinatorial loops. If an opcode cycle in the bus controller 
+  169	    -- unit is currently running, the actual PC address is stored during this 
+  170	    -- cycle. Therefore it is not possible to flush the pipe and manipulate 
+  171	    -- the PC during a running cycle. For the exception handler reading the 
+  172	    -- opcode is inhibited during a pipe flush. For the main controller unit 
+  173	    -- and the coprocessor interface the pipe is flushed after a running 
+  174	    -- opcode cycle.
+  175	    begin
+  176	        if OPCODE_RDY = '1' then
+  177	            OPCODE_RD_I <= '0';
+  178	        elsif BUSY_EXH = '1' and IPIPE_FLUSH = '1' then
+  179	            OPCODE_RD_I <= '0';
+  180	        elsif CLK = '1' and CLK' event then
+  181	            if LOOP_BSY_I = true then
+  182	                OPCODE_RD_I <= '0';
+  183	            elsif IPIPE_FLUSH = '1' then
+  184	                OPCODE_RD_I <= '1';
+  185	            elsif CAHR_STATUS = EMPTY then
+  186	                OPCODE_RD_I <= '1';
+  187	            end if;
+  188	        end if;
+  189	    end process P_BSY;
+  190	
+  191	    OPCODE_RD <= OPCODE_RD_I;
+  192	    BUSY_OPD <= '1' when OPCODE_RD_I = '1' else '0';
+  193	
+  194	    CAHR_REQ <= '0' when BKPT_REQ = '1' else -- Do not alter when BKPT is inserted.
+  195	                '1' when OW_REQ = '0' and EW_REQ = '0' and IPIPE_PNTR < 3 and CAHR_STATUS /= EMPTY else
+  196	                '1' when OW_REQ = '1' and CAHR_STATUS /= EMPTY else
+  197	                '1' when EW_REQ = '1' and CAHR_STATUS /= EMPTY else '0';
+  198	
+  199	    P_CAHR: process
+  200	    -- This is the cache holding register. This register
+  201	    -- is considered as stage A of the instruction pipe
+  202	    -- but is 32 bit wide.
+  203	    -- Be aware, that the opcode is requested (OPCODE_RD) only
+  204	    -- in CAHR_STATUS = EMPTY. So if OPCODE_RDY is asserted
+  205	    -- the cache holding register is empty.
+  206	    begin
+  207	        wait until CLK = '1' and CLK' event;
+  208	        if IPIPE_FLUSH = '1' then
+  209	            CAHR <= (others => '0');
+  210	            CAHR_STATUS <= EMPTY;
+  211	        elsif OPCODE_RDY = '1' then
+  212	            if IPIPE_PNTR = 3 and OW_REQ = '0' then
+  213	                CAHR <= OPCODE_DATA;
+  214	                CAHR_STATUS <= FULL;
+  215	                CAHR_FAULT <= not OPCODE_VALID;
+  216	            end if;
+  217	        elsif CAHR_REQ = '1' then
+  218	            CAHR_STATUS <= EMPTY;
+  219	        end if;
+  220	    end process P_CAHR;
+  221	
+  222	    INSTRUCTION_PIPE: process
+  223	    -- These are the instruction pipe FIFO registers. The opcodes are stored in IPIPE.B, IPIPE.C
+  224	    -- and IPIPE.D which is copied to the instruction register or to the respective extension when
+  225	    -- read. Be aware, that the pipe is always completely refilled to determine the correct INSTR_LVL
+  226	    -- before it is copied to the execution unit.
+  227	    variable IPIPE_D_VAR    : std_logic_vector(15 downto 0);
+  228	    begin
+  229	        wait until CLK = '1' and CLK' event;
+  230	        if IPIPE_FLUSH = '1' then
+  231	            IPIPE.D <= (others => '0');
+  232	            IPIPE.C <= (others => '0');
+  233	            IPIPE.B <= (others => '0');
+  234	            IPIPE_PNTR <= 0;
+  235	        elsif BKPT_INSERT = '1' then
+  236	            IPIPE_D_VAR := IPIPE.D;
+  237	            IPIPE.D <= BKPT_DATA; -- Insert the breakpoint data.
+  238	            BKPT_REQ <= '1';
+  239	        elsif OW_REQ = '1' and BKPT_REQ = '1' then
+  240	            IPIPE.D <= IPIPE_D_VAR; -- Restore from breakpoint.
+  241	            BKPT_REQ <= '0';
+  242	        elsif OW_REQ = '1' and LOOP_BSY_I = true then
+  243	            IPIPE.D <= OP_REG; -- Recycle the loop operation.
+  244	        elsif OW_REQ = '1' and INSTR_LVL = D and PIPE_RDY = '1' and IPIPE_PNTR = 2 then
+  245	            if OPCODE_RDY = '1' then
+  246	                IPIPE.D <= IPIPE.C;
+  247	                IPIPE.C <= OPCODE_DATA;
+  248	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  249	                IPIPE_C_FAULT <= not OPCODE_VALID;
+  250	            elsif CAHR_STATUS /= EMPTY then
+  251	                IPIPE.D <= IPIPE.C;
+  252	                IPIPE.C <= CAHR;
+  253	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  254	                IPIPE_C_FAULT <= CAHR_FAULT;
+  255	            else
+  256	                IPIPE.D <= IPIPE.C;
+  257	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  258	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  259	            end if;
+  260	        elsif OW_REQ = '1' and INSTR_LVL = D and PIPE_RDY = '1' and IPIPE_PNTR = 3 then
+  261	            if OPCODE_RDY = '1' then
+  262	                IPIPE.D <= IPIPE.C;
+  263	                IPIPE.C <= IPIPE.B;
+  264	                IPIPE.B <= OPCODE_DATA;
+  265	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  266	                IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  267	                IPIPE_B_FAULT <= not OPCODE_VALID;
+  268	            elsif CAHR_STATUS /= EMPTY then
+  269	                IPIPE.D <= IPIPE.C;
+  270	                IPIPE.C <= IPIPE.B;
+  271	                IPIPE.B <= CAHR;
+  272	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  273	                IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  274	                IPIPE_B_FAULT <= CAHR_FAULT;
+  275	            else
+  276	                IPIPE.D <= IPIPE.C;
+  277	                IPIPE.C <= IPIPE.B;
+  278	                IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  279	                IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  280	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  281	            end if;
+  282	        elsif OW_REQ = '1' and INSTR_LVL = C and PIPE_RDY = '1' and IPIPE_PNTR = 2 then
+  283	            if OPCODE_RDY = '1' then
+  284	                IPIPE.D <= OPCODE_DATA;
+  285	                IPIPE_D_FAULT <= not OPCODE_VALID;
+  286	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  287	            elsif CAHR_STATUS /= EMPTY then
+  288	                IPIPE.B <= CAHR;
+  289	                IPIPE_D_FAULT <= CAHR_FAULT;
+  290	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  291	            else
+  292	                IPIPE_PNTR <= 0;
+  293	            end if;
+  294	        elsif OW_REQ = '1' and INSTR_LVL = C and PIPE_RDY = '1' and IPIPE_PNTR = 3 then
+  295	            if OPCODE_RDY = '1' then
+  296	                IPIPE.D <= IPIPE.B;
+  297	                IPIPE.C <= OPCODE_DATA;
+  298	                IPIPE_D_FAULT <= IPIPE_B_FAULT;
+  299	                IPIPE_C_FAULT <= not OPCODE_VALID;
+  300	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  301	            elsif CAHR_STATUS /= EMPTY then
+  302	                IPIPE.D <= IPIPE.B;
+  303	                IPIPE.C <= CAHR;
+  304	                IPIPE_D_FAULT <= IPIPE_B_FAULT;
+  305	                IPIPE_C_FAULT <= CAHR_FAULT;
+  306	                IPIPE_PNTR <= IPIPE_PNTR - 1;
+  307	            else
+  308	                IPIPE.D <= IPIPE.B;
+  309	                IPIPE_D_FAULT <= IPIPE_B_FAULT;
+  310	                IPIPE_PNTR <= IPIPE_PNTR - 2;
+  311	            end if;
+  312	        elsif OW_REQ = '1' and INSTR_LVL = B and PIPE_RDY = '1' then -- IPIPE_PNTR = 3.
+  313	            if OPCODE_RDY = '1' then
+  314	                IPIPE.D <= OPCODE_DATA;
+  315	                IPIPE_D_FAULT <= not OPCODE_VALID;
+  316	                IPIPE_PNTR <= IPIPE_PNTR - 2;
+  317	            elsif CAHR_STATUS /= EMPTY then
+  318	                IPIPE.D <= CAHR;
+  319	                IPIPE_D_FAULT <= CAHR_FAULT;
+  320	                IPIPE_PNTR <= IPIPE_PNTR - 2;
+  321	            else
+  322	                IPIPE_PNTR <= 0;
+  323	            end if;
+  324	        elsif EW_REQ = '1' and IPIPE_PNTR >= 1 then
+  325	            case IPIPE_PNTR is
+  326	                when 3 =>
+  327	                    if OPCODE_RDY = '1' then
+  328	                        IPIPE.D <= IPIPE.C;
+  329	                        IPIPE.C <= IPIPE.B;
+  330	                        IPIPE.B <= OPCODE_DATA;
+  331	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  332	                        IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  333	                        IPIPE_B_FAULT <= not OPCODE_VALID;
+  334	                    elsif CAHR_STATUS /= EMPTY then
+  335	                        IPIPE.D <= IPIPE.C;
+  336	                        IPIPE.C <= IPIPE.B;
+  337	                        IPIPE.B <= CAHR;
+  338	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  339	                        IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  340	                        IPIPE_B_FAULT <= CAHR_FAULT;
+  341	                    else
+  342	                        IPIPE.D <= IPIPE.C;
+  343	                        IPIPE.C <= IPIPE.B;
+  344	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  345	                        IPIPE_C_FAULT <= IPIPE_B_FAULT;
+  346	                        IPIPE_PNTR <= IPIPE_PNTR - 1;
+  347	                    end if;
+  348	                when 2 =>
+  349	                    if OPCODE_RDY = '1' then
+  350	                        IPIPE.D <= IPIPE.C;
+  351	                        IPIPE.C <= OPCODE_DATA;
+  352	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  353	                        IPIPE_C_FAULT <= not OPCODE_VALID;
+  354	                    elsif CAHR_STATUS /= EMPTY then
+  355	                        IPIPE.D <= IPIPE.C;
+  356	                        IPIPE.C <= CAHR;
+  357	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  358	                        IPIPE_C_FAULT <= CAHR_FAULT;
+  359	                    else
+  360	                        IPIPE.D <= IPIPE.C;
+  361	                        IPIPE_D_FAULT <= IPIPE_C_FAULT;
+  362	                        IPIPE_PNTR <= IPIPE_PNTR - 1;
+  363	                    end if;
+  364	                when 1 =>
+  365	                    if OPCODE_RDY = '1' then
+  366	                        IPIPE.D <= OPCODE_DATA;
+  367	                        IPIPE_D_FAULT <= not OPCODE_VALID;
+  368	                    elsif CAHR_STATUS /= EMPTY then
+  369	                        IPIPE.D <= CAHR;
+  370	                        IPIPE_D_FAULT <= CAHR_FAULT;
+  371	                    else
+  372	                        IPIPE_PNTR <= 0;
+  373	                    end if;
+  374	                when others => null;
+  375	            end case;
+  376	        elsif OPCODE_RDY = '1' then
+  377	            case IPIPE_PNTR is
+  378	                when 2 =>
+  379	                    IPIPE.B <= OPCODE_DATA;
+  380	                    IPIPE_B_FAULT <= not OPCODE_VALID;
+  381	                    IPIPE_PNTR <= 3;
+  382	                when 1 =>
+  383	                    IPIPE.C <= OPCODE_DATA;
+  384	                    IPIPE_C_FAULT <= not OPCODE_VALID;
+  385	                    IPIPE_PNTR <= 2;
+  386	                when 0 =>
+  387	                    IPIPE.D <= OPCODE_DATA;
+  388	                    IPIPE_D_FAULT <= not OPCODE_VALID;
+  389	                    IPIPE_PNTR <= 1;
+  390	                when others => null;
+  391	            end case;
+  392	        elsif IPIPE_PNTR < 3 and CAHR_STATUS /= EMPTY then -- Shift but no read results in filling.
+  393	            case IPIPE_PNTR is
+  394	                when 0 =>
+  395	                    IPIPE.D <= CAHR;
+  396	                    IPIPE_D_FAULT <= CAHR_FAULT;
+  397	                when 1 =>
+  398	                    IPIPE.C <= CAHR;
+  399	                    IPIPE_C_FAULT <= CAHR_FAULT;
+  400	                when 2 | 3 => -- 3 is overflow!
+  401	                    IPIPE.B <= CAHR;
+  402	                    IPIPE_B_FAULT <= CAHR_FAULT;
+  403	            end case;
+  404	            IPIPE_PNTR <= IPIPE_PNTR + 1;
+  405	        end if;
+  406	    end process INSTRUCTION_PIPE;
+  407	
+  408	    P_FAULT: process
+  409	    -- This are the fault flags for pipe B and C.
+  410	    -- These flags are set, when an instruction
+  411	    -- request uses either of the respective pipes.
+  412	    begin
+  413	        wait until CLK = '1' and CLK' event;
+  414	        if IPIPE_FLUSH = '1' then
+  415	            OW_VALID <= '0';
+  416	            FC <= '0';
+  417	            FB <= '0';
+  418	        elsif OW_REQ = '1' and LOOP_BSY_I = true then
+  419	            OW_VALID <= '1';
+  420	            FC <= '0';
+  421	            FB <= '0';
+  422	        elsif OW_REQ = '1' and PIPE_RDY = '1' and INSTR_LVL = D then
+  423	            OW_VALID <= not IPIPE_D_FAULT;
+  424	            FC <= '0';
+  425	            FB <= '0';
+  426	        elsif OW_REQ = '1' and PIPE_RDY = '1' and INSTR_LVL = C then
+  427	            OW_VALID <= not(IPIPE_D_FAULT or IPIPE_C_FAULT);
+  428	            FC <= IPIPE_C_FAULT;
+  429	            FB <= '0';
+  430	        elsif OW_REQ = '1' and PIPE_RDY = '1' and INSTR_LVL = B then
+  431	            OW_VALID <= not (IPIPE_D_FAULT or IPIPE_C_FAULT or IPIPE_B_FAULT);
+  432	            FC <= IPIPE_C_FAULT;
+  433	            FB <= IPIPE_B_FAULT;
+  434	        elsif EW_REQ = '1' and PIPE_RDY = '1' then
+  435	            OW_VALID <= not IPIPE_D_FAULT;
+  436	            FC <= '0';
+  437	            FB <= '0';
+  438	        end if;
+  439	        -- The Rerun Flags:
+  440	        if IPIPE_FLUSH = '1' then
+  441	            RC <= '0';
+  442	            RB <= '0';
+  443	        elsif (EW_REQ or OW_REQ) = '1' and PIPE_RDY = '1' then
+  444	            RC <= IPIPE_C_FAULT;
+  445	            RB <= IPIPE_B_FAULT;
+  446	        end if;
+  447	        -- Restoring:
+  448	        if REST_BIW_0 = '1' then
+  449	            OW_VALID <= '1'; -- Used by RTE.
+  450	        end if;
+  451	    end process P_FAULT;
+  452	
+  453	    OUTBUFFERS: process
+  454	    variable OP_STOP    : boolean;
+  455	    begin
+  456	        wait until CLK = '1' and CLK' event;
+  457	        if OP_STOP = true and IPIPE_FLUSH = '1' then
+  458	            TRAP_CODE <= NONE;
+  459	            OP_STOP := false;
+  460	        elsif IPIPE_FLUSH = '1' then
+  461	            TRAP_CODE <= NONE;
+  462	        elsif OP_STOP = true then
+  463	            null; -- Do not update after PC is incremented.
+  464	        elsif OW_REQ = '1' and (PIPE_RDY = '1' or BKPT_REQ = '1') then
+  465	            -- Be aware: all BIW are written unaffected 
+  466	            -- if they are all used.
+  467	            OP_REG <= IPIPE.D;
+  468	            OP <= OP_I;
+  469	            BIW_0 <= IPIPE.D;
+  470	            BIW_1 <= IPIPE.C;
+  471	            BIW_2 <= IPIPE.B;
+  472	            TRAP_CODE <= TRAP_CODE_I;
+  473	            --
+  474	            if OP_I = STOP then
+  475	                OP_STOP := true;
+  476	            end if;
+  477	            --
+  478	            if INSTR_LVL = D then
+  479	                LEVEL_D <= '1';
+  480	            else
+  481	                LEVEL_D <= '0';
+  482	            end if;
+  483	        elsif EW_REQ = '1' and IPIPE_PNTR /= 0 then
+  484	            EXT_WORD <= IPIPE.D;
+  485	        end if;
+  486	        --
+  487	        if REST_BIW_0 = '1' then
+  488	            BIW_0 <= OPCODE_DATA; -- Used by RTE.
+  489	        end if;
+  490	        --
+  491	    end process OUTBUFFERS;
+  492	
+  493	    LOOP_OP <= true when OP = MOVE and BIW_0(8 downto 3) = "010010" else -- (Ay) to (Ax).
+  494	               true when OP = MOVE and BIW_0(8 downto 3) = "011010" else -- (Ay) to (Ax)+.
+  495	               true when OP = MOVE and BIW_0(8 downto 3) = "100010" else -- (Ay) to -(Ax).
+  496	               true when OP = MOVE and BIW_0(8 downto 3) = "010011" else -- (Ay)+ to (Ax).
+  497	               true when OP = MOVE and BIW_0(8 downto 3) = "011011" else -- (Ay)+ to (Ax)+.
+  498	               true when OP = MOVE and BIW_0(8 downto 3) = "100011" else -- (Ay)+ to -(Ax).
+  499	               true when OP = MOVE and BIW_0(8 downto 3) = "010100" else -- -(Ay) to (Ax).
+  500	               true when OP = MOVE and BIW_0(8 downto 3) = "011100" else -- -(Ay) to (Ax)+.
+  501	               true when OP = MOVE and BIW_0(8 downto 3) = "100100" else -- -(Ay) to -(Ax).
+  502	               true when OP = MOVE and BIW_0(8 downto 3) = "100100" else -- -(Ay) to -(Ax).
+  503	               true when OP = MOVE and BIW_0(8 downto 3) = "010000" else -- Dy to (Ax).
+  504	               true when OP = MOVE and BIW_0(8 downto 3) = "011000" else -- Dy to (Ax)+.
+  505	               true when OP = MOVE and BIW_0(8 downto 3) = "010001" else -- Ay to (Ax).
+  506	               true when OP = MOVE and BIW_0(8 downto 3) = "011001" else -- Ay to (Ax)+.
+  507	               true when (OP = ADD or OP = AND_B or OP = CMP or OP = EOR or OP = OR_B or OP = SUB) and BIW_0(5 downto 3) = "010" else -- (Ay) to Dx, Dx to (Ay).
+  508	               true when (OP = ADD or OP = AND_B or OP = CMP or OP = EOR or OP = OR_B or OP = SUB) and BIW_0(5 downto 3) = "011" else -- (Ay)+ to Dx, Dx to (Ay)+.
+  509	               true when (OP = ADD or OP = AND_B or OP = CMP or OP = EOR or OP = OR_B or OP = SUB) and BIW_0(5 downto 3) = "100" else -- -(Ay) to Dx, Dx to -(Ay).
+  510	               true when (OP = ADDA or OP = CMPA or OP = SUBA) and BIW_0(5 downto 3) = "010" else -- (Ay) to Ax.
+  511	               true when (OP = ADDA or OP = CMPA or OP = SUBA) and BIW_0(5 downto 3) = "011" else -- (Ay)+ to Ax.
+  512	               true when (OP = ADDA or OP = CMPA or OP = SUBA) and BIW_0(5 downto 3) = "100" else -- -(Ay) to Ax.
+  513	               true when OP = ABCD or OP = SBCD or OP = ADDX or OP = SUBX or OP = CMPM else -- -(Ay) to -(Ay), (Ay)+ to (Ay)+ for CMPM.
+  514	               true when (OP = CLR or OP = NEG or OP = NEGX or OP = NOT_B or OP = TST or OP = NBCD) and BIW_0(5 downto 3) = "010" else -- (Ay).
+  515	               true when (OP = CLR or OP = NEG or OP = NEGX or OP = NOT_B or OP = TST or OP = NBCD) and BIW_0(5 downto 3) = "011" else -- (Ay)+.
+  516	               true when (OP = CLR or OP = NEG or OP = NEGX or OP = NOT_B or OP = TST or OP = NBCD) and BIW_0(5 downto 3) = "100" else -- -(Ay).
+  517	               true when (OP = ASL or OP = ASR or OP = LSL or OP = LSR) and BIW_0(7 downto 3) = "11010" else -- (Ay) by #1.
+  518	               true when (OP = ASL or OP = ASR or OP = LSL or OP = LSR) and BIW_0(7 downto 3) = "11011" else -- (Ay)+ by #1.
+  519	               true when (OP = ASL or OP = ASR or OP = LSL or OP = LSR) and BIW_0(7 downto 3) = "11100" else -- -(Ay) by #1.
+  520	               true when (OP = ROTL or OP = ROTR or OP = ROXL or OP = ROXR) and BIW_0(7 downto 3) = "11010" else -- (Ay) by #1.
+  521	               true when (OP = ROTL or OP = ROTR or OP = ROXL or OP = ROXR) and BIW_0(7 downto 3) = "11011" else -- (Ay)+ by #1.
+  522	               true when (OP = ROTL or OP = ROTR or OP = ROXL or OP = ROXR) and BIW_0(7 downto 3) = "11100" else false; -- -(Ay) by #1.
+  523	
+  524	    P_LOOP: process(CLK, LOOP_EXIT)
+  525	    -- This flip flop controls the loop mode of the
+  526	    -- processor. Refer to the MC68000 user manual
+  527	    -- Appendix A for more information.
+  528	    begin
+  529	        if LOOP_EXIT = '1' then
+  530	            LOOP_BSY <= '0';
+  531	        elsif CLK = '1' and CLK' event then
+  532	            if LOOP_OP = true and LEVEL_D = '1' and OP_I = DBcc and IPIPE.C = x"FFFC" then -- IPIPE.C value must be minus four.
+  533	                LOOP_BSY_I <= true;
+  534	                LOOP_BSY <= '1';
+  535	            elsif LOOP_EXIT = '1' then
+  536	                LOOP_BSY_I <= false;
+  537	            end if;
+  538	        end if;
+  539	    end process P_LOOP;
+  540	
+  541	    OW_REQ <= '0' when BUSY_EXH = '1' else OW_REQ_MAIN;
+  542	
+  543	    EW_REQ <= EW_REQ_MAIN;
+  544	
+  545	    PIPE_RDY <= '1' when OW_REQ = '1' and IPIPE_PNTR = 3 and INSTR_LVL = B else
+  546	                '1' when OW_REQ = '1' and IPIPE_PNTR > 1 and INSTR_LVL = C else
+  547	                '1' when OW_REQ = '1' and IPIPE_PNTR > 1 and INSTR_LVL = D else -- We need always pipe C and D to determine the INSTR_LVL.
+  548	                '1' when EW_REQ = '1' and IPIPE_PNTR > 0 else '0';
+  549	 
+  550	    HANDSHAKING: process
+  551	    -- Wee need these flip flops to ensure, that the OUTBUFFERS are
+  552	    -- written when the respecktive _ACK signal is asserted.
+  553	    -- The breakpoint cycles are valid for one word operations and
+  554	    -- therefore does never start FPU operations.
+  555	    begin
+  556	        wait until CLK = '1' and CLK' event;
+  557	        if EW_REQ = '1' and IPIPE_PNTR /= 0 then
+  558	            EW_ACK <= '1';
+  559	        else
+  560	            EW_ACK <= '0';
+  561	        end if;
+  562	
+  563	        if IPIPE_FLUSH = '1' then
+  564	            OPD_ACK_MAIN <= '0';
+  565	        elsif TRAP_CODE_I = T_PRIV then -- No action when priviledged.
+  566	            OPD_ACK_MAIN <= '0';
+  567	        elsif OW_REQ = '1' and (PIPE_RDY = '1' or BKPT_REQ = '1') then
+  568	            OPD_ACK_MAIN <= '1';
+  569	        else
+  570	            OPD_ACK_MAIN <= '0';
+  571	        end if;
+  572	    end process HANDSHAKING;
+  573	
+  574	    P_PC_OFFSET: process(CLK, LOOP_EXIT, PC_INC_EXH, PC_INC_I)
+  575	    -- Be Aware: the ADR_OFFSET requires the 'old' PC_VAR.
+  576	    -- To arrange this, the ADR_OFFSET logic is located
+  577	    -- above the PC_VAR logic. Do not change this!
+  578	    -- The PC_VAR is modeled in a way, that the PC points
+  579	    -- always to the BIW_0.
+  580	    -- The PC_EW_OFFSET is also used for the calculation 
+  581	    -- of the correct PC value written to the stack pointer
+  582	    -- during BSR, JSR and exceptions.
+  583	    variable ADR_OFFSET     : std_logic_vector(6 downto 0);
+  584	    variable PC_VAR         : std_logic_vector(6 downto 0);
+  585	    variable PC_VAR_MEM     : std_logic_vector(6 downto 0);
+  586	    begin
+  587	        if CLK = '1' and CLK' event then
+  588	            if IPIPE_FLUSH = '1' then
+  589	                ADR_OFFSET := "0000000";
+  590	            elsif PC_INC_I = '1' and OPCODE_RDY = '1' then
+  591	                ADR_OFFSET := ADR_OFFSET + '1' - PC_VAR;
+  592	            elsif OPCODE_RDY = '1' then
+  593	                ADR_OFFSET := ADR_OFFSET + '1';
+  594	            elsif PC_INC_I = '1' then
+  595	                ADR_OFFSET := ADR_OFFSET - PC_VAR;
+  596	            end if;
+  597	            --
+  598	            if BUSY_EXH = '0' then
+  599	                PC_VAR_MEM := PC_VAR; -- Store the old offset to write back on the stack.
+  600	            end if;
+  601	
+  602	            if BUSY_EXH = '1' then
+  603	                -- New PC is loaded by the exception handler.
+  604	                -- So PC_VAR must be initialized.
+  605	                PC_VAR := "0000000";
+  606	            elsif PC_INC_I = '1' or FLUSHED = true then
+  607	                case INSTR_LVL is
+  608	                    when D => PC_VAR := "0000001";
+  609	                    when C => PC_VAR := "0000010";
+  610	                    when B => PC_VAR := "0000011";
+  611	                end case;
+  612	            elsif EW_REQ = '1' and IPIPE_PNTR /= 0 then
+  613	                PC_VAR := PC_VAR + '1';
+  614	            end if;
+  615	            --
+  616	            if OW_REQ = '1' and BKPT_REQ = '1' then
+  617	                PC_EW_OFFSET <= "010"; -- Always level D operations.
+  618	            elsif OW_REQ = '1' and PIPE_RDY = '1' then
+  619	                case INSTR_LVL is
+  620	                    when D => PC_EW_OFFSET <= "010";
+  621	                    when C => PC_EW_OFFSET <= "100";
+  622	                    when others => PC_EW_OFFSET <= "110"; -- LONG displacement.
+  623	                end case;
+  624	            end if;
+  625	        end if;
+  626	        --
+  627	        if PC_INC_EXH = '1' then
+  628	            PC_OFFSET <= PC_VAR_MEM & '0';
+  629	        elsif PC_INC_I = '1' and LOOP_EXIT = '1' then
+  630	            PC_OFFSET <= x"06"; -- Increment by DBcc and one D type loop operation.
+  631	        else
+  632	            PC_OFFSET <= PC_VAR & '0';
+  633	        end if;
+  634	        PC_ADR_OFFSET <= ADR_OFFSET & '0';
+  635	    end process P_PC_OFFSET;
+  636	
+  637	    P_FLUSH: process
+  638	    -- This flip flop is intended to control the incrementation
+  639	    -- of the PC. Normally the PC is updated in the end of an
+  640	    -- operation (if a new opword is available) or otherwise in
+  641	    -- the START_OP phase. When the instruction pipe is flushed,
+  642	    -- it is required to increment the PC immediately to provide
+  643	    -- the correct address for the pipe refilling. In this case
+  644	    -- the PC update after the pipe refill must be suppressed. 
+  645	    begin
+  646	        wait until CLK = '1' and CLK' event;
+  647	        if IPIPE_FLUSH = '1' and BUSY_EXH = '0' then
+  648	            FLUSHED <= true;
+  649	        elsif OW_REQ = '1' and PIPE_RDY = '1' then
+  650	            FLUSHED <= false;
+  651	        end if;
+  652	    end process P_FLUSH;
+  653	
+  654	    PC_INC <= PC_INC_I; -- Do not change the prioritization of PC_INC_I.
+  655	    PC_INC_I <= '1' when IPIPE_FLUSH = '1' and BUSY_EXH = '0' else -- If the pipe is flushed, we need the new PC value for refilling.
+  656	                '0' when BKPT_REQ = '1' else -- Do not update!
+  657	                '0' when OW_REQ = '1' and PIPE_RDY = '1' and OP_I = UNIMPLEMENTED else -- Do not update!
+  658	                '0' when LOOP_BSY_I = true and LOOP_EXIT = '0' else
+  659	                '1' when OW_REQ = '1' and PIPE_RDY = '1' and FLUSHED = false else '0';
+  660	
+  661	    -- This signal indicates how many pipe stages are used at a time.
+  662	    -- Be aware: all coprocessor commands are level D to meet the require-
+  663	    -- ments of the scanPC.
+  664	    INSTR_LVL <= B when OP_I = ADDI and IPIPE.D(7 downto 6) = "10" else
+  665	                 B when OP_I = ANDI and IPIPE.D(7 downto 6) = "10" else
+  666	                 B when (OP_I = Bcc or OP_I = BRA or OP_I = BSR) and IPIPE.D(7 downto 0) = x"FF" else
+  667	                 B when OP_I = CMPI and IPIPE.D(7 downto 6) = "10" else
+  668	                 B when OP_I = EORI and IPIPE.D(7 downto 6) = "10" else
+  669	                 B when OP_I = LINK and IPIPE.D(11 downto 3) = "100000001" else -- LONG.
+  670	                 B when OP_I = ORI and IPIPE.D(7 downto 6) = "10" else
+  671	                 B when OP_I = SUBI and IPIPE.D(7 downto 6) = "10" else
+  672	                 C when OP_I = ADDI or OP_I = ANDI or OP_I = ANDI_TO_SR or OP_I = ANDI_TO_CCR else
+  673	                 C when (OP_I = BCHG or OP_I = BCLR or OP_I = BSET or OP_I = BTST) and IPIPE.D(8) = '0' else
+  674	                 C when (OP_I = Bcc or OP_I = BRA or OP_I = BSR) and IPIPE.D(7 downto 0) = x"00" else
+  675	                 C when OP_I = CMPI or OP_I = DBcc else
+  676	                 C when (OP_I = DIVS or OP_I = DIVU) and IPIPE.D(8 downto 6) = "001" else
+  677	                 C when OP_I = EORI or OP_I = EORI_TO_CCR or OP_I = EORI_TO_SR else
+  678	                 C when OP_I = LINK or OP_I = MOVEC else
+  679	                 C when OP_I = MOVEM or OP_I = MOVEP or OP_I = MOVES else
+  680	                 C when (OP_I = MULS or OP_I = MULU) and IPIPE.D(8 downto 6) = "000" else
+  681	                 C when OP_I = ORI_TO_CCR or OP_I = ORI_TO_SR or OP_I = ORI else
+  682	                 C when OP_I = RTD or OP_I = RTE or OP_I = SUBI or OP_I = STOP else D;
+  683	
+  684	    TRAP_CODE_I <= T_1010 when OP_I = UNIMPLEMENTED and IPIPE.D(15 downto 12) = "1010" else
+  685	                   T_1111 when OP_I = UNIMPLEMENTED and IPIPE.D(15 downto 9) = "1111000" else -- Not valid MMU patterns.
+  686	                   T_ILLEGAL when OP_I = ILLEGAL else 
+  687	                   T_TRAP when OP_I = TRAP else
+  688	                   T_PRIV when IPIPE.D(15 downto 9) = "1111000" and SBIT = '0' else -- MMU in user mode is not allowed.
+  689	                   T_PRIV when OP_I = ANDI_TO_SR and SBIT = '0' else 
+  690	                   T_PRIV when OP_I = EORI_TO_SR and SBIT = '0' else 
+  691	                   T_PRIV when OP_I = MOVE_TO_SR and SBIT = '0' else 
+  692	                   T_PRIV when OP_I = MOVE_FROM_SR and SBIT = '0' and K6800n = '1' else -- This is for backward compatibility.
+  693	                   T_PRIV when (OP_I = MOVE_USP or OP_I = MOVEC or OP_I = MOVES) and SBIT = '0' else 
+  694	                   T_PRIV when OP_I = ORI_TO_SR and SBIT = '0' else
+  695	                   T_PRIV when (OP_I = RESET or OP_I = RTE) and SBIT = '0' else 
+  696	                   T_PRIV when OP_I = STOP and SBIT = '0' else NONE;
+  697	            
+  698	    OP_DECODE: process(IPIPE)
+  699	    begin
+  700	        -- The default OPCODE is the ILLEGAL operation, if no of the following conditions are met.
+  701	        -- If any not used bit pattern occurs, the CPU will result in an ILLEGAL trap. An exception of
+  702	        -- this behavior is the OPCODE with the 1010 or the 1111 pattern in the four MSBs. 
+  703	        -- These lead to the respective traps.
+  704	        OP_I <= ILLEGAL;
+  705	        case IPIPE.D(15 downto 12) is -- Operation code map.
+  706	            when x"0" => -- Bit manipulation / MOVEP / Immediate.
+  707	                if IPIPE.D(11 downto 0) = x"03C" then
+  708	                    OP_I <= ORI_TO_CCR;
+  709	                elsif IPIPE.D(11 downto 0) = x"07C" then
+  710	                    OP_I <= ORI_TO_SR;
+  711	                elsif IPIPE.D(11 downto 0) = x"23C" then
+  712	                    OP_I <= ANDI_TO_CCR;
+  713	                elsif IPIPE.D(11 downto 0) = x"27C" then
+  714	                    OP_I <= ANDI_TO_SR;
+  715	                elsif IPIPE.D(11 downto 0) = x"A3C" then
+  716	                    OP_I <= EORI_TO_CCR;
+  717	                elsif IPIPE.D(11 downto 0) = x"A7C" then
+  718	                    OP_I <= EORI_TO_SR;
+  719	                elsif IPIPE.D(11 downto 8) = "1110" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) >= "010" and IPIPE.D(5 downto 3) < "111" then
+  720	                    OP_I <= MOVES;
+  721	                elsif IPIPE.D(11 downto 8) = "1110" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+  722	                    OP_I <= MOVES;
+  723	                elsif IPIPE.D(8 downto 6) > "011" and IPIPE.D(5 downto 3) = "001" then
+  724	                    OP_I <= MOVEP;
+  725	                else
+  726	                    case IPIPE.D(5 downto 3) is -- Addressing mode.
+  727	                        when "000" | "010" | "011" | "100" | "101" | "110" =>
+  728	                            -- Bit operations with static bit number:
+  729	                            if IPIPE.D(11 downto 6) = "100000" then
+  730	                                OP_I <= BTST;
+  731	                            elsif IPIPE.D(11 downto 6) = "100001" then
+  732	                                OP_I <= BCHG;
+  733	                            elsif IPIPE.D(11 downto 6) = "100010" then
+  734	                                OP_I <= BCLR;
+  735	                            elsif IPIPE.D(11 downto 6) = "100011" then
+  736	                                OP_I <= BSET;
+  737	                            -- Logic operations:
+  738	                            elsif IPIPE.D(11 downto 8) = x"0" and IPIPE.D(7 downto 6) < "11" then
+  739	                                OP_I <= ORI;
+  740	                            elsif IPIPE.D(11 downto 8) = x"2" and IPIPE.D(7 downto 6) < "11" then
+  741	                                OP_I <= ANDI;
+  742	                            elsif IPIPE.D(11 downto 8) = x"4" and IPIPE.D(7 downto 6) < "11" then
+  743	                                OP_I <= SUBI;
+  744	                            elsif IPIPE.D(11 downto 8) = x"6" and IPIPE.D(7 downto 6) < "11" then
+  745	                                OP_I <= ADDI;
+  746	                            elsif IPIPE.D(11 downto 8) = x"A" and IPIPE.D(7 downto 6) < "11" then
+  747	                                OP_I <= EORI;
+  748	                            elsif IPIPE.D(11 downto 8) = x"C" and IPIPE.D(7 downto 6) < "11" then
+  749	                                OP_I <= CMPI;
+  750	                            -- Bit operations with dynamic bit number:
+  751	                            elsif IPIPE.D(8 downto 6) = "100" then
+  752	                                OP_I <= BTST;
+  753	                            elsif IPIPE.D(8 downto 6) = "101" then
+  754	                                OP_I <= BCHG;
+  755	                            elsif IPIPE.D(8 downto 6) = "110" then
+  756	                                OP_I <= BCLR;
+  757	                            elsif IPIPE.D(8 downto 6) = "111" then
+  758	                                OP_I <= BSET;
+  759	                            end if;
+  760	                        when "111" =>
+  761	                            -- In the addressing mode "111" not all register selections are valid.
+  762	                            -- Bit operations with static bit number:
+  763	                            if IPIPE.D(11 downto 6) = "100000" and IPIPE.D(2 downto 0) < "100" then
+  764	                                OP_I <= BTST;
+  765	                            elsif IPIPE.D(11 downto 6) = "100001" and IPIPE.D(2 downto 0) < "010" then
+  766	                                OP_I <= BCHG;
+  767	                            elsif IPIPE.D(11 downto 6) = "100010" and IPIPE.D(2 downto 0) < "010" then
+  768	                                OP_I <= BCLR;
+  769	                            elsif IPIPE.D(11 downto 6) = "100011" and IPIPE.D(2 downto 0) < "010" then
+  770	                                OP_I <= BSET;
+  771	                            -- Logic operations:
+  772	                            elsif IPIPE.D(11 downto 8) = x"0" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "010" then
+  773	                                OP_I <= ORI;
+  774	                            elsif IPIPE.D(11 downto 8) = x"2" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "010" then
+  775	                                OP_I <= ANDI;
+  776	                            elsif IPIPE.D(11 downto 8) = x"4" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "010" then
+  777	                                OP_I <= SUBI;
+  778	                            elsif IPIPE.D(11 downto 8) = x"6" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "010" then
+  779	                                OP_I <= ADDI;
+  780	                            elsif IPIPE.D(11 downto 8) = x"A" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "010" then
+  781	                                OP_I <= EORI;
+  782	                            elsif IPIPE.D(11 downto 8) = x"C" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(2 downto 0) < "100" then
+  783	                                OP_I <= CMPI;
+  784	                            -- Bit operations with dynamic bit number:
+  785	                            elsif IPIPE.D(8 downto 6) = "100" and IPIPE.D(2 downto 0) < "101" then
+  786	                                OP_I <= BTST;
+  787	                            elsif IPIPE.D(8 downto 6) = "101" and IPIPE.D(2 downto 0) < "010" then
+  788	                                OP_I <= BCHG;
+  789	                            elsif IPIPE.D(8 downto 6) = "110" and IPIPE.D(2 downto 0) < "010" then
+  790	                                OP_I <= BCLR;
+  791	                            elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(2 downto 0) < "010" then
+  792	                                OP_I <= BSET;
+  793	                            end if;
+  794	                        when others =>
+  795	                            null;
+  796	                    end case;
+  797	                end if;
+  798	            when x"1" => -- Move BYTE.
+  799	                if IPIPE.D(8 downto 6) = "111" and IPIPE.D(11 downto 9) < "010"
+  800	                        and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  801	                    OP_I <= MOVE;
+  802	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(11 downto 9) < "010" and IPIPE.D(5 downto 3) /= "001"  and IPIPE.D(5 downto 3) /= "111" then
+  803	                    OP_I <= MOVE;
+  804	                elsif IPIPE.D(8 downto 6) /= "001" and IPIPE.D(8 downto 6) /= "111" 
+  805	                        and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  806	                    OP_I <= MOVE;
+  807	                elsif IPIPE.D(8 downto 6) /= "001" and IPIPE.D(8 downto 6) /= "111" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+  808	                    OP_I <= MOVE;
+  809	                end if;
+  810	            when x"2" | x"3" => -- Move WORD or LONG.
+  811	                if IPIPE.D(8 downto 6) = "111" and IPIPE.D(11 downto 9) < "010" 
+  812	                        and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  813	                    OP_I <= MOVE;
+  814	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(11 downto 9) < "010" and IPIPE.D(5 downto 3) /= "111" then
+  815	                    OP_I <= MOVE;
+  816	                elsif IPIPE.D(8 downto 6) = "001" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  817	                    OP_I <= MOVEA;
+  818	                elsif IPIPE.D(8 downto 6) = "001" and IPIPE.D(5 downto 3) /= "111" then
+  819	                    OP_I <= MOVEA;
+  820	                elsif IPIPE.D(8 downto 6) /= "001" and IPIPE.D(8 downto 6) /= "111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  821	                    OP_I <= MOVE;
+  822	                elsif IPIPE.D(8 downto 6) /= "001" and IPIPE.D(8 downto 6) /= "111" and IPIPE.D(5 downto 3) /= "111" then
+  823	                    OP_I <= MOVE;
+  824	                end if;
+  825	            when x"4" => -- Miscellaneous.
+  826	                if IPIPE.D(11 downto 0) = x"E70" then
+  827	                    OP_I <= RESET;
+  828	                elsif IPIPE.D(11 downto 0) = x"E71" then
+  829	                    OP_I <= NOP;
+  830	                elsif IPIPE.D(11 downto 0) = x"E72" then
+  831	                    OP_I <= STOP;
+  832	                elsif IPIPE.D(11 downto 0) = x"E73" then
+  833	                    OP_I <= RTE;
+  834	                elsif IPIPE.D(11 downto 0) = x"E74" then
+  835	                    OP_I <= RTD;
+  836	                elsif IPIPE.D(11 downto 0) = x"E75" then
+  837	                    OP_I <= RTS;
+  838	                elsif IPIPE.D(11 downto 0) = x"E76" then
+  839	                    OP_I <= TRAPV;
+  840	                elsif IPIPE.D(11 downto 0) = x"E77" then
+  841	                    OP_I <= RTR;
+  842	                elsif IPIPE.D(11 downto 0) = x"AFC" then
+  843	                    OP_I <= ILLEGAL;
+  844	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"000" then
+  845	                    OP_I <= MOVEC;
+  846	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"001" then
+  847	                    OP_I <= MOVEC;
+  848	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"002" then
+  849	                    OP_I <= MOVEC;
+  850	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"800" then
+  851	                    OP_I <= MOVEC;
+  852	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"801" then
+  853	                    OP_I <= MOVEC;
+  854	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"802" then
+  855	                    OP_I <= MOVEC;
+  856	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"803" then
+  857	                    OP_I <= MOVEC;
+  858	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"804" then
+  859	                    OP_I <= MOVEC;
+  860	                elsif IPIPE.D(11 downto 1) = "11100111101" and IPIPE.C(11 downto 0) = x"805" then
+  861	                    OP_I <= MOVEC;
+  862	                elsif IPIPE.D(11 downto 1) = "11100111101" then
+  863	                    OP_I <= ILLEGAL; -- Not valid MOVEC patterns.
+  864	                elsif IPIPE.D(11 downto 3) = "100001001" then -- 68K20, 68K30, 68K40
+  865	                    OP_I <= BKPT;
+  866	                elsif IPIPE.D(11 downto 3) = "100000001" then -- 68K20, 68K30, 68K40
+  867	                    OP_I <= LINK; -- LONG.
+  868	                elsif IPIPE.D(11 downto 3) = "111001010" then
+  869	                    OP_I <= LINK; -- WORD.
+  870	                elsif IPIPE.D(11 downto 3) = "111001011" then
+  871	                    OP_I <= UNLK;
+  872	                elsif IPIPE.D(11 downto 3) = "100001000" then
+  873	                    OP_I <= SWAP;
+  874	                elsif IPIPE.D(11 downto 4) = x"E4" then
+  875	                    OP_I <= TRAP;
+  876	                elsif IPIPE.D(11 downto 4) = x"E6" then
+  877	                    OP_I <= MOVE_USP;
+  878	                else
+  879	                    case IPIPE.D(5 downto 3) is -- Addressing mode.
+  880	                        when "000" | "010" | "011" | "100" | "101" | "110" =>
+  881	                            if IPIPE.D(11 downto 6) = "110001" then
+  882	                                if IPIPE.C(11) = '1' then
+  883	                                    OP_I <= DIVS; -- Long.
+  884	                                else
+  885	                                    OP_I <= DIVU; -- Long.
+  886	                                end if;
+  887	                            elsif IPIPE.D(11 downto 6) = "001011" then
+  888	                                OP_I <= MOVE_FROM_CCR;
+  889	                            elsif IPIPE.D(11 downto 6) = "000011" then
+  890	                                OP_I <= MOVE_FROM_SR;
+  891	                            elsif IPIPE.D(11 downto 6) = "010011" then
+  892	                                OP_I <= MOVE_TO_CCR;                    
+  893	                            elsif IPIPE.D(11 downto 6) = "011011" then
+  894	                                OP_I <= MOVE_TO_SR;
+  895	                            elsif IPIPE.D(11 downto 6) = "110000" then
+  896	                                if IPIPE.C(11) = '1' then
+  897	                                    OP_I <= MULS; -- Long.
+  898	                                else
+  899	                                    OP_I <= MULU; -- Long.
+  900	                                end if;
+  901	                            elsif IPIPE.D(11 downto 6) = "100000" then
+  902	                                OP_I <= NBCD;
+  903	                            elsif IPIPE.D(11 downto 6) = "101011" then
+  904	                                OP_I <= TAS;
+  905	                            end if;
+  906	                        when  "111" => -- Not all registers are valid for this mode.
+  907	                            if IPIPE.D(11 downto 6) = "110001" and IPIPE.D(2 downto 0) < "101" then
+  908	                                if IPIPE.C(11) = '1' then
+  909	                                    OP_I <= DIVS; -- Long.
+  910	                                else
+  911	                                    OP_I <= DIVU; -- Long.
+  912	                                end if;
+  913	                            elsif IPIPE.D(11 downto 6) = "001011" and IPIPE.D(2 downto 0) < "010" then
+  914	                                OP_I <= MOVE_FROM_CCR;
+  915	                            elsif IPIPE.D(11 downto 6) = "000011" and IPIPE.D(2 downto 0) < "010" then
+  916	                                OP_I <= MOVE_FROM_SR;
+  917	                            elsif IPIPE.D(11 downto 6) = "010011" and IPIPE.D(2 downto 0) < "101" then
+  918	                                OP_I <= MOVE_TO_CCR;                    
+  919	                            elsif IPIPE.D(11 downto 6) = "011011" and IPIPE.D(2 downto 0) < "101" then
+  920	                                OP_I <= MOVE_TO_SR;
+  921	                            elsif IPIPE.D(11 downto 6) = "110000" and IPIPE.D(2 downto 0) < "101" then
+  922	                                if IPIPE.C(11) = '1' then
+  923	                                    OP_I <= MULS; -- Long.
+  924	                                else
+  925	                                    OP_I <= MULU; -- Long.
+  926	                                end if;
+  927	                            elsif IPIPE.D(11 downto 6) = "100000" and IPIPE.D(2 downto 0) < "010" then
+  928	                                OP_I <= NBCD;
+  929	                            elsif IPIPE.D(11 downto 6) = "101011" and IPIPE.D(2 downto 0) < "010" then
+  930	                                OP_I <= TAS;
+  931	                            end if;
+  932	                        when others =>
+  933	                            null;
+  934	                    end case;
+  935	                                
+  936	                    case IPIPE.D(5 downto 3) is -- Addressing mode.
+  937	                        when "010" | "101" | "110" =>
+  938	                            if IPIPE.D(11 downto 6) = "100001" then
+  939	                                OP_I <= PEA;
+  940	                            elsif IPIPE.D(11 downto 6) = "111010" then
+  941	                                OP_I <= JSR;
+  942	                            elsif IPIPE.D(11 downto 6) = "111011" then
+  943	                                OP_I <= JMP;
+  944	                            end if;
+  945	                        when  "111" => -- Not all registers are valid for this mode.
+  946	                            if IPIPE.D(11 downto 6) = "100001" and IPIPE.D(2 downto 0) < "100" then
+  947	                                OP_I <= PEA;
+  948	                            elsif IPIPE.D(11 downto 6) = "111010" and IPIPE.D(2 downto 0) < "100" then
+  949	                                OP_I <= JSR;
+  950	                            elsif IPIPE.D(11 downto 6) = "111011" and IPIPE.D(2 downto 0) < "100" then
+  951	                                OP_I <= JMP;
+  952	                            end if;
+  953	                        when others =>
+  954	                            null;
+  955	                    end case;
+  956	
+  957	                    -- For the following operation codes a SIZE (IPIPE.D(7 downto 6)) is not valid.
+  958	                    -- For the following operation codes an addressing mode x"001" is not valid.
+  959	                    if IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+  960	                        case IPIPE.D(11 downto 8) is
+  961	                            when x"0" => OP_I <= NEGX;
+  962	                            when x"2" => OP_I <= CLR;
+  963	                            when x"4" => OP_I <= NEG;
+  964	                            when x"6" => OP_I <= NOT_B;
+  965	                            when others => null;
+  966	                        end case;
+  967	                    -- Not all registers are valid for the addressing mode "111":
+  968	                    elsif IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+  969	                        case IPIPE.D(11 downto 8) is
+  970	                            when x"0" => OP_I <= NEGX;
+  971	                            when x"2" => OP_I <= CLR;
+  972	                            when x"4" => OP_I <= NEG;
+  973	                            when x"6" => OP_I <= NOT_B;
+  974	                            when others => null;
+  975	                        end case;
+  976	                    end if;
+  977	
+  978	                    -- if IPIPE.D(11 downto 8) = x"A" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and (IPIPE.D(2 downto 0) < "010" or IPIPE.D(2 downto 0) = "100") then -- 68K
+  979	                    if IPIPE.D(11 downto 8) = x"A" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+  980	                        case IPIPE.D(7 downto 6) is
+  981	                            when "01" | "10" => OP_I <= TST; -- Long or word, all addressing modes.
+  982	                            when others => -- Byte: Address register direct not allowed.
+  983	                                if IPIPE.D(2 downto 0) /= "100" then
+  984	                                    OP_I <= TST;
+  985	                                end if;
+  986	                        end case;
+  987	                    elsif IPIPE.D(11 downto 8) = x"A" and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) /= "111" then
+  988	                        case IPIPE.D(7 downto 6) is
+  989	                            when "01" | "10" => OP_I <= TST; -- Long or word, all addressing modes.
+  990	                            when others => -- Byte: Address register direct not allowed.
+  991	                                if IPIPE.D(5 downto 3) /= "001" then
+  992	                                    OP_I <= TST;
+  993	                                end if;
+  994	                        end case;
+  995	                    end if;
+  996	
+  997	                    if IPIPE.D(11 downto 9) = "100" and IPIPE.D(5 downto 3) = "000" then
+  998	                        case IPIPE.D(8 downto 6) is -- Valid OPMODES for this operation code.
+  999	                            when "010" | "011" => OP_I <= EXT;
+ 1000	                            when others => null;
+ 1001	                        end case;
+ 1002	                    end if;
+ 1003	                    
+ 1004	                    if IPIPE.D(8 downto 6) = "111" then
+ 1005	                        case IPIPE.D(5 downto 3) is -- OPMODES.
+ 1006	                            when "010" | "101" | "110" =>
+ 1007	                                OP_I <= LEA;
+ 1008	                            when "111" =>
+ 1009	                                if IPIPE.D(2 downto 0) < "100" then -- Not all registers are valid for this OPMODE.
+ 1010	                                    OP_I <= LEA;
+ 1011	                                end if;
+ 1012	                            when others => null;
+ 1013	                        end case;
+ 1014	                    end if;
+ 1015	
+ 1016	                    if IPIPE.D(11) = '1' and IPIPE.D(9 downto 7) = "001" then
+ 1017	                        if IPIPE.D(10) = '0' then -- Register to memory transfer.
+ 1018	                            case IPIPE.D(5 downto 3) is -- OPMODES, no postincrement addressing.
+ 1019	                                when "010" | "100" | "101" | "110" =>
+ 1020	                                    OP_I <= MOVEM;
+ 1021	                                when "111" =>
+ 1022	                                    if IPIPE.D(2 downto 0) = "000" or IPIPE.D(2 downto 0) = "001" then
+ 1023	                                        OP_I <= MOVEM;
+ 1024	                                    end if;
+ 1025	                                when others => null;
+ 1026	                            end case;
+ 1027	                        else -- Memory to register transfer, no predecrement addressing.
+ 1028	                            case IPIPE.D(5 downto 3) is -- OPMODES.
+ 1029	                                when "010" | "011" | "101" | "110" =>
+ 1030	                                    OP_I <= MOVEM;
+ 1031	                                when "111" =>
+ 1032	                                    if IPIPE.D(2 downto 0) < "100" then
+ 1033	                                        OP_I <= MOVEM;
+ 1034	                                    end if;
+ 1035	                                when others => null;
+ 1036	                            end case;
+ 1037	                        end if;
+ 1038	                    end if;
+ 1039	
+ 1040	                    -- The size must be "10" or "11" and the OPMODE may not be "001".
+ 1041	                    if IPIPE.D(8 downto 7) >= "10" and IPIPE.D(6 downto 3) = x"7" and IPIPE.D(2 downto 0) < "101" then
+ 1042	                        OP_I <= CHK;
+ 1043	                    elsif IPIPE.D(8 downto 7) >= "10" and IPIPE.D(6 downto 3) /= x"1" and IPIPE.D(6 downto 3) < x"7" then
+ 1044	                        OP_I <= CHK;
+ 1045	                    end if;
+ 1046	                end if;
+ 1047	            when x"5" => -- ADDQ / SUBQ / Scc / DBcc.
+ 1048	                if IPIPE.D(7 downto 3) = "11001" then
+ 1049	                    OP_I <= DBcc;
+ 1050	                elsif IPIPE.D(7 downto 6) = "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1051	                    OP_I <= Scc;
+ 1052	                elsif IPIPE.D(7 downto 6) = "11" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1053	                    OP_I <= Scc;
+ 1054	                --
+ 1055	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1056	                    OP_I <= ADDQ;
+ 1057	                elsif IPIPE.D(8) = '0' and (IPIPE.D(7 downto 6) = "01" or IPIPE.D(7 downto 6) = "10") and IPIPE.D(5 downto 3) /= "111" then
+ 1058	                    OP_I <= ADDQ;
+ 1059	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) = "00" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1060	                    OP_I <= ADDQ;
+ 1061	                --
+ 1062	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1063	                    OP_I <= SUBQ;
+ 1064	                elsif IPIPE.D(8) = '1' and (IPIPE.D(7 downto 6) = "01" or IPIPE.D(7 downto 6) = "10") and IPIPE.D(5 downto 3) /= "111" then
+ 1065	                    OP_I <= SUBQ;
+ 1066	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) = "00" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1067	                    OP_I <= SUBQ;
+ 1068	                end if;
+ 1069	            when x"6" => -- Bcc / BSR / BRA.
+ 1070	                if IPIPE.D(11 downto 8) = x"0" then
+ 1071	                    OP_I <= BRA;
+ 1072	                elsif IPIPE.D(11 downto 8) = x"1" then
+ 1073	                    OP_I <= BSR;
+ 1074	                else
+ 1075	                    OP_I <= Bcc;
+ 1076	                end if;
+ 1077	            when x"7" => -- MOVEQ.
+ 1078	                if IPIPE.D(8) = '0' then
+ 1079	                    OP_I <= MOVEQ;
+ 1080	                end if;
+ 1081	            when x"8" => -- OR / DIV / SBCD.
+ 1082	                if IPIPE.D(8 downto 6) = "011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1083	                    OP_I <= DIVU; -- WORD.
+ 1084	                elsif IPIPE.D(8 downto 6) = "011" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1085	                    OP_I <= DIVU; -- WORD.
+ 1086	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1087	                    OP_I <= DIVS; -- WORD.
+ 1088	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1089	                    OP_I <= DIVS; -- WORD.
+ 1090	                elsif IPIPE.D(8 downto 4) = "10000" then
+ 1091	                    OP_I <= SBCD;
+ 1092	                end if;
+ 1093	                --
+ 1094	                case IPIPE.D(8 downto 6) is
+ 1095	                    when "000" | "001" | "010" =>
+ 1096	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1097	                            OP_I <= OR_B;
+ 1098	                        elsif IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1099	                            OP_I <= OR_B;
+ 1100	                        end if;
+ 1101	                    when "100" | "101" | "110" =>
+ 1102	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1103	                            OP_I <= OR_B;
+ 1104	                        elsif IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1105	                            OP_I <= OR_B;
+ 1106	                        end if;
+ 1107	                    when others =>
+ 1108	                        null;
+ 1109	                end case;
+ 1110	            when x"9" => -- SUB / SUBX.
+ 1111	                case IPIPE.D(8 downto 6) is
+ 1112	                    when "000" => -- Byte size.
+ 1113	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1114	                            OP_I <= SUB;
+ 1115	                        elsif IPIPE.D(5 downto 3) /= "111" and IPIPE.D(5 downto 3) /= "001" then
+ 1116	                            OP_I <= SUB;
+ 1117	                        end if;
+ 1118	                    when "001" | "010" => -- Word and long.
+ 1119	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1120	                            OP_I <= SUB;
+ 1121	                        elsif IPIPE.D(5 downto 3) /= "111" then
+ 1122	                            OP_I <= SUB;
+ 1123	                        end if;
+ 1124	                    when "100" =>
+ 1125	                        if IPIPE.D(5 downto 3) = "000" or IPIPE.D(5 downto 3) = "001" then
+ 1126	                            OP_I <= SUBX;
+ 1127	                        elsif IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1128	                            OP_I <= SUB;
+ 1129	                        elsif IPIPE.D(5 downto 3) /= "111" and IPIPE.D(5 downto 3) /= "001" then  -- Byte size.
+ 1130	                            OP_I <= SUB;
+ 1131	                        end if;
+ 1132	                    when "101" | "110"  =>
+ 1133	                        if IPIPE.D(5 downto 3) = "000" or IPIPE.D(5 downto 3) = "001" then
+ 1134	                            OP_I <= SUBX;
+ 1135	                        elsif IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1136	                            OP_I <= SUB;
+ 1137	                        elsif IPIPE.D(5 downto 3) /= "111" then -- Word and long.
+ 1138	                            OP_I <= SUB;
+ 1139	                        end if;
+ 1140	                    when "011" | "111" =>
+ 1141	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1142	                            OP_I <= SUBA;
+ 1143	                        elsif IPIPE.D(5 downto 3) /= "111" then
+ 1144	                            OP_I <= SUBA;
+ 1145	                        end if;
+ 1146	                    when others => -- U, X, Z, W, H, L, -.
+ 1147	                        null;
+ 1148	                end case;
+ 1149	            when x"A" => -- (1010, Unassigned, Reserved).
+ 1150	                OP_I <= UNIMPLEMENTED;
+ 1151	            when x"B" => -- CMP / EOR.
+ 1152	                if IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(5 downto 3) = "001" then
+ 1153	                    OP_I <= CMPM;
+ 1154	                else
+ 1155	                    case IPIPE.D(8 downto 6) is -- OPMODE field.
+ 1156	                        when "000" =>
+ 1157	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1158	                                OP_I <= CMP;
+ 1159	                            elsif IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1160	                                OP_I <= CMP;
+ 1161	                            end if;
+ 1162	                        when "001" | "010" =>
+ 1163	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1164	                                OP_I <= CMP;
+ 1165	                            elsif IPIPE.D(5 downto 3) /= "111" then
+ 1166	                                OP_I <= CMP;
+ 1167	                            end if;
+ 1168	                        when "011" | "111" =>
+ 1169	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1170	                                OP_I <= CMPA;
+ 1171	                            elsif IPIPE.D(5 downto 3) /= "111" then
+ 1172	                                OP_I <= CMPA;
+ 1173	                            end if;
+ 1174	                        when "100" | "101" | "110" =>
+ 1175	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1176	                                OP_I <= EOR;
+ 1177	                            elsif IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1178	                                OP_I <= EOR;
+ 1179	                            end if;
+ 1180	                        when others => -- U, X, Z, W, H, L, -.
+ 1181	                            null;
+ 1182	                    end case;
+ 1183	                end if;
+ 1184	            when x"C" => -- AND / MUL / ABCD / EXG.
+ 1185	                if IPIPE.D(8 downto 4) = "10000" then
+ 1186	                    OP_I <= ABCD;
+ 1187	                elsif IPIPE.D(8 downto 6) = "011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1188	                    OP_I <= MULU; -- WORD.
+ 1189	                elsif IPIPE.D(8 downto 6) = "011" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1190	                    OP_I <= MULU; -- WORD.
+ 1191	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1192	                    OP_I <= MULS; -- WORD.
+ 1193	                elsif IPIPE.D(8 downto 6) = "111" and IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1194	                    OP_I <= MULS; -- WORD.
+ 1195	                elsif IPIPE.D(8 downto 3) = "101000" or IPIPE.D(8 downto 3) = "101001" or IPIPE.D(8 downto 3) = "110001" then
+ 1196	                    OP_I <= EXG;
+ 1197	                else
+ 1198	                    case IPIPE.D(8 downto 6) is -- OPMODE
+ 1199	                        when "000" | "001" | "010" =>
+ 1200	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1201	                                OP_I <= AND_B;
+ 1202	                            elsif IPIPE.D(5 downto 3) /= "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1203	                                OP_I <= AND_B;
+ 1204	                            end if;
+ 1205	                        when "100" | "101" | "110" =>
+ 1206	                            if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1207	                                OP_I <= AND_B;
+ 1208	                            elsif IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1209	                                OP_I <= AND_B;
+ 1210	                            end if;
+ 1211	                        when others =>
+ 1212	                            null;
+ 1213	                    end case;
+ 1214	                end if;
+ 1215	            when x"D" => -- ADD / ADDX.
+ 1216	                case IPIPE.D(8 downto 6) is
+ 1217	                    when "000" =>
+ 1218	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1219	                            OP_I <= ADD;
+ 1220	                        elsif IPIPE.D(5 downto 3) /= "111" and IPIPE.D(5 downto 3) /= "001" then
+ 1221	                            OP_I <= ADD;
+ 1222	                        end if;
+ 1223	                    when "001" | "010" =>
+ 1224	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1225	                            OP_I <= ADD;
+ 1226	                        elsif IPIPE.D(5 downto 3) /= "111" then
+ 1227	                            OP_I <= ADD;
+ 1228	                        end if;
+ 1229	                    when "100"  =>
+ 1230	                        if IPIPE.D(5 downto 3) = "000" or IPIPE.D(5 downto 3) = "001" then
+ 1231	                            OP_I <= ADDX;
+ 1232	                        elsif IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1233	                            OP_I <= ADD;
+ 1234	                        elsif IPIPE.D(5 downto 3) /= "111" and IPIPE.D(5 downto 3) /= "001" then
+ 1235	                            OP_I <= ADD;
+ 1236	                        end if;
+ 1237	                    when "101" | "110"  =>
+ 1238	                        if IPIPE.D(5 downto 3) = "000" or IPIPE.D(5 downto 3) = "001" then
+ 1239	                            OP_I <= ADDX;
+ 1240	                        elsif IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1241	                            OP_I <= ADD;
+ 1242	                        elsif IPIPE.D(5 downto 3) /= "111" then
+ 1243	                            OP_I <= ADD;
+ 1244	                        end if;
+ 1245	                    when "011" | "111" =>
+ 1246	                        if IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "101" then
+ 1247	                            OP_I <= ADDA;
+ 1248	                        elsif IPIPE.D(5 downto 3) /= "111" then
+ 1249	                            OP_I <= ADDA;
+ 1250	                        end if;
+ 1251	                    when others => -- U, X, Z, W, H, L, -.
+ 1252	                        null;
+ 1253	                end case;
+ 1254	            when x"E" => -- Shift / Rotate / Bit Field.
+ 1255	                if IPIPE.D(11 downto 6) = "000011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1256	                    OP_I <= ASR; -- Memory shifts.
+ 1257	                elsif IPIPE.D(11 downto 6) = "000011" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1258	                    OP_I <= ASR; -- Memory shifts.
+ 1259	                elsif IPIPE.D(11 downto 6) = "000111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1260	                    OP_I <= ASL; -- Memory shifts.
+ 1261	                elsif IPIPE.D(11 downto 6) = "000111" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1262	                    OP_I <= ASL; -- Memory shifts.
+ 1263	                elsif IPIPE.D(11 downto 6) = "001011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1264	                    OP_I <= LSR; -- Memory shifts.
+ 1265	                elsif IPIPE.D(11 downto 6) = "001011" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1266	                    OP_I <= LSR; -- Memory shifts.
+ 1267	                elsif IPIPE.D(11 downto 6) = "001111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1268	                    OP_I <= LSL; -- Memory shifts.
+ 1269	                elsif IPIPE.D(11 downto 6) = "001111" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1270	                    OP_I <= LSL; -- Memory shifts.
+ 1271	                elsif IPIPE.D(11 downto 6) = "010011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1272	                    OP_I <= ROXR; -- Memory shifts.
+ 1273	                elsif IPIPE.D(11 downto 6) = "010011" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1274	                    OP_I <= ROXR; -- Memory shifts.
+ 1275	                elsif IPIPE.D(11 downto 6) = "010111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1276	                    OP_I <= ROXL; -- Memory shifts.
+ 1277	                elsif IPIPE.D(11 downto 6) = "010111" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1278	                    OP_I <= ROXL; -- Memory shifts.
+ 1279	                elsif IPIPE.D(11 downto 6) = "011011" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1280	                    OP_I <= ROTR; -- Memory shifts.
+ 1281	                elsif IPIPE.D(11 downto 6) = "011011" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1282	                    OP_I <= ROTR; -- Memory shifts.
+ 1283	                elsif IPIPE.D(11 downto 6) = "011111" and IPIPE.D(5 downto 3) = "111" and IPIPE.D(2 downto 0) < "010" then
+ 1284	                    OP_I <= ROTL; -- Memory shifts.
+ 1285	                elsif IPIPE.D(11 downto 6) = "011111" and IPIPE.D(5 downto 3) > "001" and IPIPE.D(5 downto 3) /= "111" then
+ 1286	                    OP_I <= ROTL; -- Memory shifts.
+ 1287	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "00" then
+ 1288	                    OP_I <= ASR; -- Register shifts.
+ 1289	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "00" then
+ 1290	                    OP_I <= ASL; -- Register shifts.
+ 1291	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "01" then
+ 1292	                    OP_I <= LSR; -- Register shifts.
+ 1293	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "01" then
+ 1294	                    OP_I <= LSL; -- Register shifts.
+ 1295	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "10" then
+ 1296	                    OP_I <= ROXR; -- Register shifts.
+ 1297	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "10" then
+ 1298	                    OP_I <= ROXL; -- Register shifts.
+ 1299	                elsif IPIPE.D(8) = '0' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "11" then
+ 1300	                    OP_I <= ROTR; -- Register shifts.
+ 1301	                elsif IPIPE.D(8) = '1' and IPIPE.D(7 downto 6) < "11" and IPIPE.D(4 downto 3) = "11" then
+ 1302	                    OP_I <= ROTL; -- Register shifts.
+ 1303	                end if;
+ 1304	            when x"F" => -- 1111, Coprocessor Interface / 68K40 Extensions.
+ 1305	                OP_I <= UNIMPLEMENTED;
+ 1306	            when others => -- U, X, Z, W, H, L, -.
+ 1307	                null;
+ 1308	            end case;
+ 1309	    end process OP_DECODE;
+ 1310	end BEHAVIOR;
+-- "wf68k10_opcode_decoder.vhd": errors: 0; warnings: 0.

@@ -26,7 +26,7 @@ output logic CRAMWR_b,
 output logic CRAM_b,
 output logic RAM1_b, RAM0_b,
 output logic VRAMWR, VRAMRD_b, MA18_b,
-output logic UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, VBUS_b, PFSPC_b,
+output bit UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, VBUS_b, PFSPC_b,
 output logic VSCRLD_b, HSCRLD_b, SLAP_b, SNDRD_b,
 output logic SNDWR_b, INPUT_b, RAJs_b, RAJs, RLETA_b,
 output logic E2PROM_b,
@@ -147,11 +147,12 @@ logic VRDTACK_b;
         else Q_574 <= Q_574;
     end
 
-    assign VRDTACK_b = Q_574;
+    //So VRAC2 
+    assign VRDTACK_b = 1'b0;//Q_574;
     //END OF 574
-    assign out_13e = ~(Q_574_b | rip_12m);
+    assign out_13e = ~rip_12m;//~(Q_574_b | rip_12m);
     //assign DTACKn = out_13e; //I found that this would need to be 0 for anything to work
-    assign DTACKn = ~out_13e;
+    assign DTACKn = 1'b0;//~out_13e;
 
     assign c_12m = WAIT_b & AS & VRAM_b;
     ls163a VM_12m(

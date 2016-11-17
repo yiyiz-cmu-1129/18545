@@ -413,8 +413,8 @@ component WF68K10_OPCODE_DECODER
         FB                  : out std_logic;
         SBIT                : in std_logic;
         TRAP_CODE           : out TRAPTYPE_OPC;
-        OP                  : out OP_68K;
-        BIW_0               : out std_logic_vector(15 downto 0);
+        OP                  : buffer OP_68K;
+        BIW_0               : buffer std_logic_vector(15 downto 0);
         BIW_1               : out std_logic_vector(15 downto 0);
         BIW_2               : out std_logic_vector(15 downto 0);
         EXT_WORD            : out std_logic_vector(15 downto 0);

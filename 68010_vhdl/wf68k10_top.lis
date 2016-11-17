@@ -1,0 +1,1044 @@
+--                      Synopsys 1076 VHDL Analyzer
+--                 Version F-2011.12-SP1 -- May 27, 2012
+--               Copyright (c) 1991-2012 by Synopsys Inc.
+--                          ALL RIGHTS RESERVED
+-- 
+-- This program is proprietary and confidential information of Synopsys Inc.
+-- and may be used and disclosed only as authorized in a license agreement
+-- controlling such use and disclosure.
+-- 
+-- Source File:  wf68k10_top.vhd
+-- Sat Oct  1 12:29:57 2016
+
+    1	------------------------------------------------------------------------
+    2	----                                                                ----
+    3	---- This is the top level structural design unit of the 68K10      ----
+    4	---- complex instruction set (CISC) microcontroller. It's program-  ----
+    5	---- ming model is (hopefully) fully compatible with Motorola's     ----
+    6	---- MC68010. This core features a pipelined architecture. In com-  ----
+    7	---- parision to the 68K10 the core supports a 32 bit wide adress   ----
+    8	---- bus. The processor generates the stack frame format 0, 2, A, B ----
+    9	---- according to the 68K30 CPU. There is also support for multi-   ----
+   10	---- processor environments due to the RMCn signal. In conjunction  ----
+   11	---- with the 32 bit wide address bus this core is fully feature    ----
+   12	---- complete in comparision to the MC68012 processors.             ----
+   13	----                                                                ----
+   14	---- Compatibility to the 68K00:                                    ----
+   15	---- The 68K10 is pin compatible with the 68K00 but it is not 100%  ----
+   16	---- software compatible due to differences in the programming      ----
+   17	---- model. The differences in detail are:                          ----
+   18	---- 1. The following differences are implemented in this core but  ----
+   19	----    do not affect the 68K00 compatibility:                      ----
+   20	----     The 68K00 does not feature A vector base register (VBR).   ----
+   21	----     The 68K00 does not feature the BKPT instruction.           ----
+   22	----     The 68K00 does not feature the MOVE_FROM_CCR instruction.  ----
+   23	----     The 68K00 does not feature the MOVEC instruction.          ----
+   24	----     The 68K00 does not feature the MOVES instruction.          ----
+   25	----     The 68K00 does not feature the RTD instruction.            ----
+   26	----     The 68K10 stack frames are more complex but backward       ----
+   27	----     compatible to the 68K00.                                   ----
+   28	---- 2. The following differences are implemented in this core and  ----
+   29	----    do affect the 68K00 compatibility:                          ----
+   30	----     The MOVE_FROM_SR instruction is priviledged for the 68K10  ----
+   31	----     but is not priviledged for the 68K00. To gain compati-     ----
+   32	----     bility the K6800n signal driven low deactivates the pri-   ----
+   33	----     viledged mechanism for this instruction.                   ----
+   34	----     This core features the loop operation mode of the 68010.   ----
+   35	----                                                                ----
+   36	---- Enjoy.                                                         ----
+   37	----                                                                ----
+   38	---- Author(s):                                                     ----
+   39	---- - Wolfgang Foerster, wf@experiment-s.de; wf@inventronik.de     ----
+   40	----                                                                ----
+   41	------------------------------------------------------------------------
+   42	----                                                                ----
+   43	---- Copyright © 2014 Wolfgang Foerster Inventronik GmbH.           ----
+   44	----                                                                ----
+   45	---- This documentation describes Open Hardware and is licensed     ----
+   46	---- under the CERN OHL v. 1.2. You may redistribute and modify     ----
+   47	---- this documentation under the terms of the CERN OHL v.1.2.      ----
+   48	---- (http://ohwr.org/cernohl). This documentation is distributed   ----
+   49	---- WITHOUT ANY EXPRESS OR IMPLIED WARRANTY, INCLUDING OF          ----
+   50	---- MERCHANTABILITY, SATISFACTORY QUALITY AND FITNESS FOR A        ----
+   51	---- PARTICULAR PURPOSE. Please see the CERN OHL v.1.2 for          ----
+   52	---- applicable conditions                                          ----
+   53	----                                                                ----
+   54	------------------------------------------------------------------------
+   55	-- 
+   56	-- Revision History
+   57	-- 
+   58	-- Revision 2K14B 20141201 WF
+   59	--   Initial Release.
+   60	-- 
+   61	
+   62	library work;
+   63	use work.WF68K10_PKG.all;
+   64	
+   65	library ieee;
+   66	use ieee.std_logic_1164.all;
+   67	use ieee.std_logic_unsigned.all;
+   68	
+   69	entity WF68K10_TOP is
+   70	    generic(VERSION     : std_logic_vector(15 downto 0) := x"1501"); -- CPU version number.
+   71	    port (
+   72	        CLK             : in std_logic;
+   73	        
+   74	        -- Address and data:
+   75	        ADR_OUT         : out std_logic_vector(31 downto 0);
+   76	        DATA_IN         : in std_logic_vector(15 downto 0);
+   77	        DATA_OUT        : out std_logic_vector(15 downto 0);
+   78	        DATA_EN         : out std_logic;
+   79	
+   80	        -- System control:
+   81	        BERRn           : in std_logic;
+   82	        RESET_INn       : in std_logic;
+   83	        RESET_OUT       : out std_logic; -- Open drain.
+   84	        HALT_INn        : in std_logic;
+   85	        HALT_OUTn       : out std_logic; -- Open drain.
+   86	        
+   87	        -- Processor status:
+   88	        FC_OUT          : out std_logic_vector(2 downto 0);
+   89	        
+   90	        -- Interrupt control:
+   91	        AVECn           : in std_logic;
+   92	        IPLn            : in std_logic_vector(2 downto 0);
+   93	
+   94	        -- Aynchronous bus control:
+   95	        DTACKn          : in std_logic;
+   96	        ASn             : out std_logic;
+   97	        RWn             : out std_logic;
+   98	        RMCn            : out std_logic;
+   99	        UDSn            : out std_logic;
+  100	        LDSn            : out std_logic;
+  101	        DBENn           : out std_logic; -- Enables the data ports.
+  102	        BUS_EN          : out std_logic; -- Enables ADR, ASn, UDSn, LDSn, RWn, RMCn and FC.
+  103	
+  104	        -- Synchronous peripheral control:
+  105	        E               : out std_logic;
+  106	        VMAn            : out std_logic;
+  107	        VMA_EN          : out std_logic;
+  108	        VPAn            : in std_logic;
+  109	
+  110	        -- Bus arbitration control:
+  111	        BRn             : in std_logic;
+  112	        BGn             : out std_logic;
+  113	        BGACKn          : in std_logic;
+  114	        
+  115	        -- Other controls:
+  116	        K6800n          : in std_logic -- Assert for 68K00 compatibility.
+  117	    );
+  118	end entity WF68K10_TOP;
+  119	    
+  120	architecture STRUCTURE of WF68K10_TOP is
+  121	signal ADn                      : bit;
+  122	signal ADR_ATN                  : bit;
+  123	signal ADR_CPY_EXH              : std_logic_vector(31 downto 0);
+  124	signal ADR_EFF                  : std_logic_vector(31 downto 0);
+  125	signal ADR_EFF_WB               : std_logic_vector(31 downto 0);
+  126	signal ADR_L                    : std_logic_vector(31 downto 0);
+  127	signal ADR_LATCH                : std_logic_vector(31 downto 0);
+  128	signal ADR_MODE                 : std_logic_vector(2 downto 0);
+  129	signal ADR_MODE_MAIN            : std_logic_vector(2 downto 0);
+  130	signal ADR_IN_USE               : bit;
+  131	signal ADR_OFFSET               : std_logic_vector(7 downto 0);
+  132	signal ADR_OFFSET_EXH           : std_logic_vector(7 downto 0);
+  133	signal ADR_OFFSET_MAIN          : std_logic_vector(5 downto 0);
+  134	signal ADR_P                    : std_logic_vector(31 downto 0);
+  135	signal ADR_MARK_UNUSED          : bit;
+  136	signal ADR_MARK_UNUSED_MAIN     : bit;
+  137	signal ADR_MARK_USED            : bit;
+  138	signal AERR                     : bit;
+  139	signal ALU_ACK                  : bit;
+  140	signal ALU_BSY                  : bit;
+  141	signal ALU_COND                 : boolean;
+  142	signal ALU_INIT                 : bit;
+  143	signal ALU_LOAD_OP1             : bit;
+  144	signal ALU_LOAD_OP2             : bit;
+  145	signal ALU_LOAD_OP3             : bit;
+  146	signal ALU_OP1_IN               : std_logic_vector(31 downto 0);
+  147	signal ALU_OP2_IN               : std_logic_vector(31 downto 0);
+  148	signal ALU_OP3_IN               : std_logic_vector(31 downto 0);
+  149	signal ALU_REQ                  : bit;
+  150	signal ALU_RESULT               : std_logic_vector(63 downto 0);
+  151	signal AMODE_SEL                : std_logic_vector(2 downto 0);
+  152	signal AR_DEC_EXH               : bit;
+  153	signal AR_DEC                   : bit;
+  154	signal AR_DEC_MAIN              : bit;
+  155	signal AR_IN_1                  : std_logic_vector(31 downto 0);
+  156	signal AR_IN_2                  : std_logic_vector(31 downto 0);
+  157	signal AR_IN_USE                : bit;
+  158	signal AR_INC                   : bit;
+  159	signal AR_MARK_USED             : bit;
+  160	signal AR_OUT_1                 : std_logic_vector(31 downto 0);
+  161	signal AR_OUT_2                 : std_logic_vector(31 downto 0);
+  162	signal AR_SEL_RD_1              : std_logic_vector(3 downto 0);
+  163	signal AR_SEL_RD_1_MAIN         : std_logic_vector(3 downto 0);
+  164	signal AR_SEL_RD_2              : std_logic_vector(3 downto 0);
+  165	signal AR_SEL_WR_1              : std_logic_vector(2 downto 0);
+  166	signal AR_SEL_WR_2              : std_logic_vector(2 downto 0);
+  167	signal AR_WR_1                  : bit;
+  168	signal AR_WR_2                  : bit;
+  169	signal AVECn_BUSIF              : std_logic;
+  170	signal BERR_MAIN                : bit;
+  171	signal BERR_WR                  : bit;
+  172	signal BITPOS                   : std_logic_vector(4 downto 0);
+  173	signal BIW_0                    : std_logic_vector(15 downto 0);
+  174	signal BIW_1                    : std_logic_vector(15 downto 0);
+  175	signal BIW_2                    : std_logic_vector(15 downto 0);
+  176	signal BKPT_CYCLE               : bit;
+  177	signal BKPT_INSERT              : bit;
+  178	signal BUS_BSY                  : bit;
+  179	signal BUSY_EXH                 : bit;
+  180	signal BUSY_MAIN                : bit;
+  181	signal BUSY_OPD                 : bit;
+  182	signal CC_UPDT                  : bit;
+  183	signal CPU_SPACE                : bit;
+  184	signal CPU_SPACE_EXH            : bit;
+  185	signal DFC                      : std_logic_vector(2 downto 0);
+  186	signal DFC_RD                   : bit;
+  187	signal DFC_WR                   : bit;
+  188	signal DR_WR_1                  : bit;
+  189	signal DR_WR_2                  : bit;
+  190	signal DR_MARK_USED             : bit;
+  191	signal DATA_FROM_CORE           : std_logic_vector(31 downto 0);
+  192	signal DATA                     : std_logic_vector(31 downto 0);
+  193	signal DATA_IN_EXH              : std_logic_vector(31 downto 0);
+  194	signal DATA_IMMEDIATE           : std_logic_vector(31 downto 0);
+  195	signal DATA_EXH                 : std_logic_vector(31 downto 0);
+  196	signal DATA_RD                  : bit;
+  197	signal DATA_WR                  : bit;
+  198	signal DATA_RD_EXH              : bit;
+  199	signal DATA_WR_EXH              : bit;
+  200	signal DATA_RD_MAIN             : bit;
+  201	signal DATA_WR_MAIN             : bit;
+  202	signal DATA_RDY                 : bit;
+  203	signal DATA_TO_CORE             : std_logic_vector(31 downto 0);
+  204	signal DATA_RERUN_EXH           : bit;
+  205	signal DATA_VALID               : std_logic;
+  206	signal DISPLACEMENT             : std_logic_vector(31 downto 0);
+  207	signal DISPLACEMENT_MAIN        : std_logic_vector(31 downto 0);
+  208	signal DISPLACEMENT_EXH         : std_logic_vector(7 downto 0);
+  209	signal DATA_BUFFER              : std_logic_vector(31 downto 0);
+  210	signal DBcc_COND                : boolean;
+  211	signal DR_IN_1                  : std_logic_vector(31 downto 0);
+  212	signal DR_IN_2                  : std_logic_vector(31 downto 0);
+  213	signal DR_OUT_2                 : std_logic_vector(31 downto 0);
+  214	signal DR_OUT_1                 : std_logic_vector(31 downto 0);
+  215	signal DR_SEL_WR_1              : std_logic_vector(2 downto 0);
+  216	signal DR_SEL_WR_2              : std_logic_vector(2 downto 0);
+  217	signal DR_SEL_RD_1              : std_logic_vector(3 downto 0);
+  218	signal DR_SEL_RD_2              : std_logic_vector(3 downto 0);
+  219	signal DR_IN_USE                : bit;
+  220	signal EW_ACK                   : bit;
+  221	signal EX_TRACE                 : bit;
+  222	signal EXEC_RDY                 : bit;
+  223	signal EXT_WORD                 : std_logic_vector(15 downto 0);
+  224	signal EW_REQ_MAIN              : bit;
+  225	signal FB                       : std_logic;
+  226	signal FC                       : std_logic;
+  227	signal FC_I                     : std_logic_vector(2 downto 0);
+  228	signal FC_LATCH                 : std_logic_vector(2 downto 0);
+  229	signal FC_OUT_EXH               : std_logic_vector(2 downto 0);
+  230	signal FC_OUT_I                 : std_logic_vector(2 downto 0);
+  231	signal IBUFFER                  : std_logic_vector(31 downto 0);
+  232	signal INBUFFER                 : std_logic_vector(31 downto 0);
+  233	signal IPL                      : std_logic_vector(2 downto 0);
+  234	signal ISP_LOAD                 : bit;
+  235	signal INT_VECT                 : std_logic_vector(31 downto 0);
+  236	signal IVECT_OFFS               : std_logic_vector(9 downto 0);
+  237	signal IPEND_In                 : bit;
+  238	signal IRQ_PEND                 : std_logic_vector(2 downto 0);
+  239	signal IPIPE_FLUSH              : bit;
+  240	signal IPIPE_FLUSH_EXH          : bit;
+  241	signal IPIPE_FLUSH_MAIN         : bit;
+  242	signal IPIPE_OFFESET            : std_logic_vector(2 downto 0);
+  243	signal LOOP_BSY                 : bit;
+  244	signal LOOP_EXIT                : bit;
+  245	signal LOOP_EXIT_EXH            : bit;
+  246	signal LOOP_EXIT_MAIN           : bit;
+  247	signal MOVEP_PNTR               : integer range 0 to 4;
+  248	signal OPCODE_RD                : bit;
+  249	signal OPCODE_RDY               : bit;
+  250	signal OPCODE_VALID             : std_logic;
+  251	signal OPCODE_TO_CORE           : std_logic_vector(15 downto 0);
+  252	signal OPCODE_DATA_OPD          : std_logic_vector(15 downto 0);
+  253	signal OP_SIZE                  : OP_SIZETYPE;
+  254	signal OP_SIZE_BUS              : OP_SIZETYPE;
+  255	signal OP_SIZE_EXH              : OP_SIZETYPE;
+  256	signal OP_SIZE_MAIN             : OP_SIZETYPE;
+  257	signal OP_SIZE_WB               : OP_SIZETYPE; -- Writeback.
+  258	signal OPCODE_REQ               : bit;
+  259	signal OPCODE_REQ_I             : bit;
+  260	signal OW_VALID                 : std_logic;
+  261	signal OPD_ACK_MAIN             : bit;
+  262	signal OP                       : OP_68K;
+  263	signal OW_REQ_MAIN              : bit;
+  264	signal OUTBUFFER                : std_logic_vector(31 downto 0);
+  265	signal PC                       : std_logic_vector(31 downto 0);
+  266	signal PC_ADD_DISPL             : bit;
+  267	signal PC_ADR_OFFSET            : std_logic_vector(7 downto 0);
+  268	signal PC_EW_OFFSET             : std_logic_vector(2 downto 0);
+  269	signal PC_INC                   : bit;
+  270	signal PC_INC_EXH               : bit;
+  271	signal PC_INC_OPCODE            : bit;
+  272	signal PC_L                     : std_logic_vector(31 downto 0);
+  273	signal PC_LOAD                  : bit;
+  274	signal PC_LOAD_EXH              : bit;
+  275	signal PC_LOAD_MAIN             : bit;
+  276	signal PC_OFFSET                : std_logic_vector(7 downto 0);
+  277	signal PC_OFFSET_EXH            : std_logic_vector(2 downto 0);
+  278	signal PC_OFFSET_OPD            : std_logic_vector(7 downto 0);
+  279	signal PC_REG                   : std_logic_vector(31 downto 0);
+  280	signal PC_RESTORE_EXH           : bit;
+  281	signal RB                       : std_logic;
+  282	signal RC                       : std_logic;
+  283	signal RD_REQ                   : bit;
+  284	signal RD_REQ_I                 : bit;
+  285	signal RMC                      : bit;
+  286	signal REST_BIW_0               : bit;
+  287	signal RERUN_RMC                : bit;
+  288	signal RESTORE_ISP_PC           : bit;
+  289	signal RESET_CPU                : bit;
+  290	signal RESET_IN                 : std_logic;
+  291	signal RESET_STRB               : bit;
+  292	signal RTE_INIT                 : bit;
+  293	signal RTE_RESUME               : bit;
+  294	signal SP_ADD_DISPL             : bit;
+  295	signal SP_ADD_DISPL_EXH         : bit;
+  296	signal SP_ADD_DISPL_MAIN        : bit;
+  297	signal SBIT                     : std_logic;
+  298	signal SBIT_AREG                : std_logic;
+  299	signal SSW_80                   : std_logic_vector(8 downto 0);
+  300	signal SFC                      : std_logic_vector(2 downto 0);
+  301	signal SFC_RD                   : bit;
+  302	signal SFC_WR                   : bit;
+  303	signal SR_CPY                   : std_logic_vector(15 downto 0);
+  304	signal SR_RD                    : bit;
+  305	signal SR_INIT                  : bit;
+  306	signal SR_WR                    : bit;
+  307	signal SR_WR_EXH                : bit;
+  308	signal SR_WR_MAIN               : bit;
+  309	signal STACK_FORMAT             : std_logic_vector(3 downto 0);
+  310	signal STACK_POS                : integer range 0 to 46;
+  311	signal STATUS_REG               : std_logic_vector(15 downto 0);
+  312	signal STORE_ADR_FORMAT         : bit;
+  313	signal STORE_ABS_HI             : bit;
+  314	signal STORE_ABS_LO             : bit;
+  315	signal STORE_D16                : bit;
+  316	signal STORE_DISPL              : bit;
+  317	signal STORE_IDATA_B1           : bit;
+  318	signal STORE_IDATA_B2           : bit;
+  319	signal TRAP_BERR                : bit;
+  320	signal TRAP_AERR                : bit;
+  321	signal TRAP_ILLEGAL             : bit;
+  322	signal TRAP_CODE_OPC            : TRAPTYPE_OPC;
+  323	signal TRAP_CHK                 : bit;
+  324	signal TRAP_DIVZERO             : bit;
+  325	signal TRAP_V                   : bit;
+  326	signal UNMARK                   : bit;
+  327	signal USE_APAIR                : boolean;
+  328	signal USE_DFC                  : bit;
+  329	signal USE_SFC                  : bit;
+  330	signal USE_DPAIR                : boolean;
+  331	signal USP_RD                   : bit;
+  332	signal USP_WR                   : bit;
+  333	signal VBIT                     : std_logic;
+  334	signal VBR                      : std_logic_vector(31 downto 0);
+  335	signal VBR_WR                   : bit;
+  336	signal VBR_RD                   : bit;
+  337	signal WR_REQ                   : bit;
+  338	signal WR_REQ_I                 : bit;
+  339	begin
+  340	    IDATA_BUFFER : process
+  341	    -- This register stores the immediate data.
+  342	    begin
+  343	        wait until CLK = '1' and CLK' event;
+  344	        if STORE_IDATA_B2 = '1' then
+  345	            IBUFFER(31 downto 16) <= EXT_WORD;
+  346	        elsif STORE_IDATA_B1 = '1' then
+  347	            IBUFFER(15 downto 0) <= EXT_WORD;
+  348	        end if;
+  349	    end process IDATA_BUFFER;
+  350	
+  351	    DATA_IMMEDIATE <= BIW_1 & BIW_2 when OP = ADDI and OP_SIZE = LONG else
+  352	                      BIW_1 & BIW_2 when OP = ANDI and OP_SIZE = LONG else
+  353	                      BIW_1 & BIW_2 when OP = CMPI and OP_SIZE = LONG else
+  354	                      BIW_1 & BIW_2 when OP = EORI and OP_SIZE = LONG else
+  355	                      BIW_1 & BIW_2 when OP = SUBI and OP_SIZE = LONG else
+  356	                      BIW_1 & BIW_2 when OP = ORI and OP_SIZE = LONG else
+  357	                      x"0000" & BIW_1 when OP = ANDI_TO_SR else
+  358	                      x"0000" & BIW_1 when OP = EORI_TO_SR else
+  359	                      x"0000" & BIW_1 when OP = ORI_TO_SR else
+  360	                      x"0000" & BIW_1 when OP = STOP else
+  361	                      x"0000" & BIW_1 when OP = ADDI and OP_SIZE = WORD else
+  362	                      x"0000" & BIW_1 when OP = ANDI and OP_SIZE = WORD else
+  363	                      x"0000" & BIW_1 when OP = CMPI and OP_SIZE = WORD else
+  364	                      x"0000" & BIW_1 when OP = EORI and OP_SIZE = WORD else
+  365	                      x"0000" & BIW_1 when OP = SUBI and OP_SIZE = WORD else
+  366	                      x"0000" & BIW_1 when OP = ORI and OP_SIZE = WORD else
+  367	                      x"000000" & BIW_1(7 downto 0) when OP = ANDI_TO_CCR else
+  368	                      x"000000" & BIW_1(7 downto 0) when OP = EORI_TO_CCR else
+  369	                      x"000000" & BIW_1(7 downto 0) when OP = ORI_TO_CCR else
+  370	                      x"000000" & BIW_1(7 downto 0) when OP = ADDI and OP_SIZE = BYTE else
+  371	                      x"000000" & BIW_1(7 downto 0) when OP = ANDI and OP_SIZE = BYTE else
+  372	                      x"000000" & BIW_1(7 downto 0) when OP = CMPI and OP_SIZE = BYTE else
+  373	                      x"000000" & BIW_1(7 downto 0) when OP = EORI and OP_SIZE = BYTE else
+  374	                      x"000000" & BIW_1(7 downto 0) when OP = SUBI and OP_SIZE = BYTE else
+  375	                      x"000000" & BIW_1(7 downto 0) when OP = ORI and OP_SIZE = BYTE else
+  376	                      x"000000" & "00000" & BIW_0(11 downto 9) when OP = ADDQ or OP = SUBQ else
+  377	                      x"000000" & BIW_0(7 downto 0) when OP = MOVEQ else
+  378	                      x"00000001" when OP = DBcc else
+  379	                      IBUFFER when OP_SIZE = LONG else x"0000" & IBUFFER(15 downto 0);
+  380	
+  381	    -- Internal registers are place holders written as zeros.
+  382	    DATA_EXH <= -- Exception handler multiplexing:
+  383	                DATA_TO_CORE when DATA_RERUN_EXH = '1' else -- Rerun the write cycle.
+  384	                SR_CPY & PC(31 downto 16) when STACK_POS = 2 else
+  385	                PC(15 downto 0) & STACK_FORMAT & "00" & IVECT_OFFS when STACK_POS = 4 else
+  386	                PC_REG when STACK_FORMAT = x"2" and STACK_POS = 6 else
+  387	                PC_REG when STACK_FORMAT = x"9" and STACK_POS = 6 else
+  388	                x"0000" & FC & FB & RC & RB & "000" & SSW_80 when STACK_POS = 6 else -- Format A and B.
+  389	                x"0000" & BIW_0 when STACK_FORMAT = x"9" and STACK_POS = 8 else
+  390	                BIW_1 & BIW_2 when STACK_POS = 8 else -- Format A and B.
+  391	                ADR_EFF when STACK_FORMAT = x"9" and STACK_POS = 10 else -- ADR_EFF_cp.
+  392	                ADR_CPY_EXH when STACK_POS = 10 else
+  393	                OUTBUFFER when STACK_POS = 14 else
+  394	                PC_REG + "100" when STACK_POS = 20 else --STAGE B address.
+  395	                INBUFFER when STACK_POS = 24 else
+  396	                x"0000" & VERSION when STACK_POS = 28 else x"00000000";
+  397	
+  398	    DATA_IN_EXH <= ALU_RESULT(31 downto 0) when OP = MOVEC else DATA_TO_CORE;
+  399	
+  400	    DATA_FROM_CORE <= DATA_EXH when BUSY_EXH = '1' and BUSY_MAIN = '0' else
+  401	                      ALU_RESULT(31 downto 0);
+  402	
+  403	    AR_DEC <= AR_DEC_MAIN or AR_DEC_EXH;
+  404	 
+  405	    AR_SEL_RD_1 <= "1111" when BUSY_EXH = '1' and BUSY_MAIN = '0' else AR_SEL_RD_1_MAIN; --(ISP)
+  406	
+  407	    AR_IN_1 <= DATA_TO_CORE when PC_RESTORE_EXH = '1' else
+  408	               INT_VECT when PC_LOAD_EXH = '1' else
+  409	               ADR_EFF when OP = JMP or OP = JSR else
+  410	               AR_OUT_1 when OP = LINK or OP = UNLK else 
+  411	               AR_OUT_1 when OP = EXG and BIW_0(7 downto 3) = "01001" else -- Two address registers.
+  412	               DR_OUT_2 when OP = EXG and BIW_0(7 downto 3) = "10001" else -- Address- and data register.
+  413	               DATA_TO_CORE when OP = RTD or OP = RTR or OP = RTS else
+  414	               ALU_RESULT(31 downto 0);
+  415	
+  416	    AR_IN_2 <= AR_OUT_2 when OP = EXG else DATA_TO_CORE;
+  417	
+  418	    DR_IN_1 <= DR_OUT_1 when OP = EXG and BIW_0(7 downto 3) = "01000" else -- Two data registers.
+  419	               AR_OUT_1 when OP = EXG and BIW_0(7 downto 3) = "10001"else -- Address and data registers.
+  420	               ALU_RESULT(31 downto 0);
+  421	
+  422	    DR_IN_2 <= DR_OUT_2 when OP = EXG and BIW_0(7 downto 3) = "01000" else -- Two data registers.
+  423	               ALU_RESULT(63 downto 32);
+  424	
+  425	    ALU_OP1_IN <= DATA_TO_CORE when SR_WR_EXH = '1' else
+  426	                  DATA_IMMEDIATE when OP = DBcc else
+  427	                  DR_OUT_1 when (OP = ABCD or OP = SBCD) and BIW_0(3) = '0' else
+  428	                  DATA_TO_CORE when OP = ABCD or OP = SBCD else
+  429	                  DR_OUT_1 when (OP = ADD or OP = SUB) and BIW_0(8) = '1' else
+  430	                  DR_OUT_1 when (OP = AND_B or OP = EOR or  OP = OR_B) and BIW_0(8) = '1' else
+  431	                  DR_OUT_1 when (OP = ADDX or OP = SUBX) and BIW_0(3) = '0' else
+  432	                  DATA_TO_CORE when OP = ADDX or OP = SUBX else
+  433	                  DR_OUT_1 when OP = ASL or OP = ASR or OP = LSL or OP = LSR else
+  434	                  DR_OUT_1 when OP = ROTL or OP = ROTR or OP = ROXL or OP = ROXR else
+  435	                  DATA_TO_CORE when OP = CMPM else
+  436	                  PC + PC_EW_OFFSET when OP = BSR or OP = JSR else
+  437	                  ADR_EFF when OP = LEA or OP = PEA else
+  438	                  AR_OUT_1 when OP = MOVE_USP else
+  439	                  VBR when OP = MOVEC and VBR_RD = '1' else
+  440	                  x"0000000" & '0' & SFC when OP = MOVEC and SFC_RD = '1' else
+  441	                  x"0000000" & '0' & DFC when OP = MOVEC and DFC_RD = '1' else
+  442	                  AR_OUT_1 when OP = MOVEC and BIW_1(15) = '1' else
+  443	                  DR_OUT_1 when OP = MOVEC else
+  444	                  DR_OUT_1 when OP = MOVEM and BIW_0(10) = '0' and ADn = '0' else -- Register to memory.
+  445	                  AR_OUT_2 when OP = MOVEM and BIW_0(10) = '0' else -- Register to memory.
+  446	                  DR_OUT_1 when OP = MOVES and BIW_1(11) = '1' and BIW_1(15) = '0' else -- Register to Memory.
+  447	                  AR_OUT_2 when OP = MOVES and BIW_1(11) = '1' else -- Register to memory.
+  448	                  x"000000" & DR_OUT_1(31 downto 24) when OP = MOVEP and MOVEP_PNTR = 4 and BIW_0(7 downto 6) > "01" else
+  449	                  x"000000" & DR_OUT_1(23 downto 16) when OP = MOVEP and MOVEP_PNTR = 3 and BIW_0(7 downto 6) > "01"  else
+  450	                  x"000000" & DR_OUT_1(15 downto 8) when OP = MOVEP and MOVEP_PNTR = 2 and BIW_0(7 downto 6) > "01"  else
+  451	                  x"000000" & DR_OUT_1(7 downto 0) when OP = MOVEP and BIW_0(7 downto 6) > "01"  else
+  452	                  DATA_TO_CORE(7 downto 0) & DR_OUT_1(23 downto 0) when OP = MOVEP and MOVEP_PNTR = 3 else
+  453	                  DR_OUT_1(31 downto 24) & DATA_TO_CORE(7 downto 0) & DR_OUT_1(15 downto 0)  when OP = MOVEP and MOVEP_PNTR = 2 else
+  454	                  DR_OUT_1(31 downto 16) & DATA_TO_CORE(7 downto 0) & DR_OUT_1(7 downto 0)  when OP = MOVEP and MOVEP_PNTR = 1 else
+  455	                  DR_OUT_1(31 downto 8) & DATA_TO_CORE(7 downto 0) when OP = MOVEP else
+  456	                  x"0000" & STATUS_REG(15 downto 5) & DR_OUT_1(4 downto 0) when OP = MOVE_TO_CCR and BIW_0(5 downto 3) = "000" else
+  457	                  x"0000" & STATUS_REG(15 downto 5) & DATA_IMMEDIATE(4 downto 0) when OP = MOVE_TO_CCR and BIW_0(5 downto 0) = "111100" else
+  458	                  x"0000" & STATUS_REG(15 downto 5) & DATA_TO_CORE(4 downto 0) when OP = MOVE_TO_CCR else
+  459	                  x"0000" & DR_OUT_1(15 downto 0) when OP = MOVE_TO_SR and BIW_0(5 downto 3) = "000" else
+  460	                  x"0000" & DATA_IMMEDIATE(15 downto 0) when OP = MOVE_TO_SR and BIW_0(5 downto 0) = "111100" else
+  461	                  x"0000" & DATA_TO_CORE(15 downto 0) when OP = MOVE_TO_SR else
+  462	                  x"000000" & "000" & STATUS_REG(4 downto 0) when OP = MOVE_FROM_CCR else
+  463	                  x"0000" & STATUS_REG when OP = MOVE_FROM_SR else
+  464	                  DATA_IMMEDIATE when OP = STOP else -- Status register information.
+  465	                  DATA_IMMEDIATE when OP = MOVEQ else
+  466	                  DATA_IMMEDIATE when OP = ADDI or OP = CMPI or OP = SUBI or OP = ANDI or OP = EORI or OP = ORI else
+  467	                  DATA_IMMEDIATE when OP = ADDQ or OP = SUBQ else
+  468	                  DATA_IMMEDIATE when OP = ANDI_TO_CCR or OP = ANDI_TO_SR else
+  469	                  DATA_IMMEDIATE when OP = EORI_TO_CCR or OP = EORI_TO_SR else 
+  470	                  DATA_IMMEDIATE when OP = ORI_TO_CCR or OP = ORI_TO_SR else 
+  471	                  DR_OUT_1 when BIW_0(5 downto 3) = "000" else
+  472	                  AR_OUT_1 when BIW_0(5 downto 3) = "001" else
+  473	                  DATA_IMMEDIATE when BIW_0(5 downto 0) = "111100" else DATA_TO_CORE;
+  474	
+  475	    ALU_OP2_IN <= DR_OUT_2 when (OP = ABCD or OP = SBCD) and BIW_0(3) = '0' else
+  476	                  DATA_TO_CORE when OP = ABCD or OP = SBCD else
+  477	                  DR_OUT_2 when (OP = ADDX or OP = SUBX) and BIW_0(3) = '0' else
+  478	                  DATA_TO_CORE when OP = ADDX or OP = SUBX else
+  479	                  DR_OUT_2 when (OP = ADD or OP = CMP or OP = SUB) and BIW_0(8) = '0' else
+  480	                  DR_OUT_2 when (OP = AND_B or OP = OR_B) and BIW_0(8) = '0' else
+  481	                  AR_OUT_2 when (OP = ADDA or OP = CMPA or OP = SUBA) else
+  482	                  DR_OUT_2 when (OP = ASL or OP = ASR) and BIW_0(7 downto 6) /= "11" else -- Register shifts.
+  483	                  DR_OUT_2 when (OP = LSL or OP = LSR) and BIW_0(7 downto 6) /= "11" else -- Register shifts.
+  484	                  DR_OUT_2 when (OP = ROTL or OP = ROTR) and BIW_0(7 downto 6) /= "11" else -- Register shifts.
+  485	                  DR_OUT_2 when (OP = ROXL or OP = ROXR) and BIW_0(7 downto 6) /= "11" else -- Register shifts.
+  486	                  x"0000" & STATUS_REG when(OP = ANDI_TO_CCR or OP = ANDI_TO_SR) else
+  487	                  x"0000" & STATUS_REG when(OP = EORI_TO_CCR or OP = EORI_TO_SR) else
+  488	                  x"0000" & STATUS_REG when(OP = ORI_TO_CCR or OP = ORI_TO_SR) else 
+  489	                  AR_OUT_2 when OP = CHK else
+  490	                  DATA_TO_CORE when OP = CMPM else
+  491	                  DR_OUT_2 when OP = DBcc or OP = SWAP else
+  492	                  DR_OUT_2 when OP = DIVS or OP = DIVU else
+  493	                  DR_OUT_2 when OP = MULS or OP = MULU else
+  494	                  AR_OUT_1 when OP = LINK else
+  495	                  DR_OUT_2 when BIW_0(5 downto 3) = "000" else
+  496	                  AR_OUT_2 when BIW_0(5 downto 3) = "001" else DATA_TO_CORE;
+  497	
+  498	    ALU_OP3_IN <= DR_OUT_1;
+  499	
+  500	    OP_SIZE <= OP_SIZE_EXH when BUSY_EXH = '1' and BUSY_MAIN = '0' else OP_SIZE_MAIN;
+  501	    OP_SIZE_BUS <= OP_SIZE_WB when DATA_WR_MAIN = '1' else OP_SIZE;
+  502	
+  503	
+  504	    FC_OUT <= FC_OUT_EXH when DATA_RERUN_EXH = '1' else FC_OUT_I;
+  505	
+  506	    PC_OFFSET <= PC_OFFSET_OPD + PC_OFFSET_EXH;
+  507	    PC_L <= PC + PC_ADR_OFFSET + PC_OFFSET_EXH;
+  508	
+  509	    ADR_MODE <= "010" when BUSY_EXH = '1' and BUSY_MAIN = '0' else ADR_MODE_MAIN; --(ISP)
+  510	
+  511	    -- The bit field offset is byte aligned
+  512	    ADR_OFFSET <= ADR_OFFSET_EXH when BUSY_EXH = '1' and BUSY_MAIN = '0' else
+  513	                  "00" & ADR_OFFSET_MAIN;
+  514	
+  515	    DBcc_COND <= true when OP = DBcc and ALU_RESULT(15 downto 0) = x"FFFF" else false;
+  516	
+  517	    LOOP_EXIT <= LOOP_EXIT_EXH or LOOP_EXIT_MAIN;
+  518	
+  519	    DATA_RD <= DATA_RD_EXH or DATA_RD_MAIN;
+  520	    DATA_WR <= DATA_WR_EXH or DATA_WR_MAIN;
+  521	
+  522	    P_BUSREQ: process
+  523	    begin
+  524	        wait until CLK = '1' and CLK' event;
+  525	        -- We need these flip flops to avoid combinatorial loops:
+  526	        -- The requests are valid until the bus controller enters
+  527	        -- its START_CYCLE bus phase and asserts there the BUS_BSY.
+  528	        -- After the bus controller enters the bus access state,
+  529	        -- the requests are withdrawn.
+  530	        if BUS_BSY = '0' then
+  531	            RD_REQ_I <= DATA_RD and not ADR_ATN;
+  532	            WR_REQ_I <= DATA_WR;
+  533	            OPCODE_REQ_I <= OPCODE_RD;
+  534	        elsif BUS_BSY = '1' then
+  535	            RD_REQ_I <= '0';
+  536	            WR_REQ_I <= '0';
+  537	            OPCODE_REQ_I <= '0';
+  538	        end if;
+  539	    end process P_BUSREQ;
+  540	
+  541	    RD_REQ <= DATA_RD and not ADR_ATN when BUS_BSY = '0' else RD_REQ_I;
+  542	    WR_REQ <= DATA_WR when BUS_BSY = '0' else WR_REQ_I;
+  543	    OPCODE_REQ <= OPCODE_RD when BUS_BSY = '0' else OPCODE_REQ_I;
+  544	
+  545	    DISPLACEMENT <= DISPLACEMENT_MAIN when BUSY_MAIN = '1' else x"000000" & DISPLACEMENT_EXH;
+  546	
+  547	    OPCODE_DATA_OPD <= DATA_TO_CORE(15 downto 0) when REST_BIW_0 = '1' else OPCODE_TO_CORE;
+  548	
+  549	    SR_WR <= SR_WR_EXH or SR_WR_MAIN;
+  550	
+  551	    IPIPE_FLUSH <= IPIPE_FLUSH_EXH or IPIPE_FLUSH_MAIN;
+  552	
+  553	    SP_ADD_DISPL <= SP_ADD_DISPL_EXH or SP_ADD_DISPL_MAIN;
+  554	
+  555	    PC_INC <= PC_INC_OPCODE or PC_INC_EXH;
+  556	
+  557	    AVECn_BUSIF <= AVECn when BUSY_EXH = '1' else '1';
+  558	
+  559	    CPU_SPACE <= '1' when OP = BKPT and DATA_RD_MAIN = '1' else
+  560	                 CPU_SPACE_EXH when BUSY_EXH = '1' and BUSY_MAIN = '0' else '0';
+  561	
+  562	    -- The BITPOS is valid for bit operations and bit field operations. For BCHG, BCLR, BSET and BTST
+  563	    -- the BITPOS spans o to 31 bytes, when it is in register direct mode. It is modulo  in memory
+  564	    -- manipulation mode. For the bit field operations in register direct mode it also isin the 
+  565	    -- range 0 to 31. For bit fields in memory the value is byte wide (0 to 7) because the bit
+  566	    -- field from a memory location are loaded from byte boundaries.
+  567	    BITPOS <= BIW_1(4 downto 0) when (OP = BCHG or OP = BCLR or OP = BSET or OP = BTST) and BIW_0(8) = '0' and ADR_MODE = "000" else
+  568	              "00" & BIW_1(2 downto 0) when (OP = BCHG or OP = BCLR or OP = BSET or OP = BTST) and BIW_0(8) = '0' else
+  569	              DR_OUT_1(4 downto 0) when (OP = BCHG or OP = BCLR or OP = BSET or OP = BTST) and ADR_MODE = "000" else
+  570	              "00" & DR_OUT_1(2 downto 0) when OP = BCHG or OP = BCLR or OP = BSET or OP = BTST else
+  571	              BIW_1(10 downto 6) when BIW_1(11) = '0' and ADR_MODE = "000" else
+  572	              "00" & BIW_1(8 downto 6) when BIW_1(11) = '0' else
+  573	              DR_OUT_1(4 downto 0) when ADR_MODE = "000" else "00" & DR_OUT_1(2 downto 0);
+  574	
+  575	    TRAP_AERR <= AERR when BUSY_EXH = '0' else '0'; -- No address error froim the system during exception processing.
+  576	    TRAP_BERR <= BERR_WR or BERR_MAIN;
+  577	
+  578	    USE_DFC <= '1' when OP = MOVES and DATA_WR_MAIN = '1' else '0';
+  579	    USE_SFC <= '1' when OP = MOVES and DATA_RD_MAIN = '1' else '0';
+  580	
+  581	    PC_LOAD <= PC_LOAD_EXH or PC_LOAD_MAIN;
+  582	
+  583	    RESET_IN <= not RESET_INn;
+  584	    IPL <= not IPLn;
+  585	    
+  586	    -- We need these signals to mark the USP but not the active stack as 
+  587	    -- used register during MOVE_USP or MOVEC.
+  588	    SBIT_AREG <= '0' when USP_WR = '1' else STATUS_REG(13);
+  589	    SBIT <= STATUS_REG(13);
+  590	
+  591	    ADR_L <= x"000000" & "000" & BIW_0(2 downto 0) & "00" when BKPT_CYCLE = '1' else
+  592	             x"FFFFFFF" & IRQ_PEND & '1' when CPU_SPACE_EXH = '1' else
+  593	             ADR_CPY_EXH when DATA_RERUN_EXH = '1' else 
+  594	             ADR_EFF_WB when DATA_WR_MAIN = '1' else ADR_EFF; -- Exception handler uses ADR_EFF.
+  595	
+  596	    ADR_P <= ADR_LATCH when BUS_BSY = '1' else
+  597	             ADR_L when (DATA_RD = '1' and ADR_ATN = '0') or DATA_WR = '1' else PC_L;
+  598	
+  599	    P_ADR_LATCH: process
+  600	    -- This register stores the address during a running bus cycle.
+  601	    -- The signals RD_DATA, WR_DATA and RD_OPCODE may change during
+  602	    -- the cycle. Opcode read is lower prioritized.
+  603	    begin
+  604	        wait until CLK = '1' and CLK' event;
+  605	        if BUS_BSY = '0' then
+  606	            ADR_LATCH <= ADR_P;
+  607	        end if;
+  608	    end process P_ADR_LATCH;
+  609	
+  610	    P_FC_LATCH  : process
+  611	    -- This register stores the function code during a running bus cycle. 
+  612	    begin
+  613	        wait until CLK = '1' and CLK' event;
+  614	        if BUS_BSY = '0' then
+  615	            FC_LATCH <= FC_I;
+  616	        end if;
+  617	    end process P_FC_LATCH;
+  618	
+  619	    FC_I <= FC_LATCH when BUS_BSY = '1' else
+  620	            SFC when USE_SFC = '1' else
+  621	            DFC when USE_DFC = '1' else
+  622	            "111" when ((DATA_RD = '1' and ADR_ATN = '0') or DATA_WR = '1') and CPU_SPACE = '1' else
+  623	            "101" when ((DATA_RD = '1' and ADR_ATN = '0') or DATA_WR = '1') and SBIT = '1' else
+  624	            "001" when (DATA_RD = '1' and ADR_ATN = '0') or DATA_WR = '1' else
+  625	            "110" when OPCODE_RD = '1' and SBIT = '1' else "010"; -- Default is OPCODE_RD and SBIT = '0'.
+  626	
+  627	    I_ADRESSREGISTERS: WF68K10_ADDRESS_REGISTERS
+  628	        port map(
+  629	            CLK                     => CLK,
+  630	            RESET                   => RESET_CPU,
+  631	            AR_IN_1                 => AR_IN_1,
+  632	            AR_IN_2                 => AR_IN_2,
+  633	            AR_OUT_1                => AR_OUT_1,
+  634	            AR_OUT_2                => AR_OUT_2,
+  635	            INDEX_IN                => DR_OUT_1,
+  636	            PC                      => PC,
+  637	            PC_REG_OUT              => PC_REG,
+  638	            STORE_ADR_FORMAT        => STORE_ADR_FORMAT,
+  639	            STORE_ABS_HI            => STORE_ABS_HI,
+  640	            STORE_ABS_LO            => STORE_ABS_LO,
+  641	            STORE_D16               => STORE_D16,
+  642	            STORE_DISPL             => STORE_DISPL,
+  643	            OP_SIZE                 => OP_SIZE,
+  644	            OP_SIZE_WB              => OP_SIZE_WB,
+  645	            AR_MARK_USED            => AR_MARK_USED,
+  646	            USE_APAIR               => USE_APAIR,
+  647	            AR_IN_USE               => AR_IN_USE,
+  648	            AR_SEL_RD_1             => AR_SEL_RD_1,
+  649	            AR_SEL_RD_2             => AR_SEL_RD_2,
+  650	            AR_SEL_WR_1             => AR_SEL_WR_1,
+  651	            AR_SEL_WR_2             => AR_SEL_WR_2,
+  652	            DATA_RDY                => DATA_RDY,
+  653	            ADR_ATN                 => ADR_ATN,
+  654	            ADR_OFFSET              => ADR_OFFSET, -- Byte aligned.
+  655	            ADR_MARK_UNUSED         => ADR_MARK_UNUSED,
+  656	            ADR_MARK_USED           => ADR_MARK_USED,
+  657	            ADR_IN_USE              => ADR_IN_USE,
+  658	            ADR_MODE                => ADR_MODE,
+  659	            AMODE_SEL               => AMODE_SEL,
+  660	            ADR_EFF                 => ADR_EFF,
+  661	            ADR_EFF_WB              => ADR_EFF_WB,
+  662	            DFC                     => DFC,
+  663	            DFC_WR                  => DFC_WR,
+  664	            SFC                     => SFC,
+  665	            SFC_WR                  => SFC_WR,
+  666	            ISP_WR                  => ISP_LOAD,
+  667	            USP_RD                  => USP_RD,
+  668	            USP_WR                  => USP_WR,
+  669	            AR_DEC                  => AR_DEC,
+  670	            AR_INC                  => AR_INC,
+  671	            AR_WR_1                 => AR_WR_1,
+  672	            AR_WR_2                 => AR_WR_2,
+  673	            UNMARK                  => UNMARK,
+  674	            EXT_WORD                => EXT_WORD,
+  675	            SBIT                    => SBIT_AREG,
+  676	            SP_ADD_DISPL            => SP_ADD_DISPL,
+  677	            RESTORE_ISP_PC          => RESTORE_ISP_PC,
+  678	            DISPLACEMENT            => DISPLACEMENT,
+  679	            PC_ADD_DISPL            => PC_ADD_DISPL,
+  680	            PC_EW_OFFSET            => PC_EW_OFFSET,
+  681	            PC_INC                  => PC_INC,
+  682	            PC_LOAD                 => PC_LOAD,
+  683	            PC_RESTORE              => PC_RESTORE_EXH,
+  684	            PC_OFFSET               => PC_OFFSET
+  685	        );
+  686	
+  687	    I_ALU: WF68K10_ALU
+  688	        port map(
+  689	            CLK                     => CLK,
+  690	            LOAD_OP2                => ALU_LOAD_OP2,
+  691	            LOAD_OP3                => ALU_LOAD_OP3,
+  692	            LOAD_OP1                => ALU_LOAD_OP1,
+  693	            OP1_IN                  => ALU_OP1_IN,
+  694	            OP2_IN                  => ALU_OP2_IN,
+  695	            OP3_IN                  => ALU_OP3_IN,
+  696	            BITPOS_IN               => BITPOS,
+  697	            RESULT                  => ALU_RESULT,
+  698	            ADR_MODE_IN             => ADR_MODE,
+  699	            OP_SIZE_IN              => OP_SIZE,
+  700	            OP_IN                   => OP,
+  701	            BIW_0_IN                => BIW_0(11 downto 0),
+  702	            BIW_1_IN                => BIW_1,
+  703	            SR_WR                   => SR_WR,
+  704	            SR_INIT                 => SR_INIT,
+  705	            CC_UPDT                 => CC_UPDT,
+  706	            STATUS_REG_OUT          => STATUS_REG,
+  707	            ALU_COND                => ALU_COND,
+  708	            ALU_INIT                => ALU_INIT,
+  709	            ALU_BSY                 => ALU_BSY,
+  710	            ALU_REQ                 => ALU_REQ,
+  711	            ALU_ACK                 => ALU_ACK,
+  712	            IRQ_PEND                => IRQ_PEND,
+  713	            TRAP_CHK                => TRAP_CHK,
+  714	            TRAP_DIVZERO            => TRAP_DIVZERO
+  715	        );
+  716	
+  717	    I_BUS_IF: WF68K10_BUS_INTERFACE
+  718	        port map(
+  719	            CLK                 => CLK,
+  720	
+  721	            ADR_IN_P            => ADR_P,
+  722	            ADR_OUT_P           => ADR_OUT,
+  723	
+  724	            FC_IN               => FC_I,
+  725	            FC_OUT              => FC_OUT_I,
+  726	
+  727	            DATA_PORT_IN        => DATA_IN,
+  728	            DATA_PORT_OUT       => DATA_OUT,
+  729	            DATA_FROM_CORE      => DATA_FROM_CORE,
+  730	            DATA_TO_CORE        => DATA_TO_CORE,
+  731	            OPCODE_TO_CORE      => OPCODE_TO_CORE,
+  732	
+  733	            DATA_PORT_EN        => DATA_EN,
+  734	            BUS_EN              => BUS_EN,
+  735	
+  736	            OP_SIZE             => OP_SIZE_BUS,
+  737	
+  738	            RD_REQ              => RD_REQ,
+  739	            WR_REQ              => WR_REQ,
+  740	            DATA_RDY            => DATA_RDY,
+  741	            DATA_VALID          => DATA_VALID,
+  742	            OPCODE_REQ          => OPCODE_REQ,
+  743	            OPCODE_RDY          => OPCODE_RDY,
+  744	            OPCODE_VALID        => OPCODE_VALID,
+  745	            RMC                 => RMC,
+  746	            BUSY_EXH            => BUSY_EXH,
+  747	            SSW_80              => SSW_80,
+  748	            INBUFFER            => INBUFFER,
+  749	            OUTBUFFER           => OUTBUFFER,
+  750	
+  751	            DTACKn              => DTACKn,
+  752	            ASn                 => ASn,
+  753	            UDSn                => UDSn,
+  754	            LDSn                => LDSn,
+  755	            RWn                 => RWn,
+  756	            RMCn                => RMCn,
+  757	            DBENn               => DBENn,
+  758	
+  759	            E                   => E,
+  760	            VMAn                => VMAn,
+  761	            VMA_EN              => VMA_EN,
+  762	            VPAn                => VPAn,
+  763	
+  764	            BRn                 => BRn,
+  765	            BGACKn              => BGACKn,
+  766	            BGn                 => BGn,
+  767	
+  768	            RESET_STRB          => RESET_STRB,
+  769	            RESET_IN            => RESET_IN,
+  770	            RESET_OUT           => RESET_OUT,
+  771	            RESET_CPU           => RESET_CPU,
+  772	
+  773	            AVECn               => AVECn_BUSIF,
+  774	            HALTn               => HALT_INn,
+  775	            BERRn               => BERRn,
+  776	            AERR                => AERR,
+  777	            BERR_WR             => BERR_WR,
+  778	
+  779	            BUS_BSY             => BUS_BSY
+  780	        );
+  781	
+  782	    I_CONTROL: WF68K10_CONTROL
+  783	        port map(
+  784	            CLK                     => CLK,
+  785	            RESET_CPU               => RESET_CPU,
+  786	            BUSY                    => BUSY_MAIN,
+  787	            BUSY_EXH                => BUSY_EXH,
+  788	            BUSY_OPD                => BUSY_OPD,
+  789	            EW_REQ                  => EW_REQ_MAIN,
+  790	            OW_REQ                  => OW_REQ_MAIN,
+  791	            OW_VALID                => OW_VALID,
+  792	            OPD_ACK                 => OPD_ACK_MAIN,
+  793	            RERUN_RMC               => RERUN_RMC,
+  794	            EW_ACK                  => EW_ACK,
+  795	            ADR_MARK_UNUSED         => ADR_MARK_UNUSED,
+  796	            ADR_MARK_USED           => ADR_MARK_USED,
+  797	            ADR_IN_USE              => ADR_IN_USE,
+  798	            ADR_OFFSET              => ADR_OFFSET_MAIN,
+  799	            DATA_RD                 => DATA_RD_MAIN,
+  800	            DATA_WR                 => DATA_WR_MAIN,
+  801	            DATA_RDY                => DATA_RDY,
+  802	            DATA_VALID              => DATA_VALID,
+  803	            RMC                     => RMC,
+  804	            LOAD_OP1                => ALU_LOAD_OP1,
+  805	            LOAD_OP2                => ALU_LOAD_OP2,
+  806	            LOAD_OP3                => ALU_LOAD_OP3,
+  807	            STORE_ADR_FORMAT        => STORE_ADR_FORMAT,
+  808	            STORE_ABS_HI            => STORE_ABS_HI,
+  809	            STORE_ABS_LO            => STORE_ABS_LO,
+  810	            STORE_D16               => STORE_D16,
+  811	            STORE_DISPL             => STORE_DISPL,
+  812	            STORE_IDATA_B1          => STORE_IDATA_B1,
+  813	            STORE_IDATA_B2          => STORE_IDATA_B2,
+  814	            OP                      => OP,
+  815	            OP_SIZE                 => OP_SIZE_MAIN,
+  816	            BIW_0                   => BIW_0(13 downto 0),
+  817	            BIW_1                   => BIW_1,
+  818	            BIW_2                   => BIW_2,
+  819	            EXT_WORD                => EXT_WORD,
+  820	            ADR_MODE                => ADR_MODE_MAIN,
+  821	            AMODE_SEL               => AMODE_SEL,
+  822	            OP_SIZE_WB              => OP_SIZE_WB,
+  823	            AR_MARK_USED            => AR_MARK_USED,
+  824	            AR_IN_USE               => AR_IN_USE,
+  825	            AR_SEL_RD_1             => AR_SEL_RD_1_MAIN,
+  826	            AR_SEL_RD_2             => AR_SEL_RD_2,
+  827	            AR_SEL_WR_1             => AR_SEL_WR_1,
+  828	            AR_SEL_WR_2             => AR_SEL_WR_2,
+  829	            AR_INC                  => AR_INC,
+  830	            AR_DEC                  => AR_DEC_MAIN,
+  831	            AR_WR_1                 => AR_WR_1,
+  832	            AR_WR_2                 => AR_WR_2,
+  833	            DR_MARK_USED            => DR_MARK_USED,
+  834	            USE_APAIR               => USE_APAIR,
+  835	            USE_DPAIR               => USE_DPAIR,
+  836	            DR_IN_USE               => DR_IN_USE,
+  837	            DR_SEL_WR_1             => DR_SEL_WR_1,
+  838	            DR_SEL_WR_2             => DR_SEL_WR_2,
+  839	            DR_SEL_RD_1             => DR_SEL_RD_1,
+  840	            DR_SEL_RD_2             => DR_SEL_RD_2,
+  841	            DR_WR_1                 => DR_WR_1,
+  842	            DR_WR_2                 => DR_WR_2,
+  843	            UNMARK                  => UNMARK,
+  844	            DISPLACEMENT            => DISPLACEMENT_MAIN,
+  845	            PC_ADD_DISPL            => PC_ADD_DISPL,
+  846	            PC_LOAD                 => PC_LOAD_MAIN,
+  847	            SP_ADD_DISPL            => SP_ADD_DISPL_MAIN,
+  848	            DFC_RD                  => DFC_RD,
+  849	            DFC_WR                  => DFC_WR,
+  850	            SFC_RD                  => SFC_RD,
+  851	            SFC_WR                  => SFC_WR,
+  852	            VBR_RD                  => VBR_RD,
+  853	            VBR_WR                  => VBR_WR,
+  854	            USP_RD                  => USP_RD,
+  855	            USP_WR                  => USP_WR,
+  856	            IPIPE_FLUSH             => IPIPE_FLUSH_MAIN,
+  857	            ALU_INIT                => ALU_INIT,
+  858	            ALU_BSY                 => ALU_BSY,
+  859	            ALU_REQ                 => ALU_REQ,
+  860	            ALU_ACK                 => ALU_ACK,
+  861	            BKPT_CYCLE              => BKPT_CYCLE,
+  862	            BKPT_INSERT             => BKPT_INSERT,
+  863	            LOOP_BSY                => LOOP_BSY,
+  864	            LOOP_EXIT               => LOOP_EXIT_MAIN,
+  865	            SR_WR                   => SR_WR_MAIN,
+  866	            MOVEM_ADn               => ADn,
+  867	            MOVEP_PNTR              => MOVEP_PNTR,
+  868	            CC_UPDT                 => CC_UPDT,
+  869	            TRACE_EN                => STATUS_REG(15),
+  870	            VBIT                    => STATUS_REG(1),
+  871	            ALU_COND                => ALU_COND,
+  872	            DBcc_COND               => DBcc_COND,
+  873	            RESET_STRB              => RESET_STRB,
+  874	            IPENDn                  => IPEND_In,
+  875	            BERR                    => BERR_MAIN,
+  876	            EX_TRACE                => EX_TRACE,
+  877	            TRAP_V                  => TRAP_V,
+  878	            TRAP_ILLEGAL            => TRAP_ILLEGAL,
+  879	            RTE_INIT                => RTE_INIT,
+  880	            RTE_RESUME              => RTE_RESUME
+  881	        );
+  882	
+  883	    I_DATA_REGISTERS: WF68K10_DATA_REGISTERS
+  884	        port map(
+  885	            CLK                     => CLK,
+  886	            RESET                   => RESET_CPU,
+  887	            DR_IN_1                 => DR_IN_1,
+  888	            DR_IN_2                 => DR_IN_2,
+  889	            DR_OUT_2                => DR_OUT_2,
+  890	            DR_OUT_1                => DR_OUT_1,
+  891	            DR_SEL_WR_1             => DR_SEL_WR_1,
+  892	            DR_SEL_WR_2             => DR_SEL_WR_2,
+  893	            DR_SEL_RD_1             => DR_SEL_RD_1,
+  894	            DR_SEL_RD_2             => DR_SEL_RD_2,
+  895	            DR_WR_1                 => DR_WR_1,
+  896	            DR_WR_2                 => DR_WR_2,
+  897	            DR_MARK_USED            => DR_MARK_USED,
+  898	            USE_DPAIR               => USE_DPAIR,
+  899	            DR_IN_USE               => DR_IN_USE,
+  900	            UNMARK                  => UNMARK,
+  901	            OP_SIZE                 => OP_SIZE_WB
+  902	        );
+  903	
+  904	    I_EXC_HANDLER: WF68K10_EXCEPTION_HANDLER
+  905	        generic map(VERSION         => VERSION)
+  906	        port map(   
+  907	            CLK                     => CLK,
+  908	            RESET_CPU               => RESET_CPU,
+  909	            BUSY_EXH                => BUSY_EXH,
+  910	            BUSY_MAIN               => BUSY_MAIN,
+  911	    
+  912	            ADR_IN                  => ADR_EFF,
+  913	            ADR_CPY                 => ADR_CPY_EXH,
+  914	            ADR_OFFSET              => ADR_OFFSET_EXH,
+  915	            FC_OUT                  => FC_OUT_EXH,
+  916	            CPU_SPACE               => CPU_SPACE_EXH,
+  917	    
+  918	            DATA_0                  => DATA_TO_CORE(0),
+  919	            DATA_RD                 => DATA_RD_EXH,
+  920	            DATA_WR                 => DATA_WR_EXH,
+  921	            DATA_RERUN              => DATA_RERUN_EXH,
+  922	            DATA_IN                 => DATA_IN_EXH,
+  923	    
+  924	            OP_SIZE                 => OP_SIZE_EXH,
+  925	            DATA_RDY                => DATA_RDY,
+  926	            DATA_VALID              => DATA_VALID,
+  927	            RERUN_RMC               => RERUN_RMC,
+  928	    
+  929	            OPCODE_RDY              => OPCODE_RDY,
+  930	            OPD_ACK                 => OPD_ACK_MAIN,
+  931	            OW_VALID                => OW_VALID,
+  932	    
+  933	            STATUS_REG_IN           => STATUS_REG,
+  934	            SR_CPY                  => SR_CPY,
+  935	            SR_INIT                 => SR_INIT,
+  936	    
+  937	            SR_WR                   => SR_WR_EXH,
+  938	            ISP_LOAD                => ISP_LOAD,
+  939	            PC_LOAD                 => PC_LOAD_EXH,
+  940	            PC_INC                  => PC_INC_EXH,
+  941	            PC_RESTORE              => PC_RESTORE_EXH,
+  942	            PC_OFFSET               => PC_OFFSET_EXH,
+  943	    
+  944	            STACK_FORMAT            => STACK_FORMAT,
+  945	            STACK_POS               => STACK_POS,
+  946	            REST_BIW_0              => REST_BIW_0,
+  947	                
+  948	            AR_DEC                  => AR_DEC_EXH,
+  949	            ADD_DISPL               => SP_ADD_DISPL_EXH,
+  950	            DISPLACEMENT            => DISPLACEMENT_EXH,
+  951	            IPIPE_FLUSH             => IPIPE_FLUSH_EXH,
+  952	            RESTORE_ISP_PC          => RESTORE_ISP_PC,
+  953	            RTE_INIT                => RTE_INIT,
+  954	            RTE_RESUME              => RTE_RESUME,
+  955	    
+  956	            HALT_OUTn               => HALT_OUTn,
+  957	            LOOP_EXIT               => LOOP_EXIT_EXH,
+  958	    
+  959	            IRQ_IN                  => IPL,
+  960	            IRQ_PEND                => IRQ_PEND,
+  961	            AVECn                   => AVECn,
+  962	            IPENDn                  => IPEND_In,
+  963	            INT_VECT                => INT_VECT,
+  964	            IVECT_OFFS              => IVECT_OFFS,
+  965	
+  966	            TRAP_AERR               => TRAP_AERR,
+  967	            TRAP_BERR               => TRAP_BERR,
+  968	            TRAP_CHK                => TRAP_CHK,
+  969	            TRAP_DIVZERO            => TRAP_DIVZERO,
+  970	            TRAP_ILLEGAL            => TRAP_ILLEGAL,
+  971	            TRAP_CODE_OPC           => TRAP_CODE_OPC,
+  972	            TRAP_VECTOR             => BIW_0(3 downto 0),
+  973	            TRAP_V                  => TRAP_V,
+  974	            EX_TRACE_IN             => EX_TRACE,
+  975	            VBR_WR                  => VBR_WR,
+  976	            VBR                     => VBR
+  977	        );
+  978	
+  979	    I_OPCODE_DECODER: WF68K10_OPCODE_DECODER
+  980	        port map(
+  981	            CLK                     => CLK,
+  982	            K6800n                  => K6800n,
+  983	
+  984	            OW_REQ_MAIN             => OW_REQ_MAIN,
+  985	            EW_REQ_MAIN             => EW_REQ_MAIN,
+  986	            BUSY_EXH                => BUSY_EXH,
+  987	            BUSY_MAIN               => BUSY_MAIN,
+  988	            BUSY_OPD                => BUSY_OPD,
+  989	
+  990	            BKPT_INSERT             => BKPT_INSERT,
+  991	            BKPT_DATA               => DATA_TO_CORE(15 downto 0),
+  992	            LOOP_EXIT               => LOOP_EXIT,
+  993	            LOOP_BSY                => LOOP_BSY,
+  994	
+  995	            OPD_ACK_MAIN            => OPD_ACK_MAIN,
+  996	            EW_ACK                  => EW_ACK,
+  997	
+  998	            ADR_IN_PC_1             => PC_L(1),
+  999	            PC_INC                  => PC_INC_OPCODE,
+ 1000	            PC_INC_EXH              => PC_INC_EXH,
+ 1001	            PC_ADR_OFFSET           => PC_ADR_OFFSET,
+ 1002	            PC_EW_OFFSET            => PC_EW_OFFSET,
+ 1003	            PC_OFFSET               => PC_OFFSET_OPD,
+ 1004	
+ 1005	            OPCODE_RD               => OPCODE_RD,
+ 1006	            OPCODE_RDY              => OPCODE_RDY,
+ 1007	            OPCODE_VALID            => OPCODE_VALID,
+ 1008	            OPCODE_DATA             => OPCODE_DATA_OPD,
+ 1009	
+ 1010	            IPIPE_FLUSH             => IPIPE_FLUSH,
+ 1011	
+ 1012	            -- Fault logic:
+ 1013	            OW_VALID                => OW_VALID,
+ 1014	            RC                      => RC,
+ 1015	            RB                      => RB,
+ 1016	            FC                      => FC,
+ 1017	            FB                      => FB,
+ 1018	
+ 1019	            -- Trap logic:
+ 1020	            SBIT                    => SBIT,
+ 1021	            TRAP_CODE               => TRAP_CODE_OPC,
+ 1022	
+ 1023	            -- System control:
+ 1024	            OP                      => OP,
+ 1025	            BIW_0                   => BIW_0,
+ 1026	            BIW_1                   => BIW_1,
+ 1027	            BIW_2                   => BIW_2,
+ 1028	            EXT_WORD                => EXT_WORD,
+ 1029	            REST_BIW_0              => REST_BIW_0
+ 1030	        );
+ 1031	end STRUCTURE;
+-- "wf68k10_top.vhd": errors: 0; warnings: 0.
