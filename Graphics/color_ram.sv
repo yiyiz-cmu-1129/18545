@@ -68,13 +68,13 @@ module color_ram(
             MCKF,
             CRAM);
 
-    bit [9:0] A_2149;
+    logic [9:0] A_2149;
     
     //This takes care of the ls244 which is not really needed
     //This needs to feed into the 2149 ram
     //It is the address for them this should be CRAM NOT CRAM_b but I am having issues so it is CRAM_b now
-    assign A_2149 = (CRAM_b) ? MA : {CRAS, CR_9d_Q};
-    bit [15:0] Din, Dout;
+    assign A_2149 = (CRAM) ? MA : {CRAS, CR_9d_Q};
+    logic [15:0] Din, Dout;
 
     control_2149 cr13D(
     Din[3:0],

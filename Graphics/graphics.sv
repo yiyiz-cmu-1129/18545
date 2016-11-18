@@ -122,9 +122,10 @@ logic [15:0] DATA;
 
 
 always_comb begin
-    if(~VBUS_b & BR_W_b) DATA = Data_from_VRAM;
-    else if((~(Addr_68k[22] | AS_b) & BW_R_b) | (BR_W_b & ~SLAP_b)) DATA = Data_from_VMEM;
-    else DATA = Data_from_68k;
+    if(Addr_68k[22:19] == 4'b0000) DATA = MD_to_VMEM; //Program rom read
+    else if(~VBUS_b & BR_W_b) DATA = Data_from_VRAM; //Reading from VRAM
+    else if((~(Addr_68k[22] | AS_b) & BW_R_b)) DATA = Data_from_VMEM; //Reading from the writable VMEM
+    else DATA = Data_from_68k; //Read from 68k
 end
 
 //assign DATA = MD_to_VMEM;
@@ -140,7 +141,7 @@ assign Data_to_VMEM = DATA;
 logic [15:0] VBD;
 logic reset2;
 
-assign VBD = (~CRAM_b & BR_W_b) ? VBD_from_CRAM : VBD_From_VRAM; //I am puting the mux out here because I hate tristates
+assign VBD = (~CRAM_b & ~BR_W_b) ? VBD_from_CRAM : VBD_From_VRAM; //DWW: Put a NOT in front of BR_W_b to correpsond to how it is in CRAMWR_b
 assign VBD_to_CRAM = (first) ? 16'd0 : VBD;
 assign VBD_To_VRAM = (first) ? 16'd0 : VBD;
 assign reset2 = reset | SYSRES_b;

@@ -220,7 +220,7 @@ logic [2:0] dnc3;
         RAM0_b = ~ADR_OUT[12] | AD_4J_Y[1]; //4f
         VRAMRD_b = RL_b | VRAM_b;
         VRAMWR = ~VRDTACK_b & ~VRAM_b & ~WL_b;
-        CRAMWR_b = CRAM_b | WL_b;
+        CRAMWR_b = CRAM_b | LDS_b | ~BR_W_b; //Test because the BR_W_b seems to be *exactly* backwards for CRAM
         MA18_b = ~(ADR_OUT[18]);
     end
 

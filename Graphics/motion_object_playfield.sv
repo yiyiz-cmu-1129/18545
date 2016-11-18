@@ -310,9 +310,10 @@ input logic clk, reset
         MCKR);
     
     logic [3:0] MOH_3L_out, MOH_4L_out, MOH_1L_out, MOH_2L_out;
-    logic [7:0] MOSRinA, MOSRinB;
+    logic [7:0] MOSRinA, MOSRinB, MOSRin;
+    
     control_2149 MOH_3L(
-        MOSRinA[3:0],
+        MOSRin[3:0],
         MOH_3L_out,
         {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
@@ -320,7 +321,7 @@ input logic clk, reset
         MCKR);   
      
     control_2149 MOH_4L(
-        MOSRinA[7:4],
+        MOSRin[7:4],
         MOH_4L_out,
         {1'b0, MOH_2F_Q[0], MOH_2H_Q, MOH_2J_Q},
         ACS_b,
@@ -328,7 +329,7 @@ input logic clk, reset
         MCKR);
 
     control_2149 MOH_1L(
-        MOSRinB[3:0],
+        MOSRin[3:0],
         MOH_1L_out,
         {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
@@ -336,7 +337,7 @@ input logic clk, reset
         MCKR);    
 
     control_2149 MOH_2L(
-        MOSRinB[7:4],
+        MOSRin[7:4],
         MOH_2L_out,
         {1'b0, MOH_1F_Q[0], MOH_1H_Q, MOH_1J_Q},
         BCS_b,
@@ -364,9 +365,10 @@ input logic clk, reset
     always_ff @(posedge MOP_4HD3_b) begin
         MOSR7 <= ~TI;
     end
+    assign MOSRin = {MOSR7, MOSR};
     always_comb begin
-        MOSRinB = (PADB) ? {MOH_2L_out, MOH_1L_out} : {MOSR7, MOSR}; //ls244
-        MOSRinA = (PADB_b) ? {MOH_4L_out, MOH_3L_out} : {MOSR7, MOSR}; //ls244
+        MOSRinB = {MOH_2L_out, MOH_1L_out}; //ls244
+        MOSRinA = {MOH_4L_out, MOH_3L_out}; //ls244
     end
 endmodule
 
