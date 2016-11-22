@@ -13,7 +13,7 @@ module cart(
     output logic [6:0] MOSR,
     input logic [17:0] MGRA, // GA17-0 which 0 does not exist
     input logic [1:0] MGRI,
-    output bit [7:0] PFSR,
+    output logic [7:0] PFSR,
     input logic [15:0] MA_from_VMEM, MD_from_VMEM,
     input logic reset, sysclk);
 

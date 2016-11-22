@@ -64,17 +64,7 @@ module video_ram(
 	logic [3:0] VRD_9H, VRD_8H, VRD_7H, VRD_6H, VRD_9J, VRD_8J, VRD_7J, VRD_6J;
 	//This is the tristate logic
 	logic [15:0] VRD_mem_out, VRD_mem_outA, VRD_mem_outB, VRDM;
-	assign VRD_mem_out = (VRAM_4K_Y_b) ? VRD_mem_outA : VRD_mem_outB;
-	assign VRDM = (~VRAM_4F_out) ? VRD_mem_out : 16'd0;
-	assign VRD_mem_outA[3:0] = VRD_9H;
-	assign VRD_mem_outB[3:0] = VRD_8H;
-	assign VRD_mem_outA[7:4] = VRD_7H;
-	assign VRD_mem_outB[7:4] = VRD_6H;
-	assign VRD_mem_outA[11:8] = VRD_9J;
-	assign VRD_mem_outB[11:8] = VRD_8J;
-	assign VRD_mem_outA[15:12] = VRD_7J;
-	assign VRD_mem_outB[15:12] = VRD_6J;
-
+	
 	ims1420 VRAM_9H(
 		ADDR,
 		VRD[3:0], //in
@@ -141,19 +131,43 @@ module video_ram(
 
     logic [7:0] VRAM_11K_Q, VRAM_11H_Q;
     logic [15:0] VBDA, VBDB, VRDC, VBDC;
-    assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
-    assign VRD = (rst) ? VRDC : 16'd0;
 
+
+    always_comb begin
+        if(~VRAMRD_b) VBD = VRD;
+        else if(~VBUS_b & ~BR_W_b) VBD = DATA;
+        else VBD = VBD_in;
+
+        if(VRAMWR) VRD = VBD;
+        else VRD = (VRAM_4K_Y_b) ? VRD_mem_outA : VRD_mem_outB;
+        
+    end
+    //assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
+
+   // assign VRD = (rst) ? VRDC : 16'd0;
+
+
+
+
+	assign VRD_mem_outA[3:0] = VRD_9H;
+	assign VRD_mem_outB[3:0] = VRD_8H;
+	assign VRD_mem_outA[7:4] = VRD_7H;
+	assign VRD_mem_outB[7:4] = VRD_6H;
+	assign VRD_mem_outA[11:8] = VRD_9J;
+	assign VRD_mem_outB[11:8] = VRD_8J;
+	assign VRD_mem_outA[15:12] = VRD_7J;
+	assign VRD_mem_outB[15:12] = VRD_6J;
+
+/*
     always_latch begin
     	if(~VRAC[2]) VBDB <= VRD;
     end
-
+*/
     //These are the LS244 chips
-    assign VRDC = (~VRAM_14E_out) ? VBD : VRDM;
+ //   assign VRDC = (~VRAM_14E_out) ? VBD : VRDM;
     
     //These are the LS245 chips
-    assign VBD = (~VBUS_b & ~BR_W_b) ? D_in : VBDA;
-    assign D_out = VBD;
+     assign D_out = VBD;
 
     ls174 VRAM_5K(
         MN,

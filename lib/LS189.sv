@@ -1,17 +1,19 @@
-module ls189(Q, A, D, W_b, S_b, CK);
+module ls189(Q, A, D, CK, S_b);
     input logic [3:0] Q;
     input logic [3:0] A;
     output logic [3:0] D;
-    input logic W_b, S_b, CK;
+    input logic CK, S_b;
 
-    logic [3:0] [3:0] mem;
+    logic [3:0] mem [15:0];
+
+    logic [3:0] Dspecial;
 
     always_ff @(posedge CK) begin
-        if (~S_b & ~W_b)
+        if (~S_b) begin
+            Dspecial <= mem[A];
             mem[A] <= ~Q;
-        if (~S_b)
-            D <= ~Q;
-        else
-            D <= 4'bzzzz;
+        end
     end
+
+    assign D = (~S_b) ? Dspecial : 4'bzzzz;
 endmodule

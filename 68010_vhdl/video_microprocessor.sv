@@ -152,17 +152,19 @@ logic VRDTACK_b;
     //END OF 574
     assign out_13e = ~rip_12m;//~(Q_574_b | rip_12m);
     //assign DTACKn = out_13e; //I found that this would need to be 0 for anything to work
-    assign DTACKn = 1'b0;//~out_13e;
+    assign DTACKn = out_13e;
 
-    assign c_12m = WAIT_b & AS & VRAM_b;
+
+    assign c_12m = WAIT_b & AS;// & VRAM_b; FIXME: The VRAM is there in the schematic, why?
+
     ls163a VM_12m(
-        {qd_12m, dnc}, 
-        rip_12m, 
-        {2'b11, IBUS_b, MEXT_b},
-        c_12m, 
-        qd_12m,
-        1'b1, 
-        out_13e,
+        {qd_12m, dnc}, //The is a 4 bit output we only care about the last bit being a 0
+        rip_12m, //This is sending a signal when the counter finishes
+        {2'b11, IBUS_b, MEXT_b}, //The values to load in
+        c_12m, //This is the syncronous reset
+        qd_12m, //This the load signal
+        1'b1, //Count enable signal
+        out_13e, //This is the bit which ensures we are not Waiting, doing VRAM access, and that the data on the address is valid, AS
         MCKR);
 
 /////////////////////Address Decoder//////////////////

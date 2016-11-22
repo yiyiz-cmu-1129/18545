@@ -170,7 +170,7 @@ cart last_hope(
 
 initial forever #5 clk = ~clk; //this is going to be the base clk
 
-always @(/*posedge MCKR*/ VID) begin
+always @(posedge MCKR) begin
     //$display("%t, ADR: %x Data:%x, Dout %x, Din %x, DTACK %b, reset %b, VID: %x, WH_b %b, WL_b %b, UDSn %b", 
    // 	$time, addr, GR.DATA, MD, mem[addr], GR.VM_68.DTACKn, GR.reset, VIDOUT, GR.WH_b, GR.WL_b, GR.VM_68.UDSn);
     //$display("Data_from_VRAM: %x, Data_from_VMEM: %x, Data_from_68k: %x", GR.Data_from_VRAM, GR.Data_from_VMEM, GR.Data_from_68k);
@@ -182,8 +182,8 @@ always @(/*posedge MCKR*/ VID) begin
         GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.VBD, GR.Grap_sad.A_2149, GR.CRAMWR_b, last_hope.GBA, GR.Grap_MP.GPC_3E_Y, {GR.Grap_MP.A_3F_Q[5], GR.Grap_MP.APIX[1:0], GR.Grap_MP.GPC_8c_out, GR.Grap_MP.PFSC, GR.Grap_MP.GPC_1c_out, GR.Grap_MP.MPX[7], GR.Grap_MP.MPX[0]});
     //$display("VBD %x, VRD: %x, AD:%b, CRAS %b",
     //    GR.VBD, GR.Grap_MP.VRD, GR.Grap_sad.A_2149, GR.CRAS);
-    //$display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x",
-    //    GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout);
+    $display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x, PFSR: %b, ",
+        GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout, last_hope.PFSR, GR.Grap_PH.PHS_6D_out);
     
 
 
@@ -194,8 +194,9 @@ always @(/*posedge MCKR*/ VID) begin
 
 
 
-    $display("MPX %b, MOSR: %b, BR_W_b: %b, LDSn %b, UDSn %b CRAM_b %01b", 
-        GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b, GR.VM_68.LDSn, GR.VM_68.UDSn, GR.VM_68.CRAM_b);
+    //$display("Address regs: %s, Data Regs %s", GR.VM_68.PRO.I_ADRESSREGISTERS.AR, GR.VM_68.PRO.I_DATA_REGISTERS.DR);
+    $display("MPX %b, MOSR: %b, BR_W_b: %b, LDSn %b, UDSn %b CRAM_b %01b, DTACKn %b, AS_b: %b, Clear: %b, Q: %b RIP: %b\n", 
+        GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b, GR.VM_68.LDSn, GR.VM_68.UDSn, GR.VM_68.CRAM_b, GR.VM_68.DTACKn, GR.VM_68.AS_b, GR.VM_68.c_12m, GR.VM_68.VM_12m.q, GR.VM_68.VM_12m.tc);
 /*
     $display("MOP_8m_pin9_out: %b, GPC_3E_Y: %b, PFX: %b, MPX: %b", 
         GR.Grap_MP.MOP_8m_pin9_out, GR.Grap_MP.GPC_3E_Y, GR.Grap_MP.PFX, GR.Grap_MP.MPX);

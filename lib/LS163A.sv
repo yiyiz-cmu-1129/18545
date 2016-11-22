@@ -9,7 +9,7 @@ module ls163a(q, tc, p, sr_b, pe_b, cet, cep, cp);
     input logic sr_b, pe_b, cet, cep, cp;
     
     logic count_en;
-    assign count_en = cep & cet & ~pe_b;
+    assign count_en = cep & cet & pe_b;
     assign tc = cet & q == 4'b1111;
     always_ff @(posedge cp) begin
         if(~sr_b) q <= 4'b0000;

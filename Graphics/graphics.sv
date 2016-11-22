@@ -120,10 +120,19 @@ assign addr = Addr_68k;
 //The following is a bunch of tristate stuff which wont work :(
 logic [15:0] DATA;
 
+logic OBF; // Output Buffer Full
+logic SELF_TEST;
+logic [4:0] SWITCH_INPUT; //These are the 4 switch inputs
+
+assign OBF = 1'b0;
+assign SELF_TEST = 1'b1;
+assign SWITCH_INPUT = 5'b11111;
+
 
 always_comb begin
     if(Addr_68k[22:19] == 4'b0000) DATA = MD_to_VMEM; //Program rom read
-    else if(~VBUS_b & BR_W_b) DATA = Data_from_VRAM; //Reading from VRAM
+    else if(Addr_68k[22:15] == 8'hF6) DATA = {8'hFF, OBF, SELF_TEST, SWITCH_INPUT[4], VBLANK_b, SWITCH_INPUT[3:0]};
+    else if(~VBUS_b & BR_W_b) DATA = VBD; //Reading from VRAM
     else if((~(Addr_68k[22] | AS_b) & BW_R_b)) DATA = Data_from_VMEM; //Reading from the writable VMEM
     else DATA = Data_from_68k; //Read from 68k
 end
@@ -140,8 +149,13 @@ assign Data_to_VMEM = DATA;
 
 logic [15:0] VBD;
 logic reset2;
+always_comb begin
+    if(~CRAM_b & BW_R_b) VBD = VBD_from_CRAM;
+    else if(~VBUS_b & BW_R_b) VBD = DATA;
+    else VBD = VBD_From_VRAM;
+end
 
-assign VBD = (~CRAM_b & ~BR_W_b) ? VBD_from_CRAM : VBD_From_VRAM; //DWW: Put a NOT in front of BR_W_b to correpsond to how it is in CRAMWR_b
+//assign VBD = (~CRAM_b & ~BR_W_b) ? VBD_from_CRAM : VBD_From_VRAM; //DWW: Put a NOT in front of BR_W_b to correpsond to how it is in CRAMWR_b
 assign VBD_to_CRAM = (first) ? 16'd0 : VBD;
 assign VBD_To_VRAM = (first) ? 16'd0 : VBD;
 assign reset2 = reset | SYSRES_b;
@@ -152,7 +166,7 @@ assign WAIT_b = 1'b1;
 
 video_microprocessor VM_68(
     //Outward facing logic
-    .A(Addr_68k),
+    .A(Addr_68k), //THis is Addr23-1 
     .D_out(Data_from_68k),
     .D_in(Data_to_68k),
     .R_b_Vs_W(R_b_Vs_W),
