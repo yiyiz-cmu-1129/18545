@@ -45,21 +45,29 @@ module video_ram(
 	assign VRAM_14E_out = ~(VRAMWR & VRAC[2]);
 
 	always_comb begin
+        ADDR = MA[12:1]; //VRAC can suck it, it also needs the PFV and PFH part but fuck it
+        /*
 		case(VRAC[1:0]) //This is not supposed to be negated but I am doing it anyway
 			2'b00: ADDR = {PFV[5:0], PFH[5:0]};
 			2'b01: ADDR = {1'b0, MPBS[2:0], VRAM_4HDL, H01_b, MN[5:0]};
 			2'b10: ADDR = {1'b1, SYSCLK_V[7:3], SYSCLK_H[7:2]};
 			2'b11: ADDR = MA[12:1];
 		endcase
+        */
 	end
 
+    /*
 	ls151 VR_4K(
 		{4'b1111, MA[13], 2'b11, 1'b0},
 		{1'b0, VRAC[1:0]},
 		VRAM_4K_Y,
 		VRAM_4K_Y_b,
         1'b0);
+*/
 
+    //VRAC SUCKS
+    assign VRAM_4K_Y = MA[13];
+    assign VRAM_4K_Y_b = ~MA[13];
 
 	logic [3:0] VRD_9H, VRD_8H, VRD_7H, VRD_6H, VRD_9J, VRD_8J, VRD_7J, VRD_6J;
 	//This is the tristate logic
@@ -135,7 +143,7 @@ module video_ram(
 
     always_comb begin
         if(~VRAMRD_b) VBD = VRD;
-        else if(~VBUS_b & ~BR_W_b) VBD = DATA;
+        else if(~VBUS_b & ~BR_W_b) VBD = D_in;
         else VBD = VBD_in;
 
         if(VRAMWR) VRD = VBD;
@@ -144,7 +152,7 @@ module video_ram(
     end
     //assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
 
-   // assign VRD = (rst) ? VRDC : 16'd0;
+    //assign VRD = (rst) ? VRDC : 16'd0;
 
 
 

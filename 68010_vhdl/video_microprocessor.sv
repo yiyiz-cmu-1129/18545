@@ -116,7 +116,7 @@ logic VRDTACK_b;
     assign AVECn = 1'b0;
     assign BRn = PRIO1;
     assign BGACKn = PRIO1;
-    assign K6800n = 1'b0; /////////////////This might need to be 1
+    assign K6800n = 1'b1; /////////////////This might need to be 1
     assign AS_b = ASn;
     //This is the LS20 13h chip
     assign VPAn = ~(AS & FC_OUT[2] & FC_OUT[1] & FC_OUT[0]);
@@ -124,7 +124,7 @@ logic VRDTACK_b;
     assign LDS_b = LDSn;
     assign UDS_b = UDSn;
     //This is the ls368 chip
-    assign BR_W_b = ~RWn;
+    assign BR_W_b = RWn; //THIS IS NOT ACCORDING TO THE SCHEMATIC, IT SHOULD BE NOT
     assign AS = ~ASn;
     assign BW_R_b = ~BR_W_b;
     //These are the 3 LS32 chips    
@@ -222,7 +222,7 @@ logic [2:0] dnc3;
         RAM0_b = ~ADR_OUT[12] | AD_4J_Y[1]; //4f
         VRAMRD_b = RL_b | VRAM_b;
         VRAMWR = ~VRDTACK_b & ~VRAM_b & ~WL_b;
-        CRAMWR_b = CRAM_b | LDS_b | ~BR_W_b; //Test because the BR_W_b seems to be *exactly* backwards for CRAM
+        CRAMWR_b = CRAM_b | LDS_b | BR_W_b; //Test because the BR_W_b seems to be *exactly* backwards for CRAM
         MA18_b = ~(ADR_OUT[18]);
     end
 

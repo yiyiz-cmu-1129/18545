@@ -110,8 +110,8 @@ entity WF68K10_OPCODE_DECODER is
 
         -- System control signals:
         OP                  : buffer OP_68K;
-        BIW_0               : buffer std_logic_vector(15 downto 0);
-        BIW_1               : out std_logic_vector(15 downto 0);
+        BIW_0               : buffer std_logic_vector(15 downto 0); 
+        BIW_1               : out std_logic_vector(15 downto 0); 
         BIW_2               : out std_logic_vector(15 downto 0);
         EXT_WORD            : out std_logic_vector(15 downto 0);
 

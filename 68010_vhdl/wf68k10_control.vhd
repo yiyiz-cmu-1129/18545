@@ -824,6 +824,7 @@ begin
                     '1' when (OP = ADD or OP = SUB) and BIW_0(8) = '0' else
                     '1' when (OP = ADDI or OP = SUBI) and BIW_0(8) = '0' else
                     '1' when (OP = AND_B or OP = OR_B) and BIW_0(8) = '0' else
+                    '1' when (OP = EOR) else
                     '1' when (OP = ANDI or OP = EORI or OP = ORI) and BIW_0(8) = '0' else
                     '1' when (OP = ASL or OP = ASR) and BIW_0(7 downto 6) /= "11" else
                     '1' when (OP = LSL or OP = LSR) and BIW_0(7 downto 6) /= "11" else
@@ -1764,12 +1765,20 @@ begin
                             else -- Memory to memory.
                                 NEXT_EXEC_WB_STATE <= WRITE_DEST;
                             end if;
-                        when ADD | SUB | AND_B | EOR | OR_B =>
+                        when ADD | SUB | OR_B | AND_B =>          --THIS IS A THINGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG I CHANGED THIS BECAUSE I DID --CDM
                             if BIW_0_WB(8) = '0' then
-                                NEXT_EXEC_WB_STATE <= WRITEBACK; -- Destination is register.
+                                NEXT_EXEC_WB_STATE <= WRITEBACK;
                             else
                                 NEXT_EXEC_WB_STATE <= WRITE_DEST; -- Destination is in memory.
                             end if;
+                        when EOR =>
+                            if BIW_0_WB(8) = '0' then
+                                NEXT_EXEC_WB_STATE <= WRITEBACK;
+                            elsif BIW_0_WB(5 downto 3) = "000" then -----CDM
+                                NEXT_EXEC_WB_STATE <= WRITEBACK; -- Destination is register.
+                            else
+                                NEXT_EXEC_WB_STATE <= WRITE_DEST; -- Destination is in memory.
+                            end if;                                     ------This was the stuff I changed up to -------------------------------------
                         when ADDA | SUBA | ANDI_TO_SR | DIVS | DIVU | EORI_TO_SR | 
                                                                       EXG | EXT | LEA | MOVE_TO_CCR | MOVE_TO_SR | MOVE_USP | MOVEA | MOVEC | MOVEQ | MULS | MULU | ORI_TO_SR | STOP | SWAP =>
                             NEXT_EXEC_WB_STATE <= WRITEBACK;

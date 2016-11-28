@@ -182,8 +182,8 @@ always @(posedge MCKR) begin
         GR.VM_68.ADR_OUT, GR.DATA, GR.VIDOUT, GR.VBD, GR.Grap_sad.A_2149, GR.CRAMWR_b, last_hope.GBA, GR.Grap_MP.GPC_3E_Y, {GR.Grap_MP.A_3F_Q[5], GR.Grap_MP.APIX[1:0], GR.Grap_MP.GPC_8c_out, GR.Grap_MP.PFSC, GR.Grap_MP.GPC_1c_out, GR.Grap_MP.MPX[7], GR.Grap_MP.MPX[0]});
     //$display("VBD %x, VRD: %x, AD:%b, CRAS %b",
     //    GR.VBD, GR.Grap_MP.VRD, GR.Grap_sad.A_2149, GR.CRAS);
-    $display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x, PFSR: %b, ",
-        GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout, last_hope.PFSR, GR.Grap_PH.PHS_6D_out);
+    $display("MA:%x, Din %x, CRAMWR_b %b, VBD_in: %x, Dout: %x, PFSR: %b, PHS_6D_out: %b, VRD: %016b",
+        GR.Grap_sad.MA, GR.Grap_sad.Din, GR.Grap_sad.CRAMWR_b, GR.Grap_sad.VBD_in, GR.Grap_sad.Dout, last_hope.PFSR, GR.Grap_PH.PHS_6D_out, GR.VRD);
     
 
 
@@ -194,18 +194,23 @@ always @(posedge MCKR) begin
 
 
 
-    //$display("Address regs: %s, Data Regs %s", GR.VM_68.PRO.I_ADRESSREGISTERS.AR, GR.VM_68.PRO.I_DATA_REGISTERS.DR);
-    $display("MPX %b, MOSR: %b, BR_W_b: %b, LDSn %b, UDSn %b CRAM_b %01b, DTACKn %b, AS_b: %b, Clear: %b, Q: %b RIP: %b\n", 
-        GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b, GR.VM_68.LDSn, GR.VM_68.UDSn, GR.VM_68.CRAM_b, GR.VM_68.DTACKn, GR.VM_68.AS_b, GR.VM_68.c_12m, GR.VM_68.VM_12m.q, GR.VM_68.VM_12m.tc);
+    $display("A0: %x, A1: %x, A2: %x, D0: %x, D1: %x, D2: %x, BIW_0_WB: %x, BIW_0: %x, DRSELWR1: %x, DRSELWR2: %x", GR.VM_68.PRO.I_ADRESSREGISTERS.AR[0], GR.VM_68.PRO.I_ADRESSREGISTERS.AR[1], GR.VM_68.PRO.I_ADRESSREGISTERS.AR[2], GR.VM_68.PRO.I_DATA_REGISTERS.DR[0], GR.VM_68.PRO.I_DATA_REGISTERS.DR[1], GR.VM_68.PRO.I_DATA_REGISTERS.DR[2], GR.VM_68.PRO.I_CONTROL.BIW_0_WB, GR.VM_68.PRO.I_CONTROL.BIW_0, GR.VM_68.PRO.I_DATA_REGISTERS.DR_SEL_WR_1, GR.VM_68.PRO.I_DATA_REGISTERS.DR_SEL_WR_2);
+
+     $display("DR_PNTR_WR_1: %x, DR_PNTR_WR_2: %x, DR_MARK_USED: %b, DRIN1: %x, DRIN2: %x", GR.VM_68.PRO.I_DATA_REGISTERS.DR_PNTR_WR_1, GR.VM_68.PRO.I_DATA_REGISTERS.DR_PNTR_WR_2, GR.VM_68.PRO.I_DATA_REGISTERS.DR_MARK_USED, GR.VM_68.PRO.I_DATA_REGISTERS.DR_IN_1, GR.VM_68.PRO.I_DATA_REGISTERS.DR_IN_2);
+
+
+    $display("MPX %b, MOSR: %b, BR_W_b: %b, LDSn %b, UDSn %b CRAM_b %01b, DTACKn %b, AS_b: %b, Clear: %b, Q: %b RIP: %b, RAM1_b: %b, RAM0_b: %b, MD: %x\n", 
+        GR.Grap_MP.MPX, GR.MOSR, GR.BR_W_b, GR.VM_68.LDSn, GR.VM_68.UDSn, GR.VM_68.CRAM_b, GR.VM_68.DTACKn, GR.VM_68.AS_b, GR.VM_68.c_12m, GR.VM_68.VM_12m.q, GR.VM_68.VM_12m.tc, GR.Grap_VM.RAM1_b, GR.Grap_VM.RAM0_b, GR.Grap_VM.MD);
 /*
     $display("MOP_8m_pin9_out: %b, GPC_3E_Y: %b, PFX: %b, MPX: %b", 
         GR.Grap_MP.MOP_8m_pin9_out, GR.Grap_MP.GPC_3E_Y, GR.Grap_MP.PFX, GR.Grap_MP.MPX);
     $display("A_5F_D: %b, H03_b: %b, MOP_2H: %b, MOP_1H: %b, A_3F_Q: %b", 
         GR.Grap_MP.A_5F_D, GR.Grap_MP.H03_b, GR.Grap_MP.MOP_2H, GR.Grap_MP.MOP_1H, GR.Grap_MP.A_3F_Q);
-//For debuging vmem
-    //$display("MD: %x, MD_in: %x, MD12L_out: %x, MD_from_CPU: %x, data_out: %x, G: %b",
-     //GR.Grap_VM.MD, GR.Grap_VM.MD_in, GR.Grap_VM.MD15L_out, GR.Grap_VM.MD_from_CPU, GR.Grap_VM.data_out, GR.Grap_VM.G);
 */
+//For debuging vmem
+   // $display("MD: %x, MD_in: %x, MD12L_out: %x, MD_from_CPU: %x, data_out: %x, G: %b",
+   //  GR.Grap_VM.MD, GR.Grap_VM.MD_in, GR.Grap_VM.MD15L_out, GR.Grap_VM.MD_from_CPU, GR.Grap_VM.data_out, GR.Grap_VM.G);
+
 end 
 
 
