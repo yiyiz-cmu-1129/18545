@@ -446,7 +446,7 @@ end case;
                     DATA_INMUX(15 downto 0) <= DATA_PORT_IN;
                 when others => -- Byte.
                     case ADR_OUT_I(0) is
-                        when '1' => DATA_INMUX(7 downto 0) <= DATA_PORT_IN(15 downto 8);
+                        when '0' => DATA_INMUX(7 downto 0) <= DATA_PORT_IN(15 downto 8); --CDM CHANGED THIS TO 0 from 1
                         when others => DATA_INMUX(7 downto 0) <= DATA_PORT_IN(7 downto 0);
                     end case;
             end case;

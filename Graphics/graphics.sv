@@ -44,7 +44,7 @@ input logic [7:0] CLKV, CLKH,
 input logic BUFCLR_b, CLK_4HD3_b, PFHST_b,
 input logic LMPD_b, VBKINT_b,
 output logic VBKACK_b,
-
+output logic UDS_b, LDS_b,
 
 //Interface with cartarage
 output logic SLAP_b, BR_W_b,
@@ -83,7 +83,7 @@ input logic first, reset3
 logic [22:0] Addr_68k;
 logic [15:0] Data_to_68k, Data_from_68k, Data_to_VRAM, Data_from_VRAM, Data_to_VMEM, Data_from_VMEM;
 logic [3:0] ROM_b;
-logic UDS_b, LDS_b, AS_b, R_b_Vs_W;
+logic AS_b, R_b_Vs_W;
 logic VRAMRD_b, VRAMWR;
 
 logic [15:0] VRD_from_VRAM, VBD_From_VRAM, VBD_To_VRAM;

@@ -49,7 +49,7 @@ input logic clk, reset
 /////////////////////Motion Object Horizontal Line Buffer Control Variables//////////////////
     logic MOH_1m_out, MOH_1d_out;
     logic PADB, PADB_b;
-
+    logic TI;
 
 ////////////////////Graphic Priority Control Variables//////////////////////
     

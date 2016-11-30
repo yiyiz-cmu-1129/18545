@@ -125,7 +125,7 @@ module system_clock(clk100, rst_b, VBKACK_b, MCKR, SC_1H, SC_2H, SC_4H, SC_8H,
 endmodule
 
 
-
+/*
 module system_clk_test;
 
   logic clk100; 
@@ -162,3 +162,4 @@ module system_clk_test;
   end 
 
 endmodule 
+*/

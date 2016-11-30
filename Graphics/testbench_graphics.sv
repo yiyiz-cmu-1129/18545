@@ -31,10 +31,16 @@ logic [6:0] MOSR;
 logic [7:0] PFSR;
 logic [1:0] MGRI;
 logic [17:0] MGRA;
-
+logic LDS_b, UDS_b;
 
 //This loads rom
 reg [15:0] mem[8388608:0];
+
+//This did not work at all
+//logic [15:0] memfix;
+
+//assign memfix = (UDS_b ^ LDS_b) ? {mem[addr][7:0], mem[addr][15:8]} : mem[addr];
+
 logic first;
 always_ff @(posedge MCKR, posedge first) begin
     if(first) $readmemh("../roms/68kmem.hex", mem);
@@ -68,6 +74,8 @@ graphics GR(
 .LMPD_b(LMPD_b),
 .VBKINT_b(VBKINT_b),
 .VBKACK_b(VBKACK_b),
+.UDS_b(UDS_b),
+.LDS_b(LDS_b),
 
 //Interface with cartarage
 .SLAP_b(SLAP_b), 
