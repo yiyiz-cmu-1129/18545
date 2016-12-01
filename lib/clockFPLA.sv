@@ -6,8 +6,8 @@ module clockFPLA(in, out, rst_b);
 
     logic [7:0] mem [256:0];
 
-    always_ff @(negedge rst_b)
-        $readmemh(rom, mem);
+
+    initial $readmemh(rom, mem);
 
     always_comb
         out = mem[in];

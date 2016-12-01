@@ -10,10 +10,8 @@ module ims1420(
 	
     always_ff @(posedge clk) begin
         if(~WE_b & ~E_b) begin
-            ram <= ram;
             ram[ADDR][3:0] <= DATA_IN;
         end
-        else ram <= ram;
     end
     assign DATA_OUT = (~E_b & WE_b) ? ram[ADDR][3:0] : 4'bzzzz;
 

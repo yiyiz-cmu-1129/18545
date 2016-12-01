@@ -8,8 +8,9 @@ module am27s29(
 
 	logic [7:0] mem[511:0];
 
+    initial $readmemh(rom, mem);
+
 	always_ff @(posedge clk) begin
-		if(reset) $readmemh(rom, mem);
 		data <= mem[addr];
 	end
 

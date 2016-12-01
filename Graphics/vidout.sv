@@ -1,4 +1,4 @@
-`include "vga.sv"
+//`include "vga.sv"
 
 module vidout(
     input logic [15:0] VIDOUT,

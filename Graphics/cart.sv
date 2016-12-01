@@ -1,8 +1,8 @@
 //`include "../lib/LS374.sv"
 //`include "../lib/LS378.sv"
-`include "../lib/LS299.sv"
-`include "../lib/AM27529.sv"
-`include "../lib/23256.sv"
+//`include "../lib/LS299.sv"
+//`include "../lib/AM27529.sv"
+//`include "../lib/23256.sv"
 
 
 module cart(

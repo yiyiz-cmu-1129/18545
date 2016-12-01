@@ -7,8 +7,9 @@ module control_23256(
 
 	logic [7:0] mem[32767:0];
 
+    initial $readmemh(rom, mem);
+
 	always_ff @(posedge clk) begin
-		if(reset) $readmemh(rom, mem);
 		data <= mem[addr];
 	end
 

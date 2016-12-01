@@ -21,13 +21,10 @@ module control_23128(Dout, A, CS_b, OE_b, clk, reset);
     logic [7:0] mem [16383:0];
     logic first;
 
-    always_ff @(posedge clk) begin //hmmmm    	
-        if(reset) begin
-    		Dout <= 8'b0000_0000;
-    		$readmemh(rom, mem);
-    	end
-        else Dout <= (~CS_b && ~OE_b) ? mem[A][7:0] : 8'bzzzz_zzzz;
+    initial $readmemh(rom, mem);
 
+    always_ff @(posedge clk) begin //hmmmm    	
+        Dout <= (~CS_b && ~OE_b) ? mem[A][7:0] : 8'bzzzz_zzzz;
     end
 endmodule
 

@@ -1,5 +1,7 @@
 Notes:
 -68k Bios goes into the 23128's on in the video microprocessor main memory
+-68kl is bytes 0-0x7ffff of the program ROM
+-68kh is bytes 0x80000-0x81fff of the program ROM
 -Alpha goes into the 23128 in Alphanumerics
 --Note this might be wrong, I put two 2**13 bit roms together to make this one
 --I think that only the bottom 2**13 bits are valid
