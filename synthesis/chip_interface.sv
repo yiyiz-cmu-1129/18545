@@ -39,8 +39,8 @@ logic LDS_b, UDS_b;
 logic [15:0] meml [131071:0];
 logic [15:0] memh [4095:0];
 logic [15:0] temph, templ;
-bit [3:0] counter;
-logic reset2;
+bit [4:0] counter;
+logic resetN2;
 initial $readmemh("../roms/roms/68khrom.hex", memh);
 initial $readmemh("../roms/roms/68klromSLIM.hex", meml);
 always_ff @(posedge MCKR) begin
@@ -48,25 +48,27 @@ always_ff @(posedge MCKR) begin
     templ <= meml[addr[16:0]];
  end
  
- always_ff @(posedge MCKR) begin
-    if(~reset) begin
-        counter <= 4'b0000;
-        reset2 <= 0;
+ always_ff @(posedge MCKR, posedge reset) begin
+    if(reset) begin
+        counter <= 5'd0;
+        resetN2 <= 0;
+        PR1 <= 1'b0;
     end
-    if(counter < 4'b1111) begin
-        reset2 <= 0;
-        counter <= counter + 4'b0001;
+    if(counter < 5'h1f) begin
+        resetN2 <= 0;
+        counter <= counter + 5'd1;
     end
     else begin
-        reset2 <= 1;
+        PR1 <= 1'b1;
+        resetN2 <= 1;
     end
  end
     
                
 assign MDin = (addr[18]) ? temph : templ;
-assign PR1 = 1'b1;
 
-assign reset3 = reset | reset2;
+
+//assign reset3 = reset | resetN2;
 
 vidout VO(.VIDOUT(VIDOUT),
           .CLOCK_100(CLOCK_100),
@@ -82,6 +84,7 @@ ila fuck(.clk(MCKR),
           .probe1(VIDOUT),
           .probe2(MDin),
           .probe3(addr));
+
 graphics GR(
 //The following are a bunch of clocks all from the system clock and sync generator
 .MCKF(MCKF), 
@@ -129,7 +132,7 @@ graphics GR(
 .MA_from_VMEM(MA), 
 .MD_from_VMEM(MD),
 .MD_to_VMEM(MDin),
-.reset(reset2),
+.reset(resetN2),
 
 //to sound stuff
 .SNDRST_b(), 
@@ -152,8 +155,8 @@ graphics GR(
 .PR1(PR1),
 //these are testing signals
 .addr(addr),
-.first(1'b0),
-.reset3(reset3)
+.first(~PR1),
+.reset3(resetN2)
 );
 
 system_clock that_feel(
@@ -207,7 +210,7 @@ cart last_hope(
     .PFSR(PFSR),
     .MA_from_VMEM(MA[15:0]), /////These are not used 
     .MD_from_VMEM(), /////These are not used 
-    .reset(~reset), 
+    .reset(~resetN2), 
     .sysclk(MCKR));
 
 

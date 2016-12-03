@@ -2,6 +2,39 @@
 `include "graphics.sv"
 `include "cart.sv"
 `include "../lib/clockFPLA.sv"
+`include "../lib/2149.sv"
+`include "../lib/23128.sv"
+`include "../lib/23256.sv"
+`include "../lib/2804A.sv"
+`include "../lib/6116.sv"
+`include "../lib/82S129.sv"
+`include "../lib/IMS1420.sv"
+`include "../lib/LS138.sv"
+`include "../lib/LS139.sv"
+`include "../lib/LS148.sv"
+`include "../lib/LS151.sv"
+`include "../lib/LS153.sv"
+`include "../lib/LS163A.sv"
+`include "../lib/LS174.sv"
+`include "../lib/LS189.sv"
+`include "../lib/LS191.sv"
+`include "../lib/LS194.sv"
+`include "../lib/LS197.sv"
+`include "../lib/LS257.sv"
+`include "../lib/LS259.sv"
+`include "../lib/LS273.sv"
+`include "../lib/LS299.sv"
+`include "../lib/LS368A.sv"
+`include "../lib/LS373.sv"
+`include "../lib/LS374.sv"
+`include "../lib/LS378.sv"
+`include "color_ram.sv"
+`include "motion_object_playfield.sv"
+`include "playfield_horizontal_scroll.sv"
+`include "video_mem.sv"
+`include "video_ram.sv"
+`include "../68010_vhdl/video_microprocessor.sv"
+//`include "../68010_vhdl/wf68k10_top.vhd"
 
 module testbench();
 
@@ -40,10 +73,10 @@ reg [15:0] mem[8388608:0];
 //logic [15:0] memfix;
 
 //assign memfix = (UDS_b ^ LDS_b) ? {mem[addr][7:0], mem[addr][15:8]} : mem[addr];
-
+logic temp, reset2;
 logic first;
-always_ff @(posedge MCKR, posedge first) begin
-    if(first) $readmemh("../roms/68kmem.hex", mem);
+always_ff @(posedge MCKR, posedge reset2) begin
+    if(reset2) $readmemh("../roms/68kmem.hex", mem);
     else if(~BR_W_b & PR1) mem[addr] <= MD;
 end
 
@@ -118,13 +151,13 @@ graphics GR(
 //these are testing signals
 .addr(addr),
 .first(first),
-.reset3(reset3)
+.reset3(reset)
 );
 
 logic rst;
 system_clock that_feel(
         .clk100(clk), 
-        .rst_b(rst),
+        .rst_b(rst),             ////////This is something
         .VBKACK_b(VBKACK_b),
         .MCKR(MCKR),
         .SC_1H(CLKH[0]),
@@ -221,9 +254,10 @@ always @(posedge MCKR) begin
 
 end 
 
+logic [4:0] counter;
 
 //clock generation
-logic temp;
+
 always_ff @(posedge CLK_1H) begin
     CLK_2HDL <= CLK_2H;
     CLK_4HDL_b <= ~CLK_4H;
@@ -232,13 +266,41 @@ always_ff @(posedge CLK_1H) begin
     CLK_4HD3_b <= ~CLK_4HDD;
 end
 
+ always_ff @(posedge MCKR) begin
+    if(reset2) begin
+        counter <= 5'd0;
+        reset <= 0;
+    end
+    if(counter < 5'h1f) begin
+        reset <= 0;
+        counter <= counter + 5'd1;
+    end
+    else begin
+        reset <= 1;
+    end
+ end
+assign PR1 = 1'b1;
+
+initial begin
+    rst = 1'b1;
+    reset2 = 1'b1;
+    clk = 1'b0;
+    #10 rst = 1'b0;
+    #10 rst = 1'b1;
+    #300;
+    reset2 = 1'b0;
+    #10000000;
+    $stop;
+end
+
+/*
 initial begin
 	clk = 1'b0;
     reset = 1'b0;
     reset3 = 1'b0;
     first = 1'b1;
     rst = 1'b0;
-    PR1 = 1'b0;
+    PR1 = 1'b1;
     #10 rst = 1'b1;
     first = 0;
     #30000 reset = 1'b1;
@@ -251,6 +313,7 @@ initial begin
     $stop;
     
 end
+*/
 
 always_comb begin
 	CLK_1H = CLKH[0];
