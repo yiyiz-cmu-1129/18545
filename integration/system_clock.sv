@@ -1,4 +1,3 @@
-`include "../lib/82S129.sv"
 module system_clock(clk100, rst_b, VBKACK_b, MCKR, SC_1H, SC_2H, SC_4H, SC_8H,
                     SC_16H, SC_32H, SC_64H, SC_128H, SC_256H,
                     PFHST_b, BUFCLR_b, NXL_b, LMPD_b, HBLANK_b, HSYNC, NXL_b_star, VRAC,
@@ -99,7 +98,7 @@ module system_clock(clk100, rst_b, VBKACK_b, MCKR, SC_1H, SC_2H, SC_4H, SC_8H,
                                                     .O(vFPLAout),
                                                     .CE1_b(1'b0),
                                                     .CE2_b(1'b0),
-                                                    .clk(SC_256H),
+                                                    .ck(SC_256H),
                                                     .reset(rst_b));
 
     always @(posedge ~SC_256H, negedge rst_b) begin

@@ -5,7 +5,7 @@ module ls148(A, EO, GS, I, EI);
 	input logic EI;
 
 	always_comb begin
-		case({EI, I})
+		casex({EI, I})
 			9'b1_xxxx_xxxx: {A, GS, EO} = 5'b11111;
 			9'b0_1111_1111: {A, GS, EO} = 5'b11110;
 			9'b0_0xxx_xxxx: {A, GS, EO} = 5'b00001;

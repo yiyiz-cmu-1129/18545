@@ -1,37 +1,3 @@
-`include "../lib/LS138.sv"
-`include "../lib/LS139.sv"
-`include "../lib/LS148.sv"
-`include "../lib/LS151.sv"
-`include "../lib/LS153.sv"
-`include "../lib/LS163A.sv"
-`include "../lib/LS174.sv"
-`include "../lib/LS189.sv"
-`include "../lib/LS191.sv"
-`include "../lib/LS194.sv"
-`include "../lib/LS197.sv"
-//`include "../lib/LS245.sv"
-`include "../lib/LS257.sv"
-`include "../lib/LS259.sv"
-`include "../lib/LS273.sv"
-`include "../lib/LS368A.sv"
-`include "../lib/LS373.sv"
-`include "../lib/LS374.sv"
-`include "../lib/LS378.sv"
-`include "../lib/2149.sv"
-`include "../lib/23128.sv"
-`include "../lib/6116.sv"
-//`include "../lib/82S129.sv"
-`include "../lib/IMS1420.sv"
-`include "color_ram.sv"
-`include "motion_object_playfield.sv"
-`include "playfield_horizontal_scroll.sv"
-`include "video_ram.sv"
-`include "video_mem.sv"
-`include "../68010_vhdl/video_microprocessor.sv"
-`include "vidout.sv"
-`default_nettype none
-
-
 module graphics(
 //The following are a bunch of clocks all from the system clock and sync generator
 input logic MCKF, MCKR,
@@ -128,7 +94,7 @@ logic [15:0] VBD;
 assign OBF = 1'b0;
 assign SELF_TEST = 1'b1;
 assign SWITCH_INPUT = 5'b11111;
-
+assign SYSRES_b = reset;
 
 always_comb begin
     if(Addr_68k[22:19] == 4'b0000) DATA = MD_to_VMEM; //Program rom read
@@ -365,19 +331,5 @@ color_ram Grap_sad(
     .MCKF(MCKF),       //Found in the System clock and Sync Generator
     .BR_W_b(BR_W_b),
     .clk(clk));    //Found in the hookups from the 68010 diagram
-
-
-vidout Grap_hope(
-    .VIDOUT(VIDOUT),
-    .CLOCK_100(1'b0),
-    .reset(first),
-    .MCKF(MCKF), 
-    .VIDBLANK_b(1'b0),
-    .HS(),
-    .VS(), 
-    .blank_N(),
-    .VGA_R(), 
-    .VGA_G(), 
-    .VGA_B());
 
 endmodule

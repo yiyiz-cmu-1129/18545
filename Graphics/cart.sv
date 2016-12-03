@@ -1,10 +1,3 @@
-//`include "../lib/LS374.sv"
-//`include "../lib/LS378.sv"
-//`include "../lib/LS299.sv"
-//`include "../lib/AM27529.sv"
-//`include "../lib/23256.sv"
-
-
 module cart(
     input logic SLAP_b, BR_W_b,
     input logic [3:0] ROMOUT_b,

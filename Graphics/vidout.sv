@@ -5,7 +5,7 @@ module vidout(
     input logic CLOCK_100, reset,
     input logic MCKF, VIDBLANK_b,
     output logic HS, VS, blank_N,
-    output logic [7:0] VGA_R, VGA_G, VGA_B);
+    output logic [3:0] VGA_R, VGA_G, VGA_B);
 
     logic CLOCK_50;
 
@@ -56,9 +56,9 @@ module vidout(
 
     always_comb begin
         if (vga_col < 336 && vga_row < 240) begin
-            VGA_R = {buffer[vga_col][vga_row][11:8], 4'b0000};
-            VGA_G = {buffer[vga_col][vga_row][7:4], 4'b0000};
-            VGA_B = {buffer[vga_col][vga_row][3:0], 4'b0000};
+            VGA_R = {buffer[vga_col][vga_row][11:8]};
+            VGA_G = {buffer[vga_col][vga_row][7:4]};
+            VGA_B = {buffer[vga_col][vga_row][3:0]};
         end
         else begin
             VGA_R = 0;
