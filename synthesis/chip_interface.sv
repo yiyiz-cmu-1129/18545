@@ -48,7 +48,7 @@ always_ff @(posedge MCKR) begin
     templ <= meml[addr[16:0]];
  end
  
- always_ff @(posedge MCKR, posedge reset) begin
+ always_ff @(posedge MCKR) begin
     if(reset) begin
         counter <= 5'd0;
         resetN2 <= 0;
@@ -79,11 +79,13 @@ vidout VO(.VIDOUT(VIDOUT),
           .VS(VS),
           .blank_N(),
           .VGA_R(VGA_R), .VGA_G(VGA_G), .VGA_B(VGA_B));
-ila fuck(.clk(MCKR),
+ila2 fuuck(.clk(MCKR),
           .probe0(MD),
           .probe1(VIDOUT),
           .probe2(MDin),
-          .probe3(addr));
+          .probe3(addr),
+          .probe4(reset),
+          .probe5(resetN2));
 
 graphics GR(
 //The following are a bunch of clocks all from the system clock and sync generator
