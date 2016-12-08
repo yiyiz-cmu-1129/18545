@@ -1,0 +1,186 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Tue Dec  6 20:06:26 2016
+# Process ID: 15821
+# Log file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/vivado.log
+# Journal file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/vivado.jou
+#-----------------------------------------------------------
+start_gui
+create_project project_3 /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3 -part xc7z020clg484-1
+set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
+add_files -norecurse {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/sin_lut.vh /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/phinc_lut.vh /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/exp_lut.vh}
+add_files -norecurse {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_noise_lfsr.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_acc.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_phinc_rom.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_sum_op.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_sh2.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/chip_interface.sv /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_phasegen.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_op.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_timers.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_exptable.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_lfo.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_lfo_lfsr.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_noise.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/trackball_top.sv /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_reg.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_sh.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_mmr.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_lin2exp.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/audio_helper.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_exp2lin.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_envelope.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_sintable.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/leta.vhdl /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_pm.v /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv}
+import_files -force -norecurse
+update_compile_order -fileset sources_1
+update_compile_order -fileset sources_1
+update_compile_order -fileset sim_1
+add_files -fileset constrs_1 -norecurse /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/zed_audio.xdc
+import_files -fileset constrs_1 /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/zed_audio.xdc
+remove_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd
+import_files -force -norecurse /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/audio_helper.vhd
+update_compile_order -fileset sources_1
+import_files -norecurse {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/adau1761_configuraiton_data.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/clocking.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/i2s_data_interface.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/i3c2.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/i2c.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/adau1761_izedboard.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/ADAU1761_interface.vhd /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/hdl/audio_top.vhd}
+update_compile_order -fileset sources_1
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_2/project_2.xpr
+update_compile_order -fileset sources_1
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.xpr
+remove_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd
+import_files -force -norecurse /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/audio_helper.vhd
+update_compile_order -fileset sources_1
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/zed_audio.xdc -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/constraints/zed_audio.xdc -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/constraints/zed_audio.xdc -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc -filesets [get_filesets *]
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/constraints/zed_audio.xdc -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc -filesets [get_filesets *]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/zedboard_audio/constraints/zed_audio.xdc -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc -filesets [get_filesets *]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_run impl_1
+open_hw
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+close_hw_target
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+current_hw_device [lindex [get_hw_devices] 1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/trackball_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/chip_interface.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv -filesets [get_filesets *]
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+reset_run impl_1 -prev_step 
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv -filesets [get_filesets *]
+close_hw_target
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv -filesets [get_filesets *]
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/jt51_top.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv -filesets [get_filesets *]
+reset_run synth_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+close_hw_target
+disconnect_hw_server localhost:3121
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+current_hw_device [lindex [get_hw_devices] 1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_2/project_2.xpr
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.xpr
+update_files -from_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/chip_interface.sv -to_files /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv -filesets [get_filesets *]
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_run impl_1
+open_hw
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+current_hw_device [lindex [get_hw_devices] 1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+close_hw_target
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.xpr
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_run impl_1
+open_hw
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+current_hw_device [lindex [get_hw_devices] 1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+close_project
+open_project /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_2/project_2.xpr
+reset_run synth_1
+launch_runs synth_1 -jobs 4
+wait_on_run synth_1
+launch_runs impl_1 -jobs 4
+wait_on_run impl_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
+open_hw
+connect_hw_server -url localhost:3121
+current_hw_target [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+set_property PARAM.FREQUENCY 6000000 [get_hw_targets */xilinx_tcf/Xilinx/000010ebe6b201]
+open_hw_target
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_2/project_2.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+current_hw_device [lindex [get_hw_devices] 1]
+refresh_hw_device -update_hw_probes false [lindex [get_hw_devices] 1]
+set_property PROBES.FILE {} [lindex [get_hw_devices] 1]
+set_property PROGRAM.FILE {/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_2/project_2.runs/impl_1/chip_interface.bit} [lindex [get_hw_devices] 1]
+program_hw_devices [lindex [get_hw_devices] 1]
+refresh_hw_device [lindex [get_hw_devices] 1]
+close_project

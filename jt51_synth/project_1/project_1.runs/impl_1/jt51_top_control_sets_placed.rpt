@@ -1,0 +1,103 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+--------------------------------------------------------------------------------------------------------------
+| Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
+| Date         : Sun Dec  4 18:29:24 2016
+| Host         : centennial.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+| Command      : report_control_sets -verbose -file jt51_top_control_sets_placed.rpt
+| Design       : jt51_top
+| Device       : xc7z020
+--------------------------------------------------------------------------------------------------------------
+
+Control Set Information
+
+Table of Contents
+-----------------
+1. Summary
+2. Flip-Flop Distribution
+3. Detailed Control Set Information
+
+1. Summary
+----------
+
++-------------------------------------------------------------------+-------+
+|                               Status                              | Count |
++-------------------------------------------------------------------+-------+
+| Number of unique control sets                                     |    50 |
+| Minimum Number of register sites lost to control set restrictions |   167 |
++-------------------------------------------------------------------+-------+
+
+
+2. Flip-Flop Distribution
+-------------------------
+
++--------------+-----------------------+------------------------+-----------------+--------------+
+| Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
++--------------+-----------------------+------------------------+-----------------+--------------+
+| No           | No                    | No                     |             436 |          142 |
+| No           | No                    | Yes                    |               3 |            2 |
+| No           | Yes                   | No                     |             106 |           43 |
+| Yes          | No                    | No                     |             112 |           32 |
+| Yes          | No                    | Yes                    |               0 |            0 |
+| Yes          | Yes                   | No                     |             528 |          148 |
++--------------+-----------------------+------------------------+-----------------+--------------+
+
+
+3. Detailed Control Set Information
+-----------------------------------
+
++----------------------------------------+-----------------------------------------------+--------------------------------------+------------------+----------------+
+|              Clock Signal              |                 Enable Signal                 |           Set/Reset Signal           | Slice Load Count | Bel Load Count |
++----------------------------------------+-----------------------------------------------+--------------------------------------+------------------+----------------+
+|  clk_IBUF_BUFG                         |                                               | rst_IBUF                             |                1 |              1 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | rst_IBUF                             |                1 |              2 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_pg/phase_base_VI[19]_i_1_n_0   |                1 |              2 |
+|  clk_IBUF_BUFG                         |                                               | uut/u_mmr/am_reg[6][0]               |                4 |              4 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/u_reg/busy_kon0                     | uut/rst_p1                           |                1 |              4 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_noise/u_zerosh/E[0]                     | uut/u_mmr/SR[0]                      |                1 |              5 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/u_reg/csm_cnt[4]_i_2_n_0            | uut/u_mmr/u_reg/csm_state[1]         |                1 |              5 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/u_reg/cnt0                          | uut/rst_p1                           |                1 |              5 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/load_A_i_2_n_0                      | uut/u_mmr/csm                        |                3 |              5 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/ne5_out                             |                                      |                2 |              6 |
+|  clk_IBUF_BUFG                         | uut/timers/timer_A/E[0]                       | uut/u_mmr/load_A                     |                1 |              6 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_eg/u_kssh/SS[0]                |                3 |              6 |
+|  clk_IBUF_BUFG                         | uut/u_lfo/am[6]_i_2_n_0                       | uut/u_mmr/am_reg[6][0]               |                4 |              7 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/lfo_pmd[6]_i_1_n_0                  | uut/rst_p1                           |                2 |              7 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/lfo_amd[6]_i_1_n_0                  | uut/rst_p1                           |                2 |              7 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/lfo_freq[7]_i_1_n_0                 | uut/rst_p1                           |                3 |              8 |
+|  clk_IBUF_BUFG                         | uut/u_lfo/pm[7]_i_1_n_0                       | uut/u_mmr/am_reg[6][0]               |                7 |              8 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/selected_register[7]_i_1_n_0        | uut/rst_p1                           |                2 |              8 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/value_B[7]_i_1_n_0                  | uut/rst_p1                           |                2 |              8 |
+|  clk_IBUF_BUFG                         | uut/u_mmr/cnt_reg[0]_2[0]                     |                                      |                2 |              8 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/value_A[9]_i_1_n_0                  | uut/rst_p1                           |                2 |              8 |
+|  clk_IBUF_BUFG                         | uut/u_mmr/cnt_reg[7][0]                       | uut/u_mmr/am_reg[6][0]               |                3 |              8 |
+|  clk_IBUF_BUFG                         | data_cnt[8]_i_1_n_0                           | rst_IBUF                             |                4 |              9 |
+|  clk_IBUF_BUFG                         | a0                                            |                                      |                2 |              9 |
+|  clk_IBUF_BUFG                         | uut/busy05_out                                | rst_IBUF                             |                4 |              9 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_eg/u_tlsh/SS[0]                |                3 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_eg/E[0]                                 | uut/u_mmr/limit_reg[9][0]            |                3 |             10 |
+|  clk_IBUF_BUFG                         | uut/timers/timer_B/E[0]                       | uut/u_mmr/load_B                     |                2 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_eg/eg_in[9]_i_2_n_0                     | uut/u_eg/u_aroffsh/SR[0]             |                6 |             10 |
+|  clk_IBUF_BUFG                         | uut/u_mmr/cnt_reg[0]_3[0]                     |                                      |                3 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_mmr/u_reg/up_rl                |                4 |             11 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_op/log_msb2[4]                 |                4 |             13 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_acc/u_zerosh/out_reg[0]                 | uut/u_acc/u_right/out[14]_i_1__0_n_0 |                2 |             15 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_acc/u_zerosh/out_reg[0]                 | uut/u_acc/u_left/out[14]_i_1_n_0     |                4 |             15 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_eg/eg_cnt[0]_i_1_n_0                    | uut/rst_p1                           |                4 |             15 |
+|  clk_IBUF_BUFG                         |                                               |                                      |                9 |             17 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_pg/phase_base_V[17]_i_1_n_0    |                4 |             18 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_acc/u_rlsh/sel                          |                                      |                5 |             19 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_acc/u_rlsh/sum_reg[18]                  |                                      |                5 |             19 |
+|  clk_IBUF_BUFG                         | uut/u_mmr/u_reg/zero                          | uut/rst_p1                           |                5 |             19 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/u_pg/u_kosh/Q[0]                 |                5 |             20 |
+|  clk_IBUF_BUFG                         | uut/u_mmr/E[0]                                | uut/u_mmr/am_reg[6][0]               |               10 |             21 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               | uut/rst_p1                           |               15 |             22 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0 |                                      |                8 |             22 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_op/u_con1sh/mod7_en                     |                                      |                8 |             28 |
+|  clk_IBUF_BUFG                         | uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]    |                                      |               10 |             32 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_mmr/u_reg/chdata_wr                     |                                      |                5 |             40 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0 | uut/rst_p1                           |               30 |            137 |
+|  clk_IBUF_BUFG                         | uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]    | uut/rst_p1                           |               39 |            159 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                               |                                      |              163 |            545 |
++----------------------------------------+-----------------------------------------------+--------------------------------------+------------------+----------------+
+
+

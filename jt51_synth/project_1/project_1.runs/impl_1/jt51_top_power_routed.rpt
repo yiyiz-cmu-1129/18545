@@ -1,0 +1,226 @@
+Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
+------------------------------------------------------------------------------------------------------------------
+| Tool Version     : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
+| Date             : Sun Dec  4 18:29:50 2016
+| Host             : centennial.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+| Command          : 
+| Design           : jt51_top
+| Device           : xc7z020clg484-1
+| Design State     : Routed
+| Grade            : commercial
+| Process          : typical
+| Characterization : Production
+------------------------------------------------------------------------------------------------------------------
+
+Power Report
+
+Table of Contents
+-----------------
+1. Summary
+1.1 On-Chip Components
+1.2 Power Supply Summary
+1.3 Confidence Level
+2. Settings
+2.1 Environment
+2.2 Clock Constraints
+3. Detailed Reports
+3.1 By Hierarchy
+
+1. Summary
+----------
+
++--------------------------+----------------------------------+
+| Total On-Chip Power (W)  | 30.416 (Junction temp exceeded!) |
+| Dynamic (W)              | 29.370                           |
+| Device Static (W)        | 1.046                            |
+| Effective TJA (C/W)      | 11.5                             |
+| Max Ambient (C)          | 0.0                              |
+| Junction Temperature (C) | 125.0                            |
+| Confidence Level         | Low                              |
+| Setting File             | ---                              |
+| Simulation Activity File | ---                              |
+| Design Nets Matched      | NA                               |
++--------------------------+----------------------------------+
+
+
+1.1 On-Chip Components
+----------------------
+
++--------------------------+-----------+----------+-----------+-----------------+
+| On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
++--------------------------+-----------+----------+-----------+-----------------+
+| Slice Logic              |    11.677 |     3111 |       --- |             --- |
+|   LUT as Logic           |     9.508 |     1262 |     53200 |            2.37 |
+|   LUT as Shift Register  |     0.781 |      147 |     17400 |            0.84 |
+|   CARRY4                 |     0.653 |      123 |     13300 |            0.92 |
+|   Register               |     0.598 |     1185 |    106400 |            1.11 |
+|   LUT as Distributed RAM |     0.078 |       20 |     17400 |            0.11 |
+|   BUFG                   |     0.052 |        2 |        32 |            6.25 |
+|   F7/F8 Muxes            |     0.007 |       10 |     53200 |            0.02 |
+|   Others                 |     0.000 |      134 |       --- |             --- |
+| Signals                  |    11.994 |     2349 |       --- |             --- |
+| Block RAM                |     3.002 |        3 |       140 |            2.14 |
+| I/O                      |     2.696 |       51 |       200 |           25.50 |
+| Static Power             |     1.046 |          |           |                 |
+| Total                    |    30.416 |          |           |                 |
++--------------------------+-----------+----------+-----------+-----------------+
+
+
+1.2 Power Supply Summary
+------------------------
+
++-----------+-------------+-----------+-------------+------------+
+| Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
++-----------+-------------+-----------+-------------+------------+
+| Vccint    |       1.000 |    26.842 |      26.541 |      0.301 |
+| Vccaux    |       1.800 |     0.321 |       0.220 |      0.100 |
+| Vcco33    |       3.300 |     0.000 |       0.000 |      0.000 |
+| Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
+| Vcco18    |       1.800 |     1.276 |       1.275 |      0.001 |
+| Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
+| Vcco135   |       1.350 |     0.000 |       0.000 |      0.000 |
+| Vcco12    |       1.200 |     0.000 |       0.000 |      0.000 |
+| Vccaux_io |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vccbram   |       1.000 |     0.167 |       0.137 |      0.030 |
+| MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
+| MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
+| MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vccpint   |       1.000 |     0.473 |       0.000 |      0.473 |
+| Vccpaux   |       1.800 |     0.010 |       0.000 |      0.010 |
+| Vccpll    |       1.800 |     0.003 |       0.000 |      0.003 |
+| Vcco_ddr  |       1.500 |     0.000 |       0.000 |      0.000 |
+| Vcco_mio0 |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vcco_mio1 |       1.800 |     0.000 |       0.000 |      0.000 |
+| Vccadc    |       1.800 |     0.020 |       0.000 |      0.020 |
++-----------+-------------+-----------+-------------+------------+
+
+
+1.3 Confidence Level
+--------------------
+
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| User Input Data             | Confidence | Details                                                | Action                                                                                                             |
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+| Design implementation state | High       | Design is routed                                       |                                                                                                                    |
+| Clock nodes activity        | Low        | User specified less than 75% of clocks                 | Provide missing clock activity with a constraint file, simulation results or by editing the "By Clock Domain" view |
+| I/O nodes activity          | Low        | More than 75% of inputs are missing user specification | Provide missing input activity with simulation results or by editing the "By Resource Type -> I/Os" view           |
+| Internal nodes activity     | Medium     | User specified less than 25% of internal nodes         | Provide missing internal nodes activity with simulation results or by editing the "By Resource Type" views         |
+| Device models               | High       | Device models are Production                           |                                                                                                                    |
+|                             |            |                                                        |                                                                                                                    |
+| Overall confidence level    | Low        |                                                        |                                                                                                                    |
++-----------------------------+------------+--------------------------------------------------------+--------------------------------------------------------------------------------------------------------------------+
+
+
+2. Settings
+-----------
+
+2.1 Environment
+---------------
+
++-----------------------+------------------------+
+| Ambient Temp (C)      | 25.0                   |
+| ThetaJA (C/W)         | 11.5                   |
+| Airflow (LFM)         | 250                    |
+| Heat Sink             | none                   |
+| ThetaSA (C/W)         | 0.0                    |
+| Board Selection       | medium (10"x10")       |
+| # of Board Layers     | 8to11 (8 to 11 Layers) |
+| Board Temperature (C) | 25.0                   |
++-----------------------+------------------------+
+
+
+2.2 Clock Constraints
+---------------------
+
++-------+--------+-----------------+
+| Clock | Domain | Constraint (ns) |
++-------+--------+-----------------+
+
+
+3. Detailed Reports
+-------------------
+
+3.1 By Hierarchy
+----------------
+
++------------------------------+-----------+
+| Name                         | Power (W) |
++------------------------------+-----------+
+| jt51_top                     |    29.370 |
+|   uut                        |    25.744 |
+|     timers                   |     0.306 |
+|       timer_A                |     0.150 |
+|       timer_B                |     0.156 |
+|     u_acc                    |     0.886 |
+|       u_left                 |     0.349 |
+|       u_right                |     0.359 |
+|       u_rlsh                 |     0.039 |
+|       u_zerosh               |     0.138 |
+|     u_eg                     |     4.248 |
+|       u_aroffsh              |     0.021 |
+|       u_cntsh                |     0.020 |
+|       u_egsh                 |     0.251 |
+|       u_kssh                 |     0.142 |
+|       u_statesh              |     0.152 |
+|       u_tlsh                 |     0.470 |
+|     u_lfo                    |     1.610 |
+|       amnoise[0].u_noise_am  |     0.104 |
+|       amnoise[1].u_noise_am  |     0.026 |
+|       amnoise[2].u_noise_am  |     0.035 |
+|       amnoise[3].u_noise_am  |     0.033 |
+|       amnoise[4].u_noise_am  |     0.037 |
+|       amnoise[5].u_noise_am  |     0.043 |
+|       amnoise[6].u_noise_am  |     0.046 |
+|       pmnoise[0].u_noise_pm  |     0.041 |
+|       pmnoise[1].u_noise_pm  |     0.042 |
+|       pmnoise[2].u_noise_pm  |     0.041 |
+|       pmnoise[3].u_noise_pm  |     0.026 |
+|       pmnoise[4].u_noise_pm  |     0.045 |
+|       pmnoise[5].u_noise_pm  |     0.022 |
+|       pmnoise[6].u_noise_pm  |     0.051 |
+|       pmnoise[7].u_noise_pm  |     0.050 |
+|     u_mmr                    |     5.754 |
+|       u_reg                  |     5.410 |
+|         reg_ch_reg_0_7_0_5   |     0.019 |
+|         reg_ch_reg_0_7_12_17 |     0.017 |
+|         reg_ch_reg_0_7_18_23 |     0.019 |
+|         reg_ch_reg_0_7_24_25 |     0.006 |
+|         reg_ch_reg_0_7_6_11  |     0.019 |
+|     u_noise                  |     0.352 |
+|       noise_lfsr[0].u_lfsr   |     0.013 |
+|       noise_lfsr[1].u_lfsr   |     0.007 |
+|       noise_lfsr[2].u_lfsr   |     0.010 |
+|       noise_lfsr[3].u_lfsr   |     0.050 |
+|       noise_lfsr[4].u_lfsr   |     0.060 |
+|       noise_lfsr[5].u_lfsr   |     0.019 |
+|       noise_lfsr[6].u_lfsr   |     0.021 |
+|       noise_lfsr[7].u_lfsr   |     0.009 |
+|       noise_lfsr[8].u_lfsr   |     0.026 |
+|       noise_lfsr[9].u_lfsr   |     0.019 |
+|       u_op31sh               |     0.107 |
+|       u_zerosh               |     0.004 |
+|     u_op                     |     5.512 |
+|       u_con1sh               |     0.792 |
+|       u_con7sh               |     0.155 |
+|       u_mod7sh               |     0.397 |
+|         shifter[0].u_sh1     |     0.008 |
+|         shifter[10].u_sh1    |     0.005 |
+|         shifter[11].u_sh1    |     0.005 |
+|         shifter[12].u_sh1    |     0.005 |
+|         shifter[13].u_sh1    |     0.008 |
+|         shifter[1].u_sh1     |     0.005 |
+|         shifter[2].u_sh1     |     0.008 |
+|         shifter[3].u_sh1     |     0.321 |
+|         shifter[4].u_sh1     |     0.005 |
+|         shifter[5].u_sh1     |     0.005 |
+|         shifter[6].u_sh1     |     0.005 |
+|         shifter[7].u_sh1     |     0.008 |
+|         shifter[8].u_sh1     |     0.005 |
+|         shifter[9].u_sh1     |     0.004 |
+|     u_pg                     |     6.854 |
+|       u_kosh                 |     0.204 |
+|       u_mulsh                |     2.386 |
+|       u_phsh                 |     0.716 |
++------------------------------+-----------+
+
+

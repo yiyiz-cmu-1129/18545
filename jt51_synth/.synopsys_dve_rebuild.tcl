@@ -1,0 +1,9 @@
+# DVE Simulation Rebuild/Restart Options
+# Saved on Thu Nov 10 22:23:46 2016
+set SIMSETUP::REBUILDOPTION 1
+set SIMSETUP::REBUILDCMD {vcs -sverilog -debug system_clock.sv}
+set SIMSETUP::REBUILDDIR {}
+set SIMSETUP::RESTOREBP 1
+set SIMSETUP::RESTOREDUMP 1
+set SIMSETUP::RESTOREFORCE 1
+set SIMSETUP::RESTORESPECMAN 0

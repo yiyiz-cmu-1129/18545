@@ -1,0 +1,1350 @@
+#-----------------------------------------------------------
+# Vivado v2015.2 (64-bit)
+# SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
+# IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
+# Start of session at: Sun Dec  4 18:28:30 2016
+# Process ID: 21542
+# Log file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.runs/synth_1/jt51_top.vds
+# Journal file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.runs/synth_1/vivado.jou
+#-----------------------------------------------------------
+source jt51_top.tcl -notrace
+Command: synth_design -top jt51_top -part xc7z020clg484-1
+Starting synth_design
+Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -126 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+---------------------------------------------------------------------------------
+Starting Synthesize : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1066.824 ; gain = 157.520 ; free physical = 6893 ; free virtual = 20315
+---------------------------------------------------------------------------------
+INFO: [Synth 8-638] synthesizing module 'jt51_top' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
+	Parameter WAIT_FREE bound to: 0 - type: integer 
+	Parameter WR_ADDR bound to: 1 - type: integer 
+	Parameter WR_VAL bound to: 2 - type: integer 
+	Parameter DONE bound to: 3 - type: integer 
+	Parameter WRITE bound to: 4 - type: integer 
+	Parameter BLANK bound to: 5 - type: integer 
+	Parameter rom bound to: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/input.hex - type: string 
+INFO: [Synth 8-638] synthesizing module 'jt51' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_timers' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_timer' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+	Parameter counter_width bound to: 10 - type: integer 
+	Parameter mult_width bound to: 6 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_timer' (1#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+INFO: [Synth 8-638] synthesizing module 'jt51_timer__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+	Parameter counter_width bound to: 8 - type: integer 
+	Parameter mult_width bound to: 10 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_timer__parameterized0' (1#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+INFO: [Synth 8-256] done synthesizing module 'jt51_timers' (2#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
+	Parameter b0 bound to: 3 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000000000 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000000010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized0' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000000110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized1' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000001100 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized2' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000010100 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized3' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000011110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized4' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000101010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized5' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000101000 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized6' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000101001 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized7' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000000110010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized8' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized9' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000001000011 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized9' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized10' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000001011100 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized10' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized11' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000001111101 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized11' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized12' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000010100110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized12' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized13' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+	Parameter init bound to: 32'sb00000000000000000000000011010111 
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized13' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_phasegen' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
+	Parameter dt2_lim2 bound to: 8'b01001011 
+	Parameter dt2_lim3 bound to: 8'b01011111 
+INFO: [Synth 8-638] synthesizing module 'jt51_phinc_rom' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_phinc_rom' (5#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_pm' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_pm' (6#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 4 - type: integer 
+	Parameter stages bound to: 5 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh' (7#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 20 - type: integer 
+	Parameter stages bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized0' (7#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 7 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized1' (7#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_phasegen' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_envelope' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
+	Parameter ATTACK bound to: 2'b00 
+	Parameter DECAY1 bound to: 2'b01 
+	Parameter DECAY2 bound to: 2'b10 
+	Parameter RELEASE bound to: 2'b11 
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 3 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized2' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 2 - type: integer 
+	Parameter stages bound to: 2 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized3' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 10 - type: integer 
+	Parameter stages bound to: 6 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized4' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 10 - type: integer 
+	Parameter stages bound to: 27 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized5' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 32 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized6' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 2 - type: integer 
+	Parameter stages bound to: 31 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized7' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_envelope' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_op' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
+	Parameter mod_lat bound to: 5 - type: integer 
+	Parameter mod_stg bound to: 35 - type: integer 
+	Parameter M1 bound to: 2'b00 
+	Parameter M2 bound to: 2'b01 
+	Parameter C1 bound to: 2'b10 
+	Parameter C2 bound to: 2'b11 
+INFO: [Synth 8-638] synthesizing module 'jt51_sintable' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sintable' (10#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_exptable' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_exptable' (11#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
+	Parameter width bound to: 14 - type: integer 
+	Parameter stages bound to: 8 - type: integer 
+INFO: [Synth 8-638] synthesizing module 'jt51_sh1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
+	Parameter stages bound to: 8 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh1' (12#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh2' (13#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 8 - type: integer 
+	Parameter stages bound to: 7 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized8' (13#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized9' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 5 - type: integer 
+	Parameter stages bound to: 6 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized9' (13#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_op' (14#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000000000000000000 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000000000001111110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized0' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000000001101000010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized1' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000000101010010010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized2' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000001100010110100 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized3' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000010111111101110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized4' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000000101001010000110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized5' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000001000001011000010 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized6' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000001100001011101000 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized7' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+	Parameter init bound to: 32'sb00000000000000010001010100111110 
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized8' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized10' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 5 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized10' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized11' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 7 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized11' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise.v:63]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
+INFO: [Synth 8-638] synthesizing module 'jt51_acc' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sum_op' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sum_op' (17#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized12' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 2 - type: integer 
+	Parameter stages bound to: 14 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized12' (17#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized13' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+	Parameter width bound to: 1 - type: integer 
+	Parameter stages bound to: 22 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized13' (17#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_exp2lin' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_exp2lin' (18#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_lin2exp' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:30]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lin2exp' (19#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_acc' (20#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_mmr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
+	Parameter REG_TEST bound to: 8'b00000001 
+	Parameter REG_TEST2 bound to: 8'b00000010 
+	Parameter REG_KON bound to: 8'b00001000 
+	Parameter REG_NOISE bound to: 8'b00001111 
+	Parameter REG_CLKA1 bound to: 8'b00010000 
+	Parameter REG_CLKA2 bound to: 8'b00010001 
+	Parameter REG_CLKB bound to: 8'b00010010 
+	Parameter REG_TIMER bound to: 8'b00010100 
+	Parameter REG_LFRQ bound to: 8'b00011000 
+	Parameter REG_PMDAMD bound to: 8'b00011001 
+	Parameter REG_CTW bound to: 8'b00011011 
+INFO: [Synth 8-638] synthesizing module 'jt51_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_reg' (21#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:145]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:191]
+INFO: [Synth 8-256] done synthesizing module 'jt51_mmr' (22#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51' (23#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51.v:22]
+INFO: [Synth 8-638] synthesizing module 'convert_16_to_24' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:128]
+INFO: [Synth 8-256] done synthesizing module 'convert_16_to_24' (24#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:128]
+INFO: [Synth 8-3876] $readmem data file '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/input.hex' is read successfully [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:59]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:72]
+INFO: [Synth 8-256] done synthesizing module 'jt51_top' (25#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
+---------------------------------------------------------------------------------
+Finished Synthesize : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1114.113 ; gain = 204.809 ; free physical = 6843 ; free virtual = 20267
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Constraint Validation : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1114.113 ; gain = 204.809 ; free physical = 6843 ; free virtual = 20267
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Loading Part and Timing Information
+---------------------------------------------------------------------------------
+Loading part: xc7z020clg484-1
+---------------------------------------------------------------------------------
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1122.113 ; gain = 212.809 ; free physical = 6843 ; free virtual = 20267
+---------------------------------------------------------------------------------
+INFO: [Device 21-403] Loading part xc7z020clg484-1
+INFO: [Synth 8-5544] ROM "sel_base2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:197]
+INFO: [Synth 8-5544] ROM "keycode_II1" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "phase_base_VI" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:133]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:183]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:326]
+INFO: [Synth 8-5544] ROM "eg_cnt" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "state_in_III" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "step_VI0" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "csm_state" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "csm_state" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "csm_cnt" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "busy_kon" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-4471] merging register 'set_run_A_reg' into 'load_A_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
+INFO: [Synth 8-5546] ROM "up_kon" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "value_B" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "value_A" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "load_A" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "lfo_freq" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "lfo_w" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "lfo_rst" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "nfrq" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "data_cnt" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "next" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5544] ROM "next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5544] ROM "wr_n" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
+INFO: [Synth 8-5562] The signal reg_op_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (5 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-5562] The signal data_cnt_reg_rep is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+---------------------------------------------------------------------------------
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1180.258 ; gain = 270.953 ; free physical = 6789 ; free virtual = 20212
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+No constraint files found.
+---------------------------------------------------------------------------------
+Start RTL Component Statistics 
+---------------------------------------------------------------------------------
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     20 Bit       Adders := 1     
+	   2 Input     20 Bit       Adders := 6     
+	   2 Input     19 Bit       Adders := 1     
+	   2 Input     17 Bit       Adders := 1     
+	   4 Input     14 Bit       Adders := 1     
+	   2 Input     14 Bit       Adders := 3     
+	   3 Input     14 Bit       Adders := 4     
+	   2 Input     13 Bit       Adders := 1     
+	   3 Input     12 Bit       Adders := 1     
+	   4 Input     11 Bit       Adders := 1     
+	   2 Input     11 Bit       Adders := 1     
+	   4 Input     10 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 5     
+	   3 Input     10 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 3     
+	   2 Input      8 Bit       Adders := 4     
+	   2 Input      7 Bit       Adders := 3     
+	   2 Input      6 Bit       Adders := 3     
+	   2 Input      5 Bit       Adders := 5     
+	   2 Input      2 Bit       Adders := 1     
++---XORs : 
+	   2 Input      1 Bit         XORs := 10    
++---XORs : 
+	                6 Bit    Wide XORs := 15    
++---Registers : 
+	              490 Bit    Registers := 1     
+	               42 Bit    Registers := 1     
+	               32 Bit    Registers := 21    
+	               31 Bit    Registers := 2     
+	               27 Bit    Registers := 10    
+	               26 Bit    Registers := 1     
+	               22 Bit    Registers := 1     
+	               20 Bit    Registers := 3     
+	               19 Bit    Registers := 15    
+	               18 Bit    Registers := 2     
+	               17 Bit    Registers := 10    
+	               16 Bit    Registers := 2     
+	               14 Bit    Registers := 4     
+	               13 Bit    Registers := 2     
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 15    
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 25    
+	                7 Bit    Registers := 13    
+	                6 Bit    Registers := 19    
+	                5 Bit    Registers := 20    
+	                4 Bit    Registers := 6     
+	                3 Bit    Registers := 8     
+	                2 Bit    Registers := 11    
+	                1 Bit    Registers := 90    
++---RAMs : 
+	               1K Bit         RAMs := 1     
+	              208 Bit         RAMs := 1     
++---ROMs : 
+	                              ROMs := 1     
++---Muxes : 
+	   2 Input     20 Bit        Muxes := 5     
+	   4 Input     20 Bit        Muxes := 2     
+	   2 Input     18 Bit        Muxes := 1     
+	   2 Input     16 Bit        Muxes := 3     
+	   4 Input     14 Bit        Muxes := 1     
+	   2 Input     14 Bit        Muxes := 8     
+	   2 Input     13 Bit        Muxes := 5     
+	   4 Input     11 Bit        Muxes := 1     
+	   2 Input     11 Bit        Muxes := 5     
+	   2 Input     10 Bit        Muxes := 12    
+	   4 Input     10 Bit        Muxes := 2     
+	  11 Input     10 Bit        Muxes := 1     
+	  14 Input     10 Bit        Muxes := 3     
+	   2 Input      9 Bit        Muxes := 1     
+	   4 Input      9 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 10    
+	  16 Input      8 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 2     
+	  10 Input      8 Bit        Muxes := 1     
+	   7 Input      8 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 12    
+	   4 Input      7 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 2     
+	   4 Input      5 Bit        Muxes := 3     
+	   8 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 7     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 4     
+	   7 Input      4 Bit        Muxes := 2     
+	   3 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	  14 Input      3 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 10    
+	   5 Input      2 Bit        Muxes := 1     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 66    
+	   4 Input      1 Bit        Muxes := 16    
+	  11 Input      1 Bit        Muxes := 10    
+	   3 Input      1 Bit        Muxes := 2     
+	   7 Input      1 Bit        Muxes := 11    
+---------------------------------------------------------------------------------
+Finished RTL Component Statistics 
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start RTL Hierarchical Component Statistics 
+---------------------------------------------------------------------------------
+Hierarchical RTL Component report 
+Module jt51_top 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      9 Bit       Adders := 2     
++---Registers : 
+	                9 Bit    Registers := 2     
+	                8 Bit    Registers := 1     
+	                4 Bit    Registers := 2     
+	                1 Bit    Registers := 3     
++---ROMs : 
+	                              ROMs := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 1     
+	   7 Input      8 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 3     
+	   7 Input      4 Bit        Muxes := 2     
+	   3 Input      4 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+	   7 Input      1 Bit        Muxes := 5     
+	   3 Input      1 Bit        Muxes := 1     
+Module jt51_timer 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     17 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     10 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_timer__parameterized0 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     19 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 1     
+	                1 Bit    Registers := 2     
++---Muxes : 
+	   2 Input     18 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_lfo_lfsr 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized0 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized1 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized2 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized3 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized4 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized5 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized6 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized7 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized8 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized9 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized10 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized11 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized12 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo_lfsr__parameterized13 
+Detailed RTL Component Info : 
++---XORs : 
+	                6 Bit    Wide XORs := 1     
++---Registers : 
+	               19 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_lfo 
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     11 Bit       Adders := 1     
+	   2 Input     11 Bit       Adders := 1     
+	   4 Input     10 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 3     
+	   2 Input      7 Bit       Adders := 2     
+	   2 Input      5 Bit       Adders := 1     
++---Registers : 
+	               11 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 2     
+	                7 Bit    Registers := 1     
+	                1 Bit    Registers := 4     
++---Muxes : 
+	   4 Input     11 Bit        Muxes := 1     
+	   2 Input     11 Bit        Muxes := 5     
+	   4 Input     10 Bit        Muxes := 1     
+	   2 Input     10 Bit        Muxes := 5     
+	  16 Input      8 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 5     
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 3     
+	   4 Input      7 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 3     
+	   4 Input      1 Bit        Muxes := 7     
+Module jt51_pm 
+Detailed RTL Component Info : 
++---Adders : 
+	   4 Input     14 Bit       Adders := 1     
+	   2 Input     14 Bit       Adders := 2     
+	   3 Input     14 Bit       Adders := 1     
+	   3 Input     10 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 1     
+	   2 Input      8 Bit       Adders := 1     
++---Muxes : 
+	   2 Input     13 Bit        Muxes := 4     
+	   2 Input      7 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 8     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_sh 
+Detailed RTL Component Info : 
++---Registers : 
+	                5 Bit    Registers := 4     
+Module jt51_sh__parameterized0 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 20    
+Module jt51_sh__parameterized1 
+Detailed RTL Component Info : 
++---Registers : 
+	                7 Bit    Registers := 1     
+Module jt51_phasegen 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     20 Bit       Adders := 1     
+	   2 Input     20 Bit       Adders := 1     
+	   3 Input     14 Bit       Adders := 3     
+	   2 Input     14 Bit       Adders := 1     
+	   2 Input      6 Bit       Adders := 3     
++---Registers : 
+	               20 Bit    Registers := 3     
+	               18 Bit    Registers := 2     
+	               14 Bit    Registers := 1     
+	               10 Bit    Registers := 1     
+	                6 Bit    Registers := 1     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 6     
++---Muxes : 
+	   2 Input     20 Bit        Muxes := 4     
+	   4 Input     14 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 1     
+	   4 Input      6 Bit        Muxes := 1     
+	   4 Input      5 Bit        Muxes := 1     
+	   8 Input      5 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_sh__parameterized2 
+Detailed RTL Component Info : 
++---Registers : 
+	                3 Bit    Registers := 1     
+Module jt51_sh__parameterized3 
+Detailed RTL Component Info : 
++---Registers : 
+	                2 Bit    Registers := 2     
+Module jt51_sh__parameterized4 
+Detailed RTL Component Info : 
++---Registers : 
+	                6 Bit    Registers := 10    
+Module jt51_sh__parameterized5 
+Detailed RTL Component Info : 
++---Registers : 
+	               27 Bit    Registers := 10    
+Module jt51_sh__parameterized6 
+Detailed RTL Component Info : 
++---Registers : 
+	               32 Bit    Registers := 1     
+Module jt51_sh__parameterized7 
+Detailed RTL Component Info : 
++---Registers : 
+	               31 Bit    Registers := 2     
+Module jt51_envelope 
+Detailed RTL Component Info : 
++---Adders : 
+	   3 Input     12 Bit       Adders := 1     
+	   2 Input     10 Bit       Adders := 3     
+	   2 Input      9 Bit       Adders := 1     
+	   2 Input      7 Bit       Adders := 1     
+	   2 Input      2 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 6     
+	                6 Bit    Registers := 2     
+	                5 Bit    Registers := 6     
+	                4 Bit    Registers := 1     
+	                3 Bit    Registers := 1     
+	                2 Bit    Registers := 5     
+	                1 Bit    Registers := 9     
++---Muxes : 
+	   2 Input     10 Bit        Muxes := 6     
+	   4 Input     10 Bit        Muxes := 1     
+	   2 Input      9 Bit        Muxes := 1     
+	   4 Input      9 Bit        Muxes := 1     
+	  10 Input      8 Bit        Muxes := 1     
+	   4 Input      8 Bit        Muxes := 1     
+	   2 Input      7 Bit        Muxes := 1     
+	   2 Input      5 Bit        Muxes := 4     
+	   4 Input      5 Bit        Muxes := 2     
+	   4 Input      4 Bit        Muxes := 1     
+	   2 Input      4 Bit        Muxes := 1     
+	   2 Input      3 Bit        Muxes := 1     
+	   5 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 6     
+Module jt51_sh1 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_sh__parameterized8 
+Detailed RTL Component Info : 
++---Registers : 
+	                7 Bit    Registers := 8     
+Module jt51_sh__parameterized9 
+Detailed RTL Component Info : 
++---Registers : 
+	                6 Bit    Registers := 5     
+Module jt51_op 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     20 Bit       Adders := 5     
+	   2 Input     13 Bit       Adders := 1     
++---Registers : 
+	              490 Bit    Registers := 1     
+	               14 Bit    Registers := 1     
+	               13 Bit    Registers := 2     
+	               10 Bit    Registers := 3     
+	                8 Bit    Registers := 2     
+	                5 Bit    Registers := 2     
+	                4 Bit    Registers := 1     
++---Muxes : 
+	   4 Input     20 Bit        Muxes := 2     
+	   2 Input     20 Bit        Muxes := 1     
+	   2 Input     14 Bit        Muxes := 5     
+	   2 Input     13 Bit        Muxes := 1     
+	   2 Input      8 Bit        Muxes := 1     
+Module jt51_sh__parameterized10 
+Detailed RTL Component Info : 
++---Registers : 
+	                5 Bit    Registers := 1     
+Module jt51_sh__parameterized11 
+Detailed RTL Component Info : 
++---Registers : 
+	                7 Bit    Registers := 1     
+Module jt51_noise_lfsr 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized0 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized1 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized2 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized3 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized4 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized5 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized6 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized7 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise_lfsr__parameterized8 
+Detailed RTL Component Info : 
++---XORs : 
+	   2 Input      1 Bit         XORs := 1     
++---Registers : 
+	               17 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
+Module jt51_noise 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
+	                5 Bit    Registers := 1     
+	                1 Bit    Registers := 1     
++---Muxes : 
+	  11 Input     10 Bit        Muxes := 1     
+	  11 Input      1 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_sum_op 
+Detailed RTL Component Info : 
++---Registers : 
+	               16 Bit    Registers := 1     
++---Muxes : 
+	   2 Input     16 Bit        Muxes := 1     
+	   2 Input     14 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module jt51_sh__parameterized12 
+Detailed RTL Component Info : 
++---Registers : 
+	               14 Bit    Registers := 2     
+Module jt51_sh__parameterized13 
+Detailed RTL Component Info : 
++---Registers : 
+	               22 Bit    Registers := 1     
+Module jt51_lin2exp 
+Detailed RTL Component Info : 
++---Muxes : 
+	  14 Input     10 Bit        Muxes := 1     
+	  14 Input      3 Bit        Muxes := 1     
+Module jt51_acc 
+Detailed RTL Component Info : 
++---Muxes : 
+	   2 Input     14 Bit        Muxes := 1     
+Module jt51_reg 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input      5 Bit       Adders := 3     
++---Registers : 
+	               42 Bit    Registers := 1     
+	               26 Bit    Registers := 1     
+	                5 Bit    Registers := 3     
+	                4 Bit    Registers := 1     
+	                2 Bit    Registers := 2     
+	                1 Bit    Registers := 7     
++---RAMs : 
+	               1K Bit         RAMs := 1     
+	              208 Bit         RAMs := 1     
++---Muxes : 
+	   2 Input      8 Bit        Muxes := 2     
+	   2 Input      7 Bit        Muxes := 5     
+	   2 Input      6 Bit        Muxes := 2     
+	   2 Input      5 Bit        Muxes := 2     
+	   3 Input      2 Bit        Muxes := 1     
+	   2 Input      2 Bit        Muxes := 1     
+	   4 Input      1 Bit        Muxes := 5     
+	   2 Input      1 Bit        Muxes := 14    
+	   3 Input      1 Bit        Muxes := 1     
+Module jt51_mmr 
+Detailed RTL Component Info : 
++---Registers : 
+	               10 Bit    Registers := 1     
+	                8 Bit    Registers := 3     
+	                7 Bit    Registers := 2     
+	                5 Bit    Registers := 1     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 27    
++---Muxes : 
+	  14 Input     10 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 12    
+	  11 Input      1 Bit        Muxes := 9     
+	   7 Input      1 Bit        Muxes := 6     
+	   4 Input      1 Bit        Muxes := 4     
+Module jt51 
+Detailed RTL Component Info : 
++---Registers : 
+	                8 Bit    Registers := 2     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 10    
++---Muxes : 
+	   2 Input      1 Bit        Muxes := 4     
+---------------------------------------------------------------------------------
+Finished RTL Hierarchical Component Statistics
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Part Resource Summary
+---------------------------------------------------------------------------------
+Part Resources:
+DSPs: 220 (col length:60)
+BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
+---------------------------------------------------------------------------------
+Finished Part Resource Summary
+---------------------------------------------------------------------------------
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:11 ; elapsed = 00:00:11 . Memory (MB): peak = 1234.258 ; gain = 324.953 ; free physical = 6738 ; free virtual = 20162
+---------------------------------------------------------------------------------
+Start Cross Boundary Optimization
+---------------------------------------------------------------------------------
+INFO: [Synth 8-4471] merging register 'amnoise[1].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[2].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[3].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[4].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[5].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[6].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[0].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[1].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[2].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[3].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[4].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[5].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[6].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[7].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-5544] ROM "sel_base2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-4471] merging register 'noise_lfsr[1].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[2].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[3].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[4].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[5].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[6].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[7].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[8].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[9].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-5544] ROM "phase_base_VI" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
+INFO: [Synth 8-5546] ROM "state_in_III" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5562] The signal phase_addr_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-5562] The signal pow_addr_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+INFO: [Synth 8-4471] merging register 'set_run_B_reg' into 'load_B_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_1/project_1.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
+INFO: [Synth 8-5546] ROM "data_cnt" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5546] ROM "next" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-5562] The signal data_cnt_reg_rep is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[7] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[6] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[5] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[4] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[3] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[2] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[1] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port left_to_board[0] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[7] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[6] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[5] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[4] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[3] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[2] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[1] driven by constant 0
+WARNING: [Synth 8-3917] design jt51_top has port right_to_board[0] driven by constant 0
+---------------------------------------------------------------------------------
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1242.266 ; gain = 332.961 ; free physical = 6727 ; free virtual = 20151
+---------------------------------------------------------------------------------
+Finished Parallel Reinference  : Time (s): cpu = 00:00:12 ; elapsed = 00:00:12 . Memory (MB): peak = 1242.266 ; gain = 332.961 ; free physical = 6727 ; free virtual = 20151
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+INFO: [Synth 8-5562] The signal u_reg/reg_op_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (5 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+ROM:
++---------------+------------+---------------+----------------+
+|Module Name    | RTL Object | Depth x Width | Implemented As | 
++---------------+------------+---------------+----------------+
+|jt51_phinc_rom | rom        | 1024x12       | LUT            | 
+|jt51_sintable  | rom__1     | 256x12        | LUT            | 
+|jt51_exptable  | rom__2     | 256x13        | LUT            | 
+|jt51_top       | extrom     | 256x16        | Block RAM      | 
+|jt51_phasegen  | extrom__1  | 1024x12       | Block RAM      | 
+|jt51_op        | extrom__2  | 256x12        | Block RAM      | 
+|jt51_op        | extrom__3  | 256x13        | Block RAM      | 
+|jt51_top       | extrom     | 256x16        | Block RAM      | 
++---------------+------------+---------------+----------------+
+
+
+Block RAM:
++------------+------------------+------------------------+---+---+------------------------+---+---+--------------+--------+--------+----------------------------------+
+|Module Name | RTL Object       | PORT A (Depth x Width) | W | R | PORT B (Depth x Width) | W | R | OUT_REG      | RAMB18 | RAMB36 | Hierarchical Name                | 
++------------+------------------+------------------------+---+---+------------------------+---+---+--------------+--------+--------+----------------------------------+
+|jt51_top    | u_reg/reg_op_reg | 32 x 42(READ_FIRST)    | W |   | 32 x 42(WRITE_FIRST)   |   | R | Port A and B | 0      | 1      | jt51_top/jt51/jt51_mmr/extram__5 | 
++------------+------------------+------------------------+---+---+------------------------+---+---+--------------+--------+--------+----------------------------------+
+
+Note: The table shows the Block RAMs at the current stage of the synthesis flow. Some Block RAMs may be reimplemented as non Block RAM primitives later in the synthesis flow. Multiple instantiated Block RAMs are reported only once. "Hierarchical Name" reflects the Block RAM name as it appears in the hierarchical module and only part of it is displayed.
+Distributed RAM: 
++------------+------------------+-----------+----------------------+--------------+-------------------------------+
+|Module Name | RTL Object       | Inference | Size (Depth x Width) | Primitives   | Hierarchical Name             | 
++------------+------------------+-----------+----------------------+--------------+-------------------------------+
+|jt51_top    | u_reg/reg_ch_reg | Implied   | 8 x 26               | RAM32M x 5   | jt51_top/jt51/jt51_mmr/ram__1 | 
++------------+------------------+-----------+----------------------+--------------+-------------------------------+
+
+Note: The table shows the Distributed RAMs at the current stage of the synthesis flow. Some Distributed RAMs may be reimplemented as non Distributed RAM primitives later in the synthesis flow. Multiple instantiated RAMs are reported only once. "Hierarchical Name" reflects the Distributed RAM name as it appears in the hierarchical module and only part of it is displayed.
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+No constraint files found.
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (\next_reg[3] )
+INFO: [Synth 8-3333] propagating constant 0 across sequential element (cs_n_reg)
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[18] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[17] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[16] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[15] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[14] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[13] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[12] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[11] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[10] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[9] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[8] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[7] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[6] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[5] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[4] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[3] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[2] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[1] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\amnoise[0].u_noise_am/bb_reg[0] ) is unused and will be removed from module jt51_lfo.
+WARNING: [Synth 8-3332] Sequential element (\dt1_kf_III_reg[0] ) is unused and will be removed from module jt51_phasegen.
+WARNING: [Synth 8-3332] Sequential element (\dt1_kf_III_reg[1] ) is unused and will be removed from module jt51_phasegen.
+WARNING: [Synth 8-3332] Sequential element (\octave_III_reg[0] ) is unused and will be removed from module jt51_phasegen.
+WARNING: [Synth 8-3332] Sequential element (\octave_III_reg[1] ) is unused and will be removed from module jt51_phasegen.
+WARNING: [Synth 8-3332] Sequential element (\octave_III_reg[2] ) is unused and will be removed from module jt51_phasegen.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[1].bits_reg[1][0] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[0].bits_reg[0][0] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[1].bits_reg[1][1] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[0].bits_reg[0][1] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[1].bits_reg[1][2] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\u_statesh/bit_shifter[0].bits_reg[0][2] ) is unused and will be removed from module jt51_envelope.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[489] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[488] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[487] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[475] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[474] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[473] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[461] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[460] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[459] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[447] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[446] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[445] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[433] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[432] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[431] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[419] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[418] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[417] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[405] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[404] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[403] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[391] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[390] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (\mod_reg[389] ) is unused and will be removed from module jt51_op.
+WARNING: [Synth 8-3332] Sequential element (ct1_reg) is unused and will be removed from module jt51_mmr.
+WARNING: [Synth 8-3332] Sequential element (ct2_reg) is unused and will be removed from module jt51_mmr.
+WARNING: [Synth 8-3332] Sequential element (enable_irq_A_reg) is unused and will be removed from module jt51_mmr.
+WARNING: [Synth 8-3332] Sequential element (enable_irq_B_reg) is unused and will be removed from module jt51_mmr.
+WARNING: [Synth 8-3332] Sequential element (\next_reg[3] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\next_reg[2] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\state_reg[3] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (cs_n_reg) is unused and will be removed from module jt51_top.
+---------------------------------------------------------------------------------
+Start Area Optimization
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Area Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1281.312 ; gain = 372.008 ; free physical = 6688 ; free virtual = 20112
+---------------------------------------------------------------------------------
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1281.312 ; gain = 372.008 ; free physical = 6688 ; free virtual = 20112
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1281.312 ; gain = 372.008 ; free physical = 6688 ; free virtual = 20112
+---------------------------------------------------------------------------------
+Start Timing Optimization
+---------------------------------------------------------------------------------
+No constraint files found.
+---------------------------------------------------------------------------------
+Finished Timing Optimization : Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1281.312 ; gain = 372.008 ; free physical = 6688 ; free virtual = 20112
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Technology Mapping
+---------------------------------------------------------------------------------
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][0] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][1] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][2] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][3] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][4] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_pg/u_kosh/bit_shifter[0].bits_reg[0][0] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][5] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_pg/u_kosh/bit_shifter[0].bits_reg[0][1] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][6] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_pg/u_kosh/bit_shifter[0].bits_reg[0][2] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][7] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_pg/u_kosh/bit_shifter[0].bits_reg[0][3] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][8] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_pg/u_kosh/bit_shifter[0].bits_reg[0][4] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][9] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][10] ) is unused and will be removed from module jt51_top.
+WARNING: [Synth 8-3332] Sequential element (\uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][11] ) is unused and will be removed from module jt51_top.
+INFO: [Synth 8-4480] The timing for the instance \uut/u_pg/phinc_addr_III_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-4480] The timing for the instance \uut/u_op/phase_addr_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-4480] The timing for the instance \uut/u_mmr/u_reg/reg_op_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+INFO: [Synth 8-4480] The timing for the instance data_cnt_reg_rep (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
+---------------------------------------------------------------------------------
+Finished Technology Mapping : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6679 ; free virtual = 20103
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start IO Insertion
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Final Netlist Cleanup
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished IO Insertion : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6679 ; free virtual = 20103
+---------------------------------------------------------------------------------
+
+Report Check Netlist: 
++------+------------------+-------+---------+-------+------------------+
+|      |Item              |Errors |Warnings |Status |Description       |
++------+------------------+-------+---------+-------+------------------+
+|1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
++------+------------------+-------+---------+-------+------------------+
+---------------------------------------------------------------------------------
+Start Renaming Generated Instances
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6679 ; free virtual = 20103
+---------------------------------------------------------------------------------
+
+Report RTL Partitions: 
++-+--------------+------------+----------+
+| |RTL Partition |Replication |Instances |
++-+--------------+------------+----------+
++-+--------------+------------+----------+
+---------------------------------------------------------------------------------
+Start Rebuilding User Hierarchy
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6680 ; free virtual = 20104
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6680 ; free virtual = 20104
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6680 ; free virtual = 20104
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+
+Static Shift Register:
++------------+----------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|Module Name | RTL Name                                           | Length | Width | Reset Signal | Pull out first Reg | Pull out last Reg | SRL16E | SRLC32E | 
++------------+----------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+|jt51_top    | uut/u_pg/dt1_V_reg[2]                              | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_pg/u_mulsh/bit_shifter[0].bits_reg[0][4]     | 5      | 4     | NO           | NO                 | YES               | 4      | 0       | 
+|jt51_top    | uut/u_pg/u_phsh/bit_shifter[0].bits_reg[0][31]     | 31     | 20    | NO           | NO                 | YES               | 0      | 20      | 
+|jt51_top    | uut/u_eg/u_aroffsh/bit_shifter[0].bits_reg[0][2]   | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_eg/u_statesh/bit_shifter[0].bits_reg[0][30]  | 28     | 2     | NO           | NO                 | YES               | 0      | 2       | 
+|jt51_top    | uut/u_eg/u_egsh/bit_shifter[0].bits_reg[0][26]     | 27     | 10    | NO           | NO                 | YES               | 0      | 10      | 
+|jt51_top    | uut/u_eg/eg_out_VI_reg[9]                          | 4      | 10    | NO           | NO                 | YES               | 10     | 0       | 
+|jt51_top    | uut/u_eg/u_cntsh/bit_shifter[0].bits_reg[0][31]    | 32     | 1     | NO           | NO                 | YES               | 0      | 1       | 
+|jt51_top    | uut/u_eg/u_tlsh/bit_shifter[0].bits_reg[0][5]      | 6      | 10    | NO           | NO                 | YES               | 10     | 0       | 
+|jt51_top    | uut/u_op/sign_reg[3]                               | 5      | 1     | NO           | YES                | YES               | 1      | 0       | 
+|jt51_top    | uut/u_op/mod_reg[486]                              | 8      | 33    | NO           | NO                 | YES               | 33     | 0       | 
+|jt51_top    | uut/u_op/mod_reg[377]                              | 26     | 3     | NO           | NO                 | YES               | 0      | 3       | 
+|jt51_top    | uut/u_op/mod_reg[150]                              | 10     | 11    | NO           | NO                 | YES               | 11     | 0       | 
+|jt51_top    | uut/u_op/u_con1sh/bit_shifter[5].bits_reg[5][6]    | 7      | 8     | NO           | NO                 | YES               | 8      | 0       | 
+|jt51_top    | uut/u_op/u_mod7sh/shifter[0].u_sh1/shift_reg[0]    | 8      | 14    | NO           | NO                 | YES               | 14     | 0       | 
+|jt51_top    | uut/u_op/u_con7sh/bit_shifter[0].bits_reg[0][5]    | 6      | 5     | NO           | NO                 | YES               | 5      | 0       | 
+|jt51_top    | uut/u_acc/u_zerosh/bit_shifter[0].bits_reg[0][21]  | 10     | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_acc/u_rlsh/bit_shifter[0].bits_reg[0][13]    | 14     | 2     | NO           | NO                 | YES               | 2      | 0       | 
+|jt51_top    | uut/u_noise/u_zerosh/bit_shifter[0].bits_reg[0][4] | 5      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_eg/keyon_VI_reg                              | 4      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_noise/u_op31sh/bit_shifter[0].bits_reg[0][6] | 7      | 1     | NO           | NO                 | YES               | 1      | 0       | 
+|jt51_top    | uut/u_lfo/amnoise[1].u_noise_am/bb_reg[14]         | 13     | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_lfo/amnoise[2].u_noise_am/bb_reg[14]         | 12     | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_lfo/amnoise[3].u_noise_am/bb_reg[14]         | 11     | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_lfo/amnoise[4].u_noise_am/bb_reg[14]         | 10     | 2     | YES          | NO                 | NO                | 2      | 0       | 
+|jt51_top    | uut/u_lfo/amnoise[6].u_noise_am/bb_reg[14]         | 9      | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_lfo/pmnoise[6].u_noise_pm/bb_reg[14]         | 7      | 2     | YES          | NO                 | NO                | 2      | 0       | 
+|jt51_top    | uut/u_lfo/pmnoise[0].u_noise_pm/bb_reg[14]         | 9      | 3     | YES          | NO                 | NO                | 3      | 0       | 
+|jt51_top    | uut/u_lfo/pmnoise[3].u_noise_pm/bb_reg[14]         | 8      | 3     | YES          | NO                 | NO                | 3      | 0       | 
+|jt51_top    | uut/u_lfo/pmnoise[3].u_noise_pm/bb_reg[5]          | 4      | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_lfo/pmnoise[5].u_noise_pm/bb_reg[6]          | 5      | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[13]        | 14     | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_noise/noise_lfsr[1].u_lfsr/bb_reg[13]        | 7      | 2     | YES          | NO                 | NO                | 2      | 0       | 
+|jt51_top    | uut/u_noise/noise_lfsr[2].u_lfsr/bb_reg[13]        | 4      | 6     | YES          | NO                 | NO                | 6      | 0       | 
+|jt51_top    | uut/u_noise/noise_lfsr[1].u_lfsr/bb_reg[6]         | 6      | 1     | YES          | NO                 | NO                | 1      | 0       | 
+|jt51_top    | uut/u_noise/noise_lfsr[9].u_lfsr/bb_reg[5]         | 5      | 1     | YES          | NO                 | NO                | 1      | 0       | 
++------------+----------------------------------------------------+--------+-------+--------------+--------------------+-------------------+--------+---------+
+
+---------------------------------------------------------------------------------
+Finished ROM, RAM, DSP and Shift Register Reporting
+---------------------------------------------------------------------------------
+---------------------------------------------------------------------------------
+Start Writing Synthesis Report
+---------------------------------------------------------------------------------
+
+Report BlackBoxes: 
++-+--------------+----------+
+| |BlackBox name |Instances |
++-+--------------+----------+
++-+--------------+----------+
+
+Report Cell Usage: 
++------+---------+------+
+|      |Cell     |Count |
++------+---------+------+
+|1     |BUFG     |     2|
+|2     |CARRY4   |   123|
+|3     |LUT1     |   111|
+|4     |LUT2     |   255|
+|5     |LUT3     |   155|
+|6     |LUT4     |   283|
+|7     |LUT5     |   230|
+|8     |LUT6     |   503|
+|9     |MUXF7    |    10|
+|10    |RAM32M   |     5|
+|11    |RAMB18E1 |     4|
+|12    |RAMB36E1 |     1|
+|13    |SRL16E   |   131|
+|14    |SRLC32E  |    36|
+|15    |FDCE     |     1|
+|16    |FDPE     |     2|
+|17    |FDRE     |  1032|
+|18    |FDSE     |   150|
+|19    |IBUF     |     2|
+|20    |OBUF     |    49|
++------+---------+------+
+
+Report Instance Areas: 
++------+------------------------------+--------------------------------+------+
+|      |Instance                      |Module                          |Cells |
++------+------------------------------+--------------------------------+------+
+|1     |top                           |                                |  3085|
+|2     |  uut                         |jt51                            |  2938|
+|3     |    timers                    |jt51_timers                     |    97|
+|4     |      timer_A                 |jt51_timer                      |    44|
+|5     |      timer_B                 |jt51_timer__parameterized0      |    53|
+|6     |    u_acc                     |jt51_acc                        |   180|
+|7     |      u_left                  |jt51_sum_op                     |    77|
+|8     |      u_right                 |jt51_sum_op_13                  |    77|
+|9     |      u_rlsh                  |jt51_sh__parameterized12        |     6|
+|10    |      u_zerosh                |jt51_sh__parameterized13        |    20|
+|11    |    u_eg                      |jt51_envelope                   |   400|
+|12    |      u_aroffsh               |jt51_sh__parameterized2         |     4|
+|13    |      u_cntsh                 |jt51_sh__parameterized6         |     3|
+|14    |      u_egsh                  |jt51_sh__parameterized5         |    28|
+|15    |      u_kssh                  |jt51_sh__parameterized3         |    10|
+|16    |      u_statesh               |jt51_sh__parameterized7         |    19|
+|17    |      u_tlsh                  |jt51_sh__parameterized4         |    44|
+|18    |    u_lfo                     |jt51_lfo                        |   470|
+|19    |      \amnoise[0].u_noise_am  |jt51_lfo_lfsr                   |     8|
+|20    |      \amnoise[1].u_noise_am  |jt51_lfo_lfsr__parameterized0   |    10|
+|21    |      \amnoise[2].u_noise_am  |jt51_lfo_lfsr__parameterized1   |    11|
+|22    |      \amnoise[3].u_noise_am  |jt51_lfo_lfsr__parameterized2   |    12|
+|23    |      \amnoise[4].u_noise_am  |jt51_lfo_lfsr__parameterized3   |    13|
+|24    |      \amnoise[5].u_noise_am  |jt51_lfo_lfsr__parameterized4   |    13|
+|25    |      \amnoise[6].u_noise_am  |jt51_lfo_lfsr__parameterized5   |    15|
+|26    |      \pmnoise[0].u_noise_pm  |jt51_lfo_lfsr__parameterized6   |    14|
+|27    |      \pmnoise[1].u_noise_pm  |jt51_lfo_lfsr__parameterized7   |    14|
+|28    |      \pmnoise[2].u_noise_pm  |jt51_lfo_lfsr__parameterized8   |    14|
+|29    |      \pmnoise[3].u_noise_pm  |jt51_lfo_lfsr__parameterized9   |    14|
+|30    |      \pmnoise[4].u_noise_pm  |jt51_lfo_lfsr__parameterized10  |    15|
+|31    |      \pmnoise[5].u_noise_pm  |jt51_lfo_lfsr__parameterized11  |    13|
+|32    |      \pmnoise[6].u_noise_pm  |jt51_lfo_lfsr__parameterized12  |    16|
+|33    |      \pmnoise[7].u_noise_pm  |jt51_lfo_lfsr__parameterized13  |    16|
+|34    |    u_mmr                     |jt51_mmr                        |   578|
+|35    |      u_reg                   |jt51_reg                        |   315|
+|36    |    u_noise                   |jt51_noise                      |   228|
+|37    |      \noise_lfsr[0].u_lfsr   |jt51_noise_lfsr                 |    10|
+|38    |      \noise_lfsr[1].u_lfsr   |jt51_noise_lfsr__parameterized0 |    12|
+|39    |      \noise_lfsr[2].u_lfsr   |jt51_noise_lfsr__parameterized1 |    17|
+|40    |      \noise_lfsr[3].u_lfsr   |jt51_noise_lfsr__parameterized2 |    19|
+|41    |      \noise_lfsr[4].u_lfsr   |jt51_noise_lfsr__parameterized3 |    19|
+|42    |      \noise_lfsr[5].u_lfsr   |jt51_noise_lfsr__parameterized4 |    15|
+|43    |      \noise_lfsr[6].u_lfsr   |jt51_noise_lfsr__parameterized5 |    18|
+|44    |      \noise_lfsr[7].u_lfsr   |jt51_noise_lfsr__parameterized6 |    17|
+|45    |      \noise_lfsr[8].u_lfsr   |jt51_noise_lfsr__parameterized7 |    18|
+|46    |      \noise_lfsr[9].u_lfsr   |jt51_noise_lfsr__parameterized8 |    17|
+|47    |      u_op31sh                |jt51_sh__parameterized11        |    12|
+|48    |      u_zerosh                |jt51_sh__parameterized10        |     3|
+|49    |    u_op                      |jt51_op                         |   477|
+|50    |      u_con1sh                |jt51_sh__parameterized8         |   103|
+|51    |      u_con7sh                |jt51_sh__parameterized9         |    24|
+|52    |      u_mod7sh                |jt51_sh2                        |    46|
+|53    |        \shifter[0].u_sh1     |jt51_sh1                        |     3|
+|54    |        \shifter[10].u_sh1    |jt51_sh1_0                      |     3|
+|55    |        \shifter[11].u_sh1    |jt51_sh1_1                      |     3|
+|56    |        \shifter[12].u_sh1    |jt51_sh1_2                      |     3|
+|57    |        \shifter[13].u_sh1    |jt51_sh1_3                      |     3|
+|58    |        \shifter[1].u_sh1     |jt51_sh1_4                      |     3|
+|59    |        \shifter[2].u_sh1     |jt51_sh1_5                      |     3|
+|60    |        \shifter[3].u_sh1     |jt51_sh1_6                      |     7|
+|61    |        \shifter[4].u_sh1     |jt51_sh1_7                      |     3|
+|62    |        \shifter[5].u_sh1     |jt51_sh1_8                      |     3|
+|63    |        \shifter[6].u_sh1     |jt51_sh1_9                      |     3|
+|64    |        \shifter[7].u_sh1     |jt51_sh1_10                     |     3|
+|65    |        \shifter[8].u_sh1     |jt51_sh1_11                     |     3|
+|66    |        \shifter[9].u_sh1     |jt51_sh1_12                     |     3|
+|67    |    u_pg                      |jt51_phasegen                   |   471|
+|68    |      u_kosh                  |jt51_sh__parameterized1         |    32|
+|69    |      u_mulsh                 |jt51_sh                         |   107|
+|70    |      u_phsh                  |jt51_sh__parameterized0         |    85|
++------+------------------------------+--------------------------------+------+
+---------------------------------------------------------------------------------
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6680 ; free virtual = 20104
+---------------------------------------------------------------------------------
+Synthesis finished with 0 errors, 0 critical warnings and 95 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:16 ; elapsed = 00:00:15 . Memory (MB): peak = 1289.320 ; gain = 263.496 ; free physical = 6680 ; free virtual = 20104
+Synthesis Optimization Complete : Time (s): cpu = 00:00:18 ; elapsed = 00:00:18 . Memory (MB): peak = 1289.320 ; gain = 380.016 ; free physical = 6680 ; free virtual = 20104
+INFO: [Project 1-571] Translating synthesized netlist
+INFO: [Netlist 29-17] Analyzing 135 Unisim elements for replacement
+INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
+INFO: [Project 1-570] Preparing netlist for logic optimization
+INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
+INFO: [Project 1-111] Unisim Transformation Summary:
+  A total of 5 instances were transformed.
+  RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 5 instances
+
+INFO: [Common 17-83] Releasing license: Synthesis
+213 Infos, 95 Warnings, 0 Critical Warnings and 0 Errors encountered.
+synth_design completed successfully
+synth_design: Time (s): cpu = 00:00:17 ; elapsed = 00:00:17 . Memory (MB): peak = 1402.348 ; gain = 384.523 ; free physical = 6624 ; free virtual = 20048
+report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.13 . Memory (MB): peak = 1434.367 ; gain = 0.000 ; free physical = 6618 ; free virtual = 20043
+INFO: [Common 17-206] Exiting Vivado at Sun Dec  4 18:28:55 2016...

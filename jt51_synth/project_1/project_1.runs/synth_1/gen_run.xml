@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="synth_1" LaunchPart="xc7z020clg484-1" LaunchTime="1480894110">
+  <File Type="VDS-TIMING-PB" Name="jt51_top_timing_summary_synth.pb"/>
+  <File Type="VDS-TIMINGSUMMARY" Name="jt51_top_timing_summary_synth.rpt"/>
+  <File Type="RDS-DCP" Name="jt51_top.dcp"/>
+  <File Type="RDS-UTIL-PB" Name="jt51_top_utilization_synth.pb"/>
+  <File Type="RDS-UTIL" Name="jt51_top_utilization_synth.rpt"/>
+  <File Type="RDS-PROPCONSTRS" Name="jt51_top_drc_synth.rpt"/>
+  <File Type="RDS-RDS" Name="jt51_top.vds"/>
+  <File Type="PA-TCL" Name="jt51_top.tcl"/>
+  <File Type="RUN-STRAT" Name="$PDATADIR/runs/synth_1/synth_1.psg"/>
+  <File Type="RUN-SRCS" Name="$PDATADIR/runs/synth_1/sources.xml"/>
+  <File Type="RUN-CONSTRS" Name="$PDATADIR/runs/synth_1/constrs_in.xml"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_noise_lfsr.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_noise_lfsr.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_phinc_rom.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_phinc_rom.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_sum_op.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_sum_op.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_sh2.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_sh2.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_exptable.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_exptable.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_lfo_lfsr.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_reg.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_reg.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_sh.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_sh.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_lin2exp.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_lin2exp.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_exp2lin.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_exp2lin.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_sintable.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_sintable.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_pm.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_pm.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_acc.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_acc.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_phasegen.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_phasegen.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_op.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_op.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_timers.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_timers.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_lfo.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_lfo.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_noise.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_noise.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_mmr.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_mmr.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_envelope.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_envelope.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_top.sv">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_top.sv"/>
+        <Attr Name="ImportTime" Val="1480892793"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/sin_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../sin_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/phinc_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../phinc_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/exp_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../exp_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="jt51_top"/>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Synthesis Defaults" Flow="Vivado Synthesis 2015">
+      <Desc>Vivado Synthesis Defaults</Desc>
+    </StratHandle>
+    <Step Id="synth_design"/>
+  </Strategy>
+</GenRun>
