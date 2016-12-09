@@ -30,7 +30,8 @@ output bit UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, VBUS_b, PFSPC_b,
 output logic VSCRLD_b, HSCRLD_b, SLAP_b, SNDRD_b,
 output logic SNDWR_b, INPUT_b, RAJs_b, RAJs, RLETA_b,
 output logic E2PROM_b,
-output logic [3:0] ROM_b
+output logic [3:0] ROM_b,
+output logic DTACKn, VRAM_b, MEXT_b
 );
 //Logic to the vhdl code
 logic [31:0] ADR_OUT;
@@ -51,8 +52,6 @@ logic VMAn;
 logic VMA_EN;
 logic BGn;
 logic IBUS_b;
-logic VRAM_b;
-logic MEXT_b;
 logic CLK;
 logic [15:0] DATA_IN;
 logic BERRn;
@@ -60,7 +59,6 @@ logic RESET_INn;
 logic HALT_INn;
 logic AVECn;
 logic [2:0] IPLn;
-logic DTACKn;
 logic VPAn;
 logic BRn;
 logic BGACKn;
@@ -68,6 +66,8 @@ logic K6800n;
 logic VRDTACK_b;
 
     logic AS;
+
+
 
 
 
@@ -124,6 +124,7 @@ logic VRDTACK_b;
     assign LDS_b = LDSn;
     assign UDS_b = UDSn;
     //This is the ls368 chip
+    assign R_b_Vs_W = ~RWn;
     assign BR_W_b = RWn; //THIS IS NOT ACCORDING TO THE SCHEMATIC, IT SHOULD BE NOT
     assign AS = ~ASn;
     assign BW_R_b = ~BR_W_b;
@@ -152,7 +153,7 @@ logic VRDTACK_b;
     //END OF 574
     assign out_13e = ~rip_12m;//~(Q_574_b | rip_12m);
     //assign DTACKn = out_13e; //I found that this would need to be 0 for anything to work
-    assign DTACKn = out_13e;
+    assign DTACKn = out_13e; //Fuck dtack
 
 
     assign c_12m = WAIT_b & AS;// & VRAM_b; FIXME: The VRAM is there in the schematic, why?
@@ -190,13 +191,6 @@ logic [2:0] dnc3;
         ADR_OUT[20],
         ADR_OUT[21]);
 
-    ls138 AD_14C(
-        AD_14C_Y,
-        1'b1, 
-        IBUS_b,
-        ADR_OUT[17],
-        ADR_OUT[18],
-        ADR_OUT[19]);
 
     ls138 AD_2C(
         {dnc4, UNLOCK_b, VBKACK_b, WDOG_b, MISC_b, PFSPC_b, VSCRLD_b, HSCRLD_b},
@@ -213,8 +207,17 @@ logic [2:0] dnc3;
         ADR_OUT[16],
         ADR_OUT[17],
         ADR_OUT[19]);
-
     
+    logic AD_13M, dncFuck, dncFuck2;
+    
+    ls138 AD_14C(
+                {AD_13M, SNDRD_b, dncFuck, dncFuck2, INPUT_b, RAJs_b, RLETA_b, E2PROM_b},
+                1'b1, 
+                IBUS_b,
+                ADR_OUT[17],
+                ADR_OUT[18],
+                ADR_OUT[19]);
+
     
     always_comb begin
         MEXT_b = AD_4J_Y[0] | ~ADR_OUT[21]; //3B and 4A
@@ -224,6 +227,8 @@ logic [2:0] dnc3;
         VRAMWR = ~VRDTACK_b & ~VRAM_b & ~WL_b;
         CRAMWR_b = CRAM_b | LDS_b | BR_W_b; //Test because the BR_W_b seems to be *exactly* backwards for CRAM
         MA18_b = ~(ADR_OUT[18]);
+        RAJs = ~RL_b & ~RAJs_b;
+        SNDWR_b = WL_b | AD_13M;
     end
 
 endmodule

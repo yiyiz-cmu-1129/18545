@@ -28,7 +28,7 @@ module video_ram(
     input logic SYSRES_b, MISC_b, clk
 );
 
-	logic [11:0] ADDR;
+	logic [11:0] ADDR, ADDR2;
 	logic [5:0] MN;
 	logic [15:0] D, VBD, VRD;
 	logic VRAM_14E_out, VRAM_4F_out, VRAM_4K_Y, VRAM_4K_Y_b;
@@ -46,14 +46,14 @@ module video_ram(
 
 	always_comb begin
         ADDR = MA[12:1]; //VRAC can suck it, it also needs the PFV and PFH part but fuck it
-        /*
+        
 		case(VRAC[1:0]) //This is not supposed to be negated but I am doing it anyway
-			2'b00: ADDR = {PFV[5:0], PFH[5:0]};
-			2'b01: ADDR = {1'b0, MPBS[2:0], VRAM_4HDL, H01_b, MN[5:0]};
-			2'b10: ADDR = {1'b1, SYSCLK_V[7:3], SYSCLK_H[7:2]};
-			2'b11: ADDR = MA[12:1];
+			2'b00: ADDR2 = {PFV[5:0], PFH[5:0]};
+			2'b01: ADDR2 = {1'b0, MPBS[2:0], VRAM_4HDL, H01_b, MN[5:0]};
+			2'b10: ADDR2 = {1'b1, SYSCLK_V[7:3], SYSCLK_H[7:2]};
+			2'b11: ADDR2 = MA[12:1];
 		endcase
-        */
+        
 	end
 
     /*
@@ -75,7 +75,7 @@ module video_ram(
 	
 	ims1420 VRAM_9H(
 		ADDR,
-		VRD[3:0], //in
+		VRDM[3:0], //in
 		VRD_9H,   //out
 		VRAM_4F_out,
 		VRAM_4K_Y,
@@ -83,7 +83,7 @@ module video_ram(
 
 	ims1420 VRAM_8H(
 		ADDR,
-		VRD[3:0],
+		VRDM[3:0],
 		VRD_8H,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
@@ -91,7 +91,7 @@ module video_ram(
 
 	ims1420 VRAM_7H(
 		ADDR,
-		VRD[7:4],
+		VRDM[7:4],
 		VRD_7H,
 		VRAM_4F_out,
 		VRAM_4K_Y,
@@ -99,7 +99,7 @@ module video_ram(
 
 	ims1420 VRAM_6H(
 		ADDR,
-		VRD[7:4],
+		VRDM[7:4],
 		VRD_6H,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
@@ -107,7 +107,7 @@ module video_ram(
 
 	ims1420 VRAM_9J(
 		ADDR,
-		VRD[11:8],
+		VRDM[11:8],
 		VRD_9J,
 		VRAM_4F_out,
 		VRAM_4K_Y,
@@ -115,7 +115,7 @@ module video_ram(
 
 	ims1420 VRAM_8J(
 		ADDR,
-		VRD[11:8],
+		VRDM[11:8],
 		VRD_8J,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
@@ -123,7 +123,7 @@ module video_ram(
 
 	ims1420 VRAM_7J(
 		ADDR,
-		VRD[15:12],
+		VRDM[15:12],
 		VRD_7J,
 		VRAM_4F_out,
 		VRAM_4K_Y,
@@ -131,7 +131,7 @@ module video_ram(
 
 	ims1420 VRAM_6J(
 		ADDR,
-		VRD[15:12],
+		VRDM[15:12],
 		VRD_6J,
 		VRAM_4F_out,
 		VRAM_4K_Y_b,
@@ -146,12 +146,12 @@ module video_ram(
         else if(~VBUS_b & ~BR_W_b) VBD = D_in;
         else VBD = VBD_in;
 
-        if(VRAMWR) VRD = VBD;
+        if(VRAMWR & VRAMRD_b) VRD = VBD;
         else VRD = (VRAM_4K_Y_b) ? VRD_mem_outA : VRD_mem_outB;
         
     end
     //assign VBDA[15:0] = (VRAMRD_b) ? VBD_in : VBDB;
-
+    assign VRDM = VRD;
     //assign VRD = (rst) ? VRDC : 16'd0;
 
 
@@ -179,7 +179,7 @@ module video_ram(
 
     ls174 VRAM_5K(
         MN,
-        VRD[5:0],
+        VRDM[5:0],
         NXL_b,
         VRAM_4H_b);
     
@@ -189,7 +189,7 @@ module video_ram(
     logic PVS_9F_RC, PVS_9E_RC;
     assign PVS_6B_out = VBLANK_b & HSYNC;
     ls273 PVS_7K(
-        {VRD[15:14], VRD[5:0]},
+        {VRDM[15:14], VRDM[5:0]},
         VRAM_4HDL_b,
         1'b1,
         {PFHFLIP, PP18, PP[8:3]});

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1481152714">
+<GenRun Id="impl_1" LaunchPart="xc7z020clg484-1" LaunchTime="1481238369">
   <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
   <File Type="RDI-RDI" Name="chip_interface.vdi"/>
   <File Type="BG-DRC" Name="chip_interface.drc"/>
@@ -59,14 +59,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/sin_lut.vh">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../sin_lut.vh"/>
-        <Attr Name="ImportTime" Val="1480882850"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_sintable.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../jt51_sintable.v"/>
@@ -112,14 +104,6 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/phinc_lut.vh">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../phinc_lut.vh"/>
-        <Attr Name="ImportTime" Val="1480882850"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
     <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_phinc_rom.v">
       <FileInfo>
         <Attr Name="ImportPath" Val="$PPRDIR/../jt51_phinc_rom.v"/>
@@ -153,14 +137,6 @@
         <Attr Name="ImportTime" Val="1480882850"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
-        <Attr Name="UsedIn" Val="simulation"/>
-      </FileInfo>
-    </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/exp_lut.vh">
-      <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../exp_lut.vh"/>
-        <Attr Name="ImportTime" Val="1480882850"/>
-        <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -294,10 +270,8 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51.v">
+    <File Path="$PPRDIR/../../trackball/vga.sv">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../jt51.v"/>
-        <Attr Name="ImportTime" Val="1480882850"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -308,6 +282,15 @@
         <Attr Name="ImportPath" Val="$PPRDIR/../leta.vhdl"/>
         <Attr Name="ImportTime" Val="1481072521"/>
         <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51.v">
+      <FileInfo>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51.v"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
@@ -327,19 +310,19 @@
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_top.sv">
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/trackball_top.sv">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_top.sv"/>
-        <Attr Name="ImportTime" Val="1481130936"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../trackball_top.sv"/>
+        <Attr Name="ImportTime" Val="1481131416"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>
-    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/trackball_top.sv">
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/jt51_top.sv">
       <FileInfo>
-        <Attr Name="ImportPath" Val="$PPRDIR/../trackball_top.sv"/>
-        <Attr Name="ImportTime" Val="1481131416"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../jt51_top.sv"/>
+        <Attr Name="ImportTime" Val="1481130936"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
         <Attr Name="UsedIn" Val="simulation"/>
@@ -367,6 +350,33 @@
         <Attr Name="ImportTime" Val="1481131401"/>
         <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/sin_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../sin_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/phinc_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../phinc_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/imports/jt51_synth/exp_lut.vh">
+      <FileInfo>
+        <Attr Name="AutoDisabled" Val="1"/>
+        <Attr Name="ImportPath" Val="$PPRDIR/../exp_lut.vh"/>
+        <Attr Name="ImportTime" Val="1480882850"/>
+        <Attr Name="UsedIn" Val="synthesis"/>
         <Attr Name="UsedIn" Val="simulation"/>
       </FileInfo>
     </File>

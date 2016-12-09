@@ -75,7 +75,7 @@ input logic clk, reset
     assign MOP_2HDL_b = ~MOP_2HDL;
     assign MOP_4HDD_b = ~MOP_4HDD;
     assign MOP_4HDL_b = ~MOP_4HDL;
-
+    assign P2 = 1'b0;
     ls374 MOP_9m(MGRA[17:10], VRD[13:6], MOP_2HDL_b, 1'b0);
 
  

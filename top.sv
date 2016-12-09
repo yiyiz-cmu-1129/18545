@@ -1,11 +1,11 @@
-module top(JA, JB, GCLK, BTNC,
-           LD,
+module top(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, GCLK, BTNC,
+           LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7,
            VGA_HS, VGA_VS,
            VGA_R, VGA_G, VGA_B);
-    input logic [3:0] JA;
-    input logic [3:0] JB;
+    input logic JA1, JA2, JA3, JA4;
+    input logic JB1, JB2, JB3, JB4;
     input logic GCLK, BTNC;
-    output logic [7:0] LD;
+    output logic LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
     output logic VGA_HS, VGA_VS;
     output logic [3:0] VGA_B;
     output logic [3:0] VGA_R;
@@ -15,14 +15,14 @@ module top(JA, JB, GCLK, BTNC,
     logic [7:0] count;
     logic CK;
     logic [7:0] leta_out;
-    logic [1:0] addr;
+    logic addr;
     
-    logic [1:0] [11:0] leta_row;
-    logic [1:0] [11:0] leta_col;
-    logic [1:0] [11:0] leta_row_scaled;
-    logic [1:0] [11:0] leta_col_scaled;
-    logic [1:0] [11:0] leta_row_stored;
-    logic [1:0] [11:0] leta_col_stored;
+    logic [11:0] leta_row;
+    logic [11:0] leta_col;
+    logic [11:0] leta_row_scaled;
+    logic [11:0] leta_col_scaled;
+    logic [11:0] leta_row_stored;
+    logic [11:0] leta_col_stored;
     
     //VGA
     logic reset;
@@ -33,9 +33,7 @@ module top(JA, JB, GCLK, BTNC,
     assign reset = BTNC;
     
 
-    assign VGA_R = (row == leta_row_stored[0] && col || col == leta_col_stored[0]) ? 4'hF : 4'h0;
-    assign VGA_B =  (row == leta_row_stored[1] && col || col == leta_col_stored[1]) ? 4'hF : 4'h0;
-    assign VGA_G = 4'b0;
+    assign {VGA_R, VGA_G, VGA_B} = (row == leta_row_stored && col || col == leta_col_stored) ? 12'hFFF : 12'h0;
     
     
     //Create CLOCK_50
@@ -55,7 +53,7 @@ module top(JA, JB, GCLK, BTNC,
 
 
     //Assign LEDs
-    assign LD = leta_out;
+    assign {LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7} = leta_out; //{4'b0, JA4, JA3, JA2, JA1};
 
 
 
@@ -64,22 +62,20 @@ module top(JA, JB, GCLK, BTNC,
         if (reset)
             addr <= 0;
         else begin
-            if (addr[0])
-                leta_row[addr[1]] <= leta_out;
+            if (addr)
+                leta_row <= leta_out;
             else
-                leta_col[addr[1]] <= leta_out;
-            addr <= addr + 1;
+                leta_col <= leta_out;
+            addr <= ~addr;
         end    
     end
     
     //Fit the screen, 480rowsx640cols
-    assign leta_row_scaled[0] = (leta_row[0] * 15) / 8;
-    assign leta_col_scaled[0] = (leta_col[0] * 5) / 2;
-    assign leta_row_scaled[1] = (leta_row[1] * 15) / 8;
-    assign leta_col_scaled[1] = (leta_col[1] * 5) / 2;
+    assign leta_row_scaled = (leta_row * 15) / 8;
+    assign leta_col_scaled = (leta_col * 5) / 2;
     
     always_ff @(posedge CLOCK_50) begin
-        if (~VGA_VS) begin
+        if (VGA_VS) begin
             leta_row_stored <= leta_row_scaled;
             leta_col_stored <= leta_col_scaled;
         end
@@ -90,9 +86,9 @@ module top(JA, JB, GCLK, BTNC,
                   .CS(1'b0), //chip select
                   .CK(CK), //clock - .875MHz
                   .TEST(1'b0), //test-enable
-                  .AD(addr), //address
-                  .CLKS({JB[2], JB[0], JA[2], JA[0]}), //clks (from trackball)
-                  .DIRS({JB[3], JB[1], JA[3], JA[1]}), //dirs (from trackball)
+                  .AD({1'b0, addr}), //address
+                  .CLKS({JB3, JB1, JA3, JA1}), //clks (from trackball)
+                  .DIRS({JB4, JB2, JA4, JA2}), //dirs (from trackball)
                   .RESOLN(1'b1)); //god knows
                   
     

@@ -1,3 +1,5 @@
+`default_nettype none
+
 module chip_interface(CLOCK_100, reset, HS, VS,
                       VGA_B, VGA_G, VGA_R);
 
@@ -7,7 +9,7 @@ output logic [3:0] VGA_B, VGA_G, VGA_R;
 
 //Varialbes for clock generator
 logic MCKF, MCKR, HSYNC, VSYNC;
-logic VBLANK_b, VRESET_b, NXL_b;
+logic VBLANK_b, NXL_b, VRESET_b;
 logic VIDBLANK_b;
 logic HBLANK_b, CLK_1H, CLK_2H;
 logic CLK_2HDL, CLK_4H, CLK_4H_b;
@@ -33,13 +35,15 @@ logic [7:0] PFSR;
 logic [1:0] MGRI;
 logic [17:0] MGRA;
 logic LDS_b, UDS_b;
+
+logic DTACKn;
+
 //This loads rom
-
-
+logic SNDINT_b, AJSINT_b;
 logic [15:0] meml [131071:0];
 logic [15:0] memh [4095:0];
 logic [15:0] temph, templ;
-bit [4:0] counter;
+bit [7:0] counter;
 logic resetN2;
 initial $readmemh("../roms/roms/68khrom.hex", memh);
 initial $readmemh("../roms/roms/68klromSLIM.hex", meml);
@@ -47,16 +51,21 @@ always_ff @(posedge MCKR) begin
     temph <= memh[addr[11:0]];
     templ <= meml[addr[16:0]];
  end
- 
+
+assign VIDBLANK_b = 1'b1; 
+assign SNDINT_b = 1'b1;
+assign AJSINT_b = 1'b1;
+assign VRESET_b = 1'b1;
+
  always_ff @(posedge MCKR) begin
     if(reset) begin
-        counter <= 5'd0;
+        counter <= 8'd0;
         resetN2 <= 0;
         PR1 <= 1'b0;
     end
-    if(counter < 5'h1f) begin
+    else if(counter < 8'hff) begin
         resetN2 <= 0;
-        counter <= counter + 5'd1;
+        counter <= counter + 8'd1;
     end
     else begin
         PR1 <= 1'b1;
@@ -66,8 +75,8 @@ always_ff @(posedge MCKR) begin
     
                
 assign MDin = (addr[18]) ? temph : templ;
-
-
+logic [15:0] data;
+logic MEXT_b, AS_b, VRAM_b;
 //assign reset3 = reset | resetN2;
 
 vidout VO(.VIDOUT(VIDOUT),
@@ -79,13 +88,12 @@ vidout VO(.VIDOUT(VIDOUT),
           .VS(VS),
           .blank_N(),
           .VGA_R(VGA_R), .VGA_G(VGA_G), .VGA_B(VGA_B));
+
 ila2 fuuck(.clk(MCKR),
-          .probe0(MD),
-          .probe1(VIDOUT),
-          .probe2(MDin),
-          .probe3(addr),
-          .probe4(reset),
-          .probe5(resetN2));
+          .probe0(data),
+          .probe1({addr, 1'b0}),
+          .probe2(resetN2),
+          .probe3({BR_W_b, AS_b, VRAM_b, PR1, MEXT_b, reset}));
 
 graphics GR(
 //The following are a bunch of clocks all from the system clock and sync generator
@@ -144,10 +152,7 @@ graphics GR(
 .E2PROM_b(), 
 .SNDRD_b(), 
 .SNDWR_b(),
-.SNDINT_b(1'b1),
 
-//to joystick
-.AJSINT_b(1'b1),
 
 //Video out
 .VIDOUT(VIDOUT),
@@ -157,8 +162,13 @@ graphics GR(
 .PR1(PR1),
 //these are testing signals
 .addr(addr),
-.first(~PR1),
-.reset3(resetN2)
+.first(~reset),
+.reset3(resetN2),
+.DTACKn(DTACKn),
+.AS_b(AS_b),
+.VRAM_b(VRAM_b),
+.MEXT_b(MEXT_b),
+.DATA(data)
 );
 
 system_clock that_feel(
@@ -211,7 +221,7 @@ cart last_hope(
     .MGRI(MGRI), //this is not really needed
     .PFSR(PFSR),
     .MA_from_VMEM(MA[15:0]), /////These are not used 
-    .MD_from_VMEM(), /////These are not used 
+    .MD_from_VMEM(MDin), /////These are not used 
     .reset(~resetN2), 
     .sysclk(MCKR));
 

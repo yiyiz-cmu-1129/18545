@@ -137,10 +137,7 @@ graphics GR(
 .E2PROM_b(), 
 .SNDRD_b(), 
 .SNDWR_b(),
-.SNDINT_b(1'b1),
 
-//to joystick
-.AJSINT_b(1'b1),
 
 //Video out
 .VIDOUT(VIDOUT),
@@ -151,7 +148,12 @@ graphics GR(
 //these are testing signals
 .addr(addr),
 .first(first),
-.reset3(reset)
+.reset3(reset),
+.DTACKn(),
+.AS_b(),
+.VRAM_b(),
+.MEXT_b(),
+.DATA()
 );
 
 logic rst;
@@ -289,7 +291,7 @@ initial begin
     #10 rst = 1'b1;
     #300;
     reset2 = 1'b0;
-    #10000000;
+    #1000000000;
     $stop;
 end
 

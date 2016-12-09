@@ -53,12 +53,12 @@ set rc [catch {
   create_project -in_memory -part xc7z020clg484-1
   set_property board_part em.avnet.com:zed:part0:1.3 [current_project]
   set_property design_mode GateLvl [current_fileset]
-  set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.cache/wt [current_project]
-  set_property parent.project_path /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.xpr [current_project]
-  set_property ip_repo_paths /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.cache/ip [current_project]
-  set_property ip_output_repo /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.cache/ip [current_project]
-  add_files -quiet /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/synth_1/chip_interface.dcp
-  read_xdc /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc
+  set_property webtalk.parent_dir /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.cache/wt [current_project]
+  set_property parent.project_path /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.xpr [current_project]
+  set_property ip_repo_paths /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.cache/ip [current_project]
+  set_property ip_output_repo /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.cache/ip [current_project]
+  add_files -quiet /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/synth_1/chip_interface.dcp
+  read_xdc /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc
   link_design -top chip_interface -part xc7z020clg484-1
   close_msg_db -file init_design.pb
 } RESULT]

@@ -2,150 +2,36 @@
 # Vivado v2015.2 (64-bit)
 # SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
 # IP Build 1264090 on Wed Jun 24 14:22:01 MDT 2015
-# Start of session at: Wed Dec  7 18:19:23 2016
-# Process ID: 27748
-# Log file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.vdi
-# Journal file: /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/vivado.jou
+# Start of session at: Thu Dec  8 18:06:58 2016
+# Process ID: 21921
+# Log file: /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/impl_1/chip_interface.vdi
+# Journal file: /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/impl_1/vivado.jou
 #-----------------------------------------------------------
 source chip_interface.tcl -notrace
 Design is defaulting to srcset: sources_1
 Design is defaulting to constrset: constrs_1
-INFO: [Netlist 29-17] Analyzing 155 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 173 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-479] Netlist was created with Vivado 2015.2
 INFO: [Device 21-403] Loading part xc7z020clg484-1
 INFO: [Project 1-570] Preparing netlist for logic optimization
-Parsing XDC File [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
-INFO: [Timing 38-35] Done setting XDC timing constraints. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
-INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
-get_clocks: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1809.586 ; gain = 490.523 ; free physical = 4217 ; free virtual = 18294
-WARNING: [Vivado 12-584] No ports matched 'JA10'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:61]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:61]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA7'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:65]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:65]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA8'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:66]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:66]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA9'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:67]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:67]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB10'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:73]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:73]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB7'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:77]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:77]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB8'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:78]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:78]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB9'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:79]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:79]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC1_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:84]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:84]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC1_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:85]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:85]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC2_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:86]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:86]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC2_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:87]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:87]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC3_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:88]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:88]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC3_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:89]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:89]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC4_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:90]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:90]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC4_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:91]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:91]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD1_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:96]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:96]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD1_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:97]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:97]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD2_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:98]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:98]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD2_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:99]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:99]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD3_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:100]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:100]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD3_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:101]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:101]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD4_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:102]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:102]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD4_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:103]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:103]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:121]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:121]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:122]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:122]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:123]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:123]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:124]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:124]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:125]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:125]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:126]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:126]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:127]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:127]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:128]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:128]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_HS'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:129]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:129]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:130]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:130]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:131]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:131]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:132]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:132]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:133]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:133]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_VS'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:134]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:134]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-Finished Parsing XDC File [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
-INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
+Parsing XDC File [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
+INFO: [Timing 38-35] Done setting XDC timing constraints. [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
+INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
+get_clocks: Time (s): cpu = 00:00:09 ; elapsed = 00:00:09 . Memory (MB): peak = 1809.586 ; gain = 490.523 ; free physical = 8586 ; free virtual = 20774
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
+INFO: [Opt 31-140] Inserted 5 IBUFs to IO ports without IO buffers.
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Project 1-111] Unisim Transformation Summary:
   A total of 6 instances were transformed.
   IOBUF => IOBUF (IBUF, OBUFT): 1 instances
   RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 5 instances
 
-link_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1809.586 ; gain = 791.758 ; free physical = 4222 ; free virtual = 18292
+link_design: Time (s): cpu = 00:00:14 ; elapsed = 00:00:15 . Memory (MB): peak = 1809.586 ; gain = 791.758 ; free physical = 8593 ; free virtual = 20773
 Command: opt_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -129 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -130 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 Running DRC as a precondition to command opt_design
 
 Starting DRC Task
@@ -153,7 +39,7 @@ INFO: [DRC 23-27] Running DRC with 8 threads
 INFO: [Project 1-461] DRC finished with 0 Errors
 INFO: [Project 1-462] Please refer to the DRC report (report_drc) for more information.
 
-Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1824.617 ; gain = 7.027 ; free physical = 4221 ; free virtual = 18291
+Time (s): cpu = 00:00:00.17 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1824.617 ; gain = 7.027 ; free physical = 8593 ; free virtual = 20773
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Starting Logic Optimization Task
@@ -161,33 +47,33 @@ Starting Logic Optimization Task
 Phase 1 Retarget
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Opt 31-49] Retargeted 0 cell(s).
-Phase 1 Retarget | Checksum: 17ec06c84
+Phase 1 Retarget | Checksum: 14e957ed7
 
-Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.13 . Memory (MB): peak = 1829.617 ; gain = 0.000 ; free physical = 4222 ; free virtual = 18293
+Time (s): cpu = 00:00:00.18 ; elapsed = 00:00:00.15 . Memory (MB): peak = 1830.617 ; gain = 0.000 ; free physical = 8599 ; free virtual = 20780
 
 Phase 2 Constant Propagation
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
 INFO: [Opt 31-10] Eliminated 0 cells.
-Phase 2 Constant Propagation | Checksum: 17ec06c84
+Phase 2 Constant Propagation | Checksum: 14e957ed7
 
-Time (s): cpu = 00:00:00.25 ; elapsed = 00:00:00.23 . Memory (MB): peak = 1829.617 ; gain = 0.000 ; free physical = 4221 ; free virtual = 18291
+Time (s): cpu = 00:00:00.26 ; elapsed = 00:00:00.24 . Memory (MB): peak = 1830.617 ; gain = 0.000 ; free physical = 8599 ; free virtual = 20780
 
 Phase 3 Sweep
-INFO: [Opt 31-12] Eliminated 327 unconnected nets.
-INFO: [Opt 31-140] Inserted 1 IBUFs to IO ports without IO buffers.
-INFO: [Opt 31-11] Eliminated 1 unconnected cells.
-Phase 3 Sweep | Checksum: 210ccb885
+INFO: [Opt 31-12] Eliminated 384 unconnected nets.
+INFO: [Opt 31-140] Inserted 5 IBUFs to IO ports without IO buffers.
+INFO: [Opt 31-11] Eliminated 5 unconnected cells.
+Phase 3 Sweep | Checksum: 225d8cd3a
 
-Time (s): cpu = 00:00:00.39 ; elapsed = 00:00:00.37 . Memory (MB): peak = 1829.617 ; gain = 0.000 ; free physical = 4221 ; free virtual = 18291
+Time (s): cpu = 00:00:00.42 ; elapsed = 00:00:00.40 . Memory (MB): peak = 1830.617 ; gain = 0.000 ; free physical = 8599 ; free virtual = 20780
 
 Starting Connectivity Check Task
 
-Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1829.617 ; gain = 0.000 ; free physical = 4221 ; free virtual = 18291
-Ending Logic Optimization Task | Checksum: 210ccb885
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1830.617 ; gain = 0.000 ; free physical = 8599 ; free virtual = 20780
+Ending Logic Optimization Task | Checksum: 225d8cd3a
 
-Time (s): cpu = 00:00:00.40 ; elapsed = 00:00:00.39 . Memory (MB): peak = 1829.617 ; gain = 0.000 ; free physical = 4221 ; free virtual = 18291
-Implement Debug Cores | Checksum: 1d9d91ceb
-Logic Optimization | Checksum: 1d9d91ceb
+Time (s): cpu = 00:00:00.43 ; elapsed = 00:00:00.41 . Memory (MB): peak = 1830.617 ; gain = 0.000 ; free physical = 8599 ; free virtual = 20780
+Implement Debug Cores | Checksum: 1e0be4571
+Logic Optimization | Checksum: 1e0be4571
 
 Starting Power Optimization Task
 INFO: [Pwropt 34-132] Skipping clock gating for clocks with a period < 3.12 ns.
@@ -201,27 +87,27 @@ INFO: [Pwropt 34-201] Structural ODC has moved 0 WE to EN ports
 Number of BRAM Ports augmented: 0 newly gated: 4 Total Ports: 10
 Number of Flops added for Enable Generation: 2
 
-Ending PowerOpt Patch Enables Task | Checksum: 263aa4f27
+Ending PowerOpt Patch Enables Task | Checksum: 249a704c2
 
-Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1846.672 ; gain = 0.000 ; free physical = 4175 ; free virtual = 18245
-Ending Power Optimization Task | Checksum: 263aa4f27
+Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1846.664 ; gain = 0.000 ; free physical = 8551 ; free virtual = 20732
+Ending Power Optimization Task | Checksum: 249a704c2
 
-Time (s): cpu = 00:00:00.70 ; elapsed = 00:00:00.71 . Memory (MB): peak = 1846.672 ; gain = 17.055 ; free physical = 4175 ; free virtual = 18245
+Time (s): cpu = 00:00:00.70 ; elapsed = 00:00:00.71 . Memory (MB): peak = 1846.664 ; gain = 16.047 ; free physical = 8551 ; free virtual = 20732
 INFO: [Common 17-83] Releasing license: Implementation
-29 Infos, 38 Warnings, 38 Critical Warnings and 0 Errors encountered.
+29 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 opt_design completed successfully
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00.29 ; elapsed = 00:00:00.14 . Memory (MB): peak = 1878.688 ; gain = 0.000 ; free physical = 4168 ; free virtual = 18241
+Write XDEF Complete: Time (s): cpu = 00:00:00.30 ; elapsed = 00:00:00.15 . Memory (MB): peak = 1878.680 ; gain = 0.000 ; free physical = 8548 ; free virtual = 20731
 INFO: [DRC 23-27] Running DRC with 8 threads
-INFO: [Coretcl 2-168] The results of DRC are in file /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface_drc_opted.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/impl_1/chip_interface_drc_opted.rpt.
 INFO: [#UNDEF] Cannot write hardware definition file as there are no IPI block design hardware handoff files present
 Command: place_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -129 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -130 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 INFO: [DRC 23-27] Running DRC with 8 threads
 INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
 INFO: [Vivado_Tcl 4-199] Please refer to the DRC report (report_drc) for more information.
@@ -234,212 +120,212 @@ Starting Placer Task
 INFO: [Place 30-611] Multithreading enabled for place_design using a maximum of 8 CPUs
 
 Phase 1 Placer Runtime Estimator
-Phase 1 Placer Runtime Estimator | Checksum: 1c1d8e0fd
+Phase 1 Placer Runtime Estimator | Checksum: 15487c9b7
 
-Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.06 . Memory (MB): peak = 1878.703 ; gain = 0.000 ; free physical = 4169 ; free virtual = 18240
+Time (s): cpu = 00:00:00.05 ; elapsed = 00:00:00.06 . Memory (MB): peak = 1878.691 ; gain = 0.000 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2 Placer Initialization
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1878.703 ; gain = 0.000 ; free physical = 4169 ; free virtual = 18240
+Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1878.691 ; gain = 0.000 ; free physical = 8548 ; free virtual = 20730
 INFO: [Opt 31-138] Pushed 0 inverter(s) to 0 load pin(s).
-Netlist sorting complete. Time (s): cpu = 00:00:00 ; elapsed = 00:00:00 . Memory (MB): peak = 1878.703 ; gain = 0.000 ; free physical = 4169 ; free virtual = 18240
+Netlist sorting complete. Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00 . Memory (MB): peak = 1878.691 ; gain = 0.000 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2.1 IO Placement/ Clock Placement/ Build Placer Device
 
 Phase 2.1.1 Pre-Place Cells
-Phase 2.1.1 Pre-Place Cells | Checksum: c9f56c05
+Phase 2.1.1 Pre-Place Cells | Checksum: ef5ebd8c
 
-Time (s): cpu = 00:00:00.16 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1878.703 ; gain = 0.000 ; free physical = 4169 ; free virtual = 18240
+Time (s): cpu = 00:00:00.15 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1878.691 ; gain = 0.000 ; free physical = 8548 ; free virtual = 20730
 INFO: [Timing 38-35] Done setting XDC timing constraints.
 
 Phase 2.1.2 IO & Clk Clean Up
-Phase 2.1.2 IO & Clk Clean Up | Checksum: c9f56c05
+Phase 2.1.2 IO & Clk Clean Up | Checksum: ef5ebd8c
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.89 . Memory (MB): peak = 1926.711 ; gain = 48.008 ; free physical = 4168 ; free virtual = 18240
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.93 . Memory (MB): peak = 1926.703 ; gain = 48.012 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2.1.3 Implementation Feasibility check On IDelay
-Phase 2.1.3 Implementation Feasibility check On IDelay | Checksum: c9f56c05
+Phase 2.1.3 Implementation Feasibility check On IDelay | Checksum: ef5ebd8c
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.91 . Memory (MB): peak = 1926.711 ; gain = 48.008 ; free physical = 4168 ; free virtual = 18240
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.94 . Memory (MB): peak = 1926.703 ; gain = 48.012 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2.1.4 Commit IO Placement
-Phase 2.1.4 Commit IO Placement | Checksum: 194516f0
+Phase 2.1.4 Commit IO Placement | Checksum: 03b739fc
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.91 . Memory (MB): peak = 1926.711 ; gain = 48.008 ; free physical = 4168 ; free virtual = 18240
-Phase 2.1 IO Placement/ Clock Placement/ Build Placer Device | Checksum: f2f8f44f
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.95 . Memory (MB): peak = 1926.703 ; gain = 48.012 ; free physical = 8548 ; free virtual = 20730
+Phase 2.1 IO Placement/ Clock Placement/ Build Placer Device | Checksum: 8ba26d67
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.91 . Memory (MB): peak = 1926.711 ; gain = 48.008 ; free physical = 4168 ; free virtual = 18240
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:00.95 . Memory (MB): peak = 1926.703 ; gain = 48.012 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2.2 Build Placer Netlist Model
 
 Phase 2.2.1 Place Init Design
 
 Phase 2.2.1.1 Init Lut Pin Assignment
-Phase 2.2.1.1 Init Lut Pin Assignment | Checksum: 1daed63c9
+Phase 2.2.1.1 Init Lut Pin Assignment | Checksum: 121f6429d
 
-Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1926.711 ; gain = 48.008 ; free physical = 4167 ; free virtual = 18238
-Phase 2.2.1 Place Init Design | Checksum: 13b262b91
+Time (s): cpu = 00:00:02 ; elapsed = 00:00:01 . Memory (MB): peak = 1926.703 ; gain = 48.012 ; free physical = 8548 ; free virtual = 20730
+Phase 2.2.1 Place Init Design | Checksum: e3e7d93c
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1932.703 ; gain = 54.000 ; free physical = 4166 ; free virtual = 18237
-Phase 2.2 Build Placer Netlist Model | Checksum: 13b262b91
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1932.695 ; gain = 54.004 ; free physical = 8548 ; free virtual = 20730
+Phase 2.2 Build Placer Netlist Model | Checksum: e3e7d93c
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1932.703 ; gain = 54.000 ; free physical = 4166 ; free virtual = 18237
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1932.695 ; gain = 54.004 ; free physical = 8548 ; free virtual = 20730
 
 Phase 2.3 Constrain Clocks/Macros
 
 Phase 2.3.1 Constrain Global/Regional Clocks
-Phase 2.3.1 Constrain Global/Regional Clocks | Checksum: 13b262b91
+Phase 2.3.1 Constrain Global/Regional Clocks | Checksum: e3e7d93c
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1932.703 ; gain = 54.000 ; free physical = 4166 ; free virtual = 18237
-Phase 2.3 Constrain Clocks/Macros | Checksum: 13b262b91
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1932.695 ; gain = 54.004 ; free physical = 8548 ; free virtual = 20730
+Phase 2.3 Constrain Clocks/Macros | Checksum: e3e7d93c
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1932.703 ; gain = 54.000 ; free physical = 4166 ; free virtual = 18237
-Phase 2 Placer Initialization | Checksum: 13b262b91
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1932.695 ; gain = 54.004 ; free physical = 8548 ; free virtual = 20730
+Phase 2 Placer Initialization | Checksum: e3e7d93c
 
-Time (s): cpu = 00:00:03 ; elapsed = 00:00:01 . Memory (MB): peak = 1932.703 ; gain = 54.000 ; free physical = 4166 ; free virtual = 18237
+Time (s): cpu = 00:00:03 ; elapsed = 00:00:02 . Memory (MB): peak = 1932.695 ; gain = 54.004 ; free physical = 8548 ; free virtual = 20730
 
 Phase 3 Global Placement
-Phase 3 Global Placement | Checksum: 2867c37a5
+Phase 3 Global Placement | Checksum: 11d589b04
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20715
 
 Phase 4 Detail Placement
 
 Phase 4.1 Commit Multi Column Macros
-Phase 4.1 Commit Multi Column Macros | Checksum: 2867c37a5
+Phase 4.1 Commit Multi Column Macros | Checksum: 11d589b04
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20715
 
 Phase 4.2 Commit Most Macros & LUTRAMs
-Phase 4.2 Commit Most Macros & LUTRAMs | Checksum: 1a9af2bdd
+Phase 4.2 Commit Most Macros & LUTRAMs | Checksum: 1c0bc7a10
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20716
 
 Phase 4.3 Area Swap Optimization
-Phase 4.3 Area Swap Optimization | Checksum: 1ac56656c
+Phase 4.3 Area Swap Optimization | Checksum: 148c4bc86
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20716
 
 Phase 4.4 updateClock Trees: DP
-Phase 4.4 updateClock Trees: DP | Checksum: 1ac56656c
+Phase 4.4 updateClock Trees: DP | Checksum: 148c4bc86
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20716
 
 Phase 4.5 Timing Path Optimizer
-Phase 4.5 Timing Path Optimizer | Checksum: 1a6d6174c
+Phase 4.5 Timing Path Optimizer | Checksum: ff5b890b
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20716
 
 Phase 4.6 Small Shape Detail Placement
 
 Phase 4.6.1 Commit Small Macros & Core Logic
 
 Phase 4.6.1.1 setBudgets
-Phase 4.6.1.1 setBudgets | Checksum: 1a660ca16
+Phase 4.6.1.1 setBudgets | Checksum: 16efbe582
 
-Time (s): cpu = 00:00:07 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4153 ; free virtual = 18225
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:03 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8534 ; free virtual = 20716
 
 Phase 4.6.1.2 Commit Slice Clusters
-Phase 4.6.1.2 Commit Slice Clusters | Checksum: 1f0a6ae0d
+Phase 4.6.1.2 Commit Slice Clusters | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
-Phase 4.6.1 Commit Small Macros & Core Logic | Checksum: 1f0a6ae0d
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 4.6.1 Commit Small Macros & Core Logic | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 4.6.2 Clock Restriction Legalization for Leaf Columns
-Phase 4.6.2 Clock Restriction Legalization for Leaf Columns | Checksum: 1f0a6ae0d
+Phase 4.6.2 Clock Restriction Legalization for Leaf Columns | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 4.6.3 Clock Restriction Legalization for Non-Clock Pins
-Phase 4.6.3 Clock Restriction Legalization for Non-Clock Pins | Checksum: 1f0a6ae0d
+Phase 4.6.3 Clock Restriction Legalization for Non-Clock Pins | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
-Phase 4.6 Small Shape Detail Placement | Checksum: 1f0a6ae0d
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 4.6 Small Shape Detail Placement | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 4.7 Re-assign LUT pins
-Phase 4.7 Re-assign LUT pins | Checksum: 1f0a6ae0d
+Phase 4.7 Re-assign LUT pins | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
-Phase 4 Detail Placement | Checksum: 1f0a6ae0d
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 4 Detail Placement | Checksum: 1d256d1bc
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5 Post Placement Optimization and Clean-Up
 
 Phase 5.1 PCOPT Shape updates
-Phase 5.1 PCOPT Shape updates | Checksum: a8d757b7
+Phase 5.1 PCOPT Shape updates | Checksum: 19eb2e98a
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.2 Post Commit Optimization
 
 Phase 5.2.1 updateClock Trees: PCOPT
-Phase 5.2.1 updateClock Trees: PCOPT | Checksum: a8d757b7
+Phase 5.2.1 updateClock Trees: PCOPT | Checksum: 19eb2e98a
 
-Time (s): cpu = 00:00:08 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18220
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.2.2 Post Placement Optimization
 
 Phase 5.2.2.1 Post Placement Timing Optimization
-INFO: [Place 30-746] Post Placement Timing Summary WNS=6.795. For the most accurate timing information please run report_timing.
-Phase 5.2.2.1 Post Placement Timing Optimization | Checksum: 114e9dea1
+INFO: [Place 30-746] Post Placement Timing Summary WNS=6.940. For the most accurate timing information please run report_timing.
+Phase 5.2.2.1 Post Placement Timing Optimization | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
-Phase 5.2.2 Post Placement Optimization | Checksum: 114e9dea1
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 5.2.2 Post Placement Optimization | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
-Phase 5.2 Post Commit Optimization | Checksum: 114e9dea1
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 5.2 Post Commit Optimization | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.3 Sweep Clock Roots: Post-Placement
-Phase 5.3 Sweep Clock Roots: Post-Placement | Checksum: 114e9dea1
+Phase 5.3 Sweep Clock Roots: Post-Placement | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.4 Post Placement Cleanup
-Phase 5.4 Post Placement Cleanup | Checksum: 114e9dea1
+Phase 5.4 Post Placement Cleanup | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
+Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.5 Placer Reporting
 
 Phase 5.5.1 Restore STA
-Phase 5.5.1 Restore STA | Checksum: 114e9dea1
+Phase 5.5.1 Restore STA | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
-Phase 5.5 Placer Reporting | Checksum: 114e9dea1
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 5.5 Placer Reporting | Checksum: 23c8dd487
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 
 Phase 5.6 Final Placement Cleanup
-Phase 5.6 Final Placement Cleanup | Checksum: 12656e49b
+Phase 5.6 Final Placement Cleanup | Checksum: 25657cb6f
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
-Phase 5 Post Placement Optimization and Clean-Up | Checksum: 12656e49b
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Phase 5 Post Placement Optimization and Clean-Up | Checksum: 25657cb6f
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
-Ending Placer Task | Checksum: 36d71dbf
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
+Ending Placer Task | Checksum: 179455069
 
-Time (s): cpu = 00:00:09 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.727 ; gain = 102.023 ; free physical = 4149 ; free virtual = 18221
+Time (s): cpu = 00:00:10 ; elapsed = 00:00:04 . Memory (MB): peak = 1980.719 ; gain = 102.027 ; free physical = 8532 ; free virtual = 20714
 INFO: [Common 17-83] Releasing license: Implementation
-45 Infos, 38 Warnings, 38 Critical Warnings and 0 Errors encountered.
+45 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 place_design completed successfully
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00.69 ; elapsed = 00:00:00.61 . Memory (MB): peak = 1980.727 ; gain = 0.000 ; free physical = 4140 ; free virtual = 18221
-report_io: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.17 . Memory (MB): peak = 1980.727 ; gain = 0.000 ; free physical = 4142 ; free virtual = 18216
-report_utilization: Time (s): cpu = 00:00:00.08 ; elapsed = 00:00:00.15 . Memory (MB): peak = 1980.727 ; gain = 0.000 ; free physical = 4142 ; free virtual = 18216
-report_control_sets: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.09 . Memory (MB): peak = 1980.727 ; gain = 0.000 ; free physical = 4141 ; free virtual = 18215
+Write XDEF Complete: Time (s): cpu = 00:00:00.74 ; elapsed = 00:00:00.74 . Memory (MB): peak = 1980.719 ; gain = 0.000 ; free physical = 8523 ; free virtual = 20714
+report_io: Time (s): cpu = 00:00:00.10 ; elapsed = 00:00:00.16 . Memory (MB): peak = 1980.719 ; gain = 0.000 ; free physical = 8528 ; free virtual = 20712
+report_utilization: Time (s): cpu = 00:00:00.07 ; elapsed = 00:00:00.16 . Memory (MB): peak = 1980.719 ; gain = 0.000 ; free physical = 8526 ; free virtual = 20710
+report_control_sets: Time (s): cpu = 00:00:00.01 ; elapsed = 00:00:00.08 . Memory (MB): peak = 1980.719 ; gain = 0.000 ; free physical = 8526 ; free virtual = 20710
 Command: route_design
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -129 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -130 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 Running DRC as a precondition to command route_design
 INFO: [DRC 23-27] Running DRC with 8 threads
 INFO: [Vivado_Tcl 4-198] DRC finished with 0 Errors
@@ -450,109 +336,110 @@ Starting Routing Task
 INFO: [Route 35-254] Multithreading enabled for route_design using a maximum of 8 CPUs
 
 Phase 1 Build RT Design
-Phase 1 Build RT Design | Checksum: 144fae488
+Phase 1 Build RT Design | Checksum: bb1803fa
 
-Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 2000.371 ; gain = 19.645 ; free physical = 4035 ; free virtual = 18109
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 2002.363 ; gain = 21.645 ; free physical = 8415 ; free virtual = 20600
 
 Phase 2 Router Initialization
 
 Phase 2.1 Create Timer
-Phase 2.1 Create Timer | Checksum: 144fae488
+Phase 2.1 Create Timer | Checksum: bb1803fa
 
-Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 2000.371 ; gain = 19.645 ; free physical = 4034 ; free virtual = 18108
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 2002.363 ; gain = 21.645 ; free physical = 8415 ; free virtual = 20599
 
 Phase 2.2 Pre Route Cleanup
-Phase 2.2 Pre Route Cleanup | Checksum: 144fae488
+Phase 2.2 Pre Route Cleanup | Checksum: bb1803fa
 
-Time (s): cpu = 00:00:21 ; elapsed = 00:00:17 . Memory (MB): peak = 2010.359 ; gain = 29.633 ; free physical = 4004 ; free virtual = 18078
+Time (s): cpu = 00:00:20 ; elapsed = 00:00:17 . Memory (MB): peak = 2013.352 ; gain = 32.633 ; free physical = 8385 ; free virtual = 20569
  Number of Nodes with overlaps = 0
 
 Phase 2.3 Update Timing
-Phase 2.3 Update Timing | Checksum: 358ff6bc
+Phase 2.3 Update Timing | Checksum: 247b9fe5d
 
-Time (s): cpu = 00:00:23 ; elapsed = 00:00:18 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3983 ; free virtual = 18057
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.722  | TNS=0.000  | WHS=-0.139 | THS=-4.179 |
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:18 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8368 ; free virtual = 20552
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.868  | TNS=0.000  | WHS=-0.167 | THS=-4.746 |
 
-Phase 2 Router Initialization | Checksum: 5bf00025
+Phase 2 Router Initialization | Checksum: 1f93c4f3c
 
-Time (s): cpu = 00:00:23 ; elapsed = 00:00:18 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3983 ; free virtual = 18057
+Time (s): cpu = 00:00:23 ; elapsed = 00:00:18 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8368 ; free virtual = 20552
 
 Phase 3 Initial Routing
-Phase 3 Initial Routing | Checksum: 180084043
+Phase 3 Initial Routing | Checksum: 2360d90a7
 
-Time (s): cpu = 00:00:24 ; elapsed = 00:00:18 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3983 ; free virtual = 18057
+Time (s): cpu = 00:00:24 ; elapsed = 00:00:18 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8368 ; free virtual = 20552
 
 Phase 4 Rip-up And Reroute
 
 Phase 4.1 Global Iteration 0
- Number of Nodes with overlaps = 312
+ Number of Nodes with overlaps = 343
+ Number of Nodes with overlaps = 1
  Number of Nodes with overlaps = 0
 
 Phase 4.1.1 Update Timing
-Phase 4.1.1 Update Timing | Checksum: 1032cbba4
+Phase 4.1.1 Update Timing | Checksum: 155bd2c54
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.701  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.796  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.1 Global Iteration 0 | Checksum: 1b8cbd59f
+Phase 4.1 Global Iteration 0 | Checksum: 2122270f4
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 4.2 Global Iteration 1
  Number of Nodes with overlaps = 0
 
 Phase 4.2.1 Update Timing
-Phase 4.2.1 Update Timing | Checksum: 1326cc1ab
+Phase 4.2.1 Update Timing | Checksum: 15057fec1
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.704  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.799  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 4.2 Global Iteration 1 | Checksum: 12c64eb4a
+Phase 4.2 Global Iteration 1 | Checksum: 181a68522
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-Phase 4 Rip-up And Reroute | Checksum: 12c64eb4a
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+Phase 4 Rip-up And Reroute | Checksum: 181a68522
 
-Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 5 Delay and Skew Optimization
 
 Phase 5.1 Delay CleanUp
 
 Phase 5.1.1 Update Timing
-Phase 5.1.1 Update Timing | Checksum: 13b365cfe
+Phase 5.1.1 Update Timing | Checksum: 1afad5cac
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.853  | TNS=0.000  | WHS=N/A    | THS=N/A    |
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.947  | TNS=0.000  | WHS=N/A    | THS=N/A    |
 
-Phase 5.1 Delay CleanUp | Checksum: 13b365cfe
+Phase 5.1 Delay CleanUp | Checksum: 1afad5cac
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 5.2 Clock Skew Optimization
-Phase 5.2 Clock Skew Optimization | Checksum: 13b365cfe
+Phase 5.2 Clock Skew Optimization | Checksum: 1afad5cac
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-Phase 5 Delay and Skew Optimization | Checksum: 13b365cfe
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+Phase 5 Delay and Skew Optimization | Checksum: 1afad5cac
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:26 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 6 Post Hold Fix
 
 Phase 6.1 Update Timing
-Phase 6.1 Update Timing | Checksum: 17e3c9f8b
+Phase 6.1 Update Timing | Checksum: 12c395bc6
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.853  | TNS=0.000  | WHS=0.105  | THS=0.000  |
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.947  | TNS=0.000  | WHS=0.075  | THS=0.000  |
 
-Phase 6 Post Hold Fix | Checksum: dcc809f4
+Phase 6 Post Hold Fix | Checksum: 19042d751
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 7 Route finalize
 
 Router Utilization Summary
-  Global Vertical Routing Utilization    = 0.331262 %
-  Global Horizontal Routing Utilization  = 0.535751 %
+  Global Vertical Routing Utilization    = 0.333644 %
+  Global Horizontal Routing Utilization  = 0.56736 %
   Routable Net Status*
   *Does not include unroutable nets such as driverless and loadless.
   Run report_route_status for detailed report.
@@ -561,45 +448,45 @@ Router Utilization Summary
   Number of Partially Routed Nets     = 0
   Number of Node Overlaps             = 0
 
-Phase 7 Route finalize | Checksum: 1788d869c
+Phase 7 Route finalize | Checksum: 133315ce9
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8367 ; free virtual = 20551
 
 Phase 8 Verifying routed nets
 
  Verification completed successfully
-Phase 8 Verifying routed nets | Checksum: 1788d869c
+Phase 8 Verifying routed nets | Checksum: 133315ce9
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8365 ; free virtual = 20549
 
 Phase 9 Depositing Routes
-Phase 9 Depositing Routes | Checksum: 1e83ce528
+Phase 9 Depositing Routes | Checksum: 12c531741
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8365 ; free virtual = 20549
 
 Phase 10 Post Router Timing
-INFO: [Route 35-57] Estimated Timing Summary | WNS=6.853  | TNS=0.000  | WHS=0.105  | THS=0.000  |
+INFO: [Route 35-57] Estimated Timing Summary | WNS=6.947  | TNS=0.000  | WHS=0.075  | THS=0.000  |
 
 INFO: [Route 35-327] The final timing numbers are based on the router estimated timing analysis. For a complete and accurate timing signoff, please run report_timing_summary.
-Phase 10 Post Router Timing | Checksum: 1e83ce528
+Phase 10 Post Router Timing | Checksum: 12c531741
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8365 ; free virtual = 20549
 INFO: [Route 35-16] Router Completed Successfully
 
-Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+Time (s): cpu = 00:00:27 ; elapsed = 00:00:19 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8365 ; free virtual = 20549
 
 Routing Is Done.
 INFO: [Common 17-83] Releasing license: Implementation
-60 Infos, 38 Warnings, 38 Critical Warnings and 0 Errors encountered.
+60 Infos, 0 Warnings, 0 Critical Warnings and 0 Errors encountered.
 route_design completed successfully
-route_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:20 . Memory (MB): peak = 2031.414 ; gain = 50.688 ; free physical = 3982 ; free virtual = 18056
+route_design: Time (s): cpu = 00:00:28 ; elapsed = 00:00:20 . Memory (MB): peak = 2029.406 ; gain = 48.688 ; free physical = 8365 ; free virtual = 20549
 Writing placer database...
 Writing XDEF routing.
 Writing XDEF routing logical nets.
 Writing XDEF routing special nets.
-Write XDEF Complete: Time (s): cpu = 00:00:00.71 ; elapsed = 00:00:00.70 . Memory (MB): peak = 2031.414 ; gain = 0.000 ; free physical = 3972 ; free virtual = 18056
+Write XDEF Complete: Time (s): cpu = 00:00:00.76 ; elapsed = 00:00:00.73 . Memory (MB): peak = 2031.406 ; gain = 0.000 ; free physical = 8355 ; free virtual = 20550
 INFO: [DRC 23-27] Running DRC with 8 threads
-INFO: [Coretcl 2-168] The results of DRC are in file /afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/chip_interface_drc_routed.rpt.
+INFO: [Coretcl 2-168] The results of DRC are in file /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/impl_1/chip_interface_drc_routed.rpt.
 INFO: [Timing 38-91] UpdateTimingParams: Speed grade: -1, Delay Type: min_max.
 INFO: [Timing 38-191] Multithreading enabled for timing update using a maximum of 8 CPUs
 Running Vector-less Activity Propagation...
@@ -607,13 +494,17 @@ Running Vector-less Activity Propagation...
 Finished Running Vector-less Activity Propagation
 Attempting to get a license for feature 'Implementation' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Implementation' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -129 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -130 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 Running DRC as a precondition to command write_bitstream
 INFO: [DRC 23-27] Running DRC with 8 threads
 WARNING: [DRC 23-20] Rule violation (BUFC-1) Input Buffer Connections - Input buffer AC_GPIO1_IBUF_inst has no loads. An input buffer must drive an internal load.
-WARNING: [DRC 23-20] Rule violation (RTSTAT-10) No routable loads - 1 net(s) have no routable loads. The problem bus(es) and/or net(s) are AC_GPIO1_IBUF.
+WARNING: [DRC 23-20] Rule violation (BUFC-1) Input Buffer Connections - Input buffer SW[0]_IBUF_inst has no loads. An input buffer must drive an internal load.
+WARNING: [DRC 23-20] Rule violation (BUFC-1) Input Buffer Connections - Input buffer SW[1]_IBUF_inst has no loads. An input buffer must drive an internal load.
+WARNING: [DRC 23-20] Rule violation (BUFC-1) Input Buffer Connections - Input buffer SW[2]_IBUF_inst has no loads. An input buffer must drive an internal load.
+WARNING: [DRC 23-20] Rule violation (BUFC-1) Input Buffer Connections - Input buffer SW[3]_IBUF_inst has no loads. An input buffer must drive an internal load.
+WARNING: [DRC 23-20] Rule violation (RTSTAT-10) No routable loads - 5 net(s) have no routable loads. The problem bus(es) and/or net(s) are AC_GPIO1_IBUF, SW[0]_IBUF, SW[1]_IBUF, SW[2]_IBUF, SW[3]_IBUF.
 WARNING: [DRC 23-20] Rule violation (ZPS7-1) PS7 block required - The PS7 cell must be used in this Zynq design in order to enable correct default configuration.
-INFO: [Vivado 12-3199] DRC finished with 0 Errors, 3 Warnings
+INFO: [Vivado 12-3199] DRC finished with 0 Errors, 7 Warnings
 INFO: [Vivado 12-3200] Please refer to the DRC report (report_drc) for more information.
 Loading data files...
 Loading site data...
@@ -624,8 +515,8 @@ Creating bitstream...
 Writing bitstream ./chip_interface.bit...
 INFO: [Vivado 12-1842] Bitgen Completed Successfully.
 INFO: [Project 1-118] WebTalk data collection is enabled (User setting is ON. Install Setting is ON.).
-INFO: [Common 17-186] '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Wed Dec  7 18:20:37 2016. For additional details about this file, please refer to the WebTalk help file at /afs/ece/support/xilinx/xilinx.release/Vivado/doc/webtalk_introduction.html.
+INFO: [Common 17-186] '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.runs/impl_1/usage_statistics_webtalk.xml' has been successfully sent to Xilinx on Thu Dec  8 18:08:12 2016. For additional details about this file, please refer to the WebTalk help file at /afs/ece/support/xilinx/xilinx.release/Vivado-2015.2/Vivado/2015.2/doc/webtalk_introduction.html.
 INFO: [Common 17-83] Releasing license: Implementation
-write_bitstream: Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2326.871 ; gain = 231.395 ; free physical = 3678 ; free virtual = 17763
+write_bitstream: Time (s): cpu = 00:00:18 ; elapsed = 00:00:19 . Memory (MB): peak = 2333.855 ; gain = 246.395 ; free physical = 8043 ; free virtual = 20239
 INFO: [Vivado_Tcl 4-395] Unable to parse hwdef file chip_interface.hwdef
-INFO: [Common 17-206] Exiting Vivado at Wed Dec  7 18:20:37 2016...
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  8 18:08:12 2016...

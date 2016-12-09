@@ -1,7 +1,7 @@
 module jt51_top(output logic [23:0] left_to_board, 
                 output logic [23:0] right_to_board,
                 output logic sample,
-                input logic [7:0] dataX, dataY, 
+                input logic [1:0][7:0] dataX, dataY, 
                 output logic sync,
                 input logic addr0,
                 input logic clk, rst, SW2, SW3);
@@ -54,9 +54,10 @@ jt51 uut (
 
   reg [8:0] data_cnt;
 	reg [3:0] state, next;
-	reg prog_done, otherNote;
+	reg prog_done;
+	logic [1:0] otherNote;
 	parameter WAIT_FREE=0, WR_ADDR=1, WR_VAL=2, DONE=3, WRITE=4, BLANK=5;
-  parameter rom = "~/Private/MM545/YM2151/trunk/jt51_synth/input.hex";
+  parameter rom = "/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/input.hex";
    
   // signals from trackball
   //logic [7:0] data_from_trackball;
@@ -75,7 +76,7 @@ always @(posedge clk or posedge rst) begin
 			next <= WR_ADDR;
 			state<= WAIT_FREE;
       sync <= 0;
-      otherNote <= 0;
+      otherNote <= 2'b00;
 		end
 		else begin
 			case( state )
@@ -111,14 +112,14 @@ always @(posedge clk or posedge rst) begin
 					a0   <= 1'b1;
 					d_in <= (prog_done) ? sound_data : cfg[data_cnt][7:0];
 					state<= WRITE;
-					if( prog_done && otherNote ) begin
+					if( prog_done && (otherNote == 2'b11) ) begin
 						next      <= WR_ADDR; //changed this drom stat DONE
-            otherNote <= 0;
+            otherNote <= 2'b00;
 					end
 					else begin
 						data_cnt <= (prog_done) ? 9'd65 : data_cnt + 1'b1; //Changed this from 
 						next <= WR_ADDR;
-            if(prog_done) otherNote <= 1;
+                        if(prog_done) otherNote <= otherNote + 1;
 					end
 				end
 				DONE: prog_done <= 1'b1;
@@ -156,25 +157,22 @@ always_comb begin
 end*/
 
 always_comb begin
-    case({SW3, SW2})
+    case(otherNote)
     2'b00: begin
-        sound_addr = (otherNote) ? 8'h20: 8'h28;  //changed attack rate and note 
-        sound_data = (otherNote) ? 8'hc7 : {1'b0, dataX[6:0]}; //{dataY[6:0], 1'b1} : {1'b0, dataX[6:0]}; 
+        sound_addr = 8'h28;  //changed attack rate and note 
+        sound_data = {2'b00, dataX[0][7:5], dataY[0][7:5]}; //{dataY[6:0], 1'b1} : {1'b0, dataX[6:0]}; 
     end 
     2'b01: begin 
-        sound_addr = (otherNote) ? 8'h20: 8'h28; // try to change timbre 
-        sound_data = (otherNote) ? 8'hff : {1'b0, dataX[6:0]};
-        //sound_data = (otherNote) ? 8'hc1 : {1'b0, dataX[6:0]};
+        sound_addr = 8'h40;  //changed attack rate and note 
+         sound_data = {1'b0, dataX[1][7:4], dataY[1][7:5]};
     end 
     2'b10: begin 
-        sound_addr = (otherNote) ? 8'h20: 8'h28; // try to change timbre 
-        //sound_data = (otherNote) ? 8'hc2 : {1'b0, dataX[6:0]};
-        sound_data = (otherNote) ? 8'he7 : {1'b0, dataX[6:0]};
+        sound_addr = 8'h41;  //changed attack rate and note 
+        sound_data = {1'b0, dataY[1][7:1]};
     end 
     2'b11: begin
-       sound_addr = (otherNote) ? 8'h20: 8'h28; // try to change timbre 
-       sound_data = (otherNote) ? 8'hdf : {1'b0, dataX[6:0]};
-       //sound_data = (otherNote) ? 8'hc3 : {1'b0, dataX[6:0]};
+        sound_addr = 8'h29;  //changed attack rate and note 
+        sound_data = {1'b0, dataX[1][7:1]}; //{dataY[6:0], 1'b1} : {1'b0, dataX[6:0]}; 
     end  
     endcase 
 end 

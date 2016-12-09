@@ -1,17 +1,21 @@
-module chip_interface(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, SW3, SW2, SW0, SW1, clk_100,
-           LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7, BTNC, AC_GPIO0, AC_GPIO1, AC_GPIO2, 
-	AC_GPIO3, AC_ADR0, AC_ADR1, AC_SCK, AC_MCLK, AC_SDA);
+module chip_interface(JA, JB, SW, clk_100,
+           LD, BTNC, AC_GPIO0, AC_GPIO1, AC_GPIO2, 
+	AC_GPIO3, AC_ADR0, AC_ADR1, AC_SCK, AC_MCLK, AC_SDA,
+	VGA_R, VGA_G, VGA_B, VGA_HS, VGA_VS);
 
-    input logic JA1, JA2, JA3, JA4;
-    input logic JB1, JB2, JB3, JB4;
-    input logic SW0, SW1, clk_100;
-    input logic SW2, SW3;
-    output logic LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
+    input logic [3:0] JA;
+    input logic [3:0] JB;
+    input logic clk_100;
+    input logic [3:0] SW;
+    output logic [7:0] LD;
     input logic BTNC; 
     output logic AC_GPIO0;
     input logic AC_GPIO1, AC_GPIO2, AC_GPIO3;
     output logic AC_ADR0, AC_ADR1, AC_SCK, AC_MCLK;
-    inout logic AC_SDA; 
+    inout logic AC_SDA;
+    
+    output logic [3:0] VGA_R, VGA_G, VGA_B;
+    output logic VGA_HS, VGA_VS; 
 
  
 
@@ -25,7 +29,7 @@ module chip_interface(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, SW3, SW2, SW0, SW1
 
   logic [23:0] left_to_board, right_to_board;
   logic sample;
-  logic [7:0] dataX, dataY;
+  logic [1:0][7:0] dataX, dataY;
   logic addr0;
   logic sync;
 
@@ -51,11 +55,10 @@ module chip_interface(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, SW3, SW2, SW0, SW1
                 .sample(hphone_l_valid),
                 .dataX(dataX),
                 .dataY(dataY),
-                .addr0(addr0),
                 .clk(MCKR), // 7 MHZ clk 
                 .rst(BTNC),
-                .SW3(SW3),
-                .SW2(SW2),
+                .SW3(SW[3]),
+                .SW2(SW[2]),
                 .sync(sync)); // a button on fpga?
 
 
@@ -78,29 +81,19 @@ module chip_interface(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, SW3, SW2, SW0, SW1
                .NEW_SAMPLE(),
                .SAMPLE_CLK_48K(sample_clk_48k));
 
-  trackball_top tbt(.data_outX(dataX),
-                    .data_outY(dataY),
-                    .addr0(addr0),
-                    .JA1(JA1), 
-                    .JA2(JA2), 
-                    .JA3(JA3), 
-                    .JA4(JA4), 
-                    .JB1(JB1), 
-                    .JB2(JB2), 
-                    .JB3(JB3), 
-                    .JB4(JB4), 
-                    .SW0(SW0), 
-                    .SW1(SW1), 
+
+  //FIXME: Removed the SYNC signal from trackball
+  trackball_top tbt(.dataX(dataX),
+                    .dataY(dataY),
+                    .JA(JA),
+                    .JB(JB),  
                     .GCLK(clk_100),
-                    .LD0(LD0), 
-                    .LD1(LD1), 
-                    .LD2(LD2), 
-                    .LD3(LD3), 
-                    .LD4(LD4), 
-                    .LD5(LD5), 
-                    .LD6(LD6), 
-                    .LD7(LD7), 
-                    .reset(BTNC),
-                    .sync(sync));
+                    .LD(LD),
+                    .VGA_R(VGA_R),
+                    .VGA_G(VGA_G),
+                    .VGA_B(VGA_B),
+                    .VGA_HS(VGA_HS),
+                    .VGA_VS(VGA_VS),
+                    .BTNC(BTNC));
 
 endmodule 

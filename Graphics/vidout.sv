@@ -22,7 +22,8 @@ module vidout(
         else
             CLOCK_50 <= ~CLOCK_50;
     end
-
+    assign blank_N = 1'b1;
+    
     vga vgaModule(.CLOCK_50(CLOCK_50),
                   .reset(reset),
                   .HS(HS),
@@ -32,7 +33,7 @@ module vidout(
                   .col(vga_col));
 
 
-    logic [8:0][7:0][15:0] buffer;
+    logic [8:0][7:0][11:0] buffer;
     always_ff @(posedge MCKF) begin
         if(reset) begin
             comp_col <= 0;
@@ -50,7 +51,7 @@ module vidout(
         else begin
             comp_col <= comp_col + 9'd1;
         end
-        buffer[comp_col][comp_row] <= VIDOUT;
+        buffer[comp_col][comp_row] <= VIDOUT[11:0];
     end
 
 

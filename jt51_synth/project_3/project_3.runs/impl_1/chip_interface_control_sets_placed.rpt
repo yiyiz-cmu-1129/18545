@@ -1,12 +1,12 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 | Tool Version : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-| Date         : Wed Dec  7 18:19:55 2016
-| Host         : centennial.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+| Date         : Thu Dec  8 18:07:29 2016
+| Host         : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 | Command      : report_control_sets -verbose -file chip_interface_control_sets_placed.rpt
 | Design       : chip_interface
 | Device       : xc7z020
---------------------------------------------------------------------------------------------------------------
+-----------------------------------------------------------------------------------------------------------
 
 Control Set Information
 
@@ -22,8 +22,8 @@ Table of Contents
 +-------------------------------------------------------------------+-------+
 |                               Status                              | Count |
 +-------------------------------------------------------------------+-------+
-| Number of unique control sets                                     |    70 |
-| Minimum Number of register sites lost to control set restrictions |   190 |
+| Number of unique control sets                                     |    76 |
+| Minimum Number of register sites lost to control set restrictions |   209 |
 +-------------------------------------------------------------------+-------+
 
 
@@ -33,12 +33,12 @@ Table of Contents
 +--------------+-----------------------+------------------------+-----------------+--------------+
 | Clock Enable | Synchronous Set/Reset | Asynchronous Set/Reset | Total Registers | Total Slices |
 +--------------+-----------------------+------------------------+-----------------+--------------+
-| No           | No                    | No                     |             475 |          165 |
-| No           | No                    | Yes                    |              17 |            7 |
-| No           | Yes                   | No                     |             114 |           46 |
-| Yes          | No                    | No                     |             264 |           90 |
-| Yes          | No                    | Yes                    |              23 |            7 |
-| Yes          | Yes                   | No                     |             541 |          155 |
+| No           | No                    | No                     |             478 |          170 |
+| No           | No                    | Yes                    |              15 |            6 |
+| No           | Yes                   | No                     |             125 |           55 |
+| Yes          | No                    | No                     |             334 |          109 |
+| Yes          | No                    | Yes                    |              16 |            4 |
+| Yes          | Yes                   | No                     |             551 |          160 |
 +--------------+-----------------------+------------------------+-----------------+--------------+
 
 
@@ -48,76 +48,82 @@ Table of Contents
 +----------------------------------------+------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+
 |              Clock Signal              |                              Enable Signal                             |                            Set/Reset Signal                           | Slice Load Count | Bel Load Count |
 +----------------------------------------+------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+
-|  CK                                    |                                                                        | BTNC_IBUF                                                             |                1 |              2 |
+|  clk_100_IBUF_BUFG                     |                                                                        |                                                                       |                1 |              1 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_pg/phase_base_VI[19]_i_1_n_0                                 |                1 |              2 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | BTNC_IBUF                                                             |                1 |              2 |
-|  MCKR_BUFG                             |                                                                        | jt/uut/u_mmr/SR[0]                                                    |                4 |              4 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/busy_kon0                                           | jt/uut/rst_p1                                                         |                1 |              4 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_bits_left[3]_i_1_n_0 |                                                                       |                1 |              4 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/state[3]_i_1_n_0         |                                                                       |                4 |              4 |
 |  clk_100_IBUF_BUFG                     |                                                                        | BTNC_IBUF                                                             |                1 |              4 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/cnt0                                                | jt/uut/rst_p1                                                         |                2 |              5 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/u_zerosh/E[0]                                           | jt/uut/u_noise/u_zerosh/SR[0]                                         |                1 |              5 |
+|  MCKR_BUFG                             |                                                                        | jt/uut/u_mmr/SR[0]                                                    |                4 |              4 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_bits_left[3]_i_1_n_0 |                                                                       |                2 |              4 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/busy_kon0                                           | jt/uut/rst_p1                                                         |                1 |              4 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/state[3]_i_1_n_0         |                                                                       |                3 |              4 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/load_A_i_2_n_0                                            | jt/uut/u_mmr/csm                                                      |                3 |              5 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/u_zerosh/E[0]                                           | jt/uut/u_noise/u_zerosh/SR[0]                                         |                2 |              5 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/csm_cnt[4]_i_2_n_0                                  | jt/uut/u_mmr/u_reg/csm_state[1]                                       |                1 |              5 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/load_A_i_2_n_0                                            | jt/uut/u_mmr/csm                                                      |                5 |              5 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[2]_i_1_n_0        |                                                                       |                3 |              6 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/cnt0                                                | jt/uut/rst_p1                                                         |                2 |              5 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[2]_i_1_n_0        |                                                                       |                5 |              6 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/ne5_out                                                   |                                                                       |                2 |              6 |
 |  MCKR_BUFG                             | jt/uut/timers/timer_A/E[0]                                             | jt/uut/u_mmr/load_A                                                   |                1 |              6 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_eg/u_kssh/SS[0]                                              |                3 |              6 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/ne5_out                                                   |                                                                       |                3 |              6 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/lfo_amd[6]_i_1_n_0                                        | jt/uut/rst_p1                                                         |                2 |              7 |
+|  MCKR_BUFG                             | jt/uut/u_lfo/am[6]_i_2_n_0                                             | jt/uut/u_mmr/SR[0]                                                    |                3 |              7 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/lfo_pmd[6]_i_1_n_0                                        | jt/uut/rst_p1                                                         |                2 |              7 |
-|  CK                                    | tbt/posX[9]_i_1_n_0                                                    | BTNC_IBUF                                                             |                3 |              7 |
-|  MCKR_BUFG                             | jt/uut/u_lfo/am[6]_i_2_n_0                                             | jt/uut/u_mmr/SR[0]                                                    |                5 |              7 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/selected_register[7]_i_1_n_0                              | jt/uut/rst_p1                                                         |                1 |              8 |
-|  CK                                    | tbt/leta/count_register[1][7]_i_1_n_0                                  |                                                                       |                3 |              8 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/lfo_freq[7]_i_1_n_0                                       | jt/uut/rst_p1                                                         |                3 |              8 |
-|  MCKR_BUFG                             | jt/uut/u_lfo/pm[7]_i_1_n_0                                             | jt/uut/u_mmr/SR[0]                                                    |                6 |              8 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/selected_register[7]_i_1_n_0                              | jt/uut/rst_p1                                                         |                3 |              8 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/value_A[9]_i_1_n_0                                        | jt/uut/rst_p1                                                         |                2 |              8 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/value_B[7]_i_1_n_0                                        | jt/uut/rst_p1                                                         |                2 |              8 |
-|  CK                                    | tbt/leta/count_register[2][7]_i_1_n_0                                  |                                                                       |                2 |              8 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/value_B[7]_i_1_n_0                                        | jt/uut/rst_p1                                                         |                1 |              8 |
+|  MCKR_BUFG                             | jt/uut/u_lfo/pm[7]_i_1_n_0                                             | jt/uut/u_mmr/SR[0]                                                    |                6 |              8 |
+|  MCKR_BUFG                             | jt/uut/u_mmr/cnt_reg[7][0]                                             | jt/uut/u_mmr/SR[0]                                                    |                4 |              8 |
 |  MCKR_BUFG                             | jt/uut/u_mmr/cnt_reg[0][0]                                             |                                                                       |                2 |              8 |
+|  CK                                    | tbt/leta/count_register[3][7]_i_1_n_0                                  |                                                                       |                3 |              8 |
+|  CK                                    | tbt/leta/count_register[2][7]_i_1_n_0                                  |                                                                       |                3 |              8 |
+|  CK                                    | tbt/leta/count_register[1][7]_i_1_n_0                                  |                                                                       |                3 |              8 |
 |  CK                                    | tbt/leta/count_register[0][7]_i_1_n_0                                  |                                                                       |                3 |              8 |
+|  CK                                    | tbt/leta_col[1][7]_i_1_n_0                                             |                                                                       |                3 |              8 |
+|  CK                                    | tbt/leta_col[0][7]_i_1_n_0                                             |                                                                       |                3 |              8 |
+|  CK                                    | tbt/leta_row[1][7]_i_1_n_0                                             |                                                                       |                1 |              8 |
+|  CK                                    | tbt/leta_row[0][7]_i_1_n_0                                             |                                                                       |                4 |              8 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/bitcount[7]_i_1_n_0      |                                                                       |                3 |              8 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/i2s_lr_last_i_1_n_0 | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_out[39]_i_1_n_0 |                2 |              8 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_data[8]_i_1_n_0      |                                                                       |                2 |              8 |
 |  clk_100_IBUF_BUFG                     |                                                                        | tbt/clear                                                             |                2 |              8 |
-|  MCKR_BUFG                             | jt/uut/u_mmr/cnt_reg[7][0]                                             | jt/uut/u_mmr/SR[0]                                                    |                2 |              8 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_data[8]_i_1_n_0      |                                                                       |                4 |              8 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/bitcount[7]_i_1_n_0      |                                                                       |                4 |              8 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/i2s_lr_last_i_1_n_0 | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_out[39]_i_1_n_0 |                1 |              8 |
-|  CK                                    | tbt/leta/count_register[3][7]_i_1_n_0                                  |                                                                       |                2 |              8 |
+|  MCKR_BUFG                             | jt/busy05_out                                                          | BTNC_IBUF                                                             |                5 |              9 |
+|  MCKR_BUFG                             | jt/a0                                                                  |                                                                       |                4 |              9 |
 |  MCKR_BUFG                             |                                                                        | BTNC_IBUF                                                             |                4 |              9 |
-|  MCKR_BUFG                             | jt/busy05_out                                                          | BTNC_IBUF                                                             |                3 |              9 |
-|  MCKR_BUFG                             | jt/a0                                                                  |                                                                       |                6 |              9 |
-|  MCKR_BUFG                             | jt/uut/timers/timer_B/E[0]                                             | jt/uut/u_mmr/load_B                                                   |                2 |             10 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_eg/E[0]                                                       | jt/uut/u_mmr/limit_reg[9][0]                                          |                4 |             10 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_eg/eg_in[9]_i_2_n_0                                           | jt/uut/u_eg/u_aroffsh/SR[0]                                           |                7 |             10 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_eg/u_tlsh/SS[0]                                              |                3 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_eg/E[0]                                                       | jt/uut/u_mmr/limit_reg[9][0]                                          |                2 |             10 |
 |  MCKR_BUFG                             | jt/uut/u_mmr/cnt_reg[0]_0[0]                                           |                                                                       |                3 |             10 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_mmr/u_reg/up_rl                                              |                8 |             11 |
-|  MCKR_BUFG                             |                                                                        |                                                                       |                8 |             12 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_op/log_msb2[4]                                               |                5 |             13 |
+|  CLOCK_50                              | tbt/VGA/HS_counter/E[0]                                                | tbt/VGA/VS_counter/resetVS                                            |                4 |             10 |
+|  MCKR_BUFG                             | jt/uut/timers/timer_B/E[0]                                             | jt/uut/u_mmr/load_B                                                   |                2 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_eg/eg_in[9]_i_2_n_0                                           | jt/uut/u_eg/u_aroffsh/SR[0]                                           |                5 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_eg/u_tlsh/SS[0]                                              |                3 |             10 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_mmr/u_reg/up_rl                                              |                5 |             11 |
+|  CLOCK_50                              |                                                                        | tbt/VGA/HS_counter/E[0]                                               |                4 |             11 |
+|  MCKR_BUFG                             |                                                                        |                                                                       |                7 |             12 |
 |  at/i_clocking/CLK_48                  |                                                                        |                                                                       |               11 |             13 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[2]_i_1_n_0        | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[9]_i_1_n_0       |                4 |             14 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_zerosh/out_reg[0]                                       | jt/uut/u_acc/u_right/out[14]_i_1__0_n_0                               |                3 |             15 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_op/log_msb2[4]                                               |                5 |             13 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[2]_i_1_n_0        | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/pcnext[9]_i_1_n_0       |                5 |             14 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_zerosh/out_reg[0]                                       | jt/uut/u_acc/u_right/out[14]_i_1__0_n_0                               |                2 |             15 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_zerosh/out_reg[0]                                       | jt/uut/u_acc/u_left/out[14]_i_1_n_0                                   |                3 |             15 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_eg/eg_cnt[0]_i_1_n_0                                          | jt/uut/rst_p1                                                         |                4 |             15 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_zerosh/out_reg[0]                                       | jt/uut/u_acc/u_left/out[14]_i_1_n_0                                   |                5 |             15 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/delay[15]_i_1_n_0        |                                                                       |                5 |             16 |
 |  MCKR_BUFG                             | jt/data_cnt_rep[7]_i_1_n_0                                             | BTNC_IBUF                                                             |                4 |             16 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_pg/phase_base_V[17]_i_1_n_0                                  |                4 |             18 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/delay[15]_i_1_n_0        |                                                                       |                7 |             16 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_pg/phase_base_V[17]_i_1_n_0                                  |                8 |             18 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_rlsh/sel                                                |                                                                       |                5 |             19 |
 |  MCKR_BUFG                             | jt/uut/u_mmr/u_reg/zero                                                | jt/uut/rst_p1                                                         |                5 |             19 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_rlsh/sum_reg[18]                                        |                                                                       |                5 |             19 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_acc/u_rlsh/sel                                                |                                                                       |                5 |             19 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/u_pg/u_kosh/Q[0]                                               |                5 |             20 |
 |  MCKR_BUFG                             | jt/uut/u_mmr/E[0]                                                      | jt/uut/u_mmr/SR[0]                                                    |                9 |             21 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0                       |                                                                       |                8 |             22 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/rst_p1                                                         |               11 |             22 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_op/u_con1sh/mod7_en                                           |                                                                       |                8 |             28 |
-|  MCKR_BUFG                             | jt/uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]                          |                                                                       |               10 |             32 |
-|  CK                                    |                                                                        |                                                                       |               12 |             32 |
-|  audHelp/CLKBUF                        | jt/uut/u_mmr/u_reg/zero                                                |                                                                       |                9 |             32 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0                       |                                                                       |                6 |             22 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        | jt/uut/rst_p1                                                         |               15 |             22 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_op/u_con1sh/mod7_en                                           |                                                                       |               10 |             28 |
+|  MCKR_BUFG                             | jt/uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]                          |                                                                       |               14 |             32 |
+|  audHelp/CLKBUF                        | jt/uut/u_mmr/u_reg/zero                                                |                                                                       |                6 |             32 |
+|  CK                                    |                                                                        |                                                                       |               13 |             34 |
+|  CLOCK_50                              | tbt/VGA/VS_counter/E[0]                                                |                                                                       |               12 |             38 |
 |  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_mmr/u_reg/chdata_wr                                           |                                                                       |                5 |             40 |
-|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/i2s_lr_last_i_1_n_0 |                                                                       |               13 |             42 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0                       | jt/uut/rst_p1                                                         |               37 |            137 |
-|  MCKR_BUFG                             | jt/uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]                          | jt/uut/rst_p1                                                         |               35 |            159 |
-|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        |                                                                       |              164 |            545 |
+|  at/i_clocking/CLK_48                  | at/Inst_adau1761_izedboard/Inst_i2s_data_interface/i2s_lr_last_i_1_n_0 |                                                                       |               10 |             42 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 | jt/uut/u_noise/noise_lfsr[0].u_lfsr/bb_reg[14]_0                       | jt/uut/rst_p1                                                         |               27 |            137 |
+|  MCKR_BUFG                             | jt/uut/u_lfo/amnoise[0].u_noise_am/bb_reg[18]                          | jt/uut/rst_p1                                                         |               49 |            159 |
+|  bit_shifter[0].bits_reg[0][6]_i_1_n_0 |                                                                        |                                                                       |              167 |            545 |
 +----------------------------------------+------------------------------------------------------------------------+-----------------------------------------------------------------------+------------------+----------------+
 
 

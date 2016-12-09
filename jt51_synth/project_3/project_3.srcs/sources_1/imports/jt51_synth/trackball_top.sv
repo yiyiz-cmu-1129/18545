@@ -1,84 +1,105 @@
-module trackball_top(JA1, JA2, JA3, JA4, JB1, JB2, JB3, JB4, SW0, SW1, GCLK,
-           LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7, addr0, data_outX, data_outY, reset, sync);
-    input logic sync;
-    input logic JA1, JA2, JA3, JA4;
-    input logic JB1, JB2, JB3, JB4;
-    input logic SW0, SW1, GCLK, reset;
-    output logic LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7;
-    output logic addr0; 
-    output logic [7:0] data_outX, data_outY;
-
-    logic [7:0] count;
-    logic CK;
-    logic [7:0] leta_out;
+module trackball_top(JA, JB, GCLK, BTNC, LD,
+               VGA_HS, VGA_VS, VGA_R, VGA_G, VGA_B,
+               dataX, dataY);
+        input logic [3:0] JA;
+        input logic [3:0] JB;
+        input logic GCLK, BTNC;
+        output logic [7:0] LD;
+        output logic VGA_HS, VGA_VS;
+        output logic [3:0] VGA_B;
+        output logic [3:0] VGA_R;
+        output logic [3:0] VGA_G;
+        output logic [1:0] [7:0] dataX, dataY;
+        
+        assign dataX[0] = leta_col[0][7:0];
+        assign dataY[0] = leta_row[0][7:0];
+        assign dataX[1] = leta_col[1][7:0];
+        assign dataY[1] = leta_row[1][7:0];
+        
+        //Leta
+        logic [7:0] count;
+        logic CK;
+        logic [7:0] leta_out;
+        logic [1:0] addr;
+        
+        logic [1:0] [11:0] leta_row;
+        logic [1:0] [11:0] leta_col;
+        logic [1:0] [11:0] leta_row_scaled;
+        logic [1:0] [11:0] leta_col_scaled;
+        logic [1:0] [11:0] leta_row_stored;
+        logic [1:0] [11:0] leta_col_stored;
+        
+        //VGA
+        logic reset;
+        logic CLOCK_50;
+        logic [8:0] row;
+        logic [9:0] col;
+        
+        assign reset = BTNC;
+        
     
-//making a little video demo
-    logic [11:0] frameBuffer [10:0][9:0]; 
-    logic [7:0] data_from_trackball, colorR, colorG;
-    logic [10:0] posX, prevPosX; 
-    logic [9:0] posY, prevPosY;
-    logic [1:0] adr;
-
-    //logic sync;
-
-    assign addr0 = adr[0];
-    assign data_outX = posX[10:3];
-    assign data_outY = posY[9:2];
-    always_ff @(posedge CK, posedge reset) begin
-        if(reset) begin 
-            adr <= 2'b00;
-            posX <= 11'd0;
-            posY <= 10'd0;
-            prevPosX <= 11'd0;
-            prevPosY <= 10'd0;
-            colorR <= 8'd0;
-            colorG <= 8'd0;
+        assign VGA_R = (row == leta_row_stored[0] || col == leta_col_stored[0]) ? 4'hF : 4'h0;
+        assign VGA_B =  (row == leta_row_stored[1] || col == leta_col_stored[1]) ? 4'hF : 4'h0;
+        assign VGA_G = 4'b0;
+        
+        
+        //Create CLOCK_50
+        always_ff @(posedge GCLK) begin
+            if (reset)
+                CLOCK_50 <= 0;
+            else
+                CLOCK_50 <= ~CLOCK_50;
         end
-        else begin
-            if(sync) begin
-            case(adr)
-                2'b00: posX <= {data_from_trackball, 3'b000};
-                2'b01: posY <= {data_from_trackball, 2'b00};
-                2'b10: colorR <= {data_from_trackball};
-                2'b11: colorG <= {data_from_trackball};
-            endcase
-            adr <= adr + 1;
-            prevPosX <= posX;
-            prevPosY <= posY;
-            frameBuffer[posX][posY] <= {colorR[7:4], colorG[7:4], 4'hF};
-            if(posX != prevPosX | posY != prevPosY) frameBuffer[prevPosX][prevPosY] <= 12'h000;
-            
-            frameBuffer[posX + 1][posY] <=  {colorR[7:4], colorG[7:4], 4'hF};
-            if(posX != prevPosX | posY != prevPosY) frameBuffer[prevPosX + 1][prevPosY] <= 12'h000;
-
-            frameBuffer[posX -1][posY] <=  {colorR[7:4], colorG[7:4], 4'hF};
-            if(posX != prevPosX | posY != prevPosY) frameBuffer[prevPosX - 1][prevPosY] <= 12'h000;
-            
-            frameBuffer[posX][posY + 1] <=  {colorR[7:4], colorG[7:4], 4'hF};
-            if(posX != prevPosX | posY != prevPosY) frameBuffer[prevPosX][prevPosY + 1] <= 12'h000;
-
-            frameBuffer[posX][posY - 1] <=  {colorR[7:4], colorG[7:4], 4'hF};
-            if(posX != prevPosX | posY != prevPosY) frameBuffer[prevPosX][prevPosY - 1] <= 12'h000;
+        
+        
+        //Create CK
+        always_ff @(posedge GCLK)
+            count <= (count >= 114) ? 0 : count + 1;
+        
+        assign CK = count > 57;
+    
+    
+        //Assign LEDs
+        assign LD = leta_out;
+    
+    
+    
+        //Draw point in frame buffer
+        always_ff @(posedge CK) begin
+            if (reset)
+                addr <= 0;
+            else begin
+                if (addr[0])
+                    leta_row[addr[1]] <= leta_out;
+                else
+                    leta_col[addr[1]] <= leta_out;
+                addr <= addr + 1;
+            end    
+        end
+        
+        //Fit the screen, 480rowsx640cols
+        assign leta_row_scaled[0] = (leta_row[0] * 15) / 8;
+        assign leta_col_scaled[0] = (leta_col[0] * 5) / 2;
+        assign leta_row_scaled[1] = (leta_row[1] * 15) / 8;
+        assign leta_col_scaled[1] = (leta_col[1] * 5) / 2;
+        
+        always_ff @(posedge CLOCK_50) begin
+            if (~VGA_VS) begin
+                leta_row_stored <= leta_row_scaled;
+                leta_col_stored <= leta_col_scaled;
             end
-            
-
-            
         end
-    end
- 
-    always_ff @(posedge GCLK)
-        count <= (count >= 114) ? 0 : count + 1;
-    
-    assign CK = count > 57;
-    assign data_from_trackball = leta_out;
-    assign {LD0, LD1, LD2, LD3, LD4, LD5, LD6, LD7} = leta_out; //{4'b0, JA4, JA3, JA2, JA1};
-    
-    LETA_REP leta(.DB(leta_out), //data out
-                  .CS(1'b0), //chip select
-                  .CK(CK), //clock - .875MHz
-                  .TEST(1'b0), //test-enable
-                  .AD({SW1, SW0}), //address
-                  .CLKS({JB3, JB1, JA3, JA1}), //clks (from trackball)
-                  .DIRS({JB4, JB2, JA4, JA2}), //dirs (from trackball)
-                  .RESOLN(1'b1)); //god knows
+        
+        //CHIPS
+        LETA_REP leta(.DB(leta_out), //data out
+                      .CS(1'b0), //chip select
+                      .CK(CK), //clock - .875MHz
+                      .TEST(1'b0), //test-enable
+                      .AD(addr), //address
+                      .CLKS({JB[2], JB[0], JA[2], JA[0]}), //clks (from trackball)
+                      .DIRS({JB[3], JB[1], JA[3], JA[1]}), //dirs (from trackball)
+                      .RESOLN(1'b1)); //god knows
+                      
+        
+        vga VGA(CLOCK_50, reset, VGA_HS, VGA_VS, row, col);
 endmodule

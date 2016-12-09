@@ -31,10 +31,8 @@ input logic reset,
 //to sound stuff
 output logic SNDRST_b, UNLOCK_b, SYSRES_b, WL_b,
 output logic E2PROM_b, SNDRD_b, SNDWR_b,
-input logic SNDINT_b,
 
 //to joystick
-input logic AJSINT_b,
 
 //Video out
 output logic [15:0] VIDOUT,
@@ -43,13 +41,15 @@ output logic [15:0] VIDOUT,
 input logic clk, PR1,
 //The following is for testing
 output logic [22:0] addr,
-input logic first, reset3
+input logic first, reset3,
+output logic DTACKn, AS_b, VRAM_b, MEXT_b,
+output logic [15:0] DATA
 );
 
 logic [22:0] Addr_68k;
 logic [15:0] Data_to_68k, Data_from_68k, Data_to_VRAM, Data_from_VRAM, Data_to_VMEM, Data_from_VMEM;
 logic [3:0] ROM_b;
-logic AS_b, R_b_Vs_W;
+logic R_b_Vs_W;
 logic VRAMRD_b, VRAMWR;
 
 logic [15:0] VRD_from_VRAM, VBD_From_VRAM, VBD_To_VRAM;
@@ -57,7 +57,9 @@ logic PFSPC_b;
 logic RAM0_b, RAM1_b, WH_b, RL_b, BCS_b;
 logic WAIT_b, BW_R_b, VSCRLD_b;
 logic MISC_b, CRAMWR_b, CRAM_b, HSCRLD_b;
-
+logic SNDINT_b, AJSINT_b;
+assign SNDINT_b = 1'b1;
+assign AJSINT_b = 1'b1;
 logic [5:0] PFH_from_PH, PFV_from_VR;
 logic [7:0] PFX_from_PH, MPX_from_MOP;
 logic ALBNK, PFHFLIP;
@@ -84,7 +86,7 @@ assign PR97 = 1'b1;
 
 assign addr = Addr_68k;
 //The following is a bunch of tristate stuff which wont work :(
-logic [15:0] DATA;
+
 
 logic OBF; // Output Buffer Full
 logic SELF_TEST;
@@ -179,7 +181,10 @@ video_microprocessor VM_68(
     .RAJs(), 
     .RLETA_b(),
     .E2PROM_b(E2PROM_b),
-    .ROM_b(ROM_b)
+    .ROM_b(ROM_b),
+    .DTACKn(DTACKn),
+    .VRAM_b(VRAM_b),
+    .MEXT_b(MEXT_b)
 );
 
 

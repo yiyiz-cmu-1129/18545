@@ -69,7 +69,7 @@ module counter
    assign count=q;
  
 endmodule:counter
-
+/*
 module ChipInterface
   (input logic GCLK,
    input logic BTNU,
@@ -117,5 +117,5 @@ module ChipInterface
         
 
 endmodule // ChipInterface
-
+*/
 

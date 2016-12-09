@@ -2,7 +2,6 @@
 *** Running vivado
     with args -log chip_interface.vds -m64 -mode batch -messageDb vivado.pb -notrace -source chip_interface.tcl
 
-WARNING: Default location for XILINX_VIVADO_HLS not found: 
 
 ****** Vivado v2015.2 (64-bit)
   **** SW Build 1266856 on Fri Jun 26 16:35:25 MDT 2015
@@ -14,217 +13,217 @@ Command: synth_design -top chip_interface -part xc7z020clg484-1
 Starting synth_design
 Attempting to get a license for feature 'Synthesis' and/or device 'xc7z020'
 INFO: [Common 17-349] Got license for feature 'Synthesis' and/or device 'xc7z020'
-INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -129 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
+INFO: [Common 17-1223] The version limit for your license is '2016.07' and will expire in -130 days. A version limit expiration means that, although you may be able to continue to use the current version of tools or IP with this license, you will not be eligible for any updates or new releases.
 ---------------------------------------------------------------------------------
-Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1066.824 ; gain = 157.520 ; free physical = 4744 ; free virtual = 18811
+Starting RTL Elaboration : Time (s): cpu = 00:00:05 ; elapsed = 00:00:05 . Memory (MB): peak = 1065.832 ; gain = 156.520 ; free physical = 9141 ; free virtual = 21319
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-638] synthesizing module 'chip_interface' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:1]
-INFO: [Synth 8-638] synthesizing module 'audio_helper' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:13]
-INFO: [Synth 8-113] binding component instance 'BUFG_inst' to cell 'BUFG' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:15]
-INFO: [Synth 8-256] done synthesizing module 'audio_helper' (1#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:13]
-INFO: [Synth 8-638] synthesizing module 'jt51_top' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
+INFO: [Synth 8-638] synthesizing module 'chip_interface' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:1]
+INFO: [Synth 8-638] synthesizing module 'audio_helper' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:13]
+INFO: [Synth 8-113] binding component instance 'BUFG_inst' to cell 'BUFG' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:15]
+INFO: [Synth 8-256] done synthesizing module 'audio_helper' (1#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:13]
+INFO: [Synth 8-638] synthesizing module 'jt51_top' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
 	Parameter WAIT_FREE bound to: 0 - type: integer 
 	Parameter WR_ADDR bound to: 1 - type: integer 
 	Parameter WR_VAL bound to: 2 - type: integer 
 	Parameter DONE bound to: 3 - type: integer 
 	Parameter WRITE bound to: 4 - type: integer 
 	Parameter BLANK bound to: 5 - type: integer 
-	Parameter rom bound to: ~/Private/MM545/YM2151/trunk/jt51_synth/input.hex - type: string 
-INFO: [Synth 8-638] synthesizing module 'jt51' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51.v:22]
-INFO: [Synth 8-638] synthesizing module 'jt51_timers' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_timer' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+	Parameter rom bound to: /afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/input.hex - type: string 
+INFO: [Synth 8-638] synthesizing module 'jt51' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_timers' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_timer' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
 	Parameter counter_width bound to: 10 - type: integer 
 	Parameter mult_width bound to: 6 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_timer' (2#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
-INFO: [Synth 8-638] synthesizing module 'jt51_timer__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+INFO: [Synth 8-256] done synthesizing module 'jt51_timer' (2#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+INFO: [Synth 8-638] synthesizing module 'jt51_timer__parameterized0' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
 	Parameter counter_width bound to: 8 - type: integer 
 	Parameter mult_width bound to: 10 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_timer__parameterized0' (2#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
-INFO: [Synth 8-256] done synthesizing module 'jt51_timers' (3#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_timer__parameterized0' (2#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:72]
+INFO: [Synth 8-256] done synthesizing module 'jt51_timers' (3#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_timers.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
 	Parameter b0 bound to: 3 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000000000 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000000010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized0' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized0' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000000110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized1' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized1' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000001100 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized2' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized2' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000010100 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized3' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized3' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000011110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized4' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized4' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000101010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized5' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized5' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000101000 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized6' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized6' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000101001 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized7' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized7' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000000110010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized8' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized9' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized8' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized9' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000001000011 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized9' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized10' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized9' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized10' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000001011100 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized10' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized11' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized10' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized11' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000001111101 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized11' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized12' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized11' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized12' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000010100110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized12' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized13' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized12' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_lfo_lfsr__parameterized13' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
 	Parameter init bound to: 32'sb00000000000000000000000011010111 
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized13' (4#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
-INFO: [Synth 8-256] done synthesizing module 'jt51_lfo' (5#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_phasegen' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo_lfsr__parameterized13' (4#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lfo' (5#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_phasegen' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
 	Parameter dt2_lim2 bound to: 8'b01001011 
 	Parameter dt2_lim3 bound to: 8'b01011111 
-INFO: [Synth 8-638] synthesizing module 'jt51_phinc_rom' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_phinc_rom' (6#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_pm' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_pm' (7#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_phinc_rom' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_phinc_rom' (6#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phinc_rom.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_pm' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_pm' (7#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_pm.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 4 - type: integer 
 	Parameter stages bound to: 5 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh' (8#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized0' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 20 - type: integer 
 	Parameter stages bound to: 32 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized0' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized0' (8#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized1' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 7 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized1' (8#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_phasegen' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_envelope' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized1' (8#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_phasegen' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_envelope' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
 	Parameter ATTACK bound to: 2'b00 
 	Parameter DECAY1 bound to: 2'b01 
 	Parameter DECAY2 bound to: 2'b10 
 	Parameter RELEASE bound to: 2'b11 
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 3 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized2' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized2' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized3' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 2 - type: integer 
 	Parameter stages bound to: 2 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized3' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized3' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized4' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 10 - type: integer 
 	Parameter stages bound to: 6 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized4' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized4' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized5' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 10 - type: integer 
 	Parameter stages bound to: 27 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized5' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized5' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized6' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 32 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized6' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized6' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized7' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 2 - type: integer 
 	Parameter stages bound to: 31 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized7' (9#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_envelope' (10#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_op' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized7' (9#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_envelope' (10#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_op' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
 	Parameter mod_lat bound to: 5 - type: integer 
 	Parameter mod_stg bound to: 35 - type: integer 
 	Parameter M1 bound to: 2'b00 
 	Parameter M2 bound to: 2'b01 
 	Parameter C1 bound to: 2'b10 
 	Parameter C2 bound to: 2'b11 
-INFO: [Synth 8-638] synthesizing module 'jt51_sintable' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
-INFO: [Synth 8-256] done synthesizing module 'jt51_sintable' (11#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
-INFO: [Synth 8-638] synthesizing module 'jt51_exptable' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_exptable' (12#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sintable' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sintable' (11#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sintable.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_exptable' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_exptable' (12#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exptable.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
 	Parameter width bound to: 14 - type: integer 
 	Parameter stages bound to: 8 - type: integer 
-INFO: [Synth 8-638] synthesizing module 'jt51_sh1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh1' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
 	Parameter stages bound to: 8 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh1' (13#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh2' (14#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh1' (13#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:47]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh2' (14#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh2.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized8' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 8 - type: integer 
 	Parameter stages bound to: 7 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized8' (14#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized9' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized8' (14#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized9' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 5 - type: integer 
 	Parameter stages bound to: 6 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized9' (14#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_op' (15#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized9' (14#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_op' (15#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_op.v:29]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000000000000000000 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized0' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000000000001111110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized0' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized0' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized1' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000000001101000010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized1' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized1' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000000101010010010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized2' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized2' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized3' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000001100010110100 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized3' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized3' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized4' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000010111111101110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized4' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized4' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized5' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000000101001010000110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized5' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized5' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized6' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000001000001011000010 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized6' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized6' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized7' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000001100001011101000 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized7' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized7' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_noise_lfsr__parameterized8' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
 	Parameter init bound to: 32'sb00000000000000010001010100111110 
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized8' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized10' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise_lfsr__parameterized8' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:31]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized10' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 5 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized10' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized11' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized10' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized11' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 7 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized11' (16#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:63]
-INFO: [Synth 8-256] done synthesizing module 'jt51_noise' (17#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
-INFO: [Synth 8-638] synthesizing module 'jt51_acc' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sum_op' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
-INFO: [Synth 8-256] done synthesizing module 'jt51_sum_op' (18#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized12' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized11' (16#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:63]
+INFO: [Synth 8-256] done synthesizing module 'jt51_noise' (17#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise.v:46]
+INFO: [Synth 8-638] synthesizing module 'jt51_acc' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sum_op' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sum_op' (18#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sum_op.v:22]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized12' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 2 - type: integer 
 	Parameter stages bound to: 14 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized12' (18#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized13' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized12' (18#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_sh__parameterized13' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
 	Parameter width bound to: 1 - type: integer 
 	Parameter stages bound to: 22 - type: integer 
-INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized13' (18#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_exp2lin' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_exp2lin' (19#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_lin2exp' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
-INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:30]
-INFO: [Synth 8-256] done synthesizing module 'jt51_lin2exp' (20#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_acc' (21#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
-INFO: [Synth 8-638] synthesizing module 'jt51_mmr' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51_sh__parameterized13' (18#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_sh.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_exp2lin' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_exp2lin' (19#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_exp2lin.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_lin2exp' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
+INFO: [Synth 8-226] default block is never used [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:30]
+INFO: [Synth 8-256] done synthesizing module 'jt51_lin2exp' (20#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lin2exp.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_acc' (21#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_acc.v:23]
+INFO: [Synth 8-638] synthesizing module 'jt51_mmr' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
 	Parameter REG_TEST bound to: 8'b00000001 
 	Parameter REG_TEST2 bound to: 8'b00000010 
 	Parameter REG_KON bound to: 8'b00001000 
@@ -236,25 +235,25 @@ INFO: [Synth 8-638] synthesizing module 'jt51_mmr' [/afs/ece.cmu.edu/usr/yiyiz/P
 	Parameter REG_LFRQ bound to: 8'b00011000 
 	Parameter REG_PMDAMD bound to: 8'b00011001 
 	Parameter REG_CTW bound to: 8'b00011011 
-INFO: [Synth 8-638] synthesizing module 'jt51_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
-INFO: [Synth 8-256] done synthesizing module 'jt51_reg' (22#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
-INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:145]
-INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:191]
-INFO: [Synth 8-256] done synthesizing module 'jt51_mmr' (23#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
-INFO: [Synth 8-256] done synthesizing module 'jt51' (24#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51.v:22]
-INFO: [Synth 8-638] synthesizing module 'convert_16_to_24' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:214]
-INFO: [Synth 8-256] done synthesizing module 'convert_16_to_24' (25#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:214]
-INFO: [Synth 8-3876] $readmem data file '~/Private/MM545/YM2151/trunk/jt51_synth/input.hex' is read successfully [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:67]
-INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:81]
-INFO: [Synth 8-256] done synthesizing module 'jt51_top' (26#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
-INFO: [Synth 8-638] synthesizing module 'audio_top' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:74]
-INFO: [Synth 8-3491] module 'clocking' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:30' bound to instance 'i_clocking' of component 'clocking' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:124]
-INFO: [Synth 8-638] synthesizing module 'clocking' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:42]
+INFO: [Synth 8-638] synthesizing module 'jt51_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
+INFO: [Synth 8-256] done synthesizing module 'jt51_reg' (22#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_reg.v:23]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:145]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:191]
+INFO: [Synth 8-256] done synthesizing module 'jt51_mmr' (23#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:22]
+INFO: [Synth 8-256] done synthesizing module 'jt51' (24#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51.v:22]
+INFO: [Synth 8-638] synthesizing module 'convert_16_to_24' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:211]
+INFO: [Synth 8-256] done synthesizing module 'convert_16_to_24' (25#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:211]
+INFO: [Synth 8-3876] $readmem data file '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/input.hex' is read successfully [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:68]
+INFO: [Synth 8-155] case statement is not full and has no default [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:82]
+INFO: [Synth 8-256] done synthesizing module 'jt51_top' (26#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_top.sv:1]
+INFO: [Synth 8-638] synthesizing module 'audio_top' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:74]
+INFO: [Synth 8-3491] module 'clocking' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:30' bound to instance 'i_clocking' of component 'clocking' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:124]
+INFO: [Synth 8-638] synthesizing module 'clocking' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:42]
 	Parameter CAPACITANCE bound to: DONT_CARE - type: string 
 	Parameter IBUF_DELAY_VALUE bound to: 0 - type: string 
 	Parameter IBUF_LOW_PWR bound to: 1 - type: bool 
 	Parameter IOSTANDARD bound to: DEFAULT - type: string 
-INFO: [Synth 8-113] binding component instance 'clkin1_buf' to cell 'IBUFG' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:57]
+INFO: [Synth 8-113] binding component instance 'clkin1_buf' to cell 'IBUFG' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:57]
 	Parameter BANDWIDTH bound to: OPTIMIZED - type: string 
 	Parameter CLKFBOUT_MULT_F bound to: 49.500000 - type: float 
 	Parameter CLKFBOUT_PHASE bound to: 0.000000 - type: float 
@@ -303,43 +302,53 @@ INFO: [Synth 8-113] binding component instance 'clkin1_buf' to cell 'IBUFG' [/af
 	Parameter SS_MODE bound to: CENTER_HIGH - type: string 
 	Parameter SS_MOD_PERIOD bound to: 10000 - type: integer 
 	Parameter STARTUP_WAIT bound to: 0 - type: bool 
-INFO: [Synth 8-113] binding component instance 'mmcm_adv_inst' to cell 'MMCME2_ADV' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:68]
-INFO: [Synth 8-113] binding component instance 'clkout1_buf' to cell 'BUFG' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:130]
-INFO: [Synth 8-256] done synthesizing module 'clocking' (27#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:42]
-INFO: [Synth 8-3491] module 'adau1761_izedboard' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:26' bound to instance 'Inst_adau1761_izedboard' of component 'adau1761_izedboard' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:131]
-INFO: [Synth 8-638] synthesizing module 'adau1761_izedboard' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:47]
+INFO: [Synth 8-113] binding component instance 'mmcm_adv_inst' to cell 'MMCME2_ADV' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:68]
+INFO: [Synth 8-113] binding component instance 'clkout1_buf' to cell 'BUFG' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:130]
+INFO: [Synth 8-256] done synthesizing module 'clocking' (27#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/clocking.vhd:42]
+INFO: [Synth 8-3491] module 'adau1761_izedboard' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:26' bound to instance 'Inst_adau1761_izedboard' of component 'adau1761_izedboard' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:131]
+INFO: [Synth 8-638] synthesizing module 'adau1761_izedboard' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:47]
 	Parameter DRIVE bound to: 12 - type: integer 
 	Parameter IBUF_LOW_PWR bound to: 1 - type: bool 
 	Parameter IOSTANDARD bound to: DEFAULT - type: string 
 	Parameter SLEW bound to: SLOW - type: string 
-INFO: [Synth 8-113] binding component instance 'i_i2s_sda_obuf' to cell 'IOBUF' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:132]
-INFO: [Synth 8-3491] module 'i2c' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:9' bound to instance 'Inst_i2c' of component 'i2c' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:140]
-INFO: [Synth 8-638] synthesizing module 'i2c' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:19]
-INFO: [Synth 8-3491] module 'adau1761_configuraiton_data' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:13' bound to instance 'Inst_adau1761_configuraiton_data' of component 'adau1761_configuraiton_data' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:56]
-INFO: [Synth 8-638] synthesizing module 'adau1761_configuraiton_data' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:19]
-INFO: [Synth 8-256] done synthesizing module 'adau1761_configuraiton_data' (28#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:19]
+INFO: [Synth 8-113] binding component instance 'i_i2s_sda_obuf' to cell 'IOBUF' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:132]
+INFO: [Synth 8-3491] module 'i2c' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:9' bound to instance 'Inst_i2c' of component 'i2c' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:140]
+INFO: [Synth 8-638] synthesizing module 'i2c' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:19]
+INFO: [Synth 8-3491] module 'adau1761_configuraiton_data' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:13' bound to instance 'Inst_adau1761_configuraiton_data' of component 'adau1761_configuraiton_data' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:56]
+INFO: [Synth 8-638] synthesizing module 'adau1761_configuraiton_data' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:19]
+INFO: [Synth 8-256] done synthesizing module 'adau1761_configuraiton_data' (28#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_configuraiton_data.vhd:19]
 	Parameter clk_divide bound to: 8'b01111000 
-INFO: [Synth 8-3491] module 'i3c2' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:18' bound to instance 'Inst_i3c2' of component 'i3c2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-INFO: [Synth 8-638] synthesizing module 'i3c2' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:38]
+INFO: [Synth 8-3491] module 'i3c2' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:18' bound to instance 'Inst_i3c2' of component 'i3c2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+INFO: [Synth 8-638] synthesizing module 'i3c2' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:38]
 	Parameter clk_divide bound to: 8'b01111000 
-INFO: [Synth 8-256] done synthesizing module 'i3c2' (29#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:38]
-INFO: [Synth 8-256] done synthesizing module 'i2c' (30#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:19]
-INFO: [Synth 8-3491] module 'ADAU1761_interface' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:11' bound to instance 'i_ADAU1761_interface' of component 'ADAU1761_interface' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:150]
-INFO: [Synth 8-638] synthesizing module 'ADAU1761_interface' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:16]
-INFO: [Synth 8-256] done synthesizing module 'ADAU1761_interface' (31#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:16]
-INFO: [Synth 8-3491] module 'i2s_data_interface' declared at '/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:13' bound to instance 'Inst_i2s_data_interface' of component 'i2s_data_interface' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:155]
-INFO: [Synth 8-638] synthesizing module 'i2s_data_interface' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:26]
-INFO: [Synth 8-256] done synthesizing module 'i2s_data_interface' (32#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:26]
-INFO: [Synth 8-256] done synthesizing module 'adau1761_izedboard' (33#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:47]
-INFO: [Synth 8-256] done synthesizing module 'audio_top' (34#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:74]
-INFO: [Synth 8-638] synthesizing module 'trackball_top' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:1]
-INFO: [Synth 8-638] synthesizing module 'LETA_REP' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/leta.vhdl:40]
-INFO: [Synth 8-256] done synthesizing module 'LETA_REP' (35#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/leta.vhdl:40]
-INFO: [Synth 8-256] done synthesizing module 'trackball_top' (36#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:1]
-WARNING: [Synth 8-3848] Net hphone_r_valid in module/entity chip_interface does not have driver. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:24]
-INFO: [Synth 8-256] done synthesizing module 'chip_interface' (37#1) [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:1]
+INFO: [Synth 8-256] done synthesizing module 'i3c2' (29#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:38]
+INFO: [Synth 8-256] done synthesizing module 'i2c' (30#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:19]
+INFO: [Synth 8-3491] module 'ADAU1761_interface' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:11' bound to instance 'i_ADAU1761_interface' of component 'ADAU1761_interface' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:150]
+INFO: [Synth 8-638] synthesizing module 'ADAU1761_interface' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:16]
+INFO: [Synth 8-256] done synthesizing module 'ADAU1761_interface' (31#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/ADAU1761_interface.vhd:16]
+INFO: [Synth 8-3491] module 'i2s_data_interface' declared at '/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:13' bound to instance 'Inst_i2s_data_interface' of component 'i2s_data_interface' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:155]
+INFO: [Synth 8-638] synthesizing module 'i2s_data_interface' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:26]
+INFO: [Synth 8-256] done synthesizing module 'i2s_data_interface' (32#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2s_data_interface.vhd:26]
+INFO: [Synth 8-256] done synthesizing module 'adau1761_izedboard' (33#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/adau1761_izedboard.vhd:47]
+INFO: [Synth 8-256] done synthesizing module 'audio_top' (34#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/audio_top.vhd:74]
+INFO: [Synth 8-638] synthesizing module 'trackball_top' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:1]
+INFO: [Synth 8-638] synthesizing module 'LETA_REP' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/leta.vhdl:40]
+INFO: [Synth 8-256] done synthesizing module 'LETA_REP' (35#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/leta.vhdl:40]
+INFO: [Synth 8-638] synthesizing module 'vga' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:1]
+INFO: [Synth 8-638] synthesizing module 'counter' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:56]
+	Parameter WIDTH bound to: 11 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'counter' (36#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:56]
+INFO: [Synth 8-638] synthesizing module 'counter__parameterized0' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:56]
+	Parameter WIDTH bound to: 10 - type: integer 
+INFO: [Synth 8-256] done synthesizing module 'counter__parameterized0' (36#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:56]
+INFO: [Synth 8-256] done synthesizing module 'vga' (37#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/trackball/vga.sv:1]
+INFO: [Synth 8-256] done synthesizing module 'trackball_top' (38#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:1]
+WARNING: [Synth 8-3848] Net hphone_r_valid in module/entity chip_interface does not have driver. [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:28]
+INFO: [Synth 8-256] done synthesizing module 'chip_interface' (39#1) [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:1]
+WARNING: [Synth 8-3331] design chip_interface has unconnected port SW[1]
+WARNING: [Synth 8-3331] design chip_interface has unconnected port SW[0]
 ---------------------------------------------------------------------------------
-Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:08 . Memory (MB): peak = 1127.113 ; gain = 217.809 ; free physical = 4671 ; free virtual = 18740
+Finished RTL Elaboration : Time (s): cpu = 00:00:06 ; elapsed = 00:00:07 . Memory (MB): peak = 1124.121 ; gain = 214.809 ; free physical = 9078 ; free virtual = 21258
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -348,23 +357,24 @@ Report Check Netlist:
 +------+------------------+-------+---------+-------+------------------+
 |1     |multi_driven_nets |      0|        0|Passed |Multi driven nets |
 +------+------------------+-------+---------+-------+------------------+
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[15] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[14] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[13] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[12] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[11] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[10] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[9] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[8] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[7] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[6] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[5] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[4] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[3] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[2] to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
-WARNING: [Synth 8-3295] tying undriven pin at:hphone_r_valid_dummy to constant 0 [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[15] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[14] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[13] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[12] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[11] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[10] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[9] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[8] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[7] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[6] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[5] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[4] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[3] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin Inst_i3c2:inputs[2] to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i2c.vhd:62]
+WARNING: [Synth 8-3295] tying undriven pin jt:addr0 to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:52]
+WARNING: [Synth 8-3295] tying undriven pin at:hphone_r_valid_dummy to constant 0 [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/chip_interface.sv:65]
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:09 . Memory (MB): peak = 1127.113 ; gain = 217.809 ; free physical = 4673 ; free virtual = 18743
+Finished RTL Optimization Phase 1 : Time (s): cpu = 00:00:07 ; elapsed = 00:00:08 . Memory (MB): peak = 1124.121 ; gain = 214.809 ; free physical = 9080 ; free virtual = 21259
 ---------------------------------------------------------------------------------
 INFO: [Netlist 29-17] Analyzing 3 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
@@ -375,124 +385,10 @@ Resolution: It is recommended to apply the I/O constraint directly to the top le
 
 Processing XDC Constraints
 Initializing timing engine
-Parsing XDC File [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
-INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
-WARNING: [Vivado 12-584] No ports matched 'JA10'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:61]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:61]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA7'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:65]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:65]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA8'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:66]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:66]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JA9'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:67]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:67]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB10'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:73]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:73]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB7'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:77]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:77]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB8'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:78]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:78]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JB9'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:79]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:79]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC1_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:84]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:84]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC1_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:85]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:85]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC2_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:86]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:86]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC2_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:87]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:87]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC3_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:88]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:88]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC3_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:89]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:89]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC4_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:90]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:90]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JC4_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:91]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:91]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD1_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:96]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:96]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD1_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:97]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:97]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD2_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:98]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:98]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD2_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:99]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:99]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD3_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:100]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:100]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD3_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:101]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:101]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD4_N'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:102]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:102]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'JD4_P'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:103]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:103]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:121]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:121]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:122]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:122]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:123]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:123]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_B4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:124]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:124]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:125]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:125]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:126]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:126]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:127]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:127]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_G4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:128]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:128]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_HS'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:129]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:129]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R1'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:130]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:130]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R2'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:131]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:131]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R3'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:132]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:132]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_R4'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:133]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:133]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-WARNING: [Vivado 12-584] No ports matched 'VGA_VS'. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:134]
-CRITICAL WARNING: [Common 17-55] 'set_property' expects at least one object. [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:134]
-Resolution: If [get_<value>] was used to populate the object, check to make sure this command returns at least one valid object.
-Finished Parsing XDC File [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
-INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/chip_interface_propImpl.xdc].
+Parsing XDC File [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
+INFO: [Timing 38-2] Deriving generated clocks [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc:4]
+Finished Parsing XDC File [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]
+INFO: [Project 1-236] Implementation specific constraints were found while reading constraint file [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/constrs_1/imports/jt51_synth/zed_audio.xdc]. These constraints will be ignored for synthesis but will be used in implementation. Impacted constraints are listed in the file [.Xil/chip_interface_propImpl.xdc].
 Resolution: To avoid this warning, move constraints listed in [.Xil/chip_interface_propImpl.xdc] to another XDC file and exclude this new file from synthesis with the used_in_synthesis property (File Properties dialog in GUI) and re-run elaboration/synthesis.
 Completed Processing XDC Constraints
 
@@ -501,30 +397,30 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   IBUFG => IBUF: 1 instances
   IOBUF => IOBUF (IBUF, OBUFT): 1 instances
 
-Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1484.918 ; gain = 0.000 ; free physical = 4470 ; free virtual = 18540
+Constraint Validation Runtime : Time (s): cpu = 00:00:00 ; elapsed = 00:00:00.01 . Memory (MB): peak = 1482.824 ; gain = 0.000 ; free physical = 8804 ; free virtual = 20984
 ---------------------------------------------------------------------------------
-Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4518 ; free virtual = 18588
+Finished Constraint Validation : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8802 ; free virtual = 20983
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Loading Part and Timing Information
 ---------------------------------------------------------------------------------
 Loading part: xc7z020clg484-1
 ---------------------------------------------------------------------------------
-Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4518 ; free virtual = 18588
+Finished Loading Part and Timing Information : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8802 ; free virtual = 20983
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start Applying 'set_property' XDC Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:15 ; elapsed = 00:00:18 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4518 ; free virtual = 18588
+Finished applying 'set_property' XDC Constraints : Time (s): cpu = 00:00:14 ; elapsed = 00:00:17 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8802 ; free virtual = 20983
 ---------------------------------------------------------------------------------
 INFO: [Synth 8-5544] ROM "sel_base2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:197]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_phasegen.v:197]
 INFO: [Synth 8-5544] ROM "keycode_II1" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "phase_base_VI" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:133]
-INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:183]
-INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:326]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:133]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:183]
+INFO: [Synth 8-3537] HDL ADVISOR - The operator resource <adder> is shared. To prevent sharing consider applying a KEEP on the inputs of the operator [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_envelope.v:326]
 INFO: [Synth 8-5544] ROM "eg_cnt" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "state_in_III" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "step_VI0" won't be mapped to RAM because it is too sparse
@@ -535,7 +431,7 @@ INFO: [Synth 8-5544] ROM "busy_kon" won't be mapped to Block RAM because address
 INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "koff" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'set_run_A_reg' into 'load_A_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
+INFO: [Synth 8-4471] merging register 'set_run_A_reg' into 'load_A_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
 INFO: [Synth 8-5546] ROM "up_kon" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "value_B" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "value_A" won't be mapped to RAM because it is too sparse
@@ -547,7 +443,7 @@ INFO: [Synth 8-5546] ROM "nfrq" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "prog_done" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5544] ROM "next" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5544] ROM "wr_n" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'debug_scl_reg' into 'i2c_scl_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:129]
+INFO: [Synth 8-4471] merging register 'debug_scl_reg' into 'i2c_scl_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/hdl/i3c2.vhd:129]
 INFO: [Synth 8-5544] ROM "i2c_started" won't be mapped to Block RAM because address size (4) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "i2c_scl" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "i2c_scl" won't be mapped to RAM because it is too sparse
@@ -563,7 +459,7 @@ INFO: [Synth 8-5544] ROM "sr_in" won't be mapped to Block RAM because address si
 INFO: [Synth 8-5544] ROM "i2s_d_out" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5562] The signal reg_op_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (5 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
 ---------------------------------------------------------------------------------
-Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4501 ; free virtual = 18570
+Finished RTL Optimization Phase 2 : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8795 ; free virtual = 20975
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -587,17 +483,17 @@ Detailed RTL Component Info :
 	   2 Input     13 Bit       Adders := 1     
 	   3 Input     12 Bit       Adders := 1     
 	   4 Input     11 Bit       Adders := 1     
-	   2 Input     11 Bit       Adders := 1     
+	   2 Input     11 Bit       Adders := 3     
 	   4 Input     10 Bit       Adders := 1     
-	   2 Input     10 Bit       Adders := 6     
+	   2 Input     10 Bit       Adders := 7     
 	   3 Input     10 Bit       Adders := 1     
-	   2 Input      9 Bit       Adders := 3     
+	   2 Input      9 Bit       Adders := 4     
 	   2 Input      8 Bit       Adders := 14    
 	   2 Input      7 Bit       Adders := 3     
 	   2 Input      6 Bit       Adders := 3     
 	   2 Input      5 Bit       Adders := 5     
 	   2 Input      4 Bit       Adders := 2     
-	   2 Input      2 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 3     
 +---XORs : 
 	   2 Input      1 Bit         XORs := 11    
 +---XORs : 
@@ -620,16 +516,17 @@ Detailed RTL Component Info :
 	               16 Bit    Registers := 4     
 	               14 Bit    Registers := 4     
 	               13 Bit    Registers := 2     
-	               11 Bit    Registers := 2     
+	               12 Bit    Registers := 2     
+	               11 Bit    Registers := 4     
 	               10 Bit    Registers := 18    
 	                9 Bit    Registers := 4     
-	                8 Bit    Registers := 32    
+	                8 Bit    Registers := 40    
 	                7 Bit    Registers := 13    
 	                6 Bit    Registers := 19    
 	                5 Bit    Registers := 21    
 	                4 Bit    Registers := 11    
 	                3 Bit    Registers := 16    
-	                2 Bit    Registers := 12    
+	                2 Bit    Registers := 13    
 	                1 Bit    Registers := 115   
 +---RAMs : 
 	               1K Bit         RAMs := 1     
@@ -660,17 +557,16 @@ Detailed RTL Component Info :
 	   4 Input      9 Bit        Muxes := 1     
 	   6 Input      9 Bit        Muxes := 1     
 	  13 Input      9 Bit        Muxes := 1     
-	   2 Input      8 Bit        Muxes := 59    
+	   2 Input      8 Bit        Muxes := 55    
 	  16 Input      8 Bit        Muxes := 1     
 	   4 Input      8 Bit        Muxes := 4     
 	  10 Input      8 Bit        Muxes := 1     
 	   7 Input      8 Bit        Muxes := 1     
 	   6 Input      8 Bit        Muxes := 1     
 	   2 Input      7 Bit        Muxes := 12    
-	   4 Input      7 Bit        Muxes := 1     
+	   4 Input      7 Bit        Muxes := 2     
 	   4 Input      6 Bit        Muxes := 1     
-	   2 Input      6 Bit        Muxes := 3     
-	   5 Input      6 Bit        Muxes := 1     
+	   2 Input      6 Bit        Muxes := 2     
 	   4 Input      5 Bit        Muxes := 3     
 	   8 Input      5 Bit        Muxes := 1     
 	   2 Input      5 Bit        Muxes := 7     
@@ -681,11 +577,11 @@ Detailed RTL Component Info :
 	  13 Input      4 Bit        Muxes := 1     
 	   2 Input      3 Bit        Muxes := 1     
 	  14 Input      3 Bit        Muxes := 2     
-	   2 Input      2 Bit        Muxes := 11    
+	   2 Input      2 Bit        Muxes := 14    
 	   5 Input      2 Bit        Muxes := 1     
 	   3 Input      2 Bit        Muxes := 1     
-	   2 Input      1 Bit        Muxes := 152   
-	   4 Input      1 Bit        Muxes := 18    
+	   2 Input      1 Bit        Muxes := 154   
+	   4 Input      1 Bit        Muxes := 16    
 	  11 Input      1 Bit        Muxes := 10    
 	   3 Input      1 Bit        Muxes := 3     
 	   7 Input      1 Bit        Muxes := 15    
@@ -1172,20 +1068,22 @@ Module jt51_top
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input      9 Bit       Adders := 2     
+	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
 	                9 Bit    Registers := 2     
 	                8 Bit    Registers := 1     
 	                4 Bit    Registers := 2     
-	                1 Bit    Registers := 6     
+	                2 Bit    Registers := 1     
+	                1 Bit    Registers := 5     
 +---Muxes : 
 	   2 Input      9 Bit        Muxes := 2     
-	   2 Input      8 Bit        Muxes := 7     
+	   2 Input      8 Bit        Muxes := 3     
 	   7 Input      8 Bit        Muxes := 1     
 	   4 Input      8 Bit        Muxes := 1     
-	   5 Input      6 Bit        Muxes := 1     
-	   2 Input      6 Bit        Muxes := 1     
+	   4 Input      7 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 2     
 	   7 Input      4 Bit        Muxes := 2     
+	   2 Input      2 Bit        Muxes := 1     
 	   2 Input      1 Bit        Muxes := 11    
 	   3 Input      1 Bit        Muxes := 2     
 	   7 Input      1 Bit        Muxes := 8     
@@ -1270,18 +1168,40 @@ Detailed RTL Component Info :
 	   4 Input      8 Bit        Muxes := 1     
 	   2 Input      4 Bit        Muxes := 4     
 	   2 Input      1 Bit        Muxes := 54    
+Module counter 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     11 Bit       Adders := 1     
++---Registers : 
+	               11 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module counter__parameterized0 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     10 Bit       Adders := 1     
++---Registers : 
+	               10 Bit    Registers := 1     
++---Muxes : 
+	   2 Input      2 Bit        Muxes := 1     
+	   2 Input      1 Bit        Muxes := 1     
+Module vga 
+Detailed RTL Component Info : 
++---Adders : 
+	   2 Input     11 Bit       Adders := 1     
+	   2 Input      9 Bit       Adders := 1     
 Module trackball_top 
 Detailed RTL Component Info : 
 +---Adders : 
 	   2 Input      8 Bit       Adders := 1     
 	   2 Input      2 Bit       Adders := 1     
 +---Registers : 
-	               11 Bit    Registers := 1     
-	               10 Bit    Registers := 1     
-	                8 Bit    Registers := 1     
+	               12 Bit    Registers := 2     
+	               11 Bit    Registers := 2     
+	                8 Bit    Registers := 9     
 	                2 Bit    Registers := 1     
-+---Muxes : 
-	   4 Input      1 Bit        Muxes := 2     
+	                1 Bit    Registers := 1     
 ---------------------------------------------------------------------------------
 Finished RTL Hierarchical Component Statistics
 ---------------------------------------------------------------------------------
@@ -1294,49 +1214,55 @@ BRAMs: 280 (col length: RAMB18 60 RAMB36 30)
 ---------------------------------------------------------------------------------
 Finished Part Resource Summary
 ---------------------------------------------------------------------------------
-Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:17 ; elapsed = 00:00:20 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4500 ; free virtual = 18570
+Start Parallel Synthesis Optimization  : Time (s): cpu = 00:00:16 ; elapsed = 00:00:19 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8795 ; free virtual = 20975
 ---------------------------------------------------------------------------------
 Start Cross Boundary Optimization
 ---------------------------------------------------------------------------------
-INFO: [Synth 8-4471] merging register 'amnoise[1].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'amnoise[2].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'amnoise[3].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'amnoise[4].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'amnoise[5].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'amnoise[6].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[0].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[1].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[2].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[3].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[4].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[5].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[6].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
-INFO: [Synth 8-4471] merging register 'pmnoise[7].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[1].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[2].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[3].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[4].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[5].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'amnoise[6].u_noise_am/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[0].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[1].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[2].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[3].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[4].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[5].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[6].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
+INFO: [Synth 8-4471] merging register 'pmnoise[7].u_noise_pm/last_base_reg' into 'amnoise[0].u_noise_am/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_lfo_lfsr.v:44]
 INFO: [Synth 8-5544] ROM "sel_base2" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
-INFO: [Synth 8-4471] merging register 'noise_lfsr[1].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[2].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[3].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[4].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[5].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[6].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[7].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[8].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
-INFO: [Synth 8-4471] merging register 'noise_lfsr[9].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[1].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[2].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[3].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[4].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[5].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[6].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[7].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[8].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
+INFO: [Synth 8-4471] merging register 'noise_lfsr[9].u_lfsr/last_base_reg' into 'noise_lfsr[0].u_lfsr/last_base_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_noise_lfsr.v:46]
 INFO: [Synth 8-5544] ROM "phase_base_VI" won't be mapped to Block RAM because address size (2) smaller than threshold (5)
 INFO: [Synth 8-5546] ROM "state_in_III" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5562] The signal phase_addr_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
 INFO: [Synth 8-5562] The signal pow_addr_reg is implemented as block RAM but is better mapped onto distributed LUT RAM for the following reason(s): The *depth (8 address bits)* is shallow. Please use attribute (* ram_style = "distributed" *) to instruct Vivado to infer distributed LUT RAM.
-INFO: [Synth 8-4471] merging register 'set_run_B_reg' into 'load_B_reg' [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
+INFO: [Synth 8-4471] merging register 'set_run_B_reg' into 'load_B_reg' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/jt51_mmr.v:127]
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_scl" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/bitcount" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_scl" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/state" won't be mapped to RAM because it is too sparse
 INFO: [Synth 8-5546] ROM "Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_sda_t" won't be mapped to RAM because it is too sparse
+INFO: [Synth 8-4471] merging register 'leta_col_reg[1][7:0]' into 'leta_col_reg[1][7:0]' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:14]
+INFO: [Synth 8-4471] merging register 'leta_col_reg[0][7:0]' into 'leta_col_reg[0][7:0]' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:14]
+INFO: [Synth 8-4471] merging register 'leta_row_reg[1][7:0]' into 'leta_row_reg[1][7:0]' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:15]
+INFO: [Synth 8-4471] merging register 'leta_row_reg[0][7:0]' into 'leta_row_reg[0][7:0]' [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/trackball_top.sv:15]
+WARNING: [Synth 8-3331] design chip_interface has unconnected port SW[1]
+WARNING: [Synth 8-3331] design chip_interface has unconnected port SW[0]
 ---------------------------------------------------------------------------------
-Finished Cross Boundary Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:22 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4479 ; free virtual = 18549
+Finished Cross Boundary Optimization : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8794 ; free virtual = 20974
 ---------------------------------------------------------------------------------
-Finished Parallel Reinference  : Time (s): cpu = 00:00:19 ; elapsed = 00:00:22 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4479 ; free virtual = 18549
+Finished Parallel Reinference  : Time (s): cpu = 00:00:19 ; elapsed = 00:00:21 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8794 ; free virtual = 20974
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
@@ -1466,6 +1392,7 @@ WARNING: [Synth 8-3332] Sequential element (\jt/data_cnt_reg_rep[8] ) is unused 
 WARNING: [Synth 8-3332] Sequential element (\jt/next_reg[3] ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\jt/next_reg[2] ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\jt/state_reg[3] ) is unused and will be removed from module chip_interface.
+WARNING: [Synth 8-3332] Sequential element (\jt/sync_reg ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\jt/cs_n_reg ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2c/Inst_i3c2/i2c_doing_read_reg ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_out_reg[15] ) is unused and will be removed from module chip_interface.
@@ -1502,22 +1429,21 @@ WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s
 WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_in_reg[119] ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_in_reg[118] ) is unused and will be removed from module chip_interface.
 WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_in_reg[117] ) is unused and will be removed from module chip_interface.
-WARNING: [Synth 8-3332] Sequential element (\at/Inst_adau1761_izedboard/Inst_i2s_data_interface/sr_in_reg[116] ) is unused and will be removed from module chip_interface.
 INFO: [Common 17-14] Message 'Synth 8-3332' appears 100 times and further instances of the messages will be disabled. Use the Tcl command set_msg_config to change the current settings.
 ---------------------------------------------------------------------------------
 Start Area Optimization
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4475 ; free virtual = 18545
+Finished Area Optimization : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8796 ; free virtual = 20977
 ---------------------------------------------------------------------------------
-Finished Parallel Area Optimization  : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4475 ; free virtual = 18545
+Finished Parallel Area Optimization  : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8796 ; free virtual = 20977
 
 Report RTL Partitions: 
 +-+--------------+------------+----------+
 | |RTL Partition |Replication |Instances |
 +-+--------------+------------+----------+
 +-+--------------+------------+----------+
-Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4475 ; free virtual = 18545
+Finished Parallel Synthesis Optimization  : Time (s): cpu = 00:00:28 ; elapsed = 00:00:31 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8796 ; free virtual = 20977
 ---------------------------------------------------------------------------------
 Start Timing Optimization
 ---------------------------------------------------------------------------------
@@ -1525,10 +1451,10 @@ Start Timing Optimization
 Start Applying XDC Timing Constraints
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4440 ; free virtual = 18510
+Finished Applying XDC Timing Constraints : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8789 ; free virtual = 20970
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1484.918 ; gain = 575.613 ; free physical = 4438 ; free virtual = 18508
+Finished Timing Optimization : Time (s): cpu = 00:00:36 ; elapsed = 00:00:39 . Memory (MB): peak = 1482.824 ; gain = 573.512 ; free physical = 8789 ; free virtual = 20970
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1544,7 +1470,7 @@ INFO: [Synth 8-4480] The timing for the instance \jt/uut/u_op/phase_addr_reg  (i
 INFO: [Synth 8-4480] The timing for the instance \jt/uut/u_mmr/u_reg/reg_op_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 INFO: [Synth 8-4480] The timing for the instance \at/Inst_adau1761_izedboard/Inst_i2c/Inst_adau1761_configuraiton_data/data_reg  (implemented as a block RAM) might be sub-optimal as no optional output register could be merged into the block ram. Providing additional output register may help in improving timing.
 ---------------------------------------------------------------------------------
-Finished Technology Mapping : Time (s): cpu = 00:00:38 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished Technology Mapping : Time (s): cpu = 00:00:38 ; elapsed = 00:00:41 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1561,9 +1487,9 @@ Start Final Netlist Cleanup
 ---------------------------------------------------------------------------------
 Finished Final Netlist Cleanup
 ---------------------------------------------------------------------------------
-WARNING: [Synth 8-5410] Found another clock driver \audHelp/BUFG_inst :O [/afs/ece.cmu.edu/usr/yiyiz/Private/MM545/YM2151/trunk/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:15]
+WARNING: [Synth 8-5410] Found another clock driver \audHelp/BUFG_inst :O [/afs/ece.cmu.edu/usr/dww/Private/18-545/project/jt51_synth/project_3/project_3.srcs/sources_1/imports/jt51_synth/audio_helper.vhd:15]
 ---------------------------------------------------------------------------------
-Finished IO Insertion : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished IO Insertion : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 
 Report Check Netlist: 
@@ -1576,7 +1502,7 @@ Report Check Netlist:
 Start Renaming Generated Instances
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Instances : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished Renaming Generated Instances : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 
 Report RTL Partitions: 
@@ -1588,13 +1514,13 @@ Report RTL Partitions:
 Start Rebuilding User Hierarchy
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished Rebuilding User Hierarchy : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Start Renaming Generated Ports : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Start Renaming Generated Ports : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
-Finished Renaming Generated Ports : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished Renaming Generated Ports : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
 ---------------------------------------------------------------------------------
 Start ROM, RAM, DSP and Shift Register Reporting
@@ -1660,14 +1586,14 @@ Report Cell Usage:
 +------+-----------+------+
 |      |Cell       |Count |
 +------+-----------+------+
-|1     |BUFG       |     6|
-|2     |CARRY4     |   127|
-|3     |LUT1       |   131|
-|4     |LUT2       |   268|
-|5     |LUT3       |   186|
-|6     |LUT4       |   378|
+|1     |BUFG       |     7|
+|2     |CARRY4     |   149|
+|3     |LUT1       |   157|
+|4     |LUT2       |   307|
+|5     |LUT3       |   196|
+|6     |LUT4       |   383|
 |7     |LUT5       |   309|
-|8     |LUT6       |   638|
+|8     |LUT6       |   663|
 |9     |MMCME2_ADV |     1|
 |10    |MUXF7      |    13|
 |11    |RAM32M     |     5|
@@ -1678,21 +1604,21 @@ Report Cell Usage:
 |16    |RAMB36E1   |     1|
 |17    |SRL16E     |   132|
 |18    |SRLC32E    |    36|
-|19    |FDCE       |    37|
+|19    |FDCE       |    28|
 |20    |FDPE       |     3|
-|21    |FDRE       |  1242|
+|21    |FDRE       |  1336|
 |22    |FDSE       |   150|
-|23    |IBUF       |    16|
+|23    |IBUF       |    12|
 |24    |IBUFG      |     1|
 |25    |IOBUF      |     1|
-|26    |OBUF       |    13|
+|26    |OBUF       |    27|
 +------+-----------+------+
 
 Report Instance Areas: 
 +------+-----------------------------------------+--------------------------------+------+
 |      |Instance                                 |Module                          |Cells |
 +------+-----------------------------------------+--------------------------------+------+
-|1     |top                                      |                                |  3698|
+|1     |top                                      |                                |  3921|
 |2     |  at                                     |audio_top                       |   345|
 |3     |    Inst_adau1761_izedboard              |adau1761_izedboard              |   279|
 |4     |      Inst_i2c                           |i2c                             |   211|
@@ -1702,7 +1628,7 @@ Report Instance Areas:
 |8     |      i_ADAU1761_interface               |ADAU1761_interface              |     2|
 |9     |    i_clocking                           |clocking                        |     3|
 |10    |  audHelp                                |audio_helper                    |     1|
-|11    |  jt                                     |jt51_top                        |  3078|
+|11    |  jt                                     |jt51_top                        |  3070|
 |12    |    uut                                  |jt51                            |  2947|
 |13    |      timers                             |jt51_timers                     |    97|
 |14    |        timer_A                          |jt51_timer                      |    44|
@@ -1772,17 +1698,20 @@ Report Instance Areas:
 |78    |        u_kosh                           |jt51_sh__parameterized1         |    26|
 |79    |        u_mulsh                          |jt51_sh                         |   107|
 |80    |        u_phsh                           |jt51_sh__parameterized0         |    85|
-|81    |  tbt                                    |trackball_top                   |   188|
-|82    |    leta                                 |LETA_REP                        |   156|
+|81    |  tbt                                    |trackball_top                   |   408|
+|82    |    VGA                                  |vga                             |    90|
+|83    |      HS_counter                         |counter                         |    49|
+|84    |      VS_counter                         |counter__parameterized0         |    41|
+|85    |    leta                                 |LETA_REP                        |   156|
 +------+-----------------------------------------+--------------------------------+------+
 ---------------------------------------------------------------------------------
-Finished Writing Synthesis Report : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4390 ; free virtual = 18460
+Finished Writing Synthesis Report : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 ---------------------------------------------------------------------------------
-Synthesis finished with 0 errors, 0 critical warnings and 362 warnings.
-Synthesis Optimization Runtime : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1489.277 ; gain = 105.648 ; free physical = 4385 ; free virtual = 18455
-Synthesis Optimization Complete : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1489.277 ; gain = 579.973 ; free physical = 4385 ; free virtual = 18455
+Synthesis finished with 0 errors, 0 critical warnings and 351 warnings.
+Synthesis Optimization Runtime : Time (s): cpu = 00:00:31 ; elapsed = 00:00:34 . Memory (MB): peak = 1492.645 ; gain = 108.109 ; free physical = 8747 ; free virtual = 20927
+Synthesis Optimization Complete : Time (s): cpu = 00:00:39 ; elapsed = 00:00:42 . Memory (MB): peak = 1492.645 ; gain = 583.332 ; free physical = 8747 ; free virtual = 20927
 INFO: [Project 1-571] Translating synthesized netlist
-INFO: [Netlist 29-17] Analyzing 156 Unisim elements for replacement
+INFO: [Netlist 29-17] Analyzing 174 Unisim elements for replacement
 INFO: [Netlist 29-28] Unisim Transformation completed in 0 CPU seconds
 INFO: [Project 1-570] Preparing netlist for logic optimization
 WARNING: [Opt 31-32] Removing redundant IBUF since it is not being driven by a top-level port. at/i_clocking/clkin1_buf 
@@ -1794,8 +1723,8 @@ INFO: [Project 1-111] Unisim Transformation Summary:
   RAM32M => RAM32M (RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMD32, RAMS32, RAMS32): 5 instances
 
 INFO: [Common 17-83] Releasing license: Synthesis
-288 Infos, 157 Warnings, 38 Critical Warnings and 0 Errors encountered.
+298 Infos, 124 Warnings, 0 Critical Warnings and 0 Errors encountered.
 synth_design completed successfully
-synth_design: Time (s): cpu = 00:00:38 ; elapsed = 00:00:41 . Memory (MB): peak = 1521.293 ; gain = 503.469 ; free physical = 4377 ; free virtual = 18448
-report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.14 . Memory (MB): peak = 1553.312 ; gain = 0.000 ; free physical = 4374 ; free virtual = 18446
-INFO: [Common 17-206] Exiting Vivado at Wed Dec  7 18:19:23 2016...
+synth_design: Time (s): cpu = 00:00:38 ; elapsed = 00:00:41 . Memory (MB): peak = 1524.660 ; gain = 506.828 ; free physical = 8746 ; free virtual = 20927
+report_utilization: Time (s): cpu = 00:00:00.06 ; elapsed = 00:00:00.12 . Memory (MB): peak = 1556.680 ; gain = 0.000 ; free physical = 8745 ; free virtual = 20927
+INFO: [Common 17-206] Exiting Vivado at Thu Dec  8 18:06:58 2016...

@@ -1,8 +1,8 @@
 Copyright 1986-2015 Xilinx, Inc. All Rights Reserved.
 ---------------------------------------------------------------------------------------------------------------------------
 | Tool Version     : Vivado v.2015.2 (lin64) Build 1266856 Fri Jun 26 16:35:25 MDT 2015
-| Date             : Wed Dec  7 18:20:18 2016
-| Host             : centennial.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
+| Date             : Thu Dec  8 18:07:52 2016
+| Host             : horizon.andrew.cmu.edu running 64-bit Red Hat Enterprise Linux Server release 7.2 (Maipo)
 | Command          : report_power -file chip_interface_power_routed.rpt -pb chip_interface_power_summary_routed.pb
 | Design           : chip_interface
 | Device           : xc7z020clg484-1
@@ -30,12 +30,12 @@ Table of Contents
 ----------
 
 +--------------------------+-------+
-| Total On-Chip Power (W)  | 0.285 |
-| Dynamic (W)              | 0.160 |
-| Device Static (W)        | 0.125 |
+| Total On-Chip Power (W)  | 0.306 |
+| Dynamic (W)              | 0.180 |
+| Device Static (W)        | 0.126 |
 | Effective TJA (C/W)      | 11.5  |
-| Max Ambient (C)          | 81.7  |
-| Junction Temperature (C) | 28.3  |
+| Max Ambient (C)          | 81.5  |
+| Junction Temperature (C) | 28.5  |
 | Confidence Level         | Low   |
 | Setting File             | ---   |
 | Simulation Activity File | ---   |
@@ -49,22 +49,22 @@ Table of Contents
 +--------------------------+-----------+----------+-----------+-----------------+
 | On-Chip                  | Power (W) | Used     | Available | Utilization (%) |
 +--------------------------+-----------+----------+-----------+-----------------+
-| Clocks                   |     0.003 |        5 |       --- |             --- |
-| Slice Logic              |     0.012 |     3762 |       --- |             --- |
-|   LUT as Logic           |     0.010 |     1567 |     53200 |            2.95 |
-|   LUT as Shift Register  |    <0.001 |      148 |     17400 |            0.85 |
-|   CARRY4                 |    <0.001 |      127 |     13300 |            0.95 |
-|   Register               |    <0.001 |     1434 |    106400 |            1.35 |
+| Clocks                   |     0.002 |        5 |       --- |             --- |
+| Slice Logic              |     0.013 |     3970 |       --- |             --- |
+|   LUT as Logic           |     0.011 |     1655 |     53200 |            3.11 |
+|   LUT as Shift Register  |    <0.001 |      147 |     17400 |            0.84 |
+|   CARRY4                 |    <0.001 |      149 |     13300 |            1.12 |
+|   Register               |    <0.001 |     1519 |    106400 |            1.43 |
+|   BUFG                   |    <0.001 |        4 |        32 |           12.50 |
 |   LUT as Distributed RAM |    <0.001 |       20 |     17400 |            0.11 |
-|   BUFG                   |    <0.001 |        3 |        32 |            9.38 |
 |   F7/F8 Muxes            |    <0.001 |       13 |     53200 |            0.02 |
-|   Others                 |     0.000 |      153 |       --- |             --- |
-| Signals                  |     0.013 |     2841 |       --- |             --- |
+|   Others                 |     0.000 |      158 |       --- |             --- |
+| Signals                  |     0.014 |     2953 |       --- |             --- |
 | Block RAM                |     0.003 |        3 |       140 |            2.14 |
 | MMCM                     |     0.121 |        1 |         4 |           25.00 |
-| I/O                      |     0.009 |       31 |       200 |           15.50 |
-| Static Power             |     0.125 |          |           |                 |
-| Total                    |     0.285 |          |           |                 |
+| I/O                      |     0.027 |       45 |       200 |           22.50 |
+| Static Power             |     0.126 |          |           |                 |
+| Total                    |     0.306 |          |           |                 |
 +--------------------------+-----------+----------+-----------+-----------------+
 
 
@@ -74,9 +74,9 @@ Table of Contents
 +-----------+-------------+-----------+-------------+------------+
 | Source    | Voltage (V) | Total (A) | Dynamic (A) | Static (A) |
 +-----------+-------------+-----------+-------------+------------+
-| Vccint    |       1.000 |     0.039 |       0.031 |      0.008 |
-| Vccaux    |       1.800 |     0.086 |       0.067 |      0.019 |
-| Vcco33    |       3.300 |     0.003 |       0.002 |      0.001 |
+| Vccint    |       1.000 |     0.040 |       0.032 |      0.008 |
+| Vccaux    |       1.800 |     0.087 |       0.068 |      0.019 |
+| Vcco33    |       3.300 |     0.009 |       0.008 |      0.001 |
 | Vcco25    |       2.500 |     0.000 |       0.000 |      0.000 |
 | Vcco18    |       1.800 |     0.001 |       0.000 |      0.001 |
 | Vcco15    |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -87,7 +87,7 @@ Table of Contents
 | MGTAVcc   |       1.000 |     0.000 |       0.000 |      0.000 |
 | MGTAVtt   |       1.200 |     0.000 |       0.000 |      0.000 |
 | MGTVccaux |       1.800 |     0.000 |       0.000 |      0.000 |
-| Vccpint   |       1.000 |     0.017 |       0.000 |      0.017 |
+| Vccpint   |       1.000 |     0.018 |       0.000 |      0.018 |
 | Vccpaux   |       1.800 |     0.010 |       0.000 |      0.010 |
 | Vccpll    |       1.800 |     0.003 |       0.000 |      0.003 |
 | Vcco_ddr  |       1.500 |     0.000 |       0.000 |      0.000 |
@@ -152,9 +152,9 @@ Table of Contents
 +------------------------------------------+-----------+
 | Name                                     | Power (W) |
 +------------------------------------------+-----------+
-| chip_interface                           |     0.160 |
+| chip_interface                           |     0.180 |
 |   at                                     |     0.123 |
-|     Inst_adau1761_izedboard              |     0.002 |
+|     Inst_adau1761_izedboard              |     0.001 |
 |       Inst_i2c                           |     0.001 |
 |         Inst_adau1761_configuraiton_data |    <0.001 |
 |         Inst_i3c2                        |    <0.001 |
@@ -238,7 +238,10 @@ Table of Contents
 |         u_kosh                           |    <0.001 |
 |         u_mulsh                          |     0.002 |
 |         u_phsh                           |    <0.001 |
-|   tbt                                    |    <0.001 |
+|   tbt                                    |     0.002 |
+|     VGA                                  |    <0.001 |
+|       HS_counter                         |    <0.001 |
+|       VS_counter                         |    <0.001 |
 |     leta                                 |    <0.001 |
 +------------------------------------------+-----------+
 
